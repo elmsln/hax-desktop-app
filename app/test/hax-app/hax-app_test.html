@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>hax-app test</title>
+
+    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../../src/hax-app/hax-app.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <hax-app></hax-app>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('hax-app', function() {
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'hax-app');
+        });
+      });
+    </script>
+  </body>
+</html>
