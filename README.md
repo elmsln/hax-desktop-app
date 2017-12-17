@@ -6,9 +6,7 @@ To build HAX desktop from source, run the following
 ```
 git clone git@github.com:LRNWebComponents/hax-desktop-app.git
 cd hax-desktop-app
-bower install
-npm install
-npm start
+sh build.sh
 ```
 
 
