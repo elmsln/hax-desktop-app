@@ -12,4 +12,16 @@ module.exports = {
     return file;
   },
 
+  savePage(page, content) {
+    page = _.isString() ? page : 'index.html';
+    _path = path.join(process.cwd(), 'content', page);
+    if (!fs.existsSync(_path)) return false;
+    try {
+      fs.writeFileSync(_path, content, 'utf8');
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
 }

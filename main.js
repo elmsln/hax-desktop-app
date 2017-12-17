@@ -3,7 +3,9 @@ const _ = require('underscore');
 const url = require('url');
 const path = require('path');
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
-const { getPage } = require('./util/page');
+const { getPage, savePage } = require('./util/page');
+const Rx = require('rxjs/Rx');
+
 
 let mainWindow;
 
@@ -12,7 +14,7 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({});
   // load html into window
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'lrnapp-book', 'index.html'),
+    pathname: path.join(__dirname, 'app', 'index.html'),
     protocol: 'file:',
     slashes: true
   }));
@@ -54,3 +56,9 @@ ipcMain.on('get-page', async (e, page) => {
   const content = getPage(page);
   mainWindow.webContents.send('active-page', content);
 });
+
+ipcMain.on('save-page', async (e, content) => {
+  const activePage = await ipcMain.on('active-page', (e, page) => page);
+  const saved = savePage(activePage, content);
+  mainWindow.webContents.send('save-page-success');
+})

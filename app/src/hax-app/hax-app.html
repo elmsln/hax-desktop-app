@@ -6,11 +6,16 @@
 <link rel="import" href="../../bower_components/hax-body/hax-source.html">
 <link rel="import" href="../../bower_components/hax-body/hax-panel.html">
 <link rel="import" href="../../bower_components/hax-body/hax-export-dialog.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 
 <dom-module id="hax-app">
   <template>
     <style>
       :host {
+        display: block;
+      }
+
+      hax-body {
         max-width: 60em;
         margin-left: 10em;
       }
@@ -128,6 +133,14 @@
           <hax-panel-item icon="assessment" icon-class="purple-text text-darken-2" label="Quiz" event-name="quiz" voice-command="insert quiz"></hax-panel-item>
         </span>
       </lrnsys-collapselist-item>
+      <lrnsys-collapselist-item>
+        <span slot="label">
+          <div class="label">Save</div>
+        </span>
+        <span slot="content">
+          <hax-panel-item icon="save" icon-class="purple-text text-darken-2" label="Save" event-name="save" voice-command="save" on-click="save"></hax-panel-item>
+        </span>
+      </lrnsys-collapselist-item>
     </hax-panel>
     <hax-autoloader hidden>
       <video-player></video-player>
@@ -204,11 +217,14 @@
       "image": "pictures.sizes.1.link"}'></hax-source>
     </hax-manager>
 
+    <paper-toast id="notification"></paper-toast>
+
   </template>
 
   <script>
     const electron = require('electron');
     const { ipcRenderer } = electron;
+    const _ = require('underscore');
 
     Polymer({
 
@@ -221,11 +237,40 @@
         },
       },
 
+      save: function () {
+        const haxBody = this.$$('hax-body');
+        const haxContent = haxBody.haxToContent();
+        ipcRenderer.send('save-page', haxContent);
+      },
+
       attached: function () {
+        const haxBody = this.$$('hax-body');
+
+        // load the default page
         ipcRenderer.send('get-page');
-        ipcRenderer.on('active-page', (e, content) => {
-          console.log(content);
+
+        // Listen for saves
+        this.addEventListener('save', (e) => {
+          console.log(e);
         })
+
+        ipcRenderer.on('save-page-success', (e) => {
+          this.$.notification.show('Page saved');
+        })
+        
+        // // listen for the active page to change then update hax-body
+        // // with the new content
+        // ipcRenderer.on('active-page', (e, content) => {
+        //   const parser = new DOMParser();
+        //   const page = parser.parseFromString(content, 'text/html');
+        //   const pageNodes = page.querySelector('body').children;
+        //   // Clear out body
+        //   haxBody.haxClearBody();
+        //   // loop through each node and insert them into hax
+        //   _.each(pageNodes, (node) => {
+        //     haxBody.haxInsert(node.tagName, node.innerHTML);
+        //   })
+        // });
       }
 
     });
