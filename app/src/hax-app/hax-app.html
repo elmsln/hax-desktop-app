@@ -7,16 +7,28 @@
   <template>
     <style>
       :host {
-        display: block;
+        display: flex;
+      }
+
+      #nav {
+        max-width: 50em;
+      }
+
+      #content {
+        flex: 1 1 auto;
       }
     </style>
 
-    <hax-app-outline></hax-app-outline>
+    <div id="nav">
+      <hax-app-outline></hax-app-outline>
+    </div>
+    <div id="content">
+      <iron-pages selected="[[section]]" attr-for-selected="data-section">
+        <hax-app-homepage data-section="home"></hax-app-homepage>
+        <hax-app-page data-section="page"></hax-app-page>
+      </iron-pages>
+    </div>
 
-    <iron-pages selected="[[activePage]]" attr-for-selected="data-page">
-      <hax-app-homepage data-page="home"></hax-app-homepage>
-      <hax-app-page data-page="page"></hax-app-page>
-    </iron-pages>
 
   </template>
 
@@ -30,35 +42,19 @@
       is: 'hax-app',
 
       properties: {
-        activePage: {
+        section: {
           type: String,
           value: 'home',
-        },
-        location: {
-          type: String,
-          value: '',
-          observer: '_locationChanged'
         }
-      },
-
-      _locationChanged: function (location) {
-        if (location) {
-          this.activePage = 'page';
-        }
-        else {
-          this.activePage = 'home';
-        }
-      },
-
-      _getLocation: function ()  {
-        this.location = remote.getGlobal('location');
       },
 
       ready: function () {
-        ipcRenderer.on('location-changed', (e, location) => {
-          this._getLocation();
+        // get the current outline
+        ipcRenderer.on('outline-changed', (e, outline) => {
+          if (outline) {
+            this.section = 'page';
+          }
         });
-        this._getLocation();
       }
 
     });

@@ -6,9 +6,28 @@
       :host {
         display: block;
       }
+
+      :host ::content a {
+        cursor: pointer;
+        display: block;
+        position: relative;
+        padding: .2em;
+      }
+
+      :host ::content a[active="true"]:before {
+        display: block;
+        content: '';
+        background: coral;
+        color: white;
+        width: 999px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        z-index: -1;
+      }
     </style>
 
-    <h1>Active Page [[activePage]]</h1>
     <div id="slot"></div>
     
   </template>
@@ -23,7 +42,8 @@
         },
         activePage: {
           type: String,
-          value: ''
+          value: '',
+          observer: '_activePageChanged'
         }
       },
 
@@ -31,6 +51,20 @@
         // when the outline changes just write it directly to the dom
         if (outline !== old) {
           this.$.slot.innerHTML = outline;
+        }
+      },
+
+      _activePageChanged: function (page, old) {
+        // find out if there is a current active link and unset it
+        const activeLink = this.querySelector('a[active]');
+        if (activeLink) {
+          activeLink.removeAttribute('active');
+        }
+        // then find the new active link and add the active attribute
+        const newActiveLink = this.querySelector(`a[data-href="${page}"]`);
+        console.log(newActiveLink);
+        if (newActiveLink) {
+          newActiveLink.setAttribute('active', true);
         }
       },
 
@@ -43,7 +77,6 @@
         ipcRenderer.on('active-page-changed', (e, activePage) => {
           this.activePage = activePage;
         });
-
 
         // capture all clicks and look for href to set the active page
         this.addEventListener('click', (e) => {
