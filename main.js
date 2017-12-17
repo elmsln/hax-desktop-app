@@ -50,6 +50,21 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
+
+/**
+ * Access Global Properties
+ */
+const globals = {
+  getOutline() {
+    return global.outline;
+  },
+  setOutline(outline) {
+    global.outline = outline;
+    mainWindow.webContents.send('outline-changed', outline);
+  },
+}
+
+
 // ipcMain.on('get-page', async (e, page) => {
 //   const content = getPage(page);
 //   mainWindow.webContents.send('active-page', content);
@@ -63,12 +78,16 @@ if (process.env.NODE_ENV !== 'production') {
 
 ipcMain.on('open-project-prompt', (e) => {
   let location = '';
-  const locations = dialog.showOpenDialog({properties: ['openDirectory']});
+  const locations = dialog.showOpenDialog({ properties: ['openDirectory'] });
   if (_.isArray(locations)) {
     location = _.first(locations);
     // save the new location
     global.location = location;
     // send new location to app
     mainWindow.webContents.send('location-changed');
+    // get new outline
+    const outline = parseOutline();
+    // store the outline
+    globals.setOutline(outline);
   }
 });
