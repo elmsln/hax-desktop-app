@@ -58,15 +58,4 @@ module.exports = {
     }
   },
 
-
-  /**
-   * Will return the path to a specified page in the outline
-   * @param {json} outline 
-   * @param {num} page 
-   * @returns {string} 
-   */
-  getOutlinePage(outline, page = 1) {
-    console.log(outline);
-  }
-
 }
