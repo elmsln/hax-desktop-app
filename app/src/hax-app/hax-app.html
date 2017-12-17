@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../hax-app-homepage/hax-app-homepage.html">
 <link rel="import" href="../hax-app-page/hax-app-page.html">
+<link rel="import" href="../hax-app-outline/hax-app-outline.html">
 
 <dom-module id="hax-app">
   <template>
@@ -9,6 +10,8 @@
         display: block;
       }
     </style>
+
+    <hax-app-outline></hax-app-outline>
 
     <iron-pages selected="[[activePage]]" attr-for-selected="data-page">
       <hax-app-homepage data-page="home"></hax-app-homepage>

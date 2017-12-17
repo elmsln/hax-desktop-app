@@ -1,0 +1,56 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="hax-app-outline">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    
+  </template>
+  <script>
+    Polymer({
+      is: 'hax-app-outline',
+      properties: {
+        outline: {
+          type: String,
+          value: '',
+          observer: '_outlineChanged'
+        },
+        activePage: {
+          type: String,
+          value: ''
+        }
+      },
+
+      _outlineChanged: function (outline, old) {
+        // when the outline changes just write it directly to the dom
+        if (outline !== old) {
+          this.innerHTML = outline;
+        }
+      },
+
+      ready: function () {
+        // get the current outline
+        ipcRenderer.on('outline-changed', (e, outline) => {
+          this.outline = outline;
+        });
+        // get the current active page
+        ipcRenderer.on('active-page-changed', (e, activePage) => {
+          this.activePage = activePage;
+        });
+
+
+        // capture all clicks and look for href to set the active page
+        this.addEventListener('click', (e) => {
+          // find out if the target has a data-href
+          const href = e.target.getAttribute('data-href');
+          if (href) {
+            ipcRenderer.send('set-active-page', href);
+          }
+        });
+      }
+    });
+  </script>
+</dom-module>

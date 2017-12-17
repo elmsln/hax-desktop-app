@@ -3,9 +3,7 @@ const _ = require('underscore');
 const url = require('url');
 const path = require('path');
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
-const { getPage, savePage } = require('./util/page');
-const Rx = require('rxjs/Rx');
-
+const { getPage, savePage, parseOutline, getOutlinePage } = require('./util/page');
 
 let mainWindow;
 
@@ -52,16 +50,16 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-ipcMain.on('get-page', async (e, page) => {
-  const content = getPage(page);
-  mainWindow.webContents.send('active-page', content);
-});
+// ipcMain.on('get-page', async (e, page) => {
+//   const content = getPage(page);
+//   mainWindow.webContents.send('active-page', content);
+// });
 
-ipcMain.on('save-page', async (e, content) => {
-  const activePage = await ipcMain.on('active-page', (e, page) => page);
-  const saved = savePage(activePage, content);
-  mainWindow.webContents.send('save-page-success');
-});
+// ipcMain.on('save-page', async (e, content) => {
+//   const activePage = await ipcMain.on('active-page', (e, page) => page);
+//   const saved = savePage(activePage, content);
+//   mainWindow.webContents.send('save-page-success');
+// });
 
 ipcMain.on('open-project-prompt', (e) => {
   let location = '';
