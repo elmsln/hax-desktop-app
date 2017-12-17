@@ -55,6 +55,14 @@ if (process.env.NODE_ENV !== 'production') {
  * Access Global Properties
  */
 const globals = {
+  getActivePage() {
+    return global.outline;
+  },
+  setActivePage(page) {
+    global.page = page;
+    mainWindow.webContents.send('active-page-changed', page);
+  },
+
   getOutline() {
     return global.outline;
   },
@@ -64,17 +72,15 @@ const globals = {
   },
 }
 
+ipcMain.on('set-active-page', (e, page) => {
+  globals.setActivePage(page);
+});
 
-// ipcMain.on('get-page', async (e, page) => {
-//   const content = getPage(page);
-//   mainWindow.webContents.send('active-page', content);
-// });
-
-// ipcMain.on('save-page', async (e, content) => {
-//   const activePage = await ipcMain.on('active-page', (e, page) => page);
-//   const saved = savePage(activePage, content);
-//   mainWindow.webContents.send('save-page-success');
-// });
+ipcMain.on('save-page', (e, content) => {
+  const activePage = globals.getActivePage();
+  const saved = savePage(activePage, content);
+  mainWindow.webContents.send('save-page-success');
+});
 
 ipcMain.on('open-project-prompt', (e) => {
   let location = '';

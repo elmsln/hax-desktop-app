@@ -7,6 +7,9 @@
         display: block;
       }
     </style>
+
+    <h1>Active Page [[activePage]]</h1>
+    <div id="slot"></div>
     
   </template>
   <script>
@@ -27,7 +30,7 @@
       _outlineChanged: function (outline, old) {
         // when the outline changes just write it directly to the dom
         if (outline !== old) {
-          this.innerHTML = outline;
+          this.$.slot.innerHTML = outline;
         }
       },
 
