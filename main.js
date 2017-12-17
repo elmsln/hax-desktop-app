@@ -61,4 +61,16 @@ ipcMain.on('save-page', async (e, content) => {
   const activePage = await ipcMain.on('active-page', (e, page) => page);
   const saved = savePage(activePage, content);
   mainWindow.webContents.send('save-page-success');
-})
+});
+
+ipcMain.on('open-project-prompt', (e) => {
+  let location = '';
+  const locations = dialog.showOpenDialog({properties: ['openDirectory']});
+  if (_.isArray(locations)) {
+    location = _.first(locations);
+    // save the new location
+    global.location = location;
+    // send new location to app
+    mainWindow.webContents.send('location-changed');
+  }
+});

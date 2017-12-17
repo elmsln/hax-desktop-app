@@ -22,6 +22,9 @@ module.exports = {
     } catch (error) {
       return false;
     }
+  },
+
+  createPage(name, content = '') {
   }
 
 }

@@ -1,0 +1,54 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="hax-app-homepage">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      #location {
+        display: flex;
+      }
+
+      #location paper-input {
+        background: lightblue;
+        padding: .5em;
+        flex: 1 1 auto;
+      }
+    </style>
+    <h1>Configuration</h1>
+
+    <div id="location">
+      <paper-button raised on-click="openProject">Open Project</paper-button>
+      [[location]]
+    </div>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'hax-app-homepage',
+
+      properties: {
+        location: {
+          type: String,
+          value: ''
+        }
+      },
+
+      openProject: function () {
+        ipcRenderer.send('open-project-prompt');
+      },
+
+      ready: function () {
+        ipcRenderer.on('location-change', (e) => {
+          this.location = remote.getGlobal('location');
+        });
+      },
+
+    });
+  </script>
+</dom-module>
