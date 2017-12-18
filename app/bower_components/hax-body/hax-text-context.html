@@ -1,0 +1,279 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../md-extra-icons/md-extra-icons.html">
+<link rel="import" href="../app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../paper-swatch-picker/paper-swatch-picker.html">
+<link rel="import" href="../paper-slider/paper-slider.html">
+<link rel="import" href="../paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="hax-context-item-menu.html">
+<link rel="import" href="hax-context-item.html">
+<link rel="import" href="hax-context-item-textop.html">
+<!--
+`hax-text-context`
+A context menu that provides common text based authoring options.
+
+@demo demo/index.html
+
+@microcopy - the mental model for this element
+ - context menu - this is a menu of text based buttons and events for use in a larger solution.
+-->
+
+<dom-module id="hax-text-context">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      app-toolbar {
+        background-color: white;
+        padding: 0;
+        height: 40px;
+      }
+      hax-context-item {
+        margin: 0;
+        width: 40px;
+        height: 40px;
+      }
+      hax-context-item-textop {
+        margin: 0;
+        width: 40px;
+        height: 40px;
+      }
+      .close-cap {
+        margin: 0;
+        padding: 0;
+        border-right: 1px solid black;
+      }
+    </style>
+    <app-toolbar>
+      <hax-context-item
+        icon="close"
+        label="Close menu"
+        event-name="close-menu"
+        class="close-cap"
+        direction="left"></hax-context-item>
+      <hax-context-item-menu
+        selected-value="{{selectedValue}}"
+        id="formatsize"
+        icon="text-format"
+        label="Text style"
+        event-name="text-tag">
+        <paper-item value="p">Normal text</paper-item>
+        <paper-item value="h2">Title</paper-item>
+        <paper-item value="h3">Content heading</paper-item>
+        <paper-item value="h4">Subheading</paper-item>
+        <paper-item value="h5">Deeper subheading</paper-item>
+        <paper-item value="blockquote">Quote</paper-item>
+        <paper-item value="code">Code</paper-item>
+      </hax-context-item-menu>
+      <hax-context-item-textop
+        icon="editor:format-bold"
+        label="Bold"
+        event-name="text-bold"></hax-context-item-textop>
+      <hax-context-item-textop
+        icon="editor:format-italic"
+        label="Italic"
+        event-name="text-italic"></hax-context-item-textop>
+
+      <hax-context-item-menu
+        selected-value="{{justifyValue}}"
+        id="justify"
+        icon="[[justifyIcon]]"
+        label="Alignment">
+        <paper-item value="text-align-left">
+          <iron-icon icon="editor:format-align-left"></iron-icon>
+        </paper-item>
+        <paper-item value="text-align-right">
+          <iron-icon icon="editor:format-align-right"></iron-icon>
+        </paper-item>
+      </hax-context-item-menu>
+
+      <hax-context-item-textop
+        icon="editor:format-list-numbered"
+        label="Numbered list"
+        event-name="text-list-numbered"
+        hidden$="[[!polyfillSafe]]"></hax-context-item-textop>
+      <hax-context-item-textop
+        icon="editor:format-list-bulleted"
+        label="Bulleted list"
+        event-name="text-list-bulleted"
+        hidden$="[[!polyfillSafe]]"></hax-context-item-textop>
+      <hax-context-item-textop
+        icon="editor:format-indent-increase"
+        label="Indent"
+        event-name="text-indent"
+        hidden$="[[!polyfillSafe]]"></hax-context-item-textop>
+      <hax-context-item-textop
+        icon="editor:format-indent-decrease"
+        label="Outdent"
+        event-name="text-outdent"
+        hidden$="[[!polyfillSafe]]"></hax-context-item-textop>
+
+      <hax-context-item-textop
+        icon="editor:format-strikethrough"
+        label="Cross out"
+        event-name="text-strikethrough"></hax-context-item-textop>
+      <hax-context-item-textop
+        icon="mdextra:subscript"
+        label="Subscript"
+        event-name="text-subscript"></hax-context-item-textop>
+      <hax-context-item-textop
+        icon="mdextra:superscript"
+        label="Superscript"
+        event-name="text-superscript"></hax-context-item-textop>
+      <hax-context-item-textop
+        icon="editor:insert-link"
+        label="Link"
+        event-name="text-link"></hax-context-item-textop>
+      <hax-context-item-textop
+        icon="mdextra:unlink"
+        label="Unlink"
+        event-name="text-unlink"></hax-context-item-textop>
+      <hax-context-item-textop
+        icon="editor:format-clear"
+        label="Remove format"
+        event-name="text-remove-format"></hax-context-item-textop>
+    </app-toolbar>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'hax-text-context',
+      listeners: {
+        'hax-context-item-selected': '_haxContextOperation',
+      },
+      properties: {
+        /**
+         * Justify icon to reflect state.
+         */
+        justifyIcon: {
+          type: String,
+          value: 'editor:format-align-left',
+        },
+        /**
+         * Polyfill safe; this helps remove options from polyfilled platforms
+         * as far as text manipulation operations.
+         */
+        polyfillSafe: {
+          type: Boolean,
+        },
+        /**
+         * Selected value to match format of the tag currently.
+         */
+        selectedValue: {
+          type: String,
+          value: 'p',
+          notify: true,
+        },
+        /**
+         * Selected value to match text direction currently.
+         */
+        justifyValue: {
+          type: String,
+          value: 'text-align-left',
+          notify: true,
+        },
+      },
+      /**
+       * Ready.
+       */
+      ready: function() {
+        this.polyfillSafe = this._computePolyfillSafe();
+      },
+      /**
+       * Feature detect on the bar.
+       */
+      _computePolyfillSafe: function() {
+        /**
+         * These are our bad actors in polyfill'ed browsers.
+         * This means thathttps://github.com/webcomponents/webcomponentsjs/commit/ce464bb533bf39b544c312906499a6044ee0d30d
+         * explains things but basically if shadow-dom is polyfilled
+         * then we can't safely execute a DOM manipulating execCommand.
+         * This
+         */
+        if(document.head.createShadowRoot || document.head.attachShadow) {
+          return true;
+        }
+        else {
+          console.log('Shadow DOM missing, can\'t safely use list operations.');
+          return false;
+        }
+      },
+      /**
+       * Respond to simple modifications.
+       */
+      _haxContextOperation: function(e) {
+        console.log(e);
+        let detail = e.detail;
+        // support a simple insert event to bubble up or everything else
+        switch(detail.eventName) {
+          // wow these are way too easy
+          case 'text-bold':
+            document.execCommand('bold');
+          break;
+          case 'text-italic':
+            document.execCommand('italic');
+          break;
+          case 'text-underline':
+            document.execCommand('underline');
+          break;
+          case 'text-subscript':
+            document.execCommand('subscript');
+          break;
+          case 'text-superscript':
+            document.execCommand('superscript');
+          break;
+          case 'text-remove-format':
+            document.execCommand('removeFormat');
+          break;
+          case 'text-strikethrough':
+            document.execCommand('strikeThrough');
+          break;
+          case 'text-link':
+            let url = prompt("Enter a URL:");
+            document.execCommand('createLink', false, url);
+          break;
+          case 'text-unlink':
+            document.execCommand('unlink');
+          break;
+          case 'text-align-left':
+            this.justifyIcon = detail.target.children[0].attributes[0].value;
+          break;
+          case 'text-align-center':
+            this.justifyIcon = detail.target.children[0].attributes[0].value;
+          break;
+          case 'text-align-right':
+            this.justifyIcon = detail.target.children[0].attributes[0].value;
+          break;
+          case 'text-justify-full':
+            this.justifyIcon = detail.target.children[0].attributes[0].value;
+          break;
+          case 'close-menu':
+            this.$.justify.hideMenu();
+            this.$.formatsize.hideMenu();
+          break;
+          /**
+           * Our bad actors in polyfill.
+           */
+          case 'text-indent':
+            document.execCommand('indent');
+          break;
+          case 'text-outdent':
+            document.execCommand('outdent');
+          break;
+          case 'text-list-numbered':
+            document.execCommand('insertOrderedList');
+          break;
+          case 'text-list-bulleted':
+            document.execCommand('insertUnorderedList');
+          break;
+        }
+      },
+    });
+  </script>
+</dom-module>

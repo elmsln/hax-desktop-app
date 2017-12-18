@@ -60,7 +60,12 @@ const globals = {
   },
   setActivePage(page) {
     global.page = page;
+    // changed the active page
     mainWindow.webContents.send('active-page-changed', page);
+    // update the active content
+    const content = getPage(page);
+    console.log(content);
+    // mainWindow.webContents.send('active-content-changed', content);
   },
 
   getOutline() {

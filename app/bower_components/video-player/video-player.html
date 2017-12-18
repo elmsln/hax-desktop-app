@@ -1,0 +1,515 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../materializecss-styles/materializecss-styles.html">
+<link rel="import" href="../hax-body-behaviors/hax-body-behaviors.html">
+<link rel="import" href="../schema-behaviors/schema-behaviors.html">
+
+<!--
+`video-player`
+A simple responsive video player
+
+@demo demo/index.html
+
+@microcopy - the mental model for this element
+ - video source - url / link to the video file
+
+-->
+
+<dom-module id="video-player">
+  <template>
+    <style include="materializecss-styles">
+      :host {
+        display: block;
+      }
+      :host[responsive] .responsive-video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        padding-top: 25px;
+        height: 0;
+      }
+      :host[responsive] .responsive-video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      :host[responsive] .responsive-video-container video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .video-caption {
+        font-style: italic;
+        margin: 0;
+        padding: 0;
+        @apply --video-player-caption-theme;
+      }
+    </style>
+    <div class="responsive-video-container">
+      <template is="dom-if" if="[[iframed]]">
+        <iframe resource$="[[schemaResourceID]]-video" src="[[src]]" width="[[width]]" height="[[height]]" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </template>
+      <template is="dom-if" if="[[!iframed]]">
+        <video resource$="[[schemaResourceID]]-video" src="[[src]]" width="[[width]]" height="[[height]]" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen controls></video>
+      </template>
+    </div>
+    <div id="videocaption" class$="video-caption [[secondaryColorClass]] [[textColorClass]]">
+      [[caption]]
+    </div>
+    <div id="captionslot" class$="video-caption [[secondaryColorClass]] [[textColorClass]]">
+      <slot name="caption"></slot>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'video-player',
+      behaviors: [HAXBehaviors.PropertiesBehaviors, MaterializeCSSBehaviors.ColorBehaviors, SchemaBehaviors.Schema],
+      properties: {
+        /**
+         * Source of the video
+         */
+        source: {
+          type: String,
+          reflectToAttribute: true,
+        },
+        /**
+         * Computed / cleaned up source.
+         */
+        src: {
+          type: String,
+          computed: '_computeSRC(source)',
+        },
+        /**
+         * Computesd if this should be iframed or not.
+         */
+        iframed: {
+          type: Boolean,
+          computed: '_computeIframed(source)',
+        },
+        /**
+         * Video width
+         */
+        width: {
+          type: String,
+          value: 560,
+        },
+        /**
+         * video height
+         */
+        height: {
+          type: String,
+          value: 315,
+        },
+        /**
+         * Responsive video, calculated from not-responsive.
+         */
+        responsive: {
+          type: Boolean,
+          reflectToAttribute: true,
+          value: true,
+        },
+        /**
+         * Simple caption for the video
+         */
+        caption: {
+          type: String,
+          reflectToAttribute: true,
+        },
+        /**
+         * Primary Color.
+         */
+        primaryColor: {
+          type: String,
+          value: null,
+          reflectToAttribute: true,
+          observer: '_primaryColorChanged',
+        },
+        /**
+         * Secondary Color.
+         */
+        secondaryColor: {
+          type: String,
+          value: null,
+          reflectToAttribute: true,
+          observer: '_secondaryColorChanged',
+        },
+        /**
+         * Text color.
+         */
+        textColor: {
+          type: String,
+          value: null,
+          reflectToAttribute: true,
+        },
+        /**
+         * Primary color class.
+         */
+        primaryColorClass: {
+          type: String,
+          reflectToAttribute: true,
+          computed: '_computeColorClass(primaryColor)',
+        },
+        /**
+         * Secondary color class.
+         */
+        secondaryColorClass: {
+          type: String,
+          reflectToAttribute: true,
+          computed: '_computeColorClass(secondaryColor)',
+        },
+        /**
+         * Text color class.
+         */
+        textColorClass: {
+          type: String,
+          value: null,
+          reflectToAttribute: true,
+          computed: '_computeColorClass(textColor)',
+        },
+        /**
+         * Simple video styles for consistent presentation.
+         */
+        videoStyle: {
+          type: String,
+          value: 'style1',
+          reflectToAttribute: true,
+        },
+        /**
+         * Youtube cookie-less domain for privacy.
+         */
+        ytNocookie: {
+          type: Boolean,
+          value: true,
+        },
+        /**
+         * Youtube suggested option.
+         */
+        ytSuggested: {
+          type: Boolean,
+          value: false,
+        },
+        /**
+         * Youtube controls option.
+         */
+        ytControls: {
+          type: Boolean,
+          value: true,
+        },
+        /**
+         * Youtube title option.
+         */
+        ytTitle: {
+          type: Boolean,
+          value: false,
+        },
+        /**
+         * Vimeo option for title being displayed.
+         */
+        vimeoTitle: {
+          type: Boolean,
+          value: false,
+        },
+        /**
+         * Vimeo option for author being displayed.
+         */
+        vimeoByline: {
+          type: Boolean,
+          value: false,
+        },
+        /**
+         * Vimeo option for portrait mode.
+         */
+        vimeoPortrait: {
+          type: Boolean,
+          value: false,
+        },
+        /**
+         * Vimeo option for color.
+         */
+        vimeoColor: {
+          type: String,
+          value: 'FF031D',
+        },
+      },
+      /**
+       * Attached.
+       */
+      attached: function() {
+        // Establish hax properties if they exist
+        let props = {
+          'canScale': true,
+          'canPosition': true,
+          'canEditSource': false,
+          'gizmo': {
+            'title': 'Video player',
+            'description': 'This can present video in a highly accessible manner regardless of source.',
+            'icon': 'av:play-circle-filled',
+            'color': 'red',
+            'groups': ['Video', 'Media'],
+            'handles': [
+              {
+                'type': 'video',
+                'url': 'source'
+              }
+            ],
+            'meta': {
+              'author': 'LRNWebComponents'
+            }
+          },
+          'settings': {
+            'quick': [
+              {
+                'property': 'responsive',
+                'title': 'Responsive',
+                'description': 'The video automatically fills the available area.',
+                'inputMethod': 'boolean',
+                'icon': 'image:photo-size-select-small',
+              },
+              {
+                'property': 'primaryColor',
+                'title': 'Primary color',
+                'description': 'Select the primary color used in the video',
+                'inputMethod': 'colorpicker',
+                'icon': 'editor:format-color-fill',
+              },
+              {
+                'property': 'secondaryColor',
+                'title': 'Secondary color',
+                'description': 'Select the secondary color used for the video',
+                'inputMethod': 'colorpicker',
+                'icon': 'editor:format-color-fill',
+              }
+            ],
+            'configure': [
+              {
+                'property': 'source',
+                'title': 'Source',
+                'description': 'The URL for this video.',
+                'inputMethod': 'textfield',
+                'icon': 'link',
+                'required': true,
+                'validationType': 'url',
+              },
+              {
+                'property': 'caption',
+                'title': 'caption',
+                'description': 'Simple caption for under video',
+                'inputMethod': 'textfield',
+                'icon': 'av:video-label',
+                'required': false,
+                'validationType': 'text',
+              },
+              {
+                'property': 'responsive',
+                'title': 'Responsive',
+                'description': 'The video automatically fills the available area.',
+                'inputMethod': 'boolean',
+                'icon': 'image:photo-size-select-small',
+              },
+              {
+                'property': 'primaryColor',
+                'title': 'Primary color',
+                'description': 'Select the primary color used in the video',
+                'inputMethod': 'colorpicker',
+                'icon': 'editor:format-color-fill',
+              },
+              {
+                'property': 'secondaryColor',
+                'title': 'Secondary color',
+                'description': 'Select the secondary color used for the video',
+                'inputMethod': 'colorpicker',
+                'icon': 'editor:format-color-fill',
+              }
+            ],
+            'advanced': []
+          }
+        };
+        this.setHaxProperties(props);
+      },
+      /**
+       * Notice secondary color changed
+       */
+      _secondaryColorChanged: function(newValue, oldValue) {
+        if (typeof newValue !== typeof undefined && newValue != null) {
+          // sees if there's enough contrast and adjusts them accordingly
+          this.validateTextColor('textColor', 'secondaryColor');
+        }
+      },
+      /**
+       * Validate and modify the text contrast to ensure the correct contrast
+       */
+      validateTextColor: function(textprop, bgprop) {
+        // verify the value is hex value
+        if (this[bgprop].includes('#')) {
+          let color = '';
+          // strip hash from string
+          const colorBuffer = this[bgprop].substring(1);
+          // convert rrggbb to decimal
+          const rgb = parseInt(colorBuffer, 16);
+          // extract RGB
+          const r = (rgb >> 16) & 0xff;
+          const g = (rgb >> 8) & 0xff;
+          const b = (rgb >> 0) & 0xff;
+          // calculate luma
+          const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+          // if the luma is to low switch to white text
+          if (luma < 141) {
+            color = '#ffffff';
+          }
+          else {
+            color = '#000000';
+          }
+          // Set color and background color vars
+          this.set(textprop, color);
+        }
+      },
+      /**
+       * Compute src from type / source combo.
+       * Type is set by source so this ensures a waterfall
+       * of valid values.
+       */
+      _computeSRC: function(source) {
+        if (typeof source !== typeof undefined) {
+          let type = this.getType(source);
+          // ensure that this is a valid url / cleaned up a bit
+          source = this.cleanSource(source, type);
+          if (type == 'vimeo') {
+            if (this.vimeoTitle) {
+              source += '?title=1';
+            }
+            else {
+              source += '?title=0';
+            }
+            if (this.vimeoByline) {
+              source += '&byline=1';
+            }
+            else {
+              source += '&byline=0';
+            }
+            if (this.vimeoPortrait) {
+              source += '&portrait=1';
+            }
+            else {
+              source += '&portrait=0';
+            }
+            if (typeof this.vimeoColor !== typeof undefined) {
+              source += '&color=' + this.vimeoColor;
+            }
+          }
+          else if (type == 'youtube') {
+            // ensure options are applied to the address
+            if (this.ytNocookie) {
+              source = source.replace('youtube.com/embed', 'youtube-nocookie.com/embed');
+            }
+            if (this.ytTitle) {
+              source += '?showinfo=1';
+            }
+            else {
+              source += '?showinfo=0';
+            }
+            if (this.ytControls) {
+              source += '&controls=1';
+            }
+            else {
+              source += '&controls=0';
+            }
+            if (this.ytSuggested) {
+              source += '&rel=1';
+            }
+            else {
+              source += '&rel=0';
+            }
+          }
+        }
+        return source;
+      },
+      /**
+       * Primary color changed, spread into internals.
+       */
+      _primaryColorChanged: function(newValue, oldValue) {
+        if (newValue != null) {
+          this.vimeoColor = newValue.substring(1);
+          // aggressive rebuild of source so vimeo picks up
+          // the color change and updates the URL to match
+          if (typeof this.source !== typeof undefined && this.getType(this.source) == 'vimeo') {
+            var source = this.source;
+            this.set('source', '');
+            this.set('source', source);
+          }
+        }
+      },
+      /**
+       * Make class from color value
+       */
+      _computeColorClass: function(color) {
+        if (color != null && color.toLowerCase() == '#ffffff') {
+          return 'white-text';
+        }
+        else if (color == '#000000') {
+          return 'black-text';
+        }
+        else if (color != null && color.substring(0, 1) == '#') {
+          return this._colorTransform(color, '', '');
+        }
+      },
+      /**
+       * Compute iframe or video tag for implementation.
+       */
+      _computeIframed: function(source) {
+        let type = this.getType(source);
+        if (type == 'youtube' || type == 'vimeo' || type == 'external') {
+          return true;
+        }
+        else {
+          return false;
+        }
+      },
+      /**
+       * Check source of the video, potentially correcting bad links.
+       */
+      cleanSource: function(input, type) {
+        if (type == 'vimeo' || type == 'youtube') {
+          // strip off the ? modifier for youtube/vimeo so we can build ourselves
+          var tmp = input.split('?');
+          var v = '';
+          input = tmp[0];
+          if (tmp.length == 2) {
+            args = tmp[1].split('=');
+            if (args[0] == 'v') {
+              v = args[1];
+            }
+          }
+          // link to the vimeo video instead of the embed player address
+          if (input.indexOf('player.vimeo.com') == -1 && input.indexOf('vimeo.com') != -1) {
+            return input.replace('vimeo.com/', 'player.vimeo.com/video/');
+          }
+          // copy and paste from the URL
+          else if (input.indexOf('youtube.com/watch') != -1) {
+            return input.replace('youtube.com/watch', 'youtube.com/embed/') + v;
+          }
+          // weird share-ly style version
+          else if (input.indexOf('youtu.be') != -1) {
+            return input.replace('youtu.be/', 'www.youtube.com/embed/') + v;
+          }
+        }
+        return input;
+      },
+      /**
+       * Figure out the type of video based on source.
+       */
+      getType: function(source) {
+        if (source.indexOf('vimeo') != -1) {
+          return 'vimeo';
+        }
+        else if (source.indexOf('youtube') != -1 || source.indexOf('youtu.be') != -1) {
+          return 'youtube';
+
+        }
+        return 'local';
+      },
+    });
+  </script>
+</dom-module>

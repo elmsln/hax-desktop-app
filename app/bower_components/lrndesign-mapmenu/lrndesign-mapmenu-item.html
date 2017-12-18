@@ -1,0 +1,43 @@
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+
+<dom-module id="lrndesign-mapmenu-item">
+  <template>
+    <style>
+      :host {
+        display: block;
+        --lrndesign-mapmenu-item-height: 16px;
+      }
+      iron-icon {
+        --iron-icon-height: var(--lrndesign-mapmenu-item-height);
+      }
+    </style>
+    <template is="dom-if" if="[[icon]]">
+      <iron-icon icon="[[icon]]"></iron-icon>
+    </template>
+    <span id="title">[[title]]</span>
+  </template>
+  <script>
+    Polymer({
+      is: 'lrndesign-mapmenu-item',
+      properties: {
+        icon: {
+          type: String,
+          value: ''
+        },
+        title: {
+          type: String,
+          value: ''
+        },
+        url: {
+          type: String,
+          value: ''
+        },
+        icon: {
+          type: String,
+          value: ''
+        }
+      }
+    });
+  </script>
+</dom-module>

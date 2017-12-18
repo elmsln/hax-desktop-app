@@ -1,0 +1,175 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../app-layout/app-layout.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../iron-pages/iron-pages.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<!-- <link rel="import" href="../paper-dialog-scrollable/paper-dialog-scrollable.html"> -->
+<link rel="import" href="../mtz-file-download-behavior/mtz-file-download-behavior.html">
+<link rel="import" href="../neon-animation/web-animations.html">
+<link rel="import" href="../neon-animation/neon-animations.html">
+<link rel="import" href="../materializecss-styles/materializecss-styles.html">
+
+<!--
+`hax-export-dialog`
+Export dialog with all export options and settings provided.
+
+@demo demo/index.html
+
+@microcopy - the mental model for this element
+ -
+
+-->
+
+<dom-module id="hax-export-dialog">
+  <template>
+    <style include="materializecss-styles">
+      :host {
+        display: block;
+      }
+      #dialog {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: auto;
+      }
+      #dialogcontent {
+        padding:0;
+        margin:0;
+      }
+      #dialogheader {
+        margin: 0;
+        padding: 1.2em;
+        border-bottom: 1px solid black;
+      }
+      #dialogheader h2 {
+        margin: 0;
+        font-size: 1.8em
+      }
+      .page-area {
+        padding: 2em;
+      }
+      .add-url-are,
+      .add-upload-area {
+        margin: 1em 0;
+      }
+      .url-description {
+        font-size: .8em;
+        color:grey;
+      }
+      .buttons {
+        color: black;
+      }
+    </style>
+    <paper-dialog id="dialog" entry-animation="slide-from-bottom-animation" exit-animation="slide-down-animation" with-backdrop>
+      <h2 id="dialogheader" class="indigo white-text">[[exportTitle]]</h2>
+      <paper-dialog-scrollable class="dialog-contents" id="dialogcontent">
+        <textarea id="textarea" rows="20" style="width:100%;"></textarea>
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button id="download" confirm raised>Download</paper-button>
+        <paper-button id="import" raised>Import</paper-button>
+        <paper-button id="copy" raised>Copy</paper-button>
+        <paper-button id="close" raised dialog-dismiss>Close</paper-button>
+      </div>
+    </paper-dialog>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'hax-export-dialog',
+      listeners: {
+        'download.tap': 'download',
+        'import.tap': 'import',
+        'copy.tap': 'selectBody',
+      },
+      behaviors: [mtz.FileDownloadBehavior],
+      properties: {
+        /**
+         * Title when open.
+         */
+        exportTitle: {
+          type: String,
+          value: 'Export',
+        },
+      },
+      /**
+       * Attached to the DOM, now fire that we exist.
+       */
+      attached: function() {
+        // fire an event that this is the manager
+        this.fire('hax-register-export', this);
+      },
+      /**
+       * Download file.
+       */
+      download: function(e) {
+        const data = this.contentToFile();
+        this.downloadFromData(data, 'html', 'hax-file');
+      },
+      /**
+       * Download file.
+       */
+      import: function(e) {
+        Polymer.HaxStore.toast('Future functionality');
+        // @todo import content from the innerHTML
+        //Polymer.HaxStore.wipeSlot(Polymer.HaxStore.instance.haxBody.$.);
+      },
+      /**
+       * selectBody
+       */
+      selectBody: function() {
+        this.$.textarea.focus();
+        this.$.textarea.select();
+        document.execCommand('copy');
+      },
+      /**
+       * Toggle ourselves.
+       */
+      toggleDialog: function() {
+        this.$.textarea.innerHTML = this.contentToFile();
+        this.$.dialog.toggle();
+      },
+      /**
+       * Output entire thing as a file.
+       */
+      contentToFile: function() {
+        let elementList = Polymer.HaxStore.instance.elementList;
+        // @todo obviously not sustainable
+        let url = 'https://lrnwebcomponents.github.io/hax-body/components';
+        let content = `
+        <!doctype html>
+        <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+            <title>hax-body demo</title>
+          <script src="${url}/webcomponentsjs/webcomponents-lite.js"><\/script>
+          <style>
+          body {
+            padding: 2em;
+          }
+          </style>
+          <script>
+          /* this script must run before Polymer is imported */
+          window.Polymer = {
+            dom: 'shady',
+            lazyRegister: true
+          };
+        <\/script>`;
+        for (var index in elementList) {
+          content += `<link rel="import" href="${url}/${index}/${index}.html" />` + "\n";
+        }
+        content += '</head><body>';
+        content += Polymer.HaxStore.instance.haxBody.haxToContent();
+        content += '</body></html>';
+        return content;
+      },
+    });
+  </script>
+</dom-module>
