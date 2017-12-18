@@ -2,6 +2,8 @@ const electron = require('electron');
 const _ = require('underscore');
 const url = require('url');
 const path = require('path');
+const Store = require('electron-store');
+const store = new Store();
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
 const { getPage, savePage, parseOutline, getOutlinePage } = require('./util/page');
 
@@ -64,8 +66,7 @@ const globals = {
     mainWindow.webContents.send('active-page-changed', page);
     // update the active content
     const content = getPage(page);
-    console.log(content);
-    // mainWindow.webContents.send('active-content-changed', content);
+    mainWindow.webContents.send('active-content-changed', content);
   },
 
   getOutline() {
@@ -75,6 +76,14 @@ const globals = {
     global.outline = outline;
     mainWindow.webContents.send('outline-changed', outline);
   },
+
+  getLocation() {
+    return store.get('location');
+  },
+  setLocation(location) {
+    store.set('location', location);
+    mainWindow.webContents.send('location-changed', location);
+  }
 }
 
 ipcMain.on('set-active-page', (e, page) => {
@@ -92,13 +101,17 @@ ipcMain.on('open-project-prompt', (e) => {
   const locations = dialog.showOpenDialog({ properties: ['openDirectory'] });
   if (_.isArray(locations)) {
     location = _.first(locations);
-    // save the new location
-    global.location = location;
-    // send new location to app
-    mainWindow.webContents.send('location-changed');
+    // set the location
+    globals.setLocation(location);
     // get new outline
     const outline = parseOutline();
     // store the outline
     globals.setOutline(outline);
   }
 });
+
+// Find out if the app has a stored location and use that.
+// const location = globals.getLocation();
+// if (location) {
+//   mainWindow.webContents.send('location-changed', location);
+// }

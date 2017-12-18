@@ -5,15 +5,18 @@ const md = require( "markdown" ).markdown;
 const marked = require('marked');
 const cheerio = require('cheerio');
 
-module.exports = {
+// getPage('introduction/learning-objectives.md');
 
+module.exports = {
+  
   getPage(page) {
-    page = _.isString() ? page : 'index.html';
     location = global.location;
     _path = path.join(location, page);
     if (!fs.existsSync(_path)) return false;
-    let file = fs.readFileSync(_path, 'utf8');
-    return file;
+    const file = fs.readFileSync(_path, 'utf8');
+    // run this through a parser
+    const html = marked(file);
+    return html;
   },
 
   savePage(page, content) {
@@ -30,6 +33,14 @@ module.exports = {
   },
 
   createPage(name, content = '') {
+  },
+
+  /**
+   * Converts a string of markdown into html
+   * @param {string} markdown 
+   * @return {string} html
+   */
+  parseMarkdown(markdown) {
   },
 
   /**

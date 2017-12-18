@@ -44,7 +44,7 @@
       },
 
       ready: function () {
-        ipcRenderer.on('location-change', (e) => {
+        ipcRenderer.on('location-changed', (e) => {
           this.location = remote.getGlobal('location');
         });
       },

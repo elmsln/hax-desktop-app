@@ -43,9 +43,10 @@
     </style>
 
     <h1>[[activePage]]</h1>
+    hax-app-page
 
     <hax-store></hax-store>
-    <hax-body context-offset-left="-164">
+    <hax-body id="haxbody" context-offset-left="-164">
 
     </hax-body>
     <hax-export-dialog></hax-export-dialog>
@@ -164,7 +165,19 @@
         activePage: {
           type: String,
           value: ''
+        },
+        content: {
+          type: String,
+          value: '',
+          observer: '_contentChanged'
         }
+      },
+
+      _contentChanged: function (content, oldContent) {
+        // quick dirty check
+        if (content === oldContent) return;
+        // update hax body content
+        this.$.haxbody.innerHTML = content;
       },
 
       save: function () {
@@ -189,15 +202,9 @@
         // with the new content
         ipcRenderer.on('active-page-changed', (e, page) => {
           this.activePage = page;
-          // const parser = new DOMParser();
-          // const page = parser.parseFromString(content, 'text/html');
-          // const pageNodes = page.querySelector('body').children;
-          // // Clear out body
-          // haxBody.haxClearBody();
-          // // loop through each node and insert them into hax
-          // _.each(pageNodes, (node) => {
-          //   haxBody.haxInsert(node.tagName, node.innerHTML);
-          // })
+        });
+        ipcRenderer.on('active-content-changed', (e, content) => {
+          this.content = content;
         });
       }
 
