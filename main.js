@@ -78,9 +78,10 @@ const globals = {
   },
 
   getLocation() {
-    return store.get('location');
+    return global.location;
   },
   setLocation(location) {
+    global.location = location;
     store.set('location', location);
     mainWindow.webContents.send('location-changed', location);
   }
@@ -111,7 +112,7 @@ ipcMain.on('open-project-prompt', (e) => {
 });
 
 // Find out if the app has a stored location and use that.
-// const location = globals.getLocation();
-// if (location) {
-//   mainWindow.webContents.send('location-changed', location);
-// }
+const location = store.get('location');
+if (location) {
+  globals.setLocation(location);
+}

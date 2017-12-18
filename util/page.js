@@ -11,6 +11,7 @@ module.exports = {
   
   getPage(page) {
     location = global.location;
+    if (!page || !location) return false;
     _path = path.join(location, page);
     if (!fs.existsSync(_path)) return false;
     const file = fs.readFileSync(_path, 'utf8');
@@ -33,6 +34,7 @@ module.exports = {
   },
 
   createPage(name, content = '') {
+
   },
 
   /**
