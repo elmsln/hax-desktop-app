@@ -110,9 +110,3 @@ ipcMain.on('open-project-prompt', (e) => {
     globals.setOutline(outline);
   }
 });
-
-// Find out if the app has a stored location and use that.
-const location = store.get('location');
-if (location) {
-  globals.setLocation(location);
-}
