@@ -58,7 +58,7 @@ if (process.env.NODE_ENV !== 'production') {
  */
 const globals = {
   getActivePage() {
-    return global.outline;
+    return global.page;
   },
   setActivePage(page) {
     global.page = page;

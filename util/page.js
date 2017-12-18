@@ -21,10 +21,12 @@ module.exports = {
   },
 
   savePage(page, content) {
-    page = _.isString() ? page : 'index.html';
     location = global.location;
-    _path = path.join(location, _page);
-    if (!fs.existsSync(_path)) return false;
+    _path = path.join(location, page);
+    console.log({
+      path: _path,
+      content: content
+    });
     try {
       fs.writeFileSync(_path, content, 'utf8');
       return true;
