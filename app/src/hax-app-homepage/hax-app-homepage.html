@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../hax-app-location-list/hax-app-location-list.html">
 
 <dom-module id="hax-app-homepage">
   <template>
@@ -17,6 +18,10 @@
         padding: .5em;
         flex: 1 1 auto;
       }
+
+      h2 {
+        margin-top: 2em;
+      }
     </style>
     <h1>Configuration</h1>
 
@@ -24,6 +29,9 @@
       <paper-button raised on-click="openProject">Open Project</paper-button>
       [[location]]
     </div>
+
+    <h2>Recent Projects</h2>
+    <hax-app-location-list></hax-app-location-list>
 
   </template>
 

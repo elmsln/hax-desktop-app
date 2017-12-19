@@ -82,12 +82,38 @@ const globals = {
   },
   setLocation(location) {
     global.location = location;
-    store.set('location', location);
     mainWindow.webContents.send('location-changed', location);
     // get new outline
     const outline = parseOutline();
     // store the outline
     globals.setOutline(outline);
+    // store the location in the location list
+    globals.addToLocationList(location);
+  },
+
+  getLocationList() {
+    if (global.locationList) {
+      return global.locationList;
+    } 
+    else {
+      return store.get('location-list');
+    }
+  },
+  addToLocationList(location) {
+    let newLocationList = [];
+    const locationList = store.get('location-list') ? store.get('location-list') : [];
+    // if the location already exists add remove it from the list 
+    if (locationList.includes(location)) {
+      newLocationList = locationList.filter(l => l !== location);
+    }
+    // add the location to the top of the list
+    newLocationList.push(location);
+    globals.setLocationList(newLocationList);
+  },
+  setLocationList(locations) {
+    global.locationList = locations;
+    store.set('location-list', locations);
+    mainWindow.webContents.send('location-list-changed', locations);
   }
 }
 
@@ -112,9 +138,11 @@ ipcMain.on('open-project-prompt', (e) => {
 });
 
 ipcMain.on('app-initialized', (e, arg) => {
-  // Find out if we have a stored location.
-  const location = store.get('location');
-  if (location) {
-    globals.setLocation(location);
-  }
+  // Initialize locations
+  const locationList = globals.getLocationList();
+  globals.setLocationList(locationList);
 });
+
+ipcMain.on('change-location', (e, location) => {
+  globals.setLocation(location);
+})

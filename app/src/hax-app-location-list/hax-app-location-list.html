@@ -1,0 +1,63 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-item.html">
+
+
+
+<dom-module id="hax-app-location-list">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      paper-menu {
+        --paper-menu-focused-item: {
+          background: #eefbff;
+        }
+      }
+
+      paper-item:last-of-type {
+        border-top: 1px solid lightblue;
+        border-bottom: 1px solid lightblue;
+      }
+
+      paper-item {
+        border-top: 1px solid blue;
+      }
+
+      paper-item:hover {
+        background: #eefbff;
+      }
+    </style>
+
+    <paper-menu>
+      <template is="dom-repeat" items="[[locations]]" as="location">
+        <paper-item data-location$="[[location]]" on-click="_selectLocation">[[location]]</paper-item>
+      </template>
+    </paper-menu>
+    
+  </template>
+  <script>
+    Polymer({
+      is: 'hax-app-location-list',
+      properties: {
+        locations: {
+          type: Array,
+          value: []
+        }
+      },
+      _selectLocation: function(e) {
+        const localTarget = Polymer.dom(e).localTarget;
+        const location = localTarget.getAttribute('data-location');
+        ipcRenderer.send('change-location', location);
+      },
+      ready: function () {
+        ipcRenderer.on('location-list-changed', (e, locations) => {
+          this.locations = locations;
+          console.log(locations);
+        });
+      }
+    });
+  </script>
+</dom-module>
