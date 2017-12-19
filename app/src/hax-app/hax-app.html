@@ -49,6 +49,7 @@
       },
 
       ready: function () {
+        ipcRenderer.send('app-initialized');
         // get the current outline
         ipcRenderer.on('outline-changed', (e, outline) => {
           if (outline) {

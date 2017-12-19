@@ -84,6 +84,10 @@ const globals = {
     global.location = location;
     store.set('location', location);
     mainWindow.webContents.send('location-changed', location);
+    // get new outline
+    const outline = parseOutline();
+    // store the outline
+    globals.setOutline(outline);
   }
 }
 
@@ -104,9 +108,13 @@ ipcMain.on('open-project-prompt', (e) => {
     location = _.first(locations);
     // set the location
     globals.setLocation(location);
-    // get new outline
-    const outline = parseOutline();
-    // store the outline
-    globals.setOutline(outline);
+  }
+});
+
+ipcMain.on('app-initialized', (e, arg) => {
+  // Find out if we have a stored location.
+  const location = store.get('location');
+  if (location) {
+    globals.setLocation(location);
   }
 });
