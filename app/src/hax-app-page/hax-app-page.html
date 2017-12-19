@@ -176,7 +176,9 @@
         // quick dirty check
         if (content === oldContent) return;
         // update hax body content
-        this.$.haxbody.innerHTML = content;
+        if (this.__haxBody) {
+          Polymer.dom(this.$$('hax-body')).innerHTML = content;
+        }
       },
 
       save: function () {
@@ -186,7 +188,7 @@
       },
 
       attached: function () {
-        const haxBody = this.$$('hax-body');
+        this.__haxBody = this.$$('hax-body');
 
         // Listen for saves
         this.addEventListener('save', (e) => {
