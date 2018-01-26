@@ -13,7 +13,10 @@
     "paper-drawer-panel": "PolymerElements/paper-drawer-panel#^2.0.0",
     "paper-dialog": "PolymerElements/paper-dialog#^2.0.0",
     "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#^2.1.0",
-    "iron-image": "PolymerElements/iron-image#^2.1.2"
+    "iron-image": "PolymerElements/iron-image#^2.1.2",
+    "lrn-icons": "LRNWebComponents/lrn-icons#^1.0.13",
+    "paper-button": "PolymerElements/paper-button#^2.0.0",
+    "neon-animation": "PolymerElements/neon-animation#^2.0.2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

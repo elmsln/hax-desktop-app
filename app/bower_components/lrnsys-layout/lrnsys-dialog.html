@@ -10,6 +10,7 @@
 <link rel="import" href="../materializecss-styles/colors.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="lrnsys-dialog-toolbar.html">
+<link rel="import" href="lrnsys-button-inner.html">
 
 <!--
 `lrnsys-dialog`
@@ -31,6 +32,10 @@
         bottom: 5%;
         left: 5%;
         overflow: auto;
+        border-radius: 3px;
+      }
+      paper-dialog-scrollable {
+        margin-top:0;
       }
       paper-dialog-scrollable {
         margin-top:0;
@@ -57,10 +62,6 @@
         font-size: 1.5em;
       }
 
-      .text-label {
-        margin-left: 1em;
-      }
-
       #close-button {
         position: fixed;
         right: 9%;
@@ -71,16 +72,9 @@
       }
     </style>
     <paper-button class$="[[class]]" id="dialog-trigger" on-tap="toggleDialog" raised="[[raised]]" disabled$="[[disabled]]" title="[[alt]]">
-      <template is="dom-if" if="[[avatar]]">
-        <paper-avatar src$="[[avatar]]"></paper-avatar>
-      </template>
-      <template is="dom-if" if="[[icon]]">
-        <lrn-icon icon="[[icon]]"></lrn-icon>
-      </template>
-      <template is="dom-if" if="[[text]]">
-        <span class="text-label">[[text]]</span>
-      </template>
-      <slot name="button"></slot>
+      <lrnsys-button-inner avatar$="[[avatar]]" icon$="[[icon]]" text$="[[text]]">
+        <slot name="button"></slot>
+      </lrnsys-button-inner>
     </paper-button>
     <template is="dom-if" if="[[alt]]">
       <paper-tooltip for="dialog-trigger" animation-delay="0">[[alt]]</paper-tooltip>
@@ -89,10 +83,10 @@
       <!--START TOOLBAR TO DIALOG -->
       <lrnsys-dialog-toolbar on-button-clicked="_toolbarButtonClickedHandler">
         <span slot="primary">
-            <slot name="toolbar-primary"></slot>
+          <slot name="toolbar-primary"></slot>
         </span>
         <span slot="secondary">
-            <slot name="toolbar-secondary"></slot>
+          <slot name="toolbar-secondary"></slot>
         </span>
       </lrnsys-dialog-toolbar>
       <!--END TOOLBAR TO DIALOG -->
