@@ -26,13 +26,57 @@
         height: 100%;
         z-index: -1;
       }
-    </style>
+      
+      button {
+        margin-left:20%; 
+      }
+      
+      #overlay{
+        display: none; /**hides popup initially*/
+        position: fixed; /**position is fixed when user scrolls around*/
+        left: 0px; /**element at left most position */
+        top: 0px; /**element at top most position*/
+        width: 100%; /**element takes up 100% of the parents width*/
+        height: 100%; /**element takes up 100% of thr parents height*/
+        background: black; /**sets background to balck*/
+        opacity: 0.5; /**50% opacity so it is see through*/
+        z-index: 99999; /**changes z-index so it is above everything else*/
+      }
 
+      #popup{
+        display: none; /**hides popup initially*/
+        position: fixed; /**position is fixed when user scrolls around*/
+        left: 50%; /**element at left most position */
+        top: 50%; /**element at top most position*/
+        width: 300px; /**element is 300 pixles wide*/
+        height: 150px; /**element is 150 pixles tall*/
+        margin-top: 75px;
+        margin-left: -150px;
+        background: white; /**sets background to white*/
+        border: 2px solid #000;
+        z-index: 100000; /**z index 1 more than overlay so it is above it*/
+      }
+    </style>
+    
+    <div class="button">
+      <paper-button toggles raised class ="green" on-tap="handleTap">Add Page</paper-button>
+      <p id="test">Did you hear about the circus fire?</p>
+    </div>
+
+    <paper-dialog id="dialog">
+      <h2>Page Information</h2>
+      <paper-input></paper-input>
+      <div class="buttons">
+        <paper-button dialog-confirm autofocus on-tap="handleTap" class = "green">Create Page</paper-button>
+        <paper-button dialog-dismiss>Cancel</paper-button>
+      </div>
+    </paper-dialog>
+    
     <div id="slot"></div>
     
   </template>
   <script>
-    Polymer({
+    Polymer({ 
       is: 'hax-app-outline',
       properties: {
         outline: {
@@ -86,6 +130,12 @@
             ipcRenderer.send('set-active-page', href);
           }
         });
+      },
+
+      handleTap: function(){
+        console.log(":thumbs_up:");
+        document.getElementById("test").innerHTML = "it was in-TENTS";
+        this.$.dialog.toggle();
       }
     });
   </script>
