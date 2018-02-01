@@ -12,14 +12,14 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebComponents/materializecss-styles",
-  "version": "0.0.5",
-  "_release": "0.0.5",
+  "version": "1.1.0",
+  "_release": "1.1.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.5",
-    "commit": "eb86e92d0996b31f9c60f4ee3b52145a73d26cf5"
+    "tag": "1.1.0",
+    "commit": "61cc6b02cb4c2695e38b5342307b095f4e7fe297"
   },
   "_source": "https://github.com/LRNWebComponents/materializecss-styles.git",
-  "_target": "^0.0.5",
+  "_target": "^1.1.0",
   "_originalSource": "LRNWebComponents/materializecss-styles"
 }

@@ -15,16 +15,59 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/LRNWebComponents/hax-body)
 
 # HAX
-An application that uses HAX is made up of several custom elements working together. These elements are:
+Headless Authoring eXperience or HAX for short, is a new way of authoring content that works across platforms. Written in webcomponents, HAX allows users to effectively write HTML by touching the interface directly. Think WYSIWYG if it was built with modern and future proof tools and libraries instead of based on the work of the early 2000s.
+
+HAX can be integrated into any solution as it's depending on a headless backend in order to integrate. It also has the ability to allow end users to use and insert complex custom elements, presenting an input form based on JSONSchema that's emmitted from the custom element upon registration. HAX is for stitching together your universe of content and media solutions into a remote control for your authors.
+
+There's lots of documentation in this file and examples of integrations and you can see lots of video based tutorials in this playlist: https://www.youtube.com/watch?v=kLrKMhz8-JY&list=PLJQupiji7J5eTqv8JFiW8SZpSeKouZACH
+
+## Notable video examples / tutorials for building
+- Integrating HAX with NASA media search - https://www.youtube.com/watch?v=Sza6mmt-D0U&index=2&list=PLJQupiji7J5eTqv8JFiW8SZpSeKouZACH
+- Integrating HAX with Kaltura search - https://www.youtube.com/watch?v=kLrKMhz8-JY&list=PLJQupiji7J5eTqv8JFiW8SZpSeKouZACH
+- Wiring an `audio-player` webcomponent up to HAX - https://www.youtube.com/watch?v=ZQ7JGvlevQM&list=PLJQupiji7J5eTqv8JFiW8SZpSeKouZACH&index=3
+- Wiring HAX into an existing element (much more detailed) - https://www.youtube.com/watch?v=d2CFA-pKzaY&index=4&list=PLJQupiji7J5eTqv8JFiW8SZpSeKouZACH
+
+### Deeper developer dive into how HAX works
+- initial deep dive - https://www.youtube.com/watch?v=eGV1XWzUko8&list=PLJQupiji7J5eTqv8JFiW8SZpSeKouZACH&index=10
+- State management and pluggability - https://www.youtube.com/watch?v=Pehb3s5JBTw&list=PLJQupiji7J5eTqv8JFiW8SZpSeKouZACH&index=1
+
+An application that uses HAX is made up of several custom elements working together. Some of the primary elements to make this happen are:
 ```
 <hax-body>
 <hax-panel>
 <hax-manager>
 <hax-source>
+<hax-autoloader>
 <hax-store>
 ```
 
 These elements all live at the "app level" that you will create in order to utilize these tags. They are separate so that you can swap them out or fork individual ones as you desire.
+
+## Systems that integrate with HAX
+- ELMS:LN - https://github.com/elmsln/elmsln
+- Drupal (6 and 7) - https://www.drupal.org/project/hax
+  + Drupal 7 via Champion distro - https://www.youtube.com/watch?v=ifIg7FiXYCc&index=8&list=PLJQupiji7J5eTqv8JFiW8SZpSeKouZACH
+  + Drupal 6 - https://www.youtube.com/watch?v=ojlF3YxqXTo&list=PLJQupiji7J5eTqv8JFiW8SZpSeKouZACH&index=6
+- Backdrop - https://backdropcms.org/project/hax
+  + Video of install / integration - https://www.youtube.com/watch?v=yCOOnA7VWPo&index=7&list=PLJQupiji7J5eTqv8JFiW8SZpSeKouZACH
+- GravCMS - https://github.com/elmsln/grav-plugin-hax
+  + Integration and showcase - https://www.youtube.com/watch?v=Z2chE4DuJf8&list=PLJQupiji7J5eTqv8JFiW8SZpSeKouZACH&index=5
+- Your system! (see next step)
+
+### What do I need to integrate with hax?
+HAX is designed to integrate with any system by being about authoring HTML that any end user could have hit "view source" and done themselves. It manipulates the DOM in a targetted area and then bubbles up what the change was without all the HAX cruft attached. If you want to get more integrations listed above, here's what the system needs:
+- HTML blob storage - It has to store data as a block of HTML. If it has a CKEditor or TinyMCE input method currently then it probably does this already.
+- ability to render webcomponents - hax is built on webcomponents so your system has to be able to load them (this is as easy as adding an `<link rel="import" src="cms-hax/cms-hax.html"/>` reference)
+- end point / API location to save the data (if building your own HAX integration not the cms or wysiwyg option)
+
+If you think you can use HAX, try one of the methods below of integration. HAX is a pretty deep dive into Polymer / Webcomponents so these areas might be good starting points and then working down from there if you find it useful.
+
+#### Drop in integrations
+- Faster HAX integration into a CMS setting. Use the `cms-hax` tag - https://github.com/LRNWebComponents/cms-hax
+- Want CKEditor style replacement (integration wise). Use `wysiwyg-hax` tag - https://github.com/LRNWebComponents/wysiwyg-hax
+
+### Why the difference in integration methodologies?
+`hax-body` is a collection of tags for building your own HAX editor. You don't like our `hax-panel` tag? Well, if you implement the registration function for your own `much-better-hax-panel` tag then it'll act like it's part of HAX. This isn't for everyone though so we have some simplified integrations that are much less flexible (they define and implement the standard tags of hax). ELMS:LN for example implements `hax-body` and associated tags directly but the other integrations listed utilize `cms-hax`. For a complex example integrating with the tags directly into an existing application, check out https://github.com/elmsln/elmsln/blob/0.10.x/core/webcomponents/apps/lrnapp-book/src/lrnapp-book/lrnapp-book.html .
 
 ## Definitions
 - *HAX* - Headless Authoring eXperience or HAX, will always and must always be system agnostic. It needs to be able to interface with HTML primatives as well as custom-element tags which provide a haxProperties object to the specification of a haxElement.
@@ -59,12 +102,14 @@ These elements all live at the "app level" that you will create in order to util
   - `<hax-plate-context>` - a grid-plate editor which allow for cloning the item, moving it up or down in the hax-body DOM or deleting the element from the body
   - `<hax-context-item>` - an icon button for any hax-*-context menus which emmits normalized events and provides display consistency
   - `<hax-context-item-textop>` - same as hax-context-item but this is specific to text-based operations. If the event needs to maintain focus on the element's contenteditable area in order to work (like injecting a bulleted list) then this button helps ensure that happens. It works in all the same ways otherwise.
-  - hax-context-item-menu>` - providing a consistent drop-down menu in place
+  - `<hax-context-item-menu>` - providing a consistent drop-down menu in place
 - `<hax-panel>` - side panel of options to pick from as a form of quick inserting and selection of HAX Elements that get inserted into hax-body.
   - `<hax-panel-item>` - an item that lives in hax-panel and helps provide visual consistency as well as normalized event bubbling
 - `<hax-manager>` - modal that's doing the bulk of the work of finding and configuring an element before it is placed on the page
   - `<hax-source-browser>` - a listing of all hax-sources in a "app store" type display
     - `<hax-source-browser-item>` - an item in this listing, generated based on reading off the information provided by hax-source
+  - `<hax-gizmo-browser>` - a listing of all gizmos in a "app store" type display for presenting and managing searching for gizmos the end user can add to the body of content.
+    - `<hax-gizmo-browser-item>` - an item in this listing, generated based on reading off the information provided by custom elements implementing haxProperties.
   - `<hax-preview>` - the "configure" screen of hax-manager which shows an interactive preview of what your working on and tweaking
 - `<hax-source>` - an end point that has a listing of items (like videos) which also expresses
 - `<hax-store>` - a state management object store as well as brain for what elements and sources are available to this HAX application. For example, if you place a `<video-player>` tag inside the `<hax-store>` element on the page, it will realize that video-player is a valid element, import it's definition at run-time (lazy load) as well as start to build up HAX defintion of what elements are available in the `<slot>`. It also provides global transformation methods for things like HaxPropertiesToJSONSchema and HAXElementToNode. This is the brain helping everyone else have to do less.
