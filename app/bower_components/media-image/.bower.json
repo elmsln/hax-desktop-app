@@ -22,14 +22,14 @@
     "iron-ajax": "^2.0.5"
   },
   "homepage": "https://github.com/LRNWebComponents/media-image",
-  "version": "0.0.9",
-  "_release": "0.0.9",
+  "version": "0.0.10",
+  "_release": "0.0.10",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.9",
-    "commit": "2341368085273bba30fd3ffbf43366eb68cb46f2"
+    "tag": "0.0.10",
+    "commit": "6e02a53aec2f09d05af2b27e3ad7de95e6594064"
   },
   "_source": "https://github.com/LRNWebComponents/media-image.git",
-  "_target": "^0.0.9",
+  "_target": "^0.0.10",
   "_originalSource": "LRNWebComponents/media-image"
 }

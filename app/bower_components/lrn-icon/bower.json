@@ -2,17 +2,24 @@
   "name": "lrn-icon",
   "main": "lrn-icon.html",
   "dependencies": {
-    "iron-flex-layout": "polymerelements/iron-flex-layout#^1.0.0",
-    "iron-meta": "polymerelements/iron-meta#^1.0.0",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.1",
+    "iron-meta": "PolymerElements/iron-meta#^2.0.3",
     "polymer": "Polymer/polymer#^1.1.0",
-    "iron-iconset": "^1.0.5",
-    "lrn-icons": "LRNWebComponents/lrn-icons#^1.0.5"
+    "iron-iconset": "PolymerElements/iron-iconset#^2.0.0"
   },
   "devDependencies": {
-    "test-fixture": "polymerelements/test-fixture#^1.0.0",
-    "promise-polyfill": "polymerlabs/promise-polyfill#^1.0.0",
-    "iron-component-page": "polymerelements/iron-component-page#^1.0.0",
+    "lrn-icons": "LRNWebComponents/lrn-icons#^1.0.5",
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
     "web-component-tester": "^4.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  },
+  "resolutions": {
+    "iron-meta": "^2.0.3",
+    "iron-iconset": "^2.0.0",
+    "iron-flex-layout": "1 - 2",
+    "webcomponentsjs": "^0.7.24",
+    "iron-icon": "^2.0.0",
+    "iron-iconset-svg": "^2.1.0"
   }
 }

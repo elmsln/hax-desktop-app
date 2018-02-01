@@ -235,7 +235,7 @@ A simple responsive video player
         /**
          * Vimeo option for color.
          */
-        vimeoColor: {
+        videoColor: {
           type: String,
           value: 'FF031D',
         },
@@ -258,7 +258,11 @@ A simple responsive video player
             'handles': [
               {
                 'type': 'video',
-                'url': 'source'
+                'source': 'source',
+                'title': 'caption',
+                'caption': 'caption',
+                'description': 'caption',
+                'color': 'primaryColor'
               }
             ],
             'meta': {
@@ -364,8 +368,8 @@ A simple responsive video player
             else {
               source += '&portrait=0';
             }
-            if (typeof this.vimeoColor !== typeof undefined) {
-              source += '&color=' + this.vimeoColor;
+            if (typeof this.videoColor !== typeof undefined) {
+              source += '&color=' + this.videoColor;
             }
           }
           else if (type == 'youtube') {
@@ -392,6 +396,15 @@ A simple responsive video player
               source += '&rel=0';
             }
           }
+          else if (type == 'dailymotion') {
+            source += '&ui-start-screen-info=false';
+            source += '&ui-logo=false';
+            source += '&sharing-enable=false';
+            source += '&endscreen-enable=false';
+            if (typeof this.videoColor !== typeof undefined) {
+              source += '&ui-highlight=' + this.videoColor;
+            }
+          }
         }
         return source;
       },
@@ -408,15 +421,13 @@ A simple responsive video player
        * Primary color changed, spread into internals.
        */
       _primaryColorChanged: function(newValue, oldValue) {
-        if (newValue != null) {
-          this.vimeoColor = newValue.substring(1);
+        if (newValue != null && typeof this.source !== typeof undefined) {
+          this.videoColor = newValue.substring(1);
           // aggressive rebuild of source so vimeo picks up
           // the color change and updates the URL to match
-          if (typeof this.source !== typeof undefined && this.getVideoType(this.source) == 'vimeo') {
-            var source = this.source;
-            this.set('source', '');
-            this.set('source', source);
-          }
+          var source = this.source;
+          this.set('source', '');
+          this.set('source', source);
         }
       },
       /**

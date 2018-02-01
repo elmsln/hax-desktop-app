@@ -4,25 +4,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>boiler-plate test</title>
+    <title>csv-render test</title>
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../boiler-plate.html">
+    <link rel="import" href="../csv-render.html">
   </head>
   <body>
     <test-fixture id="basic">
       <template>
-        <boiler-plate></boiler-plate>
+        <csv-render></csv-render>
       </template>
     </test-fixture>
 
     <script>
-      suite('boiler-plate', function() {
+      suite('csv-render', function() {
         test('instantiating the element works', function() {
           var element = fixture('basic');
-          assert.equal(element.is, 'boiler-plate');
+          assert.equal(element.is, 'csv-render');
         });
       });
     </script>

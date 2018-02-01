@@ -3,13 +3,12 @@
   "description": "A LRN element",
   "main": "elmsln-loading.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.9.1",
-    "lrnsys-behaviors": "LRNWebComponents/lrnsys-behaviors#^1.0.0",
-    "hax-behaviors": "LRNWebComponents/hax-behaviors#^0.0.6",
-    "materializecss-styles": "LRNWebComponents/materializecss-styles#^0.0.5",
+    "polymer": "Polymer/Polymer#^2.3.1",
+    "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.1.0",
     "paper-spinner": "PolymerElements/paper-spinner#^1.2.1",
     "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.4",
-    "lrn-icons": "LRNWebComponents/lrn-icons#^1.0.13"
+    "lrn-icons": "LRNWebComponents/lrn-icons#^1.1.0",
+    "lrn-icon": "LRNWebComponents/lrn-icon#^1.0.2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

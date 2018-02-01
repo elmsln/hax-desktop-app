@@ -1,13 +1,13 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../lrn-icon/lrn-icon.html">
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../lrn-icon/lrn-icon.html">
 
 <dom-module id="lrn-icons-demo">
 <template>
   <ul>
-  <template is="dom-repeat" items="{{iconlist}}">
+  <template is="dom-repeat" items="[[iconList]]">
     <li>
-    <lrn-icon icon="{{item.icon}}"></lrn-icon>
-    <strong>&lt;lrn-icon icon="{{item.icon}}"&gt;</strong>
+    <lrn-icon icon="[[item.icon]]"></lrn-icon>
+    <strong>&lt;lrn-icon icon="[[item.icon]]"&gt;</strong>
     </li>
   </template>
   </ul>
@@ -16,7 +16,7 @@
       Polymer({
           is: 'lrn-icons-demo',
           ready: function() {
-              this.iconlist = [
+              this.iconList = [
               {"icon": "done"},
               {"icon": "input"},
               {"icon": "about"},
@@ -53,6 +53,7 @@
               {"icon": "ecd"},
               {"icon": "mooc"},
               {"icon": "content-outline"},
+              {"icon": "book"},
               {"icon": "courses"},
               {"icon": "content"},
               {"icon": "dino"},

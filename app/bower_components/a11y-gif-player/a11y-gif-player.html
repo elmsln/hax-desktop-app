@@ -1,16 +1,15 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
+<link rel="import" href="../iron-image/iron-image.html">
 <link rel="import" href="../hax-body-behaviors/hax-body-behaviors.html">
 <link rel="import" href="../schema-behaviors/schema-behaviors.html">
 <!--
-`a11y-gif-player`
-A LRN element
+ `a11y-gif-player`
+ Play gifs in an accessible way by having the user click to play their animation.
 
 @demo demo/index.html
 
 @microcopy - the mental model for this element
- -
- -
  -
 
 -->
@@ -41,7 +40,8 @@ A LRN element
     </style>
     <div id="gifbutton" aria-role="button" aria-controls="gif" tabindex="0" width$="[[width]]" height$="[[height]]">
       <div>
-        <img id="gif" width$="[[width]]" height$="[[height]]" alt$="[[alt]]" src$="[[srcWithoutAnimation]]" />
+        <iron-image id="gif" width$="[[width]]" height$="[[height]]" style$="width:[[width]]; height:[[height]]; background-color: lightgray;"
+        preload fade alt$="[[alt]]" src$="[[srcWithoutAnimation]]"></iron-image>
         <svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"  width="30%" height="30%">
           <g opacity=".5">
             <polygon points="30,20 30,180 170,100" fill="#000000" stroke="#ffffff" stroke-width="15px"/>
@@ -50,8 +50,8 @@ A LRN element
         </svg>
       </div>
     </div>
-    <img id="preload" src$="[[src]]" hidden />
-    <iron-a11y-keys id="a11y" keys="enter" target="[[target]]"
+    <iron-image id="preload" src$="[[src]]" hidden></iron-image>
+    <iron-a11y-keys id="a11y" keys="enter" target$="[[target]]"
     on-keys-pressed="toggleAnimation"></iron-a11y-keys>
   </template>
 
@@ -168,7 +168,9 @@ A LRN element
             'handles': [
               {
                 'type': 'image',
-                'url': 'source'
+                'source': 'src',
+                'source2': 'srcWithoutAnimation',
+                'alt': 'alt',
               }
             ],
             'meta': {

@@ -257,6 +257,7 @@ with the hax-body element which manages elements.
       if (typeof type === typeof undefined) {
         type = 'configure';
       }
+      var slot = '';
       let settings = this.haxProperties.settings[type];
       var schema = {
         "$schema": "http://json-schema.org/schema#",
@@ -293,9 +294,16 @@ with the hax-body element which manages elements.
               };
             break;
             case 'select':
+              slot = '';
+              if (typeof settings[value].options !== typeof undefined) {
+                for (var val in settings[value].options) {
+                  slot += '<paper-item value="' + val + '">' + settings[value].options[val] + '</paper-item>' + "\n";
+                }
+              }
               schema.properties[settings[value].property].component = {
-                "name": "paper-dropdown-menu",
-                "valueProperty": "selected",
+                "name": "dropdown-select",
+                "valueProperty": "value",
+                "slot": slot,
                 "properties": {
                   "required": settings[value].required
                 }

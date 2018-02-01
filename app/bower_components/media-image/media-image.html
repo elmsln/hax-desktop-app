@@ -75,9 +75,7 @@ A LRN element
 
     <iron-image resource$="[[schemaResourceID]]-image" src$="[[source]]" alt$="[[alt]]"></iron-image>
     <div class="citation">[[citation]]</div>
-    <div class="caption">
-      <slot name="caption"></slot>
-    </div>
+    <div class="caption">[[caption]]</div>
 
   </template>
 
@@ -91,6 +89,7 @@ A LRN element
         */
         source: {
           type: String,
+          value: "",
           reflectToAttribute: true,
         },
         /**
@@ -98,13 +97,21 @@ A LRN element
         */
         citation: {
           type: String,
-          reflectToAttribute: true,
+          value: "",
+        },
+        /**
+         * Image caption.
+        */
+        caption: {
+          type: String,
+          value: "",
         },
         /**
          * Image alt.
         */
         alt: {
           type: String,
+          value: "",
           reflectToAttribute: true,
         },
         /**
@@ -158,7 +165,11 @@ A LRN element
             'handles': [
               {
                 'type': 'image',
-                'url': 'source'
+                'source': 'source',
+                'title': 'alt',
+                'alt': 'alt',
+                'citation': 'citation',
+                'caption': 'caption'
               }
             ],
             'meta': {
@@ -194,7 +205,7 @@ A LRN element
                 'required': true,
               },
               {
-                'slot': 'caption',
+                'property': 'caption',
                 'title': 'Caption',
                 'description': 'A caption to describe the image usage',
                 'inputMethod': 'textarea',

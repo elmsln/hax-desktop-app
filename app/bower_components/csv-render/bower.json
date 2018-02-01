@@ -4,7 +4,6 @@
   "main": "csv-render.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.11.0",
-    "lrnsys-behaviors": "LRNWebComponents/lrnsys-behaviors#^1.0.0",
     "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.0.0",
     "paper-spinner": "PolymerElements/paper-spinner#^2.0.0",
     "paper-tooltip": "PolymerElements/paper-tooltip#^2.0.0"

@@ -116,40 +116,38 @@ ability to render csv files
     </style>
     <iron-ajax
       auto
-      url="{{dataSource}}"
+      url="[[dataSource]]"
       handle-as="text"
       last-response="{{tableData}}"
       on-response="handleResponse"></iron-ajax>
     <div id="loading">
-      <paper-spinner-lite active class="orange"></paper-spinner-lite>
+      <paper-spinner-lite active class="grey"></paper-spinner-lite>
     </div>
-    <template is="dom-if" if="{{displayTest('table', displayAs)}}">
-      <table class="mdl-data-table" summary="{{summary}}">
-      <template is="dom-if" if="{{caption}}">
-        <caption>{{caption}}</caption>
-      </template>
-      <thead>
-        <a href="{{dataSource}}" id="download" tabindex="-1">
-          <paper-icon-button icon="file-download" class="grey-text"></paper-icon-button>
-        </a>
-        <paper-tooltip for="download" animation-delay="0">Download table data</paper-tooltip>
-        <tr>
-        <template is="dom-repeat" items="{{tableHeadings}}" as="heading">
-          <th scope="col">{{heading}}</th>
-        </template>
-        </tr>
-      </thead>
-      <tbody>
-        <template is="dom-repeat" items="{{table}}" as="row">
-          <tr>
-            <template is="dom-repeat" items="{{row}}" as="col">
-            <td>{{col}}</td>
-            </template>
-          </tr>
-        </template>
-      </tbody>
-      </table>
+    <table class="mdl-data-table" summary="[[summary]]">
+    <template is="dom-if" if="[[caption]]">
+      <caption>[[caption]]</caption>
     </template>
+    <thead>
+      <a href="[[dataSource]]" id="download" tabindex="-1">
+        <paper-icon-button icon="file-download" class="grey-text"></paper-icon-button>
+      </a>
+      <paper-tooltip for="download" animation-delay="0">Download table data</paper-tooltip>
+      <tr>
+      <template is="dom-repeat" items="[[tableHeadings]]" as="heading">
+        <th scope="col">[[heading]]</th>
+      </template>
+      </tr>
+    </thead>
+    <tbody>
+      <template is="dom-repeat" items="[[table]]" as="row">
+      <tr>
+        <template is="dom-repeat" items="[[row]]" as="col">
+        <td>[[col]]</td>
+        </template>
+      </tr>
+      </template>
+    </tbody>
+    </table>
   </template>
 
   <script>
@@ -161,22 +159,12 @@ ability to render csv files
          */
         dataSource: {
           type: String,
-          notify: true,
-        },
-        /**
-         * What to display this as.
-         */
-        displayAs: {
-          type: String,
-          notify: true,
-          value: 'table',
         },
         /**
          * Caption for the table to improve accessibility and readability.
          */
         caption: {
           type: String,
-          notify: true,
           reflectToAttribute: true,
         },
         /**
@@ -184,7 +172,6 @@ ability to render csv files
          */
         summary: {
           type: String,
-          notify: true,
           reflectToAttribute: true,
         },
         /**
@@ -192,7 +179,6 @@ ability to render csv files
          */
         table: {
           type: Array,
-          notify: true,
           value: [],
         },
         /**
@@ -200,7 +186,6 @@ ability to render csv files
          */
         tableHeadings: {
           type: Array,
-          notify: true,
           value: [],
         },
         /**
@@ -208,27 +193,16 @@ ability to render csv files
          */
         tableData: {
           type: String,
-          notify: true,
           value: ''
         }
-      },
-      /**
-       * Validate if this matches
-       */
-      displayTest: function(value, test) {
-        if (value == test) {
-          return true;
-        }
-        return false;
       },
       /**
        * Convert from csv text to an array in the table function
        */
       handleResponse: function(e) {
-        let root = this;
-        root.table = root.CSVtoArray(root.tableData);
-        root.tableHeadings = root.table.shift();
-        root.$$('#loading').innerHTML = '';
+        this.table = this.CSVtoArray(this.tableData);
+        this.tableHeadings = this.table.shift();
+        this.$.loading.innerHTML = '';
       },
       /**
        * Mix of solutions from https://stackoverflow.com/questions/8493195/how-can-i-parse-a-csv-string-with-javascript-which-contains-comma-in-data
