@@ -86,5 +86,17 @@
     "iron-ajax": "^2.0.6",
     "paper-dropdown-menu": "^2.0.0",
     "iron-meta": "^2.0.3"
-  }
+  },
+  "homepage": "https://github.com/LRNWebcomponents/hax-body",
+  "version": "0.8.5",
+  "_release": "0.8.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.8.5",
+    "commit": "fb9bef88181f1143e8e2ee9da1b118e541adad45"
+  },
+  "_source": "https://github.com/LRNWebcomponents/hax-body.git",
+  "_target": "^0.8.5",
+  "_originalSource": "LRNWebcomponents/hax-body",
+  "_direct": true
 }
