@@ -5,7 +5,7 @@ const path = require('path');
 const Store = require('electron-store');
 const store = new Store();
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
-const { getPage, savePage, parseOutline, getOutlinePage } = require('./util/page');
+const { getPage, savePage, parseOutline, getOutlinePage, createPage } = require('./util/page');
 
 let mainWindow;
 
@@ -125,6 +125,13 @@ ipcMain.on('save-page', (e, content) => {
   const activePage = globals.getActivePage();
   const saved = savePage(activePage, content);
   mainWindow.webContents.send('save-page-success');
+});
+
+ipcMain.on('create-page', (e, pageInfo) => {
+  const fileName = pageInfo.fileName;
+  const content = pageInfo.content;
+  const created = createPage(fileName, content);
+  mainWindow.webContents.send('create-page-success');
 });
 
 ipcMain.on('open-project-prompt', (e) => {

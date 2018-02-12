@@ -65,9 +65,9 @@
 
     <paper-dialog id="dialog">
       <h2>Page Information</h2>
-      <paper-input></paper-input>
+      <paper-input id="pageName"></paper-input>
       <div class="buttons">
-        <paper-button dialog-confirm autofocus on-tap="handleTap" class = "green">Create Page</paper-button>
+        <paper-button dialog-confirm autofocus on-tap="handleCreatePage" class = "green">Create Page</paper-button>
         <paper-button dialog-dismiss>Cancel</paper-button>
       </div>
     </paper-dialog>
@@ -133,10 +133,20 @@
       },
 
       handleTap: function(){
-        console.log(":thumbs_up:");
-        document.getElementById("test").innerHTML = "it was in-TENTS";
+        console.log(":thumbs_up:"); //test output
+        document.getElementById("test").innerHTML = "it was in-TENTS"; //content change test 
         this.$.dialog.toggle();
+      },
+
+
+
+      handleCreatePage: function(){
+        this.$.dialog.toggle();
+        const pageName = this.$.pageName.value;
+        console.log(pageName);
+        ipcRenderer.send('create-page', { fileName: pageName, content: ""});
       }
+
     });
   </script>
 </dom-module>

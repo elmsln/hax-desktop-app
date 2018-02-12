@@ -4,12 +4,13 @@ const fs = require('fs');
 const md = require( "markdown" ).markdown;
 const marked = require('marked');
 const cheerio = require('cheerio');
+const Case = require('case');
 
 // getPage('introduction/learning-objectives.md');
 
 module.exports = {
   
-  getPage(page) {
+  getPage: (page) => {
     location = global.location;
     if (!page || !location) return false;
     _path = path.join(location, page);
@@ -20,7 +21,7 @@ module.exports = {
     return html;
   },
 
-  savePage(page, content) {
+  savePage: (page, content) => {
     location = global.location;
     _path = path.join(location, page);
     console.log({
@@ -35,8 +36,25 @@ module.exports = {
     }
   },
 
-  createPage(name, content = '') {
+  createPage: (fileName, content = '') => {
+    const normalFileName = this.fileNameNormalizer(fileName);
+    location = global.location;
+    _path = path.join(location, normalFileName);
+    if (!fs.existsSync(_path)) {
+      try {
+        fs.writeFileSync(_path, content, 'utf8');
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }    
+  },
 
+  fileNameNormalizer: (fileName) => { 
+    let newFileName = "";
+    fileName = Case.snake(fileName);
+    newFileName = fileName = fileName + ".md";
+    return newFileName;
   },
 
   /**
@@ -44,7 +62,7 @@ module.exports = {
    * @param {string} markdown 
    * @return {string} html
    */
-  parseMarkdown(markdown) {
+  parseMarkdown: (markdown) => {
   },
 
   /**
@@ -53,7 +71,7 @@ module.exports = {
    * 
    * @returns {string} html outline
    */
-  parseOutline() {
+  parseOutline: () => {
     const location = global.location;
     const outlinePath = path.join(location, 'SUMMARY.md');
     try {
