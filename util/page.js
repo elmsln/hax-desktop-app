@@ -36,10 +36,23 @@ module.exports = {
     }
   },
 
+  //file name normalizer does not work. something does not like this function
+  //but when adding the main function lines in createPage then it works fine
+  //trying to figure out why this function doesn't work
+  fileNameNormalizer: (fileName) => { 
+    let newFileName = "";
+    fileName = Case.snake(fileName);
+    newFileName = fileName = fileName + ".md";
+    return newFileName;
+  },
+
   createPage: (fileName, content = '') => {
-    const normalFileName = this.fileNameNormalizer(fileName);
+    //const normalFileName = fileNameNormalizer(fileName);
+    //fileNameNormalizer is not working
+    fileName = Case.snake(fileName) + ".md";
     location = global.location;
-    _path = path.join(location, normalFileName);
+    //_path = path.join(location, normalFileName);
+    _path = path.join(location, fileName);
     if (!fs.existsSync(_path)) {
       try {
         fs.writeFileSync(_path, content, 'utf8');
@@ -48,13 +61,6 @@ module.exports = {
         return false;
       }
     }    
-  },
-
-  fileNameNormalizer: (fileName) => { 
-    let newFileName = "";
-    fileName = Case.snake(fileName);
-    newFileName = fileName = fileName + ".md";
-    return newFileName;
   },
 
   /**
