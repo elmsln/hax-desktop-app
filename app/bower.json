@@ -6,7 +6,8 @@
     "hax-body": "LRNWebcomponents/hax-body#^0.8.5",
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
     "paper-item": "PolymerElements/paper-item#^2.0.0",
-    "pdf-element": "LRNWebcomponents/pdf-element#^1.3.0"
+    "pdf-element": "LRNWebcomponents/pdf-element#^1.3.0",
+    "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^2.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

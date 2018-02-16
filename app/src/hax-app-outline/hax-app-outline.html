@@ -59,15 +59,16 @@
     </style>
     
     <div class="button">
-      <paper-button toggles raised class ="green" on-tap="handleTap">Add Page</paper-button>
+      <paper-button id="addPageButton" toggles raised class ="green" on-tap="handleTap">Add Page</paper-button>
       <p id="test">Did you hear about the circus fire?</p>
+      <iron-a11y-keys target="[[addPageTarget]]" on-keys-pressed="handleCreatePage" keys="enter"></iron-a11y-keys>
     </div>
 
     <paper-dialog id="dialog">
       <h2>Page Information</h2>
       <paper-input id="pageName"></paper-input>
       <div class="buttons">
-        <paper-button dialog-confirm autofocus on-tap="handleCreatePage" class = "green">Create Page</paper-button>
+        <paper-button id="createPageButton" dialog-confirm autofocus on-tap="handleCreatePage" class = "green">Create Page</paper-button>
         <paper-button dialog-dismiss>Cancel</paper-button>
       </div>
     </paper-dialog>
@@ -84,6 +85,11 @@
           value: '',
           observer: '_outlineChanged'
         },
+        addPageTarget:{
+          type: Object,
+          value: null,
+        },
+
         activePage: {
           type: String,
           value: '',
@@ -113,6 +119,7 @@
       },
 
       ready: function () {
+        this.addPageTarget = this.$.pageName;
         // get the current outline
         ipcRenderer.on('outline-changed', (e, outline) => {
           this.outline = outline;
@@ -137,8 +144,6 @@
         document.getElementById("test").innerHTML = "it was in-TENTS"; //content change test 
         this.$.dialog.toggle();
       },
-
-
 
       handleCreatePage: function(){
         this.$.dialog.toggle();
