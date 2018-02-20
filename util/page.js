@@ -36,6 +36,10 @@ module.exports = {
     }
   },
 
+  updateSummary:(page) => {
+    fs.writeFileSync(_path, );
+  },
+
   //file name normalizer does not work. something does not like this function
   //but when adding the main function lines in createPage then it works fine
   //trying to figure out why this function doesn't work

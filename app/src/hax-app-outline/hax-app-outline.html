@@ -31,31 +31,6 @@
         margin-left:20%; 
       }
       
-      #overlay{
-        display: none; /**hides popup initially*/
-        position: fixed; /**position is fixed when user scrolls around*/
-        left: 0px; /**element at left most position */
-        top: 0px; /**element at top most position*/
-        width: 100%; /**element takes up 100% of the parents width*/
-        height: 100%; /**element takes up 100% of thr parents height*/
-        background: black; /**sets background to balck*/
-        opacity: 0.5; /**50% opacity so it is see through*/
-        z-index: 99999; /**changes z-index so it is above everything else*/
-      }
-
-      #popup{
-        display: none; /**hides popup initially*/
-        position: fixed; /**position is fixed when user scrolls around*/
-        left: 50%; /**element at left most position */
-        top: 50%; /**element at top most position*/
-        width: 300px; /**element is 300 pixles wide*/
-        height: 150px; /**element is 150 pixles tall*/
-        margin-top: 75px;
-        margin-left: -150px;
-        background: white; /**sets background to white*/
-        border: 2px solid #000;
-        z-index: 100000; /**z index 1 more than overlay so it is above it*/
-      }
     </style>
     
     <div class="button">
@@ -66,7 +41,7 @@
 
     <paper-dialog id="dialog">
       <h2>Page Information</h2>
-      <paper-input id="pageName"></paper-input>
+      <paper-input id="pageName" placeholder="Page Name"></paper-input>
       <div class="buttons">
         <paper-button id="createPageButton" dialog-confirm autofocus on-tap="handleCreatePage" class = "green">Create Page</paper-button>
         <paper-button dialog-dismiss>Cancel</paper-button>
@@ -150,6 +125,7 @@
         const pageName = this.$.pageName.value;
         console.log(pageName);
         ipcRenderer.send('create-page', { fileName: pageName, content: ""});
+        fs.
       }
 
     });
