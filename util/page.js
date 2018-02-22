@@ -6,8 +6,6 @@ const marked = require('marked');
 const cheerio = require('cheerio');
 const Case = require('case');
 
-// getPage('introduction/learning-objectives.md');
-
 module.exports = {
   
   getPage: (page) => {
@@ -22,9 +20,9 @@ module.exports = {
   },
 
   savePage: (page, content) => {
-    location = global.location;
+    location = global.location; //gets location
     _path = path.join(location, page);
-    console.log({
+    console.log({ //prints the path and contents being saved
       path: _path,
       content: content
     });
@@ -36,30 +34,19 @@ module.exports = {
     }
   },
 
-  updateSummary:(page) => {
-    fs.writeFileSync(_path, );
-  },
-
-  //file name normalizer does not work. something does not like this function
-  //but when adding the main function lines in createPage then it works fine
-  //trying to figure out why this function doesn't work
-  fileNameNormalizer: (fileName) => { 
-    let newFileName = "";
-    fileName = Case.snake(fileName);
-    newFileName = fileName = fileName + ".md";
-    return newFileName;
-  },
-
+  //this function will create a new page and write it to SUMMARY.md
+  //currently it completely rewrites the contents of SUMMARY.md
+  //but that will be fixed soon(tm)
   createPage: (fileName, content = '') => {
-    //const normalFileName = fileNameNormalizer(fileName);
-    //fileNameNormalizer is not working
-    fileName = Case.snake(fileName) + ".md";
-    location = global.location;
-    //_path = path.join(location, normalFileName);
-    _path = path.join(location, fileName);
+    const fileNameFormatted = Case.snake(fileName) + ".md"; //makes sure the file created has .md extension
+    const tocFormatName = `*[${fileName}](${fileNameFormatted})`; //formatted to be added into SUMMARY.md
+    const location = global.location;
+    _path = path.join(location, fileNameFormatted);
+    _summaryFile = path.join(location, 'SUMMARY.md'); //points to the SUMMARY.md file
     if (!fs.existsSync(_path)) {
       try {
-        fs.writeFileSync(_path, content, 'utf8');
+        fs.writeFileSync(_path, content, 'utf8'); //writes created .md File to the gitbook location 
+        fs.writeFileSync(_summaryFile, tocFormatName, 'utf8'); // writes file name to summary md
         return true;
       } catch (error) {
         return false;

@@ -125,7 +125,7 @@
         const pageName = this.$.pageName.value;
         console.log(pageName);
         ipcRenderer.send('create-page', { fileName: pageName, content: ""});
-        fs.
+        ipcRenderer.send();
       }
 
     });
