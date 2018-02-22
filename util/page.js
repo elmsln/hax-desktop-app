@@ -5,6 +5,8 @@ const md = require( "markdown" ).markdown;
 const marked = require('marked');
 const cheerio = require('cheerio');
 const Case = require('case');
+const $ = require('cheerio');
+const addPageSumm = require('./addPagetoSummary');
 
 module.exports = {
   
@@ -46,13 +48,14 @@ module.exports = {
     if (!fs.existsSync(_path)) {
       try {
         fs.writeFileSync(_path, content, 'utf8'); //writes created .md File to the gitbook location 
-        fs.writeFileSync(_summaryFile, tocFormatName, 'utf8'); // writes file name to summary md
+        addPageSumm
         return true;
       } catch (error) {
         return false;
       }
     }    
   },
+
 
   /**
    * Converts a string of markdown into html
@@ -87,5 +90,4 @@ module.exports = {
       return error;
     }
   },
-
 }

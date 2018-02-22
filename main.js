@@ -132,6 +132,7 @@ ipcMain.on('create-page', (e, pageInfo) => {
   const content = pageInfo.content;
   const created = createPage(fileName, content);
   mainWindow.webContents.send('create-page-success');
+  
 });
 
 ipcMain.on('open-project-prompt', (e) => {
