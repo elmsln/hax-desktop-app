@@ -130,9 +130,15 @@ ipcMain.on('save-page', (e, content) => {
 ipcMain.on('create-page', (e, pageInfo) => {
   const fileName = pageInfo.fileName;
   const content = pageInfo.content;
-  const created = createPage(fileName, content);
+  const updated = createPage(fileName, content);
   mainWindow.webContents.send('create-page-success');
-  
+});
+
+//wIp 
+ipcMain.on('update-summary', (e, page) => {
+  const fileName = pageInfo.fileName;
+  const updated = addPagetoSummary(fileName, parent);
+  mainWindow.webContents.send('update-summary-success');
 });
 
 ipcMain.on('open-project-prompt', (e) => {

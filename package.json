@@ -27,6 +27,8 @@
     "markdown": "^0.5.0",
     "marked": "^0.3.7",
     "rxjs": "^5.5.5",
+    "showdown": "^1.8.6",
+    "turndown": "^4.0.1",
     "underscore": "^1.8.3"
   }
 }

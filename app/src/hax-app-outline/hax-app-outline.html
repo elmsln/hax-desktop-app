@@ -125,6 +125,7 @@
         const pageName = this.$.pageName.value;
         console.log(pageName);
         ipcRenderer.send('create-page', { fileName: pageName, content: ""});
+        ipcRenderer.send('update-summary', { fileName: pageName});
         ipcRenderer.send();
       }
 
