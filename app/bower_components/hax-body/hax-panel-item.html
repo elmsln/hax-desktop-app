@@ -29,7 +29,7 @@ A single button in the hax panel for consistency.
         display: inline-flex;
         margin: 0;
         padding: 0;
-        height: 4em;
+        height: 64px;
         --hax-panel-hover: #34e79a;
       }
       paper-button {
@@ -42,26 +42,31 @@ A single button in the hax panel for consistency.
         padding: 0;
         border-radius: 0;
         border: none;
+        min-width: 5.14em;
+      }
+      :host[edged="left"] paper-button {
+        border-bottom-right-radius: 16px;
+      }
+      :host[edged="right"] paper-button {
+        border-bottom-left-radius: 16px;
       }
       paper-button .label {
-        font-size: .8em;
+        font-size: 12px;
         margin: 0;
-        max-height: 1em;
+        max-height: 16px;
       }
       paper-button .button-inner {
         padding: 0;
         text-align: center;
       }
       paper-button iron-icon {
-        height: 2em;
-        width: 1.5em;
+        height: 32px;
+        width: 24px;
       }
       paper-button:hover,
       paper-button:focus {
-        outline-color:var(--hax-panel-hover);
-        outline-offset: 0px;
-        outline-style: solid;
-        outline-width: 2px;
+        border-bottom: 4px solid var(--hax-panel-hover);
+        margin-bottom: -4px;
       }
       paper-button:hover .label {
         color: var(--hax-panel-hover);
@@ -99,6 +104,15 @@ A single button in the hax panel for consistency.
         disabled: {
           type: Boolean,
           value: false,
+        },
+        /**
+         * If we should apply a rounded edge to the button, opposite
+         * to the direction that it's came from.
+         */
+        edged: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
         },
         /**
          * Icon for the button.
