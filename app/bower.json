@@ -2,8 +2,8 @@
   "name": "hax",
   "main": "index.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0",
-    "hax-body": "LRNWebcomponents/hax-body#^0.8.5",
+    "polymer": "Polymer/polymer#^1.11.0",
+    "hax-body": "LRNWebcomponents/hax-body#^0.9.0",
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
     "paper-item": "PolymerElements/paper-item#^2.0.0",
     "pdf-element": "LRNWebcomponents/pdf-element#^1.3.0",

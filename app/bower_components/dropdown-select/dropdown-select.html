@@ -2,6 +2,7 @@
 <link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../web-animations-js/web-animations-next-lite.min.html">
 
 <!--
 `dropdown-select`
@@ -21,16 +22,24 @@ An easy to use, works as expected dropdown menu. Add slotted items like follows:
       :host {
         display: block;
       }
-      paper-listbox ::slotted(*) {
+      paper-listbox ::slotted(paper-item) {
         display: block;
         width: 100%;
         min-height: 2em;
         vertical-align: text-top;
         line-height: 2em;
         @apply --dropdown-select-items;
-      };
+      }
+      paper-listbox paper-listbox {
+        @apply --dropdown-listbox;
+      }
     </style>
-    <paper-dropdown-menu id="menu" label$="[[label]]" on-selected-item-changed="_setSelectedValue">
+    <paper-dropdown-menu 
+      always-float-label$="[[alwaysFloatLabel]]"
+      id="menu" 
+      label$="[[label]]" 
+      no-label-float$="[[noLabelFloat]]"
+      on-selected-item-changed="_setSelectedValue">
       <paper-listbox id="listbox" slot="dropdown-content" selected$="[[selectedIndex]]">
         <slot></slot>
       </paper-listbox>
@@ -65,7 +74,21 @@ An easy to use, works as expected dropdown menu. Add slotted items like follows:
           reflectToAttribute: true,
           notify: true,
           computed: '_getSelectedIndex(value)',
-        }
+        },
+        /**
+         * Set to true to always float the label.
+         */
+        alwaysFloatLabel: {
+          type: Boolean,
+          value: false
+        },
+        /**
+         * Set to true to disable the floating label. 
+         */
+        noLabelFloat: {
+          type: Boolean,
+          value: false
+        },
       },
       /**
        * Get the value of the selected item.

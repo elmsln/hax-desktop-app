@@ -1,7 +1,7 @@
 {
   "name": "juicy-html",
   "description": "A custom element that lets you load HTML partials into your Web page. Declarative way for client-side includes.",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "homepage": "https://github.com/Juicy/juicy-html",
   "authors": [
     "Joachim Wester <joachimwester@me.com>",
@@ -32,11 +32,11 @@
     "web-component-tester": "^6.0.0",
     "webcomponentsjs": "^0.7.24"
   },
-  "_release": "2.0.2",
+  "_release": "2.0.3",
   "_resolution": {
     "type": "version",
-    "tag": "2.0.2",
-    "commit": "e54b3a169e13110ce2175163306a8faae8092ad0"
+    "tag": "2.0.3",
+    "commit": "ac85274e068407c8de9e247f2b9d8baaa8498bfe"
   },
   "_source": "https://github.com/Juicy/juicy-html.git",
   "_target": "^2.0.2",

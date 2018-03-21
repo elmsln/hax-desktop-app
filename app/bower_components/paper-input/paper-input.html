@@ -123,6 +123,10 @@ Custom property | Description | Default
         @apply --paper-input-container-input-webkit-clear;
       }
 
+      input::-webkit-calendar-picker-indicator {
+        @apply --paper-input-container-input-webkit-calendar-picker-indicator;
+      }
+
       input::-webkit-input-placeholder {
         color: var(--paper-input-container-color, var(--secondary-text-color));
       }
@@ -293,6 +297,8 @@ Custom property | Description | Default
     /**
      * Returns a reference to the focusable element. Overridden from PaperInputBehavior
      * to correctly focus the native input.
+     *
+     * @return {!HTMLElement}
      */
     get _focusableElement() {
       return Polymer.Element ? this.inputElement._inputElement : this.inputElement;

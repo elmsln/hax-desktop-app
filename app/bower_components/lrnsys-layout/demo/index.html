@@ -27,7 +27,7 @@
     <h3>Basic lrnsys-drawer demo</h3>
     <demo-snippet>
       <template>
-        <lrnsys-drawer text="More tools" icon="network" alt="Click for more tools" header="More tools" align="right">
+        <lrnsys-drawer text="More tools" icon="network" alt="Click for more tools" header="More tools" align="right" heading-class="orange lighten-3 blue-text text-darken-4">
           All the content of the drawer!
         </lrnsys-drawer>
       </template>
@@ -154,10 +154,136 @@
     </demo-snippet>
   </div>
   <div class="vertical-section-container centered">
-    <h3>Using Dialog</h3>
+    <h3>Using Dialog with reparent option (test on the bottom 3)</h3>
     <demo-snippet>
       <template>
         <lrnsys-dialog id="dialog" class="circle" body-append raised hover-class="black white-text" text="btopro" avatar="http://www.elmsln.org/sites/redesign/files/styles/square-profile-portrait/public/headshot.jpg"
+          alt="Bryan O">
+          <span slot="toolbar-secondary">
+            <lrnsys-dialog-toolbar-button title="Zoom In" icon="zoom-in" id="zoom-in"></lrnsys-dialog-toolbar-button>
+            <lrnsys-dialog-toolbar-button title="Zoom Out" icon="zoom-out" id="zoom-out"></lrnsys-dialog-toolbar-button>
+            <lrnsys-dialog-toolbar-button title="Restore" icon="refresh" id="restore"></lrnsys-dialog-toolbar-button>
+            <lrnsys-dialog-toolbar-button title="Download" icon="save" id="download"></lrnsys-dialog-toolbar-button>
+          </span>
+          <span class="toolbar-buttons" slot="toolbar"></span>
+          <h2 slot="header">This is the heading</h2>
+          <lrnsys-collapselist items='[
+              {
+                "icon": "user",
+                "label": "Member details",
+                "content": "Member for 54 weeks."
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }]'>
+          </lrnsys-collapselist>
+          </lrnsys-drawer>
+        </lrnsys-dialog>
+
+      </template>
+    </demo-snippet>
+  </div>
+  <div class="vertical-section-container centered">
+    <h3>Using Dialog but won't auto focus back here afterwards</h3>
+    <demo-snippet>
+      <template>
+        <lrnsys-dialog id="dialog" class="circle" body-append raised hover-class="black white-text" text="btopro2" avatar="http://www.elmsln.org/sites/redesign/files/styles/square-profile-portrait/public/headshot.jpg"
+          alt="Bryan O" disable-auto-focus>
+          <span slot="toolbar-secondary">
+            <lrnsys-dialog-toolbar-button title="Zoom In" icon="zoom-in" id="zoom-in"></lrnsys-dialog-toolbar-button>
+            <lrnsys-dialog-toolbar-button title="Zoom Out" icon="zoom-out" id="zoom-out"></lrnsys-dialog-toolbar-button>
+            <lrnsys-dialog-toolbar-button title="Restore" icon="refresh" id="restore"></lrnsys-dialog-toolbar-button>
+            <lrnsys-dialog-toolbar-button title="Download" icon="save" id="download"></lrnsys-dialog-toolbar-button>
+          </span>
+          <span class="toolbar-buttons" slot="toolbar"></span>
+          <h2 slot="header">This is the heading</h2>
+          <lrnsys-collapselist items='[
+              {
+                "icon": "user",
+                "label": "Member details",
+                "content": "Member for 54 weeks."
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }, {
+                "icon": "accessibility",
+                "label": "Preferences",
+                "content": "Contrast ratio"
+              }]'>
+          </lrnsys-collapselist>
+          </lrnsys-drawer>
+        </lrnsys-dialog>
+
+      </template>
+    </demo-snippet>
+  </div>
+  <div class="vertical-section-container centered">
+    <h3>A last example to prove it works against target that invoked it</h3>
+    <demo-snippet>
+      <template>
+        <lrnsys-dialog id="dialog" class="circle" body-append raised hover-class="black white-text" text="btopro3" avatar="http://www.elmsln.org/sites/redesign/files/styles/square-profile-portrait/public/headshot.jpg"
           alt="Bryan O">
           <span slot="toolbar-secondary">
             <lrnsys-dialog-toolbar-button title="Zoom In" icon="zoom-in" id="zoom-in"></lrnsys-dialog-toolbar-button>

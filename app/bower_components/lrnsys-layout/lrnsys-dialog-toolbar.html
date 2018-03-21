@@ -49,7 +49,7 @@
     <app-toolbar id="primary">
       <slot name="primary"></slot>
       <div main-title></div>
-      <lrnsys-dialog-toolbar-button icon="close" id="close"></lrnsys-dialog-toolbar-button>
+      <lrnsys-dialog-toolbar-button icon="close" id="close" title="close dialog"></lrnsys-dialog-toolbar-button>
     </app-toolbar>
     <app-toolbar id="secondary" hidden$="[[!_secondaryHasChildren]]">
       <div class="secondary-buttons">
@@ -61,7 +61,7 @@
     Polymer({
       is: 'lrnsys-dialog-toolbar',
       listeners: {
-        'clicked': '_clickedHandler'
+        'dialog-toolbar-button-tapped': '_tapHandler'
       },
       properties: {
         /**
@@ -73,9 +73,9 @@
         },
       },
       /**
-       * Button clicked
+       * Button tapped
        */
-      _clickedHandler: function (e) {
+      _tapHandler: function (e) {
         this.fire('button-clicked', e.detail);
       },
       /**

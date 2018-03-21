@@ -44,7 +44,12 @@ var components = {
 		},
 		"markup": {
 			"title": "Markup",
-			"aliasTitles": { "html": "HTML", "xml": "XML", "svg": "SVG", "mathml": "MathML" },
+			"aliasTitles": {
+				"html": "HTML",
+				"xml": "XML",
+				"svg": "SVG",
+				"mathml": "MathML"
+			},
 			"option": "default"
 		},
 		"css": {
@@ -90,9 +95,17 @@ var components = {
 			"require": "cpp",
 			"owner": "eisbehr-"
 		},
+		"arff": {
+			"title": "ARFF",
+			"owner": "Golmote"
+		},
 		"asciidoc": {
 			"title": "AsciiDoc",
 			"owner": "Golmote"
+		},
+		"asm6502": {
+			"title": "6502 Assembly",
+			"owner": "kzurawel"
 		},
 		"aspnet": {
 			"title": "ASP.NET (C#)",
@@ -152,10 +165,18 @@ var components = {
 			"require": "javascript",
 			"owner": "R-osey"
 		},
+		"clojure": {
+			"title": "Clojure",
+			"owner": "troglotit"
+		},
 		"crystal": {
 			"title": "Crystal",
 			"require": "ruby",
 			"owner": "MakeNowJust"
+		},
+		"csp": {
+			"title": "Content-Security-Policy",
+			"owner": "ScottHelme"
 		},
 		"css-extras": {
 			"title": "CSS Extras",
@@ -172,14 +193,14 @@ var components = {
 			"require": "clike",
 			"owner": "Golmote"
 		},
+		"diff": {
+			"title": "Diff",
+			"owner": "uranusjr"
+		},
 		"django": {
 			"title": "Django/Jinja2",
 			"require": "markup",
 			"owner": "romanvm"
-		},
-		"diff": {
-			"title": "Diff",
-			"owner": "uranusjr"
 		},
 		"docker": {
 			"title": "Docker",
@@ -192,6 +213,10 @@ var components = {
 		"elixir": {
 			"title": "Elixir",
 			"owner": "Golmote"
+		},
+		"elm": {
+			"title": "Elm",
+			"owner": "zwilias"
 		},
 		"erlang": {
 			"title": "Erlang",
@@ -261,6 +286,18 @@ var components = {
 			"title": "HTTP",
 			"owner": "danielgtaylor"
 		},
+		"hpkp": {
+			"title": "HTTP Public-Key-Pins",
+			"owner": "ScottHelme"
+		},
+		"hsts": {
+			"title": "HTTP Strict-Transport-Security",
+			"owner": "ScottHelme"
+		},
+		"ichigojam": {
+			"title": "IchigoJam",
+			"owner": "BlueCocoa"
+		},
 		"icon": {
 			"title": "Icon",
 			"owner": "Golmote"
@@ -272,6 +309,10 @@ var components = {
 		"ini": {
 			"title": "Ini",
 			"owner": "aviaryan"
+		},
+		"io": {
+			"title": "Io",
+			"owner": "AlesTsurko"
 		},
 		"j": {
 			"title": "J",
@@ -313,6 +354,10 @@ var components = {
 			"require": "css",
 			"owner": "Golmote"
 		},
+		"liquid": {
+			"title": "Liquid",
+			"owner": "cinhtau"
+		},
 		"livescript": {
 			"title": "LiveScript",
 			"owner": "Golmote"
@@ -350,7 +395,7 @@ var components = {
 			"title": "Monkey",
 			"owner": "Golmote"
 		},
-		"n4js":{
+		"n4js": {
 			"title": "N4JS",
 			"require": "javascript",
 			"owner": "bsmith-n4"
@@ -473,15 +518,19 @@ var components = {
 			"title": "R",
 			"owner": "Golmote"
 		},
-		"jsx":{
+		"jsx": {
 			"title": "React JSX",
 			"require": ["markup", "javascript"],
 			"owner": "vkbansal"
 		},
+		"tsx": {
+			"title": "React TSX",
+			"require": ["jsx", "typescript"]
+		},
 		"renpy": {
 			"title": "Ren'py",
 			"owner": "HyuchiaDiego"
-        },
+		},
 		"reason": {
 			"title": "Reason",
 			"require": "clike",
@@ -527,9 +576,9 @@ var components = {
 			"require": "java",
 			"owner": "jozic"
 		},
-		"scheme" : {
+		"scheme": {
 			"title": "Scheme",
-			"owner" : "bacchus123"
+			"owner": "bacchus123"
 		},
 		"smalltalk": {
 			"title": "Smalltalk",
@@ -544,7 +593,7 @@ var components = {
 			"title": "SQL",
 			"owner": "multipetros"
 		},
-		"stylus" : {
+		"stylus": {
 			"title": "Stylus",
 			"owner": "vkbansal"
 		},
@@ -567,7 +616,7 @@ var components = {
 			"require": "markup",
 			"owner": "brandonkelly"
 		},
-		"typescript":{
+		"typescript": {
 			"title": "TypeScript",
 			"require": "javascript",
 			"owner": "vkbansal"
@@ -593,6 +642,11 @@ var components = {
 			"title": "Wiki markup",
 			"require": "markup",
 			"owner": "Golmote"
+		},
+		"xeora": {
+			"title": "Xeora",
+			"require": "markup",
+			"owner": "freakmaxi"
 		},
 		"xojo": {
 			"title": "Xojo (REALbasic)",
@@ -646,33 +700,8 @@ var components = {
 			"owner": "Golmote",
 			"noCSS": true
 		},
-		"previewer-base": {
-			"title": "Previewer: Base",
-			"owner": "Golmote"
-		},
-		"previewer-color": {
-			"title": "Previewer: Color",
-			"require": "previewer-base",
-			"owner": "Golmote"
-		},
-		"previewer-gradient": {
-			"title": "Previewer: Gradient",
-			"require": "previewer-base",
-			"owner": "Golmote"
-		},
-		"previewer-easing": {
-			"title": "Previewer: Easing",
-			"require": "previewer-base",
-			"owner": "Golmote"
-		},
-		"previewer-time": {
-			"title": "Previewer: Time",
-			"require": "previewer-base",
-			"owner": "Golmote"
-		},
-		"previewer-angle": {
-			"title": "Previewer: Angle",
-			"require": "previewer-base",
+		"previewers": {
+			"title": "Previewers",
 			"owner": "Golmote"
 		},
 		"autoloader": {

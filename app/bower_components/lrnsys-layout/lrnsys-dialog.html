@@ -9,7 +9,7 @@
 <link rel="import" href="../neon-animation/neon-animations.html">
 <link rel="import" href="../materializecss-styles/colors.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
-<link rel="import" href="lrnsys-dialog-toolbar.html">
+<link rel="import" href="lrnsys-dialog-modal.html">
 <link rel="import" href="lrnsys-button-inner.html">
 
 <!--
@@ -24,82 +24,19 @@
        :host {
         display: inline-block;
       }
-
-      paper-dialog {
-        position: fixed;
-        top: 5%;
-        right: 5%;
-        bottom: 5%;
-        left: 5%;
-        overflow: auto;
-        border-radius: 3px;
-      }
-      paper-dialog-scrollable {
-        margin-top:0;
-      }
-      paper-dialog-scrollable {
-        margin-top:0;
-      }
-
-      paper-dialog>*:first-child {
-        margin-top: 0;
-      }
-
-      .dialog-header {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        text-align: -webkit-center;
-        text-align: center;
-        text-transform: uppercase;
-      }
-
-      .dialog-heading {
-        padding: 0;
-        margin: 0;
-        height: 2.5em;
-        line-height: 3em;
-        font-size: 1.5em;
-      }
-
-      #close-button {
-        position: fixed;
-        right: 9%;
-        top: 8%;
-        padding: 0;
-        margin: 0;
-        min-width: .1em;
-      }
     </style>
-    <paper-button class$="[[class]]" id="dialog-trigger" on-tap="toggleDialog" raised="[[raised]]" disabled$="[[disabled]]" title="[[alt]]">
+    <paper-button class$="[[class]]" id="dialogtrigger" on-tap="toggleDialog" raised="[[raised]]" disabled$="[[disabled]]" title="[[alt]]" aria-label$="[[alt]]">
       <lrnsys-button-inner avatar$="[[avatar]]" icon$="[[icon]]" text$="[[text]]">
         <slot name="button"></slot>
       </lrnsys-button-inner>
     </paper-button>
-    <template is="dom-if" if="[[alt]]">
-      <paper-tooltip for="dialog-trigger" animation-delay="0">[[alt]]</paper-tooltip>
-    </template>
-    <paper-dialog modal="[[modal]]" id="dialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
-      <!--START TOOLBAR TO DIALOG -->
-      <lrnsys-dialog-toolbar on-button-clicked="_toolbarButtonClickedHandler">
-        <span slot="primary">
-          <slot name="toolbar-primary"></slot>
-        </span>
-        <span slot="secondary">
-          <slot name="toolbar-secondary"></slot>
-        </span>
-      </lrnsys-dialog-toolbar>
-      <!--END TOOLBAR TO DIALOG -->
-      <div class="dialog-header">
-        <template is="dom-if" if="[[header]]">
-          <h3 class="white-text black dialog-heading">[[header]]</h3>
-        </template>
-        <slot name="header"></slot>
-      </div>
-      <paper-dialog-scrollable class="dialog-contents" id="dialogcontent">
-        <slot></slot>
-      </paper-dialog-scrollable>
-    </paper-dialog>
+    <paper-tooltip for="dialogtrigger" animation-delay="0" hidden$="[[!alt]]">[[alt]]</paper-tooltip>
+    <lrnsys-dialog-modal id="modal" dynamic-images="[[dynamicImages]]" body-append="[[bodyAppend]]" header="[[header]]" modal="[[modal]]" heading-class="[[headingClass]]" opened$="[[opened]]">
+      <slot name="toolbar-primary" slot="primary"></slot>
+      <slot name="toolbar-secondary" slot="secondary"></slot>
+      <slot name="header" slot="header"></slot>
+      <slot></slot>
+    </lrnsys-dialog-modal>
   </template>
   <script>
     Polymer({
@@ -108,7 +45,7 @@
         'mousedown': 'tapEventOn',
         'mouseover': 'tapEventOn',
         'mouseout': 'tapEventOff',
-        'dialog-trigger.focused-changed': 'focusToggle',
+        'dialogtrigger.focused-changed': 'focusToggle',
       },
       properties: {
         /**
@@ -163,10 +100,26 @@
           value: false,
         },
         /**
+         * Is dialog opened?
+         */
+        opened: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true,
+          notify: true,
+        },
+        /**
          * Classes to add / subtract based on the item being hovered
          */
         hoverClass: {
           type: String,
+        },
+        /**
+         * Default heading classes.
+         */
+        headingClass: {
+          type: String,
+          value: 'white-text black',
         },
         /**
          * Support for body-appending which is a hack for stacking context
@@ -174,7 +127,7 @@
          */
         bodyAppend: {
           type: Boolean,
-          value: false
+          value: true,
         },
         /**
          * Support for dynamic loading of iron-image elements that are in the content slot.
@@ -189,19 +142,27 @@
         focusState: {
           type: Boolean,
           value: false,
-        }
+        },
+        /**
+         * Ability to disable the auto focus mode
+         * this is useful if something else is picking up this capability.
+         */
+        disableAutoFocus: {
+          type: Boolean,
+          value: false,
+        },
       },
       /**
        * Handle a focus/tap event and add the hoverclasses
        * to the classList array for paper-button.
        */
       tapEventOn: function (e) {
-        let root = this;
+        const root = this;
         if (typeof root.hoverClass !== typeof undefined) {
           var classes = root.hoverClass.split(' ');
           classes.forEach(function (item, index) {
             if (item != '') {
-              root.$$('#dialog-trigger').classList.add(item);
+              root.$.dialogtrigger.classList.add(item);
             }
           });
         }
@@ -211,12 +172,12 @@
        * from the classList array for paper-button.
        */
       tapEventOff: function (e) {
-        let root = this;
+        const root = this;
         if (typeof root.hoverClass !== typeof undefined) {
           var classes = root.hoverClass.split(' ');
           classes.forEach(function (item, index) {
             if (item != '') {
-              root.$$('#dialog-trigger').classList.remove(item);
+              root.$.dialogtrigger.classList.remove(item);
             }
           });
         }
@@ -225,27 +186,14 @@
        * Toggle the drawer to open / close.
        */
       toggleDialog: function () {
-        let root = this;
-        // support for loading iron-images dynamically
-        if (root.dynamicImages) {
-          var images = root.$.dialogcontent.getElementsByTagName("IRON-IMAGE");
-          // make sure these are
-          for (var i = 0; i < images.length; i++) {
-            images[i].preventLoad = false;
-          }
-        }
-        // support for appending to the light document
-        if (root.bodyAppend) {
-          document.body.appendChild(root.$.dialog);
-        }
-        root.$.dialog.toggle();
+        this.$.modal.toggleDialog();
       },
       /**
        * Handle toggle for mouse class and manage classList array for paper-button.
        */
       focusToggle: function (e) {
-        let root = this;
-        this.fire('focus-changed', { focus: root.focusState });
+        const root = this;
+        root.fire('focus-changed', { focus: root.focusState });
         // see if it has hover classes
         if (typeof root.hoverClass !== typeof undefined) {
           // break class into array
@@ -254,34 +202,54 @@
           classes.forEach(function (item, index) {
             if (item != '') {
               if (root.focusState) {
-                root.$$('#dialog-trigger').classList.add(item);
+                root.$.dialogtrigger.classList.add(item);
               }
               else {
-                root.$$('#dialog-trigger').classList.remove(item);
+                root.$.dialogtrigger.classList.remove(item);
               }
             }
           });
         }
         root.focusState = !root.focusState;
       },
-      _toolbarButtonClickedHandler: function (e) {
-        if (e.detail.id === 'close') {
-          this.toggleDialog();
-        }
-        this.fire('toolbar-button-clicked', e.detail);
+      /**
+       * Ready lifecycle
+       */
+      ready: function() {
+        this.__modal = this.$.modal;
       },
-
-      ready: function () {
-        const dialog = this.$$('paper-dialog');
-        const toolbar = this.$$('lrnsys-dialog-toolbar');
-        dialog.addEventListener('mouseover', (e) => {
-          toolbar.setAttribute('secondary-visible', true);
-        });
-        dialog.addEventListener('mouseout', (e) => {
-          toolbar.removeAttribute('secondary-visible');
-        })
-      }
-
+      /**
+       * Attached lifecycle
+       */
+      attached: function() {
+        document.body.addEventListener('lrnsys-dialog-modal-changed', this._changeOpen.bind(this));
+        if (!this.disableAutoFocus) {
+          document.body.addEventListener('lrnsys-dialog-modal-closed', this._accessibleFocus.bind(this));
+        }
+      },
+      /**
+       * Set ourselves as having focus after the modal closes.
+       */
+      _accessibleFocus: function(e) {
+        // this is OUR modal, we found her, oh modal, We've missed
+        // you so much. thank you for coming home. We're so, so, so
+        // sorry that we appended you to the body. We'll never do it
+        // again (until the next time you open).
+        if (e.detail === this.__modal) {
+          // focus on our dialog triggering button
+          this.$.dialogtrigger.focus();
+        }
+      },
+      /**
+       * Attached lifecyce
+       */
+      _changeOpen: function(e) {
+        e.stopPropagation();
+        if (e.detail === this.$.modal) {
+          this.opened = e.type === 'iron-overlay-opened';
+          this.fire('lrnsys-dialog-changed', this);
+        }
+      },
     });
   </script>
 </dom-module>
