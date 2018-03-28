@@ -1,0 +1,27 @@
+{
+  "name": "responsive-grid",
+  "description": "A LRN element",
+  "main": "responsive-grid.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.10.1",
+    "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#^2.0.1",
+    "responsive-utility": "LRNWebComponents/responsive-utility"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  },
+  "homepage": "https://github.com/LRNWebComponents/responsive-grid",
+  "version": "0.2.0",
+  "_release": "0.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.2.0",
+    "commit": "7f2cf3b3c70edf4a93636d9f348409644c506038"
+  },
+  "_source": "https://github.com/LRNWebComponents/responsive-grid.git",
+  "_target": "^0.2.0",
+  "_originalSource": "LRNWebComponents/responsive-grid"
+}

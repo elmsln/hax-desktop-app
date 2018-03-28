@@ -1,0 +1,26 @@
+{
+  "name": "responsive-utility",
+  "description": "A LRN element",
+  "main": "responsive-utility.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.10.1",
+    "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#^2.0.1"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+    "resize-observer-polyfill": "^1.5.0"
+  },
+  "homepage": "https://github.com/LRNWebComponents/responsive-utility",
+  "_release": "9802a416a3",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "9802a416a3a853b8cbbc958b31de0a61b2bc69d6"
+  },
+  "_source": "https://github.com/LRNWebComponents/responsive-utility.git",
+  "_target": "*",
+  "_originalSource": "LRNWebComponents/responsive-utility"
+}
