@@ -1,19 +1,11 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-card/paper-card.html">
-<link rel="import" href="../iron-icons/iron-icons.html">
-<link rel="import" href="../iron-icons/editor-icons.html">
-<link rel="import" href="../iron-icons/device-icons.html">
-<link rel="import" href="../iron-icons/hardware-icons.html">
-<link rel="import" href="../iron-icons/communication-icons.html">
-<link rel="import" href="../iron-icons/social-icons.html">
-<link rel="import" href="../iron-icons/av-icons.html">
-<link rel="import" href="../iron-icons/maps-icons.html">
 <link rel="import" href="../iron-image/iron-image.html">
 <link rel="import" href="../materializecss-styles/colors.html">
 
 <!--
-`hax-gizmo-browser-item`
+`hax-stax-browser-item`
 A button on the hax-gizmo-browser app display
 
 @demo demo/index.html
@@ -22,7 +14,7 @@ A button on the hax-gizmo-browser app display
  - 
 -->
 
-<dom-module id="hax-gizmo-browser-item">
+<dom-module id="hax-stax-browser-item">
   <template>
     <style include="materializecss-styles-colors">
       :host {
@@ -36,8 +28,8 @@ A button on the hax-gizmo-browser app display
         text-transform: none;
         margin:0;
         background-color: #ffffff;
-        height: 96px !important;
-        width: 96px !important;
+        height: 192px !important;
+        width: 192px !important;
         display: flex;
         border-radius: 3px;
         border-style: solid;
@@ -51,18 +43,13 @@ A button on the hax-gizmo-browser app display
         padding-top: 8px;
         text-align: center;
       }
-      paper-button iron-icon {
-        height: 32px;
-        width: 32px;
-      }
       .flip-icon {
         transform: rotateY(180deg);
       }
     </style>
     <paper-card id="card" elevation="2">
-      <paper-button id="button" on-tap="_fireEvent" data-voicecommand$="select [[title]]" class$="[[color]] lighten-5 [[color]]-border">
+      <paper-button id="button" on-tap="_fireEvent" data-voicecommand$="select [[title]]" class="blue lighten-5">
         <div class="button-inner">
-          <iron-icon icon="[[icon]]" class$="[[color]]-text text-darken-3" hidden$="[[!icon]]"></iron-icon>
           <iron-image src="[[image]]" preload sizing="cover" hidden$="[[!image]]"></iron-image>
           <div class="item-title">[[title]]</div>
         </div>
@@ -79,7 +66,7 @@ A button on the hax-gizmo-browser app display
   <script>
     Polymer({
 
-      is: 'hax-gizmo-browser-item',
+      is: 'hax-stax-browser-item',
       listeners: {
         'mousedown': 'tapEventOn',
         'mouseover': 'tapEventOn',
@@ -96,25 +83,13 @@ A button on the hax-gizmo-browser app display
         /**
          * Index position in the original list of imports
          */
-        index: {
-          type: Number,
-        },
-        /**
-         * Icon for the button, optional.
-         */
-        icon: {
-          type: String
+        staxReference: {
+          type: Object,
         },
         /**
          * Image for the button, optional.
          */
         image: {
-          type: String
-        },
-        /**
-         * MaterializeCSS color name of the item
-         */
-        color: {
           type: String
         },
         /**
@@ -172,14 +147,11 @@ A button on the hax-gizmo-browser app display
        * Fire an event that includes the eventName of what was just pressed.
        */
       _fireEvent: function(e) {
-        var normalizedEvent = Polymer.dom(e);
-        var local = normalizedEvent.localTarget;
-        let gizmo = {
-          'tag': this.tag
-        };
-        let element = Polymer.HaxStore.haxElementPrototype(gizmo);
-        Polymer.HaxStore.write('activeHaxElement', element, this);
-      }
+        for (var i=0; i< this.stax.length; i++) {
+          this.fire('hax-insert-content', this.stax[i]);
+        }
+        Polymer.HaxStore.instance.haxStaxPicker.close();
+      },
     });
   </script>
 </dom-module>

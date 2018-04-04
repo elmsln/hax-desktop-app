@@ -4,6 +4,8 @@
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="hax-panel-item.html">
 <link rel="import" href="hax-preferences-dialog.html">
+<link rel="import" href="hax-stax-picker.html">
+
 
 <!--
 `hax-panel`
@@ -24,6 +26,8 @@ as the events being bubbled up include HTML nodes to inject into something
     <style>
       :host {
         display: block;
+        position: absolute;
+        z-index: 1000000;
       }
       app-drawer {
         z-index: 100001;
@@ -102,6 +106,7 @@ as the events being bubbled up include HTML nodes to inject into something
         hidden$="[[hidePanelOps]]"
         on-tap="_clickButton"
         icon="save"
+        id="haxsavebutton"
         label="[[__tipText]]"
         event-name="save"
         voice-command="save content"></hax-panel-item>
@@ -122,6 +127,12 @@ as the events being bubbled up include HTML nodes to inject into something
         event-name="header"
         voice-command="insert heading"></hax-panel-item>
       <hax-panel-item
+        icon="image:transform"
+        icon-class="green-text text-darken-1"
+        label="Placeholder"
+        event-name="placeholder"
+        voice-command="insert placeholder"></hax-panel-item>
+      <hax-panel-item
         icon="image:panorama"
         icon-class="amber-text text-darken-1"
         label="Image"
@@ -139,21 +150,20 @@ as the events being bubbled up include HTML nodes to inject into something
         label="Divider"
         event-name="divider"
         voice-command="insert divider"></hax-panel-item>
-      <slot></slot>
+      <hax-panel-item
+        icon="view-agenda"
+        icon-class="orange-text text-darken-1"
+        label="Layout stax"
+        event-name="hax-stax-picker-open"
+        voice-command="insert stack"></hax-panel-item>
       <hax-panel-item
         disabled
         icon="view-quilt"
         icon-class="red-text text-darken-1"
-        label="Block layout"
+        label="Block"
         event-name="layout"
         voice-command="insert block"></hax-panel-item>
-      <hax-panel-item
-        disabled
-        icon="view-agenda"
-        icon-class="orange-text text-darken-1"
-        label="Layout stack"
-        event-name="layout"
-        voice-command="insert stack"></hax-panel-item>
+      <slot></slot>
       <hax-panel-item
         hidden$="[[hideExportButton]]"
         on-tap="_htmlExportDialog"
@@ -165,6 +175,7 @@ as the events being bubbled up include HTML nodes to inject into something
         label="Preferences"></hax-panel-item>
     </app-drawer>
     <hax-preferences-dialog></hax-preferences-dialog>
+    <hax-stax-picker></hax-stax-picker>
   </template>
   <script>
     Polymer({
@@ -173,6 +184,9 @@ as the events being bubbled up include HTML nodes to inject into something
       listeners: {
         'hax-item-selected': '_processItemEvent',
       },
+      observers: [
+        '_globalPreferencesChanged(globalPreferences.*)',
+      ],
       properties: {
         /**
          * Display to the right corner instead of the left (default)
@@ -204,6 +218,18 @@ as the events being bubbled up include HTML nodes to inject into something
           type: Boolean,
           value: false,
         },
+        /**
+         * Global preferences for HAX overall
+         */
+        globalPreferences: {
+          type: Object,
+        },
+      },
+      /**
+       * Created life cycle.
+       */
+      ready: function() {
+        document.body.appendChild(this);
       },
       /**
        * Attached to the DOM; now we can fire event to the store that
@@ -214,10 +240,23 @@ as the events being bubbled up include HTML nodes to inject into something
         document.body.addEventListener('hax-store-property-updated', this._haxStorePropertyUpdated.bind(this));
       },
       /**
+       * Global preference changed.
+       */
+      _globalPreferencesChanged: function(value) {
+        if (typeof value !== typeof undefined) {
+          if (value.value != null && typeof value.value.haxShowExportButton !== typeof undefined) {
+            this.hideExportButton = !value.value.haxShowExportButton;
+          }
+        }
+      },
+      /**
        * Store updated, sync.
        */
       _haxStorePropertyUpdated: function(e) {
         if (e.detail && typeof e.detail.value !== typeof undefined && e.detail.property) {
+          if (typeof e.detail.value === 'object') {
+            this.set(e.detail.property, null);
+          }
           this.set(e.detail.property, e.detail.value);
         }
       },
@@ -244,6 +283,14 @@ as the events being bubbled up include HTML nodes to inject into something
           case 'header':
             detail.tag = 'h2';
             detail.content = 'Header';
+            this.fire('hax-insert-content', detail);
+          break;
+          case 'placeholder':
+            detail.tag = 'place-holder';
+            detail.content = '';
+            detail.properties = {
+              'style': 'width:50%;',
+            };
             this.fire('hax-insert-content', detail);
           break;
           case 'image':
@@ -284,6 +331,9 @@ as the events being bubbled up include HTML nodes to inject into something
             Polymer.HaxStore.instance.haxManager.resetManager();
             Polymer.HaxStore.write('activeHaxElement', {}, this);
             Polymer.HaxStore.instance.haxManager.toggleDialog();
+          break;
+          case 'hax-stax-picker-open':
+            Polymer.HaxStore.instance.haxStaxPicker.toggleDialog();
           break;
           case 'undo':
             document.execCommand('undo');

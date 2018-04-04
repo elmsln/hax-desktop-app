@@ -86,6 +86,6 @@
     "commit": "429a679fbad119b99239c5666cfe7d74939d502e"
   },
   "_source": "https://github.com/PolymerElements/paper-menu-button.git",
-  "_target": "^2",
+  "_target": "1 - 2",
   "_originalSource": "PolymerElements/paper-menu-button"
 }

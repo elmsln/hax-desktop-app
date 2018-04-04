@@ -161,3 +161,23 @@ ipcMain.on('app-initialized', (e, arg) => {
 ipcMain.on('change-location', (e, location) => {
   globals.setLocation(location);
 })
+
+/**
+ * Commit to git by accessing the current folder
+ * and executing directly via file system.
+ * @todo  this should be tied to a button instead of the new page button
+ */
+ipcMain.on('commit-to-git', (e) => {
+  var exec = require('child_process').exec;
+  function execute(command, callback){
+      exec(command, function(error, stdout, stderr){ callback(stdout); });
+  };
+  const location = globals.getLocation();
+  // call the function
+  execute('cd ' + location + '', function(output) {
+      console.log(output);
+      console.log('when we\'re ready:  && git add -A && git commit -m "updated pages" && git push origin master will actually work');
+  });
+})
+
+
