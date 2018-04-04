@@ -135,10 +135,11 @@ ipcMain.on('create-page', (e, pageInfo) => {
 });
 
 //wIp 
-ipcMain.on('update-summary', (e, page) => {
-  const fileName = pageInfo.fileName;
-  const updated = addPagetoSummary(fileName, parent);
-  mainWindow.webContents.send('update-summary-success');
+ipcMain.on('update-summary', (e, pageInfo) => {
+  // const pageTite = pageInfo.fileName;
+  // const activePage = global.getActivePage();
+  // const updated = addToSumm(pageTite, activePage);
+  // mainWindow.webContents.send('update-summary-success');
 });
 
 ipcMain.on('open-project-prompt', (e) => {
