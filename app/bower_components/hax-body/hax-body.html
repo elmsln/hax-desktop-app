@@ -42,13 +42,10 @@ A LRN element that will change the world.
         transition: all .6s ease;
         z-index: 3;
         display: none;
-      }
-      :host #bodycontainer ::slotted(#platecontextmenu) {
-        position: absolute;
+        float: left;
       }
       :host #bodycontainer ::slotted(#haxinputmixer) {
-        z-index: 4;
-        position: absolute;
+        z-index: 10000000;
       }
       :host #bodycontainer ::slotted(.hax-context-visible) {
         visibility: visible;
@@ -154,12 +151,17 @@ A LRN element that will change the world.
         margin: 0;
         z-index: 1;
       }
+      /*#inlinetracker {
+        border: 1px solid green;
+        width: 10px;
+        height: 10px;
+      }*/
     </style>
     <div id="bodycontainer" class="ignore-activation">
       <slot id="body"></slot>
     </div>
     <div id="contextcontainer">
-      <span id="inlinetracker" style="pointer-events: none; visibility: none; opacity: 0; width:0;height:0;" class="ignore-activation hax-inline-tracker-element" contenteditable="false"></span>
+      <span id="inlinetracker" style="pointer-events: none; visibility: hidden; opacity: 0; width:0;height:0;" class="ignore-activation hax-inline-tracker-element" contenteditable="false"></span>
       <hax-inline-context id="inlinecontextmenu" class="hax-context-menu ignore-activation"></hax-inline-context>
       <hax-text-context id="textcontextmenu" class="hax-context-menu ignore-activation"></hax-text-context>
       <hax-ce-context id="cecontextmenu" class="hax-context-menu ignore-activation"></hax-ce-context>
@@ -226,14 +228,6 @@ A LRN element that will change the world.
           value: {},
           notify: true,
           observer: '_activeHoverChanged',
-        },
-        /**
-         * Property to help w/ alignment in different layouts.
-         */
-        contextOffsetLeft: {
-          type: Number,
-          reflectToAttribute: true,
-          value: 0,
         },
       },
       /**
@@ -338,14 +332,13 @@ A LRN element that will change the world.
           }
           // special support for a drag and drop into a place-holder tag
           // as this is a more aggressive operation then the others
-          if (Polymer.HaxStore.instance.activePlaceHolder !== null) {
+          if (Polymer.HaxStore.instance.activePlaceHolder !== null && typeof Polymer.HaxStore.instance.activePlaceHolder.style !== typeof undefined) {
             // replicate styles so that it doesn't jar the UI
             newNode.style.width = Polymer.HaxStore.instance.activePlaceHolder.style.width;
             newNode.style.float = Polymer.HaxStore.instance.activePlaceHolder.style.float;
             newNode.style.margin = Polymer.HaxStore.instance.activePlaceHolder.style.margin;
             newNode.style.display = Polymer.HaxStore.instance.activePlaceHolder.style.display;
             this.haxReplaceNode(Polymer.HaxStore.instance.activePlaceHolder, newNode);
-            Polymer.HaxStore.instance.activePlaceHolder = null;
           }
           // insert at active insert point if we have one
           else if (this.activeNode !== null) {
@@ -355,11 +348,14 @@ A LRN element that will change the world.
             // send this into the root, which should filter it back down into the slot
             Polymer.dom(this).appendChild(newNode);
           }
+          this.$.inlinecontextmenu.opened = false;
           // wait so that the DOM can have the node to then attach to
           setTimeout( () => {
             Polymer.HaxStore.write('activeNode', newNode, this);
             // attempt to focus on the new node, may not always work
             newNode.focus();
+            // scroll to it
+            newNode.scrollIntoView({behavior: "smooth", inline: "nearest"});
           }, 100);
           return true;
         }
@@ -407,6 +403,8 @@ A LRN element that will change the world.
         content = content.replace(/\sdata-editable=\"true\"/g, '');
         // remove the data-editable attribute
         content = content.replace(/\sdata-editable=\"false\"/g, '');
+        // remove copy and paste glitch
+        content = content.replace(/<span id=\"inlinetracker\" class=\"ignore-activation hax-inline-tracker-element style-scope hax-body\" style=\"font-size: 19.2px; pointer-events: none; opacity: 0; width: 0px; height: 0px;\"><\/span>/g, '');
         // remove HAX specific classes / scoping classes
         let parentTag = this.parentNode.tagName.toLowerCase();
         let string = 'style-scope ' + parentTag + ' x-scope';
@@ -422,6 +420,7 @@ A LRN element that will change the world.
         content = content.replace(re, '');
         // now all tags we have defined as valid
         let tags = Polymer.HaxStore.instance.validTagList;
+        tags.push('hax-preview');
         for (var i in tags) {
           string = 'style-scope ' + tags[i];
           re = new RegExp(string, "g");
@@ -432,7 +431,7 @@ A LRN element that will change the world.
           string = 'x-scope ' + tags[i] + '-0';
           re = new RegExp(string, "g");
           content = content.replace(re, '');
-      }
+        }
         // remove empty class structures
         content = content.replace(/\sclass=\"\"/g, '');
         content = content.replace(/\sclass=\"\s\"/g, '');
@@ -482,8 +481,10 @@ A LRN element that will change the world.
             for (var j = 0, len2 = slotnodes.length; j < len2; j++) {
               if (typeof slotnodes[j].tagName !== typeof undefined) {
                 // if we're a custom element, keep digging, otherwise a simple
-                // self append is fine.
-                if (!this._HTMLPrimativeTest(slotnodes[j].tagName)) {
+                // self append is fine unless template tag cause it's a special
+                // case for the web in general as it'll register as not a primative
+                // even though it is...
+                if (!this._HTMLPrimativeTest(slotnodes[j].tagName) && slotnodes[j].tagName !== 'TEMPLATE') {
                   content += this.haxNodeToContent(slotnodes[j]);
                 }
                 else {
@@ -567,6 +568,15 @@ A LRN element that will change the world.
        */
       positionContextMenus: function(node) {
         let props = Polymer.HaxStore.instance.elementList[node.tagName.toLowerCase()];
+        // get width from window size and do very minor responsive inline support
+        let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        let offsetmenu = -44;
+        let offsetplate = -66;
+        // if we go below 800 break point, change menu positioning
+        if ( w < 800) {
+          offsetmenu = 0;
+          offsetplate = 0;
+        }
         // try and work against anything NOT a P tag
         if (typeof props !== typeof undefined && node.tagName !== 'P') {
           this.__activeContextType = this.$.cecontextmenu;
@@ -579,13 +589,10 @@ A LRN element that will change the world.
           // currently been set. it's by no means perfect but it'll
           // be a really good start
           this.__activeContextType = this.$.textcontextmenu;
-          this._positionContextMenu(this.$.inlinecontextmenu, node, 0, -48);
+          this._positionContextMenu(this.$.inlinecontextmenu, node, offsetmenu, -44);
         }
-        this._positionContextMenu(this.__activeContextType, node, -16, -40);
-        this._positionContextMenu(this.$.platecontextmenu, node, -72, -8);
-        setTimeout( () => {
-  	      this.__activeContextType.scrollIntoView({behavior: "smooth", inline: "nearest"});
-  	    }, 100);
+        this._positionContextMenu(this.__activeContextType, node, offsetmenu, -54);
+        this._positionContextMenu(this.$.platecontextmenu, node, offsetplate, -8, false);
       },
       /**
        * Move grid plate around
@@ -601,12 +608,18 @@ A LRN element that will change the world.
               Polymer.dom(this).insertBefore(node, node.previousElementSibling);
             }
             this.positionContextMenus(node);
+            setTimeout( () => {
+              node.scrollIntoView({behavior: "smooth", inline: "nearest"});
+            }, 150);
           break;
           case 'down':
             if (node.nextElementSibling !== null) {
               this.hideContextMenus();
               Polymer.dom(this).insertBefore(node.nextElementSibling, node);
               this.positionContextMenus(node);
+              setTimeout( () => {
+                node.scrollIntoView({behavior: "smooth", inline: "nearest"});
+              }, 150);
             }
           break;
           // @todo support other directions for when inside of an element
@@ -660,6 +673,8 @@ A LRN element that will change the world.
         else {
           Polymer.HaxStore.write('activeNode', null, this);
         }
+        // close this menu just to be sure
+        this.$.inlinecontextmenu.opened = false;
         // @todo figure out why this is complaining
         try {
           return Polymer.dom(this).removeChild(node);
@@ -750,7 +765,7 @@ A LRN element that will change the world.
               }
             }
             // make input mixer show up
-            this._positionContextMenu(haxInputMixer, this.$.cecontextmenu, 34, -104);
+            this._positionContextMenu(haxInputMixer, this.$.cecontextmenu, -6, -116);
           break;
           // directional / proportion operations
           case 'hax-align-left':
@@ -949,26 +964,31 @@ A LRN element that will change the world.
         // the grid plate context menu to show up
         if (typeof newValue !== typeof undefined && newValue !== null && this.activeNode === newValue) {
           // position the operations / in context element
-          this._positionContextMenu(this.$.platecontextmenu, newValue, -72, -8);
+          this._positionContextMenu(this.$.platecontextmenu, newValue, -66, -8, false);
         }
       },
       /**
        * Handle display and position of the context menu
        */
-      _positionContextMenu: function (menu, target, xoffset, yoffset) {
+      _positionContextMenu: function (menu, target, xoffset, yoffset, matchStyle = true) {
         menu.classList.add('hax-context-visible');
         try {
           Polymer.dom(this).insertBefore(menu, target);
         }
         catch(err) {
-          Polymer.dom(target.parentNode).insertBefore(menu, target);
+          try {
+            Polymer.dom(target.parentNode).insertBefore(menu, target);
+          }
+          catch(err2) {
+          }
         }
-        let offset = 0;
-        if (target.offsetLeft != 0) {
-          offset = target.offsetLeft + this.contextOffsetLeft;
+        // account for the target using these layout busters
+        if (matchStyle) {
+          menu.style.width = target.style.width;
+          menu.style.float = target.style.float;
         }
         if (xoffset != null) {
-          menu.style["margin-left"] = (xoffset + offset ) + 'px';
+          menu.style["margin-left"] = xoffset + 'px';
         }
         if (yoffset != null) {
           menu.style["margin-top"] = yoffset + 'px';

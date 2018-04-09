@@ -22,15 +22,15 @@
     "paper-styles": "^2.0.0",
     "webcomponentsjs": "^0.7.24"
   },
-  "homepage": "https://github.com/LRNWebComponents/magazine-cover",
-  "version": "1.1.1",
-  "_release": "1.1.1",
+  "homepage": "https://github.com/LRNWebcomponents/magazine-cover",
+  "version": "1.1.2",
+  "_release": "1.1.2",
   "_resolution": {
     "type": "version",
-    "tag": "1.1.1",
-    "commit": "f22893e677585973d2ec1a1cdc06aa336962b78f"
+    "tag": "1.1.2",
+    "commit": "c34bca108883c413e4a7d3561d9d5ae3b2c65ec4"
   },
-  "_source": "https://github.com/LRNWebComponents/magazine-cover.git",
-  "_target": "^1.1.1",
-  "_originalSource": "LRNWebComponents/magazine-cover"
+  "_source": "https://github.com/LRNWebcomponents/magazine-cover.git",
+  "_target": "^1.1.2",
+  "_originalSource": "LRNWebcomponents/magazine-cover"
 }

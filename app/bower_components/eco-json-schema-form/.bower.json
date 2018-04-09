@@ -1,6 +1,6 @@
 {
   "name": "eco-json-schema-form",
-  "version": "1.0.0-lrn7",
+  "version": "1.0.0-lrn8",
   "authors": [
     "Eric Coutu <eric.coutu@gmail.com>"
   ],
@@ -44,13 +44,13 @@
     "paper-styles": "^1.1.5",
     "web-component-tester": "^4.3.5"
   },
-  "_release": "1.0.0-lrn7",
+  "_release": "1.0.0-lrn8",
   "_resolution": {
     "type": "version",
-    "tag": "v1.0.0-lrn7",
-    "commit": "0a8e3855bdb8f5bf7ee3a71537d30a7aa47f8613"
+    "tag": "v1.0.0-lrn8",
+    "commit": "38b97d47c5f54e6ce4e2526b2adccfee33000ba8"
   },
   "_source": "https://github.com/LRNWebComponents/eco-json-schema-form.git",
-  "_target": "1.0.0-lrn7",
+  "_target": "1.0.0-lrn8",
   "_originalSource": "LRNWebComponents/eco-json-schema-form"
 }

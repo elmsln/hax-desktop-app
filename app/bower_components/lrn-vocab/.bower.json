@@ -1,0 +1,34 @@
+{
+  "name": "lrn-vocab",
+  "description": "A LRN element",
+  "main": "lrn-vocab.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.10.1",
+    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.2.0",
+    "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.0.0",
+    "schema-behaviors": "LRNWebcomponents/schema-behaviors#^0.1.0",
+    "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#^2.2.0",
+    "paper-dialog": "PolymerElements/paper-dialog#^2.1.1",
+    "paper-button": "PolymerElements/paper-button#^2.1.0",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^2.2.0",
+    "iron-image": "PolymerElements/iron-image#^2.2.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+    "video-player": "LRNWebComponents/video-player#^1.8.0"
+  },
+  "homepage": "https://github.com/LRNWebcomponents/lrn-vocab",
+  "version": "1.1.0",
+  "_release": "1.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.0",
+    "commit": "e7d29f7786b45e4843e64607affdb5b7f55754a6"
+  },
+  "_source": "https://github.com/LRNWebcomponents/lrn-vocab.git",
+  "_target": "^1.1.0",
+  "_originalSource": "LRNWebcomponents/lrn-vocab"
+}

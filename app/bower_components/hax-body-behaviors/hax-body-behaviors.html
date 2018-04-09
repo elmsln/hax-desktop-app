@@ -319,12 +319,12 @@ with the hax-body element which manages elements.
      * This allows for complex form building systems based on this data.
      * type is configure or advanced
      */
-    getHaxJSONSchema: function(type, haxProperties) {
+    getHaxJSONSchema: function(type, haxProperties, target = this) {
       if (typeof type === typeof undefined) {
         type = 'configure';
       }
       if (typeof haxProperties === typeof undefined) {
-        haxProperties = this.haxProperties;
+        haxProperties = target.haxProperties;
       }
       var slot = '';
       let settings = haxProperties.settings[type];
@@ -339,10 +339,10 @@ with the hax-body element which manages elements.
           if (typeof settings[value].property !== typeof undefined) {
             schema.properties[settings[value].property] = {
               'title': settings[value].title,
-              'type': this.getHaxJSONSchemaType(settings[value].inputMethod)
+              'type': target.getHaxJSONSchemaType(settings[value].inputMethod)
             };
-            if (typeof this[settings[value].property] !== typeof undefined) {
-              schema.properties[settings[value].property].value = this[settings[value].property];
+            if (typeof target[settings[value].property] !== typeof undefined) {
+              schema.properties[settings[value].property].value = target[settings[value].property];
             }
             if (settings[value].validationType == 'url') {
               schema.properties[settings[value].property].format = 'uri';
@@ -388,6 +388,23 @@ with the hax-body element which manages elements.
                   }
                 };
               break;
+              case 'code-editor':
+                schema.properties[settings[value].property].component = {
+                  'name': 'code-editor',
+                  'valueProperty': 'editorValue',
+                  'attributes': {
+                    'id': 'haxcodeeditor'
+                  },
+                  'properties': {
+                    'title': settings[value].title,
+                    'readOnly': false,
+                    'theme': 'ace/theme/monokai',
+                    'mode': 'ace/mode/html',
+                    'fontsize': '16px',
+                    'className': 'hax-code-editor'
+                  }
+                };
+              break;
               case 'textfield':
                 schema.properties[settings[value].property].component = {
                   'name': 'paper-input',
@@ -408,20 +425,20 @@ with the hax-body element which manages elements.
               break;
             }
           }
-          else if (this.hasAttribute(settings[value].attribute) || ['id', 'class', 'style', 'property', 'prefix', 'typeof', 'resource'].includes(settings[value].attribute)) {
+          else if (target.hasAttribute(settings[value].attribute) || ['id', 'class', 'style', 'property', 'prefix', 'typeof', 'resource'].includes(settings[value].attribute)) {
             schema.properties[settings[value].attribute] = {
               'title': settings[value].title,
-              'type': this.getHaxJSONSchemaType(settings[value].inputMethod)
+              'type': target.getHaxJSONSchemaType(settings[value].inputMethod)
             };
             // special support for className
             if (settings[value].attribute === 'class') {
-              schema.properties[settings[value].attribute].value = this.className;
+              schema.properties[settings[value].attribute].value = target.className;
             }
             else if (settings[value].attribute === 'style') {
-              schema.properties[settings[value].attribute].value = this.style.cssText;
+              schema.properties[settings[value].attribute].value = target.style.cssText;
             }
-            else if (typeof this.attributes[settings[value].attribute] !== typeof undefined) {
-              schema.properties[settings[value].attribute].value = this.getAttribute(settings[value].attribute);
+            else if (typeof target.attributes[settings[value].attribute] !== typeof undefined) {
+              schema.properties[settings[value].attribute].value = target.getAttribute(settings[value].attribute);
             }
             // special validation on uri based attributes
             if (value == 'href' || value == 'src') {
@@ -471,6 +488,23 @@ with the hax-body element which manages elements.
                   }
                 };
               break;
+              case 'code-editor':
+                schema.properties[settings[value].attribute].component = {
+                  'name': 'code-editor',
+                  'valueProperty': 'editorValue',
+                  'attributes': {
+                    'id': 'haxcodeeditor'
+                  },
+                  'properties': {
+                    'title': settings[value].title,
+                    'readOnly': false,
+                    'theme': 'ace/theme/monokai',
+                    'mode': 'ace/mode/html',
+                    'fontsize': '16px',
+                    'className': 'hax-code-editor'
+                  }
+                };
+              break;
               case 'textfield':
                 schema.properties[settings[value].attribute].component = {
                   'name': 'paper-input',
@@ -492,18 +526,41 @@ with the hax-body element which manages elements.
             }
           }
           else {
+            // @todo slot should support other editor types... maybe
             schema.properties[settings[value].slot] = {
               'title': settings[value].title,
-              'type': this.getHaxJSONSchemaType(settings[value].inputMethod),
+              'type': target.getHaxJSONSchemaType(settings[value].inputMethod),
               'value': '',
+              'component': {
+                'name': 'code-editor',
+                'valueProperty': 'editorValue',
+                'attributes': {
+                  'id': 'haxcodeeditor'
+                },
+                'properties': {
+                  'title': settings[value].title,
+                  'readOnly': false,
+                  'theme': 'ace/theme/monokai',
+                  'mode': 'ace/mode/html',
+                  'fontsize': '16px',
+                  'className': 'hax-code-editor'
+                }
+              }
             };
+            let slot = '';
             // test for slotted content values names is tricky
-            for (var i in Polymer.dom(this).childNodes) {
+            for (var i in Polymer.dom(target).childNodes) {
               // this is crazy... you know that right
-              if (typeof Polymer.dom(this).childNodes[i] !== typeof undefined && Polymer.dom(this).childNodes[i].nodeType === 1 && Polymer.dom(this).childNodes[i].slot === settings[value].slot) {
-                  schema.properties[settings[value].slot].value = Polymer.dom(this).childNodes[i].innerHTML;
+              if (typeof Polymer.dom(target).childNodes[i] !== typeof undefined) {
+                if (Polymer.dom(target).childNodes[i].nodeType === 1) {
+                  slot += Polymer.dom(target).childNodes[i].innerHTML;
+                }
+                else if (Polymer.dom(target).childNodes[i].nodeType !== 1 && typeof Polymer.dom(target).childNodes[i].textContent !== typeof undefined && Polymer.dom(target).childNodes[i].textContent !== '') {
+                  slot += Polymer.dom(target).childNodes[i].textContent;
+                }
               }
             }
+            schema.properties[settings[value].slot].component.slot = '<template>' + slot + '</template>';
           }
         }
       }
@@ -540,7 +597,7 @@ with the hax-body element which manages elements.
      * List valid input methods.
      */
     validHAXPropertyInputMethod: function() {
-      var methods = ['flipboolean', 'boolean', 'select', 'textfield', 'textarea', 'datepicker', 'colorpicker', 'number'];
+      var methods = ['flipboolean', 'boolean', 'select', 'textfield', 'textarea', 'datepicker', 'colorpicker', 'number', 'code-editor'];
       return methods;
     },
     /**
