@@ -23,14 +23,14 @@
     "webcomponentsjs": "^0.7.24"
   },
   "homepage": "https://github.com/LRNWebcomponents/magazine-cover",
-  "version": "1.1.2",
-  "_release": "1.1.2",
+  "version": "1.1.3",
+  "_release": "1.1.3",
   "_resolution": {
     "type": "version",
-    "tag": "1.1.2",
-    "commit": "c34bca108883c413e4a7d3561d9d5ae3b2c65ec4"
+    "tag": "1.1.3",
+    "commit": "0666a3502c85524fa57104f7afc3995d785f2fd8"
   },
   "_source": "https://github.com/LRNWebcomponents/magazine-cover.git",
-  "_target": "^1.1.2",
+  "_target": "^1.1.3",
   "_originalSource": "LRNWebcomponents/magazine-cover"
 }

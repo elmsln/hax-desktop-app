@@ -11,7 +11,7 @@ A Magazine cover element
 
 Example:
   ```html
-  <magazine-cover image="demo/picture2.jpg" header="Sunset" action="Click, Breath, Relax">
+  <magazine-cover image="demo/picture2.jpg" header="Sunset" action="Click, Breath, Relax" link="https://www.elmsln.org/">
     A simple time, a simple life. America may be fast paced and brutal on health but in Canada, people enjoy sitting and watching the sunset. Learn how Canadians manage stress.
   </magazine-cover>
   ```
@@ -152,6 +152,9 @@ Example:
     Polymer({
 
       is: 'magazine-cover',
+      listeners: {
+        'actionlink.tap': '_linkTapped',
+      },
       behaviors: [
         HAXBehaviors.PropertiesBehaviors,
       ],
@@ -199,8 +202,32 @@ Example:
          */
         link: {
           type: String,
-          value: '#',
+          value: '',
         },
+        /**
+         * Optional event binding for the button press.
+         */
+        eventName: {
+          type: String,
+          value: '',
+        },
+        /**
+         * Optional event data to send along
+         */
+        eventData: {
+          type: Object,
+          value: {},
+        },
+      },
+      /**
+       * Link tap, fire event if we have one
+       */
+      _linkTapped: function(e) {
+        if (this.eventName !== '') {
+          e.preventDefault();
+          e.stopPropagation();
+          this.fire(this.eventName, this.eventData);
+        }
       },
       /**
        * Attached.
@@ -331,7 +358,20 @@ Example:
                 },
               },
             ],
-            'advanced': []
+            'advanced': [
+              {
+                'property': 'event-name',
+                'title': 'Event name',
+                'description': 'Name of the event to fire',
+                'inputMethod': 'textfield',
+              },
+              {
+                'property': 'event-data',
+                'title': 'Event data (JSON)',
+                'description': 'JSON blob of data to send along',
+                'inputMethod': 'code-editor',
+              },
+            ]
           }
         };
         this.setHaxProperties(props);
