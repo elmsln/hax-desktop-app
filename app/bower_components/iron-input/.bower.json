@@ -39,6 +39,6 @@
     "commit": "9b991e43576064227053ab73eeb351be60d82a40"
   },
   "_source": "https://github.com/PolymerElements/iron-input.git",
-  "_target": "^1.0.0",
+  "_target": "^1.0.10",
   "_originalSource": "PolymerElements/iron-input"
 }

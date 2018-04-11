@@ -1,13 +1,14 @@
 <link rel="import" href="../../polymer/polymer.html">
-<link rel="import" href="../../lrn-icon/lrn-icon.html">
+<link rel="import" href="../../iron-icon/iron-icon.html">
+<link rel="import" href="../lrn-icons.html">
 
 <dom-module id="lrn-icons-demo">
 <template>
   <ul>
   <template is="dom-repeat" items="[[iconList]]">
     <li>
-    <lrn-icon icon="[[item.icon]]"></lrn-icon>
-    <strong>&lt;lrn-icon icon="[[item.icon]]"&gt;</strong>
+    <iron-icon icon$="lrn:[[item.icon]]"></iron-icon>
+    <strong>&lt;iron-icon icon="lrn:[[item.icon]]"&gt;</strong>
     </li>
   </template>
   </ul>

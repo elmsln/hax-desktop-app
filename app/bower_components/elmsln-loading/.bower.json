@@ -7,8 +7,7 @@
     "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.1.0",
     "paper-spinner": "PolymerElements/paper-spinner#^1.2.1",
     "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.4",
-    "lrn-icons": "LRNWebComponents/lrn-icons#^1.1.0",
-    "lrn-icon": "LRNWebComponents/lrn-icon#^1.0.2"
+    "lrn-icons": "LRNWebComponents/lrn-icons#^1.3.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -17,12 +16,12 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebComponents/elmsln-loading",
-  "version": "1.0.1",
-  "_release": "1.0.1",
+  "version": "1.1.0",
+  "_release": "1.1.0",
   "_resolution": {
     "type": "version",
-    "tag": "1.0.1",
-    "commit": "9c6c098e69615c35de0a0dd9815abf55f5d6155e"
+    "tag": "1.1.0",
+    "commit": "9cdc873189ed4375fb89ea05d40b0f56c9e07904"
   },
   "_source": "https://github.com/LRNWebComponents/elmsln-loading.git",
   "_target": "^1.0.0",

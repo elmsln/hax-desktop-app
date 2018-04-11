@@ -108,7 +108,7 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
         pointer-events: none;
       }
 
-      :host-context([dir="rtl"]) #ink {
+      #ink:dir(rtl) {
         right: calc(0px - (var(--calculated-paper-checkbox-ink-size) - var(--calculated-paper-checkbox-size)) / 2);
         left: auto;
       }
@@ -173,7 +173,7 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
         box-sizing: content-box; /* protect against page-level box-sizing */
       }
 
-      :host-context([dir="rtl"]) #checkmark {
+      #checkmark:dir(rtl) {
         -webkit-transform-origin: 50% 14%;
         transform-origin: 50% 14%;
       }
@@ -195,7 +195,7 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
         @apply --paper-checkbox-label-checked;
       }
 
-      :host-context([dir="rtl"]) #checkboxLabel {
+      #checkboxLabel:dir(rtl) {
         padding-right: var(--paper-checkbox-label-spacing, 8px);
         padding-left: 0;
       }
@@ -243,6 +243,7 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
         Polymer.PaperCheckedElementBehavior
       ],
 
+      /** @private */
       hostAttributes: {
         role: 'checkbox',
         'aria-checked': false,
@@ -276,7 +277,12 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
           if (inkSize === '-1px') {
             var checkboxSizeText = this.getComputedStyleValue('--calculated-paper-checkbox-size').trim();
 
-            var units = checkboxSizeText.match(/[A-Za-z]+$/)[0] || 'px';
+            var units = 'px';
+            var unitsMatches = checkboxSizeText.match(/[A-Za-z]+$/);
+            if (unitsMatches !== null) {
+              units = unitsMatches[0];
+            }
+
             var checkboxSize = parseFloat(checkboxSizeText);
             var defaultInkSize = (8 / 3) * checkboxSize;
 

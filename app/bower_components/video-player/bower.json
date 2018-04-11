@@ -8,7 +8,7 @@
     "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.0.0",
     "schema-behaviors": "LRNWebComponents/schema-behaviors",
     "a11y-behaviors": "LRNWebComponents/a11y-behaviors#^1.0.0",
-    "media-behaviors": "LRNWebComponents/media-behaviors#^1.1.1"
+    "media-behaviors": "LRNWebComponents/media-behaviors#^1.1.2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

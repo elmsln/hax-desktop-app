@@ -1,6 +1,6 @@
 {
   "name": "pdf-element",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "authors": [
     "Pavel Makhov <streetturtle@gmail.com>"
   ],
@@ -29,11 +29,11 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebcomponents/pdf-element",
-  "_release": "1.3.0",
+  "_release": "1.4.0",
   "_resolution": {
     "type": "version",
-    "tag": "1.3.0",
-    "commit": "616f57a6c870c0c3ea4507c77346105b1ec80b72"
+    "tag": "1.4.0",
+    "commit": "fea1b7efb7a7e994f1ea133dfad7f0fb9fa63b6f"
   },
   "_source": "https://github.com/LRNWebcomponents/pdf-element.git",
   "_target": "^1.3.0",

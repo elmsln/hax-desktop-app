@@ -58,19 +58,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script>
 suite('<iron-meta>', function () {
   suite('basic behavior', function () {
-
-    window.metas = [];
     var meta;
 
     setup(function () {
       meta = fixture('TrivialMeta');
-      meta.id = 'meta' + metas.length;
-      metas.push(meta);
     });
 
-    teardown(function() {
-      meta.value = null;
-    })
+    teardown(function () {
+      meta.key = null;
+    });
 
     test('uses itself as the default value', function () {
       expect(meta.value).to.be.equal(meta);
@@ -102,7 +98,7 @@ suite('<iron-meta>', function () {
 
     teardown(function () {
       metas.forEach(function (meta) {
-        meta.value = null;
+        meta.key = null;
       });
     });
 
@@ -114,7 +110,7 @@ suite('<iron-meta>', function () {
     });
 
     test('can be unregistered individually', function () {
-      metas[0].value = null;
+      metas[0].key = null;
 
       expect(metas[0].list.length).to.be.equal(2);
       expect(metas[0].list).to.be.deep.equal([metas[1], metas[2]])
@@ -184,29 +180,12 @@ suite('<iron-meta>', function () {
     });
   });
 
-  suite('imperative usage', function () {
-    var meta;
+  suite('singleton', function () {
 
-    setup(function() {
-      meta = fixture('TrivialMeta');
-    });
-
-    teardown(function() {
-      meta.value = null;
-    });
-
-    test('gets value by type and key', function() {
-      expect(new Polymer.IronMeta({
-        type: meta.type,
-        key: meta.key
-      }).value).to.be.equal(meta.value);
-    });
-
-    test('getting `list` does not throw if no objects of the given type exist', function() {
-      const meta = new Polymer.IronMeta({type: 'NO ITEMS OF THIS TYPE'});
-      assert.doesNotThrow(function() {
-        meta.list;
-      });
+    test('only one ironmeta created', function () {
+      var first = Polymer.IronMeta.getIronMeta();
+      var second = Polymer.IronMeta.getIronMeta();
+      expect(first).to.be.equal(second);
     });
   });
 });

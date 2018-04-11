@@ -65,6 +65,6 @@
     "commit": "72ebd02dc36d2fcf321eeb17fafdbea4b3d75ce1"
   },
   "_source": "https://github.com/PolymerElements/iron-overlay-behavior.git",
-  "_target": "^2.0.0",
-  "_originalSource": "iron-overlay-behavior"
+  "_target": "^2.2.0",
+  "_originalSource": "PolymerElements/iron-overlay-behavior"
 }

@@ -52,6 +52,6 @@
     "commit": "3da4d24e5292d7521081686115e17d1114d284ed"
   },
   "_source": "https://github.com/PolymerElements/iron-media-query.git",
-  "_target": "^2.0.0",
-  "_originalSource": "iron-media-query"
+  "_target": "1 - 2",
+  "_originalSource": "PolymerElements/iron-media-query"
 }
