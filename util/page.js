@@ -74,7 +74,7 @@ module.exports = {
    */
   parseOutline: () => {
     const location = global.location;
-    const outlinePath = path.join(location, 'hax-outline.json');
+    const outlinePath = path.join(location, 'outline.json');
     try {
       const outline = parseOutline(outlinePath);
       return outline;
