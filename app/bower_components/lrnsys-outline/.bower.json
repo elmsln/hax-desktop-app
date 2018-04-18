@@ -1,0 +1,29 @@
+{
+  "name": "lrnsys-outline",
+  "description": "A LRN element",
+  "main": "lrnsys-outline.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.10.1",
+    "paper-input": "PolymerElements/paper-input#^1.0.9",
+    "iron-list": "PolymerElements/iron-list#^2.0.12",
+    "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^2.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  },
+  "homepage": "https://github.com/LRNWebComponents/lrnsys-outline",
+  "version": "0.0.1",
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.1",
+    "commit": "409c70fd308ffa7356a2225b709df20c7edb5c4e"
+  },
+  "_source": "https://github.com/LRNWebComponents/lrnsys-outline.git",
+  "_target": "^0.0.1",
+  "_originalSource": "LRNWebComponents/lrnsys-outline",
+  "_direct": true
+}
