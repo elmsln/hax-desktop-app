@@ -33,6 +33,7 @@
     "rxjs": "^5.5.5",
     "showdown": "^1.8.6",
     "turndown": "^4.0.1",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "uuid": "^3.2.1"
   }
 }

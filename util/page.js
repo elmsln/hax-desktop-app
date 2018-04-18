@@ -7,6 +7,7 @@ const cheerio = require('cheerio');
 const Case = require('case');
 const $ = require('cheerio');
 const addPageSumm = require('./addPagetoSummary');
+const parseOutline = require('./parseOutline');
 
 module.exports = {
   
@@ -73,19 +74,10 @@ module.exports = {
    */
   parseOutline: () => {
     const location = global.location;
-    const outlinePath = path.join(location, 'SUMMARY.md');
+    const outlinePath = path.join(location, 'hax-outline.json');
     try {
-      const outlineMarkdown = fs.readFileSync(outlinePath, 'utf8');
-      let outlineHTML = marked(outlineMarkdown);
-      const $ = cheerio.load(outlineHTML);
-      // switch out the hrefs for data-hrefs
-      $('a').each((i, elem) => {
-        const href = $(elem).attr('href');
-        $(elem).attr('href', null);
-        $(elem).attr('data-href', href);
-      })
-      // look for the first bulletlist in the summary file.
-      return $.html();
+      const outline = parseOutline(outlinePath);
+      return outline;
     } catch (error) {
       return error;
     }
