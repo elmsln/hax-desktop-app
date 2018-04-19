@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
 
 <dom-module id="hax-app-location-list">
   <template>
@@ -7,46 +9,56 @@
         display: block;
       }
 
+      h3 {
+        padding: 0;
+        margin: 0;
+      }
+
       #locationMenu {
         width: 100%;
       }
 
-      .list-item:last-of-type {
-        border-top: 1px solid lightblue;
-        border-bottom: 1px solid lightblue;
-      }
-
-      .list-item {
-        border-top: 1px solid lightblue;
+      paper-card {
         width: 100%;
-        padding: 1em;
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 3px;
       }
 
-      .list-item:hover {
-        background: #eefbff;
-        cursor: pointer;
+      paper-card:hover {
+        box-shadow: 0 3px 8px 0 darkgray;
       }
 
-      #newbook {
-        margin-top: 2em;
-        width: 100%;
-        background: skyblue;
-        color: white;
+      paper-icon-button#more_btn {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        color: #9DAAB6;
       }
+
+
+
+
     </style>
 
     <div id="locationMenu">
       <template is="dom-repeat" items="[[locations]]" as="item">
-        <div class="list-item" data-location$="[[item.location]]" on-click="_selectLocation"> 
-          <h3 class="title">[[item.title]]</h3>
-          <div class="location">[[item.location]]</div>
-          <div class="last-edited">[[item.lastEdited]]</div>
-        </div>
+        <paper-card>
+          <paper-icon-button id="more_btn" icon="more-horiz" on-click="openProject"></paper-icon-button>
+          <div class="list-item" data-location$="[[item.location]]" on-click="_selectLocation">
+            <h3 class="title">[[item.title]]</h3>
+            <div class="location">[[item.location]]</div>
+            <div class="last-edited">[[item.lastEdited]]</div>
+          </div>
+        </paper-card>
       </template>
     </div>
 
-    <paper-button id="newbook">New Book</paper-button>
+
+
+
     
+
   </template>
   <script>
     Polymer({
@@ -76,7 +88,7 @@
           ]
         }
       },
-      _selectLocation: function(e) {
+      _selectLocation: function (e) {
         const localTarget = Polymer.dom(e).localTarget;
         const location = localTarget.getAttribute('data-location');
         // ipcRenderer.send('change-location', location);
