@@ -14,6 +14,12 @@
         margin: 0;
       }
 
+      .title {
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
       #locationMenu {
         width: 100%;
       }
@@ -36,30 +42,43 @@
         color: #9DAAB6;
       }
 
+      .course_image {
+        width: 75px;
+        height: 75px;
+        float: left;
+        margin-right: 15px;
+        background-color: gray;
+      }
 
+      @media screen and (max-width: 390px) {
+        .list-item {
+          clear: left;
+        }
+      }
 
-
+      @media screen and (max-width: 390px) {
+        .course_image {
+          margin-bottom: 10px;
+        }
+      }
     </style>
 
     <div id="locationMenu">
       <template is="dom-repeat" items="[[locations]]" as="item">
         <paper-card>
+          <div class="course_image"></div>
           <paper-icon-button id="more_btn" icon="more-horiz" on-click="openProject"></paper-icon-button>
           <div class="list-item" data-location$="[[item.location]]" on-click="_selectLocation">
-            <h3 class="title">[[item.title]]</h3>
+            <div class="title">[[item.title]]</div>
             <div class="location">[[item.location]]</div>
             <div class="last-edited">[[item.lastEdited]]</div>
           </div>
         </paper-card>
       </template>
     </div>
-
-
-
-
-    
-
   </template>
+
+
   <script>
     Polymer({
       is: 'hax-app-location-list',
