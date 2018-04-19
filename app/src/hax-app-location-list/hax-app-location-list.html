@@ -1,8 +1,4 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
-<link rel="import" href="../../bower_components/paper-menu/paper-item.html">
-
-
 
 <dom-module id="hax-app-location-list">
   <template>
@@ -11,31 +7,45 @@
         display: block;
       }
 
-      paper-menu {
-        --paper-menu-focused-item: {
-          background: #eefbff;
-        }
+      #locationMenu {
+        width: 100%;
       }
 
-      paper-item:last-of-type {
+      .list-item:last-of-type {
         border-top: 1px solid lightblue;
         border-bottom: 1px solid lightblue;
       }
 
-      paper-item {
-        border-top: 1px solid blue;
+      .list-item {
+        border-top: 1px solid lightblue;
+        width: 100%;
+        padding: 1em;
       }
 
-      paper-item:hover {
+      .list-item:hover {
         background: #eefbff;
+        cursor: pointer;
+      }
+
+      #newbook {
+        margin-top: 2em;
+        width: 100%;
+        background: skyblue;
+        color: white;
       }
     </style>
 
-    <paper-menu>
-      <template is="dom-repeat" items="[[locations]]" as="location">
-        <paper-item data-location$="[[location]]" on-click="_selectLocation">[[location]]</paper-item>
+    <div id="locationMenu">
+      <template is="dom-repeat" items="[[locations]]" as="item">
+        <div class="list-item" data-location$="[[item.location]]" on-click="_selectLocation"> 
+          <h3 class="title">[[item.title]]</h3>
+          <div class="location">[[item.location]]</div>
+          <div class="last-edited">[[item.lastEdited]]</div>
+        </div>
       </template>
-    </paper-menu>
+    </div>
+
+    <paper-button id="newbook">New Book</paper-button>
     
   </template>
   <script>
@@ -44,18 +54,36 @@
       properties: {
         locations: {
           type: Array,
-          value: []
+          value: [
+            {
+              title: 'Phys211',
+              lastEdited: '3 Months ago',
+              id: 'unique-id-0001',
+              location: '/users/mike/folder'
+            },
+            {
+              title: 'Phys211',
+              lastEdited: '3 Months ago',
+              id: 'unique-id-0001',
+              location: '/users/mike/folder'
+            },
+            {
+              title: 'Phys211',
+              lastEdited: '3 Months ago',
+              id: 'unique-id-0001',
+              location: '/users/mike/folder'
+            },
+          ]
         }
       },
       _selectLocation: function(e) {
         const localTarget = Polymer.dom(e).localTarget;
         const location = localTarget.getAttribute('data-location');
-        ipcRenderer.send('change-location', location);
+        // ipcRenderer.send('change-location', location);
       },
       ready: function () {
         ipcRenderer.on('location-list-changed', (e, locations) => {
-          this.locations = locations;
-          console.log(locations);
+          // this.locations = locations;
         });
       }
     });

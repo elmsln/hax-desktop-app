@@ -1,7 +1,5 @@
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../hax-app-homepage/hax-app-homepage.html">
-<link rel="import" href="../hax-app-page/hax-app-page.html">
-<link rel="import" href="../hax-app-outline/hax-app-outline.html">
 
 <dom-module id="hax-desktop-app">
   <template>
@@ -19,16 +17,11 @@
       }
     </style>
 
-    <div id="nav">
-      <hax-app-outline></hax-app-outline>
-    </div>
     <div id="content">
       <iron-pages selected="[[section]]" attr-for-selected="data-section">
         <hax-app-homepage data-section="home"></hax-app-homepage>
-        <hax-app-page data-section="page"></hax-app-page>
       </iron-pages>
     </div>
-
 
   </template>
 
