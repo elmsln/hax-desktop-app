@@ -1,11 +1,21 @@
-<!--
- `media-behaviors`
-  Behaviors for images, video and other media types.
--->
 <script>
   // ensure MediaBehaviors exists
   window.MediaBehaviors = window.MediaBehaviors || {};
-
+  /**
+   * `MediaBehaviors.Video` provides some helper functions for working with video
+   * from multiple sources. It helps resolve a video by type and currently supports
+   * youtube, vimeo, and a few other sources and helps to determine if we need
+   * an iframe to display the media or a local `<video>` tag.
+   *
+   * This also provides a powerful little utility to clean up embedded
+   * URLs that reference popular media sources in order to make sure
+   * that their embed URLs are structured correctly. This is especially
+   * useful for allowing users to copy and paste links from youtube's URL
+   * bar yet actually transform that address into a cookie free embed that
+   * strips off the related videos and other options.
+   *
+   * @polymerBehavior MediaBehaviors.Video
+   **/
   window.MediaBehaviors.Video = {
     /**
      * Compute iframe or video tag for implementation.

@@ -1,0 +1,185 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-list/iron-list.html">
+<link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
+<link rel="import" href="../paper-input/paper-input.html">
+
+<!--
+`lrnsys-outline-item`
+A LRN element
+
+@demo demo/index.html
+
+@microcopy - the mental model for this element
+ -
+ -
+ -
+
+-->
+
+<dom-module id="lrnsys-outline-item">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      :host[indent="0"] {
+        padding-left: 0em;
+      }
+      :host[indent="1"] {
+        padding-left: 2.5em;
+      }
+      :host[indent="2"] {
+        padding-left: 5em;
+      }
+      :host[indent="3"] {
+        padding-left: 7.5em;
+      }
+      :host[indent="4"] {
+        padding-left: 10em;
+      }
+      :host[indent="5"] {
+        padding-left: 12.5em;
+      }
+      :host[indent="6"] {
+        padding-left: 15em;
+      }
+      :host {
+        padding-left: 20em;
+      }
+    </style>
+    <div id="wrapper" indent$="[[indent]]">
+      <paper-input 
+        id="input" 
+        label="Enter a page title" 
+        value$="[[title]]" 
+        no-label-float>
+      </paper-input>
+    </div>
+    <iron-a11y-keys id="a11y" target="[[target]]" keys="enter"
+    on-keys-pressed="_onEnter"></iron-a11y-keys>
+    <iron-a11y-keys id="a11y" target="[[target]]" keys="backspace"
+    on-keys-pressed="_onBackspace"></iron-a11y-keys>
+    <iron-a11y-keys id="a11y" target="[[target]]" keys="up"
+    on-keys-pressed="_onUp"></iron-a11y-keys>
+    <iron-a11y-keys id="a11y" target="[[target]]" keys="down"
+    on-keys-pressed="_onDown"></iron-a11y-keys>
+    <iron-a11y-keys id="a11y" target="[[target]]" keys="tab"
+    on-keys-pressed="_onTab"></iron-a11y-keys>
+    <iron-a11y-keys id="a11y" target="[[target]]" keys="shift+tab"
+    on-keys-pressed="_onShiftTab"></iron-a11y-keys>
+    <iron-a11y-keys id="a11y" target="[[target]]" keys="alt+up"
+    on-keys-pressed="_onAltUp"></iron-a11y-keys>
+    <iron-a11y-keys id="a11y" target="[[target]]" keys="alt+down"
+    on-keys-pressed="_onAltDown"></iron-a11y-keys>
+    <iron-a11y-keys id="a11y" target="[[target]]" keys="shift+up"
+    on-keys-pressed="_onShiftUp"></iron-a11y-keys>
+    <iron-a11y-keys id="a11y" target="[[target]]" keys="shift+down"
+    on-keys-pressed="_onShiftDown"></iron-a11y-keys>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'lrnsys-outline-item',
+      
+      listeners: {
+        'change': '_onChange',
+      },
+
+      properties: {
+        id: {
+          type: String,
+          value: null,
+        },
+        value: {
+          type: String,
+          value: null,
+          reflectToAttribute: true,
+        },
+        parent: {
+          type: String,
+          value: null,
+        },
+        indent: {
+          type: Number,
+          value: 0,
+        },
+        target: {
+          type: Object,
+          value: null,
+        },
+      },
+      attached: function(){
+        this.fire('attached-item', {item: this});
+      },
+      ready: function(){
+        this.target = this.$.input;
+      },
+      focus: function(){
+        this.$.input.focus();
+        return this;
+      },
+      value: function(){
+        this.title = this.$.input.value;
+        return this.title;
+      },
+      setSelection: function(start,end){
+        let s = start !== undefined ? start : 0, n = end !== undefined ? end : s;
+        try {
+          this.$.input.querySelector('input').setSelectionRange(s,n);
+        } catch (e){
+          console.log(e);
+        }
+        this.focus();
+      },
+      _onChange: function(){
+        this.fire('change-item', {item: this, value: this.$.input.value});
+      },
+      _onEnter: function(){
+        let i = this.$.input.querySelector('input').selectionStart, j = this.$.input.value;
+        this.fire('add-item', {item: this, value: j.slice(0, i), new: j.slice(i, j.length)});
+      },
+      _onBackspace: function(e){
+        if (window.getSelection().toString() == this.$.input.value){
+          event.detail.keyboardEvent.preventDefault();
+          this.fire('delete-item', {item: this});
+        } else if (this.$.input.querySelector('input').selectionStart == 0) {
+          this.fire('indent-item', {item: this, increase: false});
+        }
+      },
+      _onUp: function(){
+        if (this.$.input.querySelector('input').selectionStart == 0) {
+          this.fire('focus-item', {item: this, moveUp: true});
+        }
+      },
+      _onDown: function(){
+        if (this.$.input.querySelector('input').selectionStart == this.$.input.value.length) {
+          this.fire('focus-item', {item: this, moveUp: false});
+        }
+      },
+      _onShiftTab: function(){
+        this.fire('indent-item', {item: this, increase: false});
+      },
+      _onTab: function(e){
+        //e.preventDefault();
+        console.log(this.$.input.querySelector('input').selectionStart == 0);
+        if (this.$.input.querySelector('input').selectionStart == 0) {
+          e.preventDefault();
+          this.fire('indent-item', {item: this, increase: true});
+        }
+      },
+      _onAltUp: function(){
+        this.fire('move-item', {item: this, moveUp: true, byGroup: false});
+      },
+      _onAltDown: function(){
+        this.fire('move-item', {item: this, moveUp: false, byGroup: false});
+      },
+      _onShiftUp: function(){
+        this.fire('move-item', {item: this, moveUp: true, byGroup: true});
+      },
+      _onShiftDown: function(){
+        this.fire('move-item', {item: this, moveUp: false, byGroup: true});
+      },
+    });
+  </script>
+</dom-module>

@@ -6,19 +6,24 @@ const Store = require('electron-store');
 const store = new Store();
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
 const { getPage, savePage, parseOutline, getOutlinePage, createPage } = require('./util/page');
+// reload
+require('electron-reload')(__dirname);
 
 let mainWindow;
 
 app.on('ready', () => {
   // create window
-  mainWindow = new BrowserWindow({});
+  mainWindow = new BrowserWindow({
+    width: 600,
+    height: 800
+  });
   // load html into window
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'app', 'index.html'),
+    pathname: path.join(__dirname, 'app', 'main.html'),
     protocol: 'file:',
-    slashes: true
+    slashes: true,
   }));
-
+  
   // Build main menu
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   // Insert the Menu into the app

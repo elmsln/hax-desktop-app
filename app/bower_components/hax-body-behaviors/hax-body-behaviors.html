@@ -25,6 +25,7 @@ with the hax-body element which manages elements.
    *      'configure': [],
    *      'advanced': [],
    *    },
+   *    'saveOptions': {}
    *  }
    *
    * This tells hax-body's context menu for custom-elements that this element
@@ -98,10 +99,40 @@ with the hax-body element which manages elements.
    *     }
    *   ]
    * }
+   * `saveOptions` is a more open ended object which can be used to help
+   * support future flexibility / needs. The first major thing this supports
+   * is the wipeSlot flag (default false). wipeSlot is used to inform HAX
+   * that when it's going to save the current item to a backend (convert to html / text)
+   * that it needs to first wipe out the contents of the element. This is not a common
+   * operation but useful for things like tokens and other tags that leverage slot
+   * in order to present information but should not be saving that information
+   * to a backend. Elements that dynamically pull content from an end point are
+   * the perfect example of when you'd want to wipe the slot. A content element
+   * like a block-quote tag which uses slot to allow users to write whatever
+   * they want inside the tag would NOT want to use this, otherwise the contents
+   * would be lost.
    */
   // ensure HAXPropertiesBehaviors exists
   window.HAXBehaviors = window.HAXBehaviors || {};
-  // ensure we have consistent reporting of haxBodyProperties
+  /**
+   * `HAXBehaviors.PropertiesBehaviors` helps ensure that there is a consistent
+   * function name and binding structure for notifying HAX that this element
+   * is capable of working with it. This behavior provides validation helpers
+   * to ensure that the HAX schema conforms to the API and fills in the gaps
+   * when people are missing critical properties in order for the API to work.
+   *
+   * It also provides some basic protections for the haxProperties object
+   * by making it read only and using private functions to get and set it.
+   *
+   * The helper function to convert the haxProperties schema into JSON Schema
+   * is also incredibly powerful and provides much of what makes HAX able to
+   * generate headless forms. The hax-store also utilizes this behavior which
+   * may seem odd but allows for centralization of operations and consistency
+   * no matter if an element or the store is in scope of wanting to interogate
+   * the possible targets for a URL (like who can support image media).
+   *
+   * @polymerBehavior HAXBehaviors.PropertiesBehaviors
+   **/
   window.HAXBehaviors.PropertiesBehaviors = {
     properties: {
       /**
@@ -118,6 +149,7 @@ with the hax-body element which manages elements.
             'configure': [],
             'advanced': [],
           },
+          'wipeSlot': {},
         },
         readOnly: true,
       },

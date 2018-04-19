@@ -230,7 +230,7 @@
 		},
 		"erb": {
 			"title": "ERB",
-			"require": ["markup", "ruby"],
+			"require": ["ruby", "markup-templating"],
 			"owner": "Golmote"
 		},
 		"erlang": {
@@ -249,6 +249,10 @@
 		},
 		"fortran": {
 			"title": "Fortran",
+			"owner": "Golmote"
+		},
+		"gedcom": {
+			"title": "GEDCOM",
 			"owner": "Golmote"
 		},
 		"gherkin": {
@@ -285,7 +289,7 @@
 		},
 		"handlebars": {
 			"title": "Handlebars",
-			"require": "markup",
+			"require": "markup-templating",
 			"owner": "Golmote"
 		},
 		"haskell": {
@@ -373,6 +377,11 @@
 			"title": "Liquid",
 			"owner": "cinhtau"
 		},
+		"lisp": {
+			"title": "Lisp",
+			"owner": "JuanCaicedo",
+			"alias": ["emacs", "elisp", "emacs-lisp"]
+		},
 		"livescript": {
 			"title": "LiveScript",
 			"owner": "Golmote"
@@ -391,6 +400,11 @@
 		},
 		"markdown": {
 			"title": "Markdown",
+			"require": "markup",
+			"owner": "Golmote"
+		},
+		"markup-templating": {
+			"title": "Markup templating",
 			"require": "markup",
 			"owner": "Golmote"
 		},
@@ -474,7 +488,7 @@
 		},
 		"php": {
 			"title": "PHP",
-			"require": "clike",
+			"require": ["clike", "markup-templating"],
 			"owner": "milesj"
 		},
 		"php-extras": {
@@ -607,12 +621,17 @@
 		},
 		"smarty": {
 			"title": "Smarty",
-			"require": "markup",
+			"require": "markup-templating",
 			"owner": "Golmote"
 		},
 		"sql": {
 			"title": "SQL",
 			"owner": "multipetros"
+		},
+		"soy": {
+			"title": "Soy (Closure Template)",
+			"require": "markup-templating",
+			"owner": "Golmote"
 		},
 		"stylus": {
 			"title": "Stylus",
@@ -648,6 +667,11 @@
 			"require": "basic",
 			"owner": "Bigsby"
 		},
+		"velocity": {
+			"title": "Velocity",
+			"require": "markup",
+			"owner": "Golmote"
+		},
 		"verilog": {
 			"title": "Verilog",
 			"owner": "a-rey"
@@ -659,6 +683,15 @@
 		"vim": {
 			"title": "vim",
 			"owner": "westonganger"
+		},
+		"visual-basic": {
+			"title": "Visual Basic",
+			"owner": "Golmote",
+			"alias": "vb"
+		},
+		"wasm": {
+			"title": "WebAssembly",
+			"owner": "Golmote"
 		},
 		"wiki": {
 			"title": "Wiki markup",

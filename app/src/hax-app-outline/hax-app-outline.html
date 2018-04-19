@@ -1,4 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/lrnsys-outline/lrnsys-outline.html">
+<link rel="import" href="../../bower_components/map-menu/map-menu.html">
+<link rel="import" href="../components/hax-app-outline-ui.html">
 
 <dom-module id="hax-app-outline">
   <template>
@@ -33,22 +36,9 @@
       
     </style>
     
-    <div class="button">
-      <paper-button id="addPageButton" toggles raised class ="green" on-tap="handleTap">Add Page</paper-button>
-      <p id="test">Did you hear about the circus fire?</p>
-      <iron-a11y-keys target="[[addPageTarget]]" on-keys-pressed="handleCreatePage" keys="enter"></iron-a11y-keys>
-    </div>
-
-    <paper-dialog id="dialog">
-      <h2>Page Information</h2>
-      <paper-input id="pageName" placeholder="Page Name"></paper-input>
-      <div class="buttons">
-        <paper-button id="createPageButton" dialog-confirm autofocus on-tap="handleCreatePage" class = "green">Create Page</paper-button>
-        <paper-button dialog-dismiss>Cancel</paper-button>
-      </div>
-    </paper-dialog>
-    
-    <div id="slot"></div>
+    <hax-app-outline-ui id="ui" outline="[[outline]]" active-page="[[activePge]]">
+      <slot></slot>
+    </hax-app-outline-ui>
     
   </template>
   <script>
@@ -56,41 +46,21 @@
       is: 'hax-app-outline',
       properties: {
         outline: {
-          type: String,
-          value: '',
-          observer: '_outlineChanged'
+          type: Array,
+          value: [],
         },
         addPageTarget:{
           type: Object,
           value: null,
         },
-
         activePage: {
           type: String,
           value: '',
-          observer: '_activePageChanged'
-        }
-      },
-
-      _outlineChanged: function (outline, old) {
-        // when the outline changes just write it directly to the dom
-        if (outline !== old) {
-          this.$.slot.innerHTML = outline;
-        }
-      },
-
-      _activePageChanged: function (page, old) {
-        // find out if there is a current active link and unset it
-        const activeLink = this.querySelector('a[active]');
-        if (activeLink) {
-          activeLink.removeAttribute('active');
-        }
-        // then find the new active link and add the active attribute
-        const newActiveLink = this.querySelector(`a[data-href="${page}"]`);
-        console.log(newActiveLink);
-        if (newActiveLink) {
-          newActiveLink.setAttribute('active', true);
-        }
+        },
+        __menuOpened: {
+          type: Boolean,
+          value: true
+        },
       },
 
       ready: function () {
@@ -114,16 +84,7 @@
         });
       },
 
-      handleTap: function(){
-        console.log(":thumbs_up:"); //test output
-        document.getElementById("test").innerHTML = "it was in-TENTS"; //content change test 
-        this.$.dialog.toggle();
-      },
-
       handleCreatePage: function(){
-        this.$.dialog.toggle();
-        const pageName = this.$.pageName.value;
-        console.log(pageName);
         ipcRenderer.send('create-page', { fileName: pageName, content: ""});
         ipcRenderer.send('update-summary', { fileName: pageName});
         ipcRenderer.send('commit-to-git', {});

@@ -1,40 +1,127 @@
+# HAX body behaviors
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/LRNWebComponents/hax-body-behaviors)
 
-# \<hax-body-behaviors\>
+[Video showing how we integrate HAX with elements](https://www.youtube.com/watch?v=P-ZA4CQASpY&index=1&list=PLJQupiji7J5eTqv8JFiW8SZpSeKouZACH)
 
-A behavior for mixing-in structure for elements to communicate effectively with the hax-body element which manages elements. Dig into the comments of the element to see how it's used in practice. `video-player` implements this, check it out here -- https://www.webcomponents.org/element/LRNWebComponents/video-player
+HAX body behaviors provide a consistent way to rapidly wire Polymer elements up to HAX. While anything can talk to HAX via consistent property and event usage, these body behaviors reduce the time and increase accuracy when trying to wire to HAX (drastically).
 
-## Install the Polymer-CLI
+The major is in HAX Schema defintion which can be translated to JSON Schema with a single function. This allows for rapidly building out headless "forms" in HAX while the elements themselves just define the JSON blob as to how it should function and what should be wired where. It's more complicated then it sounds.
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
-
-## Viewing Your Application
-
+## Example implementation
+For full documentation just open the `hax-body-behaviors.html` file as it's got a lot of documentation but here's a basic example from `video-player`.
+top of file:
 ```
-$ polymer serve
+<link rel="import" href="../hax-body-behaviors/hax-body-behaviors.html">
 ```
-
-## Building Your Application
-
+Implement the behaviors in the Polymer object:
 ```
-$ polymer build
+...
+Polymer({
+      is: 'video-player',
+      behaviors: [
+        HAXBehaviors.PropertiesBehaviors,
+      ],
+...
 ```
-
-This will create a `build/` folder with `bundled/` and `unbundled/` sub-folders
-containing a bundled (Vulcanized) and unbundled builds, both run through HTML,
-CSS, and JS optimizers.
-
-You can serve the built versions by giving `polymer serve` a folder to serve
-from:
-
+Wire up to HAX in an attached life cycle callback:
 ```
-$ polymer serve build/bundled
+  /**
+   * Attached.
+   */
+  attached: function() {
+    // Establish hax properties if they exist
+    let props = {
+      'canScale': true,
+      'canPosition': true,
+      'canEditSource': false,
+      'gizmo': {
+        'title': 'Video player',
+        'description': 'This can present video in a highly accessible manner regardless of source.',
+        'icon': 'av:play-circle-filled',
+        'color': 'red',
+        'groups': ['Video', 'Media'],
+        'handles': [
+          {
+            'type': 'video',
+            'source': 'source',
+            'title': 'caption',
+            'caption': 'caption',
+            'description': 'caption',
+            'color': 'primaryColor'
+          }
+        ],
+        'meta': {
+          'author': 'LRNWebComponents'
+        }
+      },
+      'settings': {
+        'quick': [
+          {
+            'property': 'responsive',
+            'title': 'Responsive',
+            'description': 'The video automatically fills the available area.',
+            'inputMethod': 'boolean',
+            'icon': 'image:photo-size-select-small',
+          },
+          {
+            'property': 'primaryColor',
+            'title': 'Primary color',
+            'description': 'Select the primary color used in the video',
+            'inputMethod': 'colorpicker',
+            'icon': 'editor:format-color-fill',
+          },
+          {
+            'property': 'secondaryColor',
+            'title': 'Secondary color',
+            'description': 'Select the secondary color used for the video',
+            'inputMethod': 'colorpicker',
+            'icon': 'editor:format-color-fill',
+          }
+        ],
+        'configure': [
+          {
+            'property': 'source',
+            'title': 'Source',
+            'description': 'The URL for this video.',
+            'inputMethod': 'textfield',
+            'icon': 'link',
+            'required': true,
+            'validationType': 'url',
+          },
+          {
+            'property': 'caption',
+            'title': 'caption',
+            'description': 'Simple caption for under video',
+            'inputMethod': 'textfield',
+            'icon': 'av:video-label',
+            'required': false,
+            'validationType': 'text',
+          },
+          {
+            'property': 'responsive',
+            'title': 'Responsive',
+            'description': 'The video automatically fills the available area.',
+            'inputMethod': 'boolean',
+            'icon': 'image:photo-size-select-small',
+          },
+          {
+            'property': 'primaryColor',
+            'title': 'Primary color',
+            'description': 'Select the primary color used in the video',
+            'inputMethod': 'colorpicker',
+            'icon': 'editor:format-color-fill',
+          },
+          {
+            'property': 'secondaryColor',
+            'title': 'Secondary color',
+            'description': 'Select the secondary color used for the video',
+            'inputMethod': 'colorpicker',
+            'icon': 'editor:format-color-fill',
+          }
+        ],
+        'advanced': []
+      }
+    };
+    this.setHaxProperties(props);
+  },
 ```
-
-## Running Tests
-
-```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.

@@ -1,0 +1,14 @@
+{
+  "name": "lit-html",
+  "homepage": "https://github.com/Polymer/lit-html",
+  "version": "0.6.0",
+  "_release": "0.6.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.6.0",
+    "commit": "566118f84dfcd4db1cd2aac6198f19f2f5360e18"
+  },
+  "_source": "https://github.com/Polymer/lit-html.git",
+  "_target": "^0.6.0",
+  "_originalSource": "Polymer/lit-html"
+}

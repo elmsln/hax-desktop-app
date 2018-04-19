@@ -1,0 +1,143 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/lrnsys-outline/lrnsys-outline.html">
+<link rel="import" href="../../bower_components/map-menu/map-menu.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<dom-module id="hax-app-outline-ui">
+  <template>
+    <style>
+      :host {
+        display: flex;
+      }
+
+      #drawer {
+        width: 0em;
+        transition: all .3s ease-in-out;
+        display: flex;
+        overflow: hidden;
+        background-color: #f3f3f3;
+        padding: .5em;
+        @apply --hax-app-outline-ui-drawer;
+      }
+
+      :host[opened] #drawer {
+        width: 20em;
+      }
+
+      #content {
+        margin-left: 2em;
+        flex: 1 1 auto;
+        padding: 1em;
+      }
+    </style>
+
+
+    <div id="drawer">
+      <map-menu id="menu" opened selected="[[activePage]]"></map-menu>
+    </div>
+
+    <div id="content">
+      <div id="header">
+        <paper-icon-button disabled$="__menuTransitioning" id="menuTrigger" icon="menu"></paper-icon-button>
+      </div>
+      <lrnsys-outline id="outline"></lrnsys-outline>
+      <div id="slot">
+        <slot></slot>
+      </div>
+    </div>
+
+
+  </template>
+  <script>
+    Polymer({
+      is: 'hax-app-outline-ui',
+
+      properties: {
+        /** 
+         * The open state of the menu
+         */
+        opened: {
+          type: Boolean,
+          value: true,
+          reflectToAttribute: true
+        },
+        /** 
+         * The linear menu outline
+         */
+        outline: {
+          type: Array,
+          value: [],
+          observer: '__outlineChanged'
+        },
+        /** 
+         * Current active page
+         */
+        activePage: {
+          type: String,
+          value: '',
+        },
+        /** 
+         * The active state of menu animating
+         */
+        __menuTransitioning: {
+          type: Boolean,
+          value: false
+        },
+      },
+
+      observers: [
+        '__openedChanged(opened)'
+      ],
+
+      listeners: {
+        'menu.Tap': '__menuTap',
+        'menuTrigger.tap': '__menuTriggerTap'
+      },
+
+      /**
+       * Set or update the outline data.
+       */
+      setData: function (outline) {
+        this.outline = outline;
+      },
+
+      /**
+       * Set or update map menu and outline editor
+       */
+      __setData: function (outline) {
+        this.$.menu.setData(outline);
+        this.$.outline.setData(outline);
+      },
+
+      /**
+       * When the outline changes then update the data
+       * in both the map menu and the outline components
+       */
+      __outlineChanged: function (outline, old) {
+        this.__setData(outline);
+      },
+
+      /** 
+       * React to the opened state change.
+       */
+      __openedChanged: function (opened) {
+      },
+
+      /**
+       * Menu Trigger Tap
+       */
+      __menuTap: function (e) {
+        e.stopPropagation();
+      },
+
+      /**
+       * Menu Trigger Tap
+       */
+      __menuTriggerTap: function (e) {
+        this.opened = !this.opened;
+      },
+
+    });
+  </script>
+</dom-module>
