@@ -4,32 +4,49 @@ const url = require('url');
 const path = require('path');
 const Store = require('electron-store');
 const store = new Store();
+const windowStateKeeper = require('electron-window-state');
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
 const { getPage, savePage, parseOutline, getOutlinePage, createPage } = require('./util/page');
+
 // reload
 require('electron-reload')(__dirname);
 
 let mainWindow;
 
 app.on('ready', () => {
+  // Load the previous state with fallback to defaults
+  let mainWindowState = windowStateKeeper({
+    defaultWidth: 600,
+    defaultHeight: 800
+  });
   // create window
   mainWindow = new BrowserWindow({
-    width: 600,
-    height: 800
+    'x': mainWindowState.x,
+    'y': mainWindowState.y,
+    'width': mainWindowState.width,
+    'height': mainWindowState.height,
+    'show': false,
   });
+  // Let us register listeners on the window, so we can update the state
+  // automatically (the listeners will be removed when the window is closed)
+  // and restore the maximized or full screen state
+  mainWindowState.manage(mainWindow);
   // load html into window
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'app', 'main.html'),
     protocol: 'file:',
     slashes: true,
   }));
-  
+  // Show window when page is ready
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
+  });
+
   // Build main menu
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   // Insert the Menu into the app
   Menu.setApplicationMenu(mainMenu);
-  // Send out the config settings
-})
+});
 
 // Set the Main Menu
 const mainMenuTemplate = [
@@ -99,7 +116,7 @@ const globals = {
   getLocationList() {
     if (global.locationList) {
       return global.locationList;
-    } 
+    }
     else {
       return store.get('location-list');
     }
@@ -174,14 +191,14 @@ ipcMain.on('change-location', (e, location) => {
  */
 ipcMain.on('commit-to-git', (e) => {
   var exec = require('child_process').exec;
-  function execute(command, callback){
-      exec(command, function(error, stdout, stderr){ callback(stdout); });
+  function execute(command, callback) {
+    exec(command, function (error, stdout, stderr) { callback(stdout); });
   };
   const location = globals.getLocation();
   // call the function
-  execute('cd ' + location + '', function(output) {
-      console.log(output);
-      console.log('when we\'re ready:  && git add -A && git commit -m "updated pages" && git push origin master will actually work');
+  execute('cd ' + location + '', function (output) {
+    console.log(output);
+    console.log('when we\'re ready:  && git add -A && git commit -m "updated pages" && git push origin master will actually work');
   });
 })
 
