@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../hax-app-location-list/hax-app-location-list.html">
 
 <dom-module id="hax-app-homepage">
@@ -7,31 +9,80 @@
     <style>
       :host {
         display: block;
-      }
-
-      #location {
-        display: flex;
-      }
-
-      #location paper-input {
-        background: lightblue;
-        padding: .5em;
-        flex: 1 1 auto;
+        font-family: Roboto;
       }
 
       h2 {
         margin-top: 2em;
       }
-    </style>
-    <h1>Configuration</h1>
 
-    <div id="location">
-      <paper-button raised on-click="openProject">Open Project</paper-button>
-      [[location]]
+      #location {
+        margin-right: 14px;
+      }
+
+      #project_wrap {
+        background-color: #f5f7f9;
+        padding: 20px;
+      }
+
+      #menu_wrap {
+        display: flex;
+        background-color: #fff;
+        border-bottom: solid 2px #D3DCE4;
+      }
+
+      paper-icon-button {
+        width: 50px;
+        height: 50px;
+        color: #3884FF;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+
+      paper-icon-button#newbook {
+        width: 75px;
+        height: 75px;
+        color: #3884FF;
+      }
+
+      .newbook_btn {
+        position: absolute;
+        right: 0px;
+        bottom: 50px;
+      }
+
+      .app_title {
+        margin-left: 20px;
+      }
+
+      .recent_title {
+        text-transform: uppercase;
+        font-size: 20px;
+        color: grey;
+        margin-bottom: 15px;
+      }
+    </style>
+
+    <div id="menu_wrap">
+      <div class="app_title">
+        <h3>HAX Desktop Application</h3>
+      </div>
+      <div id="location">
+        <paper-icon-button id="openProject" icon="folder-open" on-click="openProject"></paper-icon-button>
+        <paper-tooltip for="openProject" position="bottom">Open Project</paper-tooltip>
+        [[location]]
+      </div>
     </div>
 
-    <h2>Recent Projects</h2>
-    <hax-app-location-list></hax-app-location-list>
+    <div id="project_wrap">
+      <div class="recent_title">Recent Projects</div>
+      <hax-app-location-list></hax-app-location-list>
+      <div class="newbook_btn">
+        <paper-icon-button id="newbook" icon="add-circle"></paper-icon-button>
+        <paper-tooltip for="newbook" position="left">New Project</paper-tooltip>
+      </div>
+    </div>
 
   </template>
 
