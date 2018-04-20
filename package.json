@@ -6,9 +6,9 @@
   "scripts": {
     "start": "electron .",
     "build": "bash build.sh",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds",
-    "package-win": "electron-packager . hax-desktop-app --overwrite --asar --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Hax-Desktop app\"",
-    "package-linux": "electron-packager . hax-desktop-app --overwrite --asar --platform=linux --arch=x64 --prune=true --out=release-builds"
+    "package-mac": "electron-packager . --overwrite --icon=assets/icons/mac/lrn_icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . hax-desktop-app --overwrite --asar --icon=assets/icons/win/lrn_icon.ico  --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Hax-Desktop app\"",
+    "package-linux": "electron-packager . hax-desktop-app --overwrite --asar --icon=assets/icons/lin/lrn_icon.png --prune=true --out=release-builds"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
