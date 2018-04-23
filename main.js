@@ -8,10 +8,6 @@ const store = new Store();
 const windowStateKeeper = require('electron-window-state');
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
 const { getPage, savePage, parseOutline, getOutlinePage, createPage } = require('./util/page');
-//ssconst notifyBtn = document.getElementById('notifyBtn'); //for new window -tom
-
-// reload
-require('electron-reload')(__dirname);
 
 let mainWindow;
 
