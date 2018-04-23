@@ -270,7 +270,6 @@ ipcMain.on('open-project-prompt', (e) => {
     location = _.first(locations);
     pathArray = location.split('/');
     title = pathArray[pathArray.length - 1];
-    console.log(location, pathArray, title);
     // set the location
     globals.setProject({
       title: title,
