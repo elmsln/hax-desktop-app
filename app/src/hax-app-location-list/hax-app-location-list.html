@@ -67,8 +67,8 @@
       <template is="dom-repeat" items="[[projects]]" as="item">
         <paper-card>
           <div class="course_image"></div>
-          <paper-icon-button id="more_btn" icon="more-horiz" on-click="openProject"></paper-icon-button>
-          <div class="list-item" data-location$="[[item.location]]" on-click="_selectLocation">
+          <paper-icon-button id="more_btn" icon="more-horiz"></paper-icon-button>
+          <div class="list-item" data-location$="[[item.location]]" on-click="__selectProject">
             <div class="title">[[item.title]]</div>
             <div class="location">[[item.location]]</div>
             <div class="last-edited">[[item.lastEdited]]</div>
@@ -82,12 +82,14 @@
   <script>
     Polymer({
       is: 'hax-app-location-list',
+
       properties: {
         projects: {
           type: Array,
           value: []
         }
       },
+
       ready: function () {
         ipcRenderer.send('get-projects');
         ipcRenderer.on('get-projects', (e, projects) => {
@@ -98,7 +100,14 @@
           this.set('projects', [])
           this.set('projects', projects)
         });
-      }
+      },
+
+      __selectProject: function (e) {
+        const target = e.target;
+        const dataLocation = target.getAttribute('data-location');
+        ipcRenderer.send('project-selected', dataLocation);
+      },
+
     });
   </script>
 </dom-module>

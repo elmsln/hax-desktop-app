@@ -98,8 +98,8 @@ const globals = {
    */
   Project: {
     title: null,
-    location: null, 
-    lastEdited: null
+    location: null,
+    lastEdited: null,
   },
 
   /**
@@ -148,7 +148,7 @@ const globals = {
       newProject = Object.assign({}, newProject, existingProject);
     }
     // update the last edit date
-    newProject =  Object.assign({}, newProject, {
+    newProject = Object.assign({}, newProject, {
       lastEdited: new Date()
     });
     // if we have an existing project then add it to the top of the list and remove
@@ -238,7 +238,15 @@ const globals = {
 ipcMain.on('get-projects', (e) => {
   const projects = globals.getProjects();
   mainWindow.webContents.send('get-projects', projects);
-})
+});
+
+ipcMain.on('project-selected', (e, projectLocation) => {
+  let win = new BrowserWindow({ width: 800, height: 600 })
+  win.on('closed', () => {
+    win = null
+  });
+  win.loadURL(`file://${projectLocation}`);
+});
 
 ipcMain.on('set-active-page', (e, page) => {
   globals.setActivePage(page);
