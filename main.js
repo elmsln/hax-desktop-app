@@ -73,10 +73,85 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
+
 /**
  * Access Global Properties
  */
 const globals = {
+
+  /**
+   * Project
+   * @type {object}
+   * @property {array} list - Listing of projects
+   * @method getProjects
+   * @method add
+   */
+  Projects: {
+    list: [{
+      title: "mike project",
+      location: "/usr/path",
+      lastEdited: 'Mon Apr 23 2018 13:22:34 GMT-0400 (EDT)'
+    }]
+  },
+  
+  /**
+   * Project
+   * @type {object}
+   * @property {string} title - Title of the project
+   * @property {string} location - Path of the project on the users computer
+   * @property {date} lastEdited - Last edit date of the
+   */
+  Project: {
+    title: null,
+    location: null, 
+    lastEdited: null
+  },
+
+  /**
+   * Return a single project
+   * @param {string} projectLocation
+   * @return {Project}
+   */
+  getProject(projectLocation) {
+    return this.Projects.list.find(p => p.location === projectLocation);
+  },
+  /**
+   * Get a list of all Projects
+   * @returns {Project[]}
+   */
+  getProjects() {
+    return this.Projects.list;
+  },
+  /**
+   * Add or update new project
+   * @param {Project} project 
+   * @return {Project}
+   */
+  setProject(project) {
+    // look for the existing project
+    let newProject = this.Project();
+    const existingProject = this.getProject(project.location) || null;
+    // if we have an existing project then merge that with new Project
+    if (existingProject) {
+      newProject = Object.assign({}, newProject, existingProject);
+    }
+    // update the last edit date
+    newProject =  Object.assign({}, newProject, {
+      lastEdited: new Date()
+    });
+    // if we have an existing project then add it to the top of the list and remove
+    // the old copy
+    if (existingProject) {
+      // get mutable instance of the Project List
+      const currentProjectList = [[this.Projects.list]];
+      const projectListExistingProjectRemoved = currentProjectList.filter(p => p.location !== existingProject.location);
+      const newProjectList = projectListExistingProjectRemoved;
+      this.Projects.list = newProjectList;
+    }
+    // add the newProject to the top of the list
+    this.Projects.list = [newProject, ...this.Projects.list];
+  },
+
   getActivePage() {
     return global.page;
   },
@@ -136,6 +211,11 @@ const globals = {
     mainWindow.webContents.send('location-list-changed', locations);
   }
 }
+
+ipcMain.on('get-projects', (e) => {
+  const projects = globals.getProjects();
+  mainWindow.webContents.send('get-projects', projects);
+})
 
 ipcMain.on('set-active-page', (e, page) => {
   globals.setActivePage(page);
@@ -199,5 +279,3 @@ ipcMain.on('commit-to-git', (e) => {
     console.log('when we\'re ready:  && git add -A && git commit -m "updated pages" && git push origin master will actually work');
   });
 })
-
-
