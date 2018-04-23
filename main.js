@@ -72,8 +72,10 @@ if (process.env.NODE_ENV !== 'production') {
       {
         role: 'reload'
       }
-    ]
-  });
+    ],
+    label: 'New Window',
+  },
+);
 }
 
 
