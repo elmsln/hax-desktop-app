@@ -72,13 +72,10 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-
-
 /**
  * Access Global Properties
  */
 const globals = {
-
   /**
    * Project
    * @type {object}
@@ -87,13 +84,9 @@ const globals = {
    * @method add
    */
   Projects: {
-    list: [{
-      title: "mike project",
-      location: "/usr/path",
-      lastEdited: 'Mon Apr 23 2018 13:22:34 GMT-0400 (EDT)'
-    }]
+    list: []
   },
-  
+
   /**
    * Project
    * @type {object}
@@ -113,14 +106,29 @@ const globals = {
    * @return {Project}
    */
   getProject(projectLocation) {
-    return this.Projects.list.find(p => p.location === projectLocation);
+    const currentProjectList = this.getProjects();
+    if (currentProjectList) {
+      const project = currentProjectList.find(p => {
+        return p.location === projectLocation
+      });
+      return project;
+    }
+    else {
+      return null;
+    }
   },
   /**
    * Get a list of all Projects
    * @returns {Project[]}
    */
   getProjects() {
-    return this.Projects.list;
+    const projects = store.get('projects') || {};
+    if (projects.list) {
+      return projects.list;
+    }
+    else {
+      return [];
+    }
   },
   /**
    * Add or update new project
@@ -128,8 +136,10 @@ const globals = {
    * @return {Project}
    */
   setProject(project) {
+    let newProject = Object.assign({}, this.Project, project);
+    // get mutable instance of the Project List
+    const currentProjectList = this.getProjects();
     // look for the existing project
-    let newProject = this.Project();
     const existingProject = this.getProject(project.location) || null;
     // if we have an existing project then merge that with new Project
     if (existingProject) {
@@ -142,14 +152,25 @@ const globals = {
     // if we have an existing project then add it to the top of the list and remove
     // the old copy
     if (existingProject) {
-      // get mutable instance of the Project List
-      const currentProjectList = [[this.Projects.list]];
       const projectListExistingProjectRemoved = currentProjectList.filter(p => p.location !== existingProject.location);
       const newProjectList = projectListExistingProjectRemoved;
-      this.Projects.list = newProjectList;
+      store.set('projects.list', newProjectList);
+      store.set('projects.list', [newProject, ...newProjectList]);
     }
-    // add the newProject to the top of the list
-    this.Projects.list = [newProject, ...this.Projects.list];
+    else {
+      store.set('projects.list', [newProject, ...currentProjectList]);
+    }
+    mainWindow.webContents.send('projects-updated', this.getProjects());
+  },
+  /**
+   * Remove project from Project list
+   * @param {string} projectLocation 
+   */
+  deleteProject(projectLocation) {
+    const currentProjectList = this.getProjects(projectLocation);
+    const newProjectList = currentProjectList.filter(p => p.location === projectLocation);
+    store.set('projects.list', [newProjectList]);
+    mainWindow.webContents.send('projects-updated', this.getProjects());
   },
 
   getActivePage() {
@@ -247,8 +268,14 @@ ipcMain.on('open-project-prompt', (e) => {
   const locations = dialog.showOpenDialog({ properties: ['openDirectory'] });
   if (_.isArray(locations)) {
     location = _.first(locations);
+    pathArray = location.split('/');
+    title = pathArray[pathArray.length - 1];
+    console.log(location, pathArray, title);
     // set the location
-    globals.setLocation(location);
+    globals.setProject({
+      title: title,
+      location: location
+    });
   }
 });
 

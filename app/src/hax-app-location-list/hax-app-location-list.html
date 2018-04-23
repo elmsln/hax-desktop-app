@@ -85,31 +85,16 @@
       properties: {
         projects: {
           type: Array,
-          value: [
-            {
-              title: 'Phys211',
-              lastEdited: '3 Months ago',
-              id: 'unique-id-0001',
-              location: '/users/mike/folder'
-            },
-            {
-              title: 'Phys211',
-              lastEdited: '3 Months ago',
-              id: 'unique-id-0001',
-              location: '/users/mike/folder'
-            },
-            {
-              title: 'Phys211',
-              lastEdited: '3 Months ago',
-              id: 'unique-id-0001',
-              location: '/users/mike/folder'
-            },
-          ]
+          value: []
         }
       },
       ready: function () {
         ipcRenderer.send('get-projects');
         ipcRenderer.on('get-projects', (e, projects) => {
+          this.set('projects', [])
+          this.set('projects', projects)
+        });
+        ipcRenderer.on('projects-updated', (e, projects) => {
           this.set('projects', [])
           this.set('projects', projects)
         });
