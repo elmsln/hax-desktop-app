@@ -8,10 +8,6 @@ const store = new Store();
 const windowStateKeeper = require('electron-window-state');
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
 const { getPage, savePage, parseOutline, getOutlinePage, createPage } = require('./util/page');
-//ssconst notifyBtn = document.getElementById('notifyBtn'); //for new window -tom
-
-// reload
-require('electron-reload')(__dirname);
 
 let mainWindow;
 
@@ -78,11 +74,107 @@ if (process.env.NODE_ENV !== 'production') {
 );
 }
 
-
 /**
  * Access Global Properties
  */
 const globals = {
+  /**
+   * Project
+   * @type {object}
+   * @property {array} list - Listing of projects
+   * @method getProjects
+   * @method add
+   */
+  Projects: {
+    list: []
+  },
+
+  /**
+   * Project
+   * @type {object}
+   * @property {string} title - Title of the project
+   * @property {string} location - Path of the project on the users computer
+   * @property {date} lastEdited - Last edit date of the
+   */
+  Project: {
+    title: null,
+    location: null, 
+    lastEdited: null
+  },
+
+  /**
+   * Return a single project
+   * @param {string} projectLocation
+   * @return {Project}
+   */
+  getProject(projectLocation) {
+    const currentProjectList = this.getProjects();
+    if (currentProjectList) {
+      const project = currentProjectList.find(p => {
+        return p.location === projectLocation
+      });
+      return project;
+    }
+    else {
+      return null;
+    }
+  },
+  /**
+   * Get a list of all Projects
+   * @returns {Project[]}
+   */
+  getProjects() {
+    const projects = store.get('projects') || {};
+    if (projects.list) {
+      return projects.list;
+    }
+    else {
+      return [];
+    }
+  },
+  /**
+   * Add or update new project
+   * @param {Project} project 
+   * @return {Project}
+   */
+  setProject(project) {
+    let newProject = Object.assign({}, this.Project, project);
+    // get mutable instance of the Project List
+    const currentProjectList = this.getProjects();
+    // look for the existing project
+    const existingProject = this.getProject(project.location) || null;
+    // if we have an existing project then merge that with new Project
+    if (existingProject) {
+      newProject = Object.assign({}, newProject, existingProject);
+    }
+    // update the last edit date
+    newProject =  Object.assign({}, newProject, {
+      lastEdited: new Date()
+    });
+    // if we have an existing project then add it to the top of the list and remove
+    // the old copy
+    if (existingProject) {
+      const projectListExistingProjectRemoved = currentProjectList.filter(p => p.location !== existingProject.location);
+      const newProjectList = projectListExistingProjectRemoved;
+      store.set('projects.list', newProjectList);
+      store.set('projects.list', [newProject, ...newProjectList]);
+    }
+    else {
+      store.set('projects.list', [newProject, ...currentProjectList]);
+    }
+    mainWindow.webContents.send('projects-updated', this.getProjects());
+  },
+  /**
+   * Remove project from Project list
+   * @param {string} projectLocation 
+   */
+  deleteProject(projectLocation) {
+    const currentProjectList = this.getProjects(projectLocation);
+    const newProjectList = currentProjectList.filter(p => p.location === projectLocation);
+    store.set('projects.list', [newProjectList]);
+    mainWindow.webContents.send('projects-updated', this.getProjects());
+  },
+
   getActivePage() {
     return global.page;
   },
@@ -143,6 +235,11 @@ const globals = {
   }
 }
 
+ipcMain.on('get-projects', (e) => {
+  const projects = globals.getProjects();
+  mainWindow.webContents.send('get-projects', projects);
+})
+
 ipcMain.on('set-active-page', (e, page) => {
   globals.setActivePage(page);
 });
@@ -173,8 +270,13 @@ ipcMain.on('open-project-prompt', (e) => {
   const locations = dialog.showOpenDialog({ properties: ['openDirectory'] });
   if (_.isArray(locations)) {
     location = _.first(locations);
+    pathArray = location.split('/');
+    title = pathArray[pathArray.length - 1];
     // set the location
-    globals.setLocation(location);
+    globals.setProject({
+      title: title,
+      location: location
+    });
   }
 });
 
@@ -205,5 +307,3 @@ ipcMain.on('commit-to-git', (e) => {
     console.log('when we\'re ready:  && git add -A && git commit -m "updated pages" && git push origin master will actually work');
   });
 })
-
-

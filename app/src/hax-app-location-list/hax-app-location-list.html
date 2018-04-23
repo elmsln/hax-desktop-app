@@ -64,7 +64,7 @@
     </style>
 
     <div id="locationMenu">
-      <template is="dom-repeat" items="[[locations]]" as="item">
+      <template is="dom-repeat" items="[[projects]]" as="item">
         <paper-card>
           <div class="course_image"></div>
           <paper-icon-button id="more_btn" icon="more-horiz" on-click="openProject"></paper-icon-button>
@@ -83,38 +83,20 @@
     Polymer({
       is: 'hax-app-location-list',
       properties: {
-        locations: {
+        projects: {
           type: Array,
-          value: [
-            {
-              title: 'Phys211',
-              lastEdited: '3 Months ago',
-              id: 'unique-id-0001',
-              location: '/users/mike/folder'
-            },
-            {
-              title: 'Phys211',
-              lastEdited: '3 Months ago',
-              id: 'unique-id-0001',
-              location: '/users/mike/folder'
-            },
-            {
-              title: 'Phys211',
-              lastEdited: '3 Months ago',
-              id: 'unique-id-0001',
-              location: '/users/mike/folder'
-            },
-          ]
+          value: []
         }
       },
-      _selectLocation: function (e) {
-        const localTarget = Polymer.dom(e).localTarget;
-        const location = localTarget.getAttribute('data-location');
-        // ipcRenderer.send('change-location', location);
-      },
       ready: function () {
-        ipcRenderer.on('location-list-changed', (e, locations) => {
-          // this.locations = locations;
+        ipcRenderer.send('get-projects');
+        ipcRenderer.on('get-projects', (e, projects) => {
+          this.set('projects', [])
+          this.set('projects', projects)
+        });
+        ipcRenderer.on('projects-updated', (e, projects) => {
+          this.set('projects', [])
+          this.set('projects', projects)
         });
       }
     });

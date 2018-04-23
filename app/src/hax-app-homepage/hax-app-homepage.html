@@ -47,9 +47,9 @@
       }
 
       .newbook_btn {
-        position: absolute;
+        position: fixed;
         right: 0px;
-        bottom: 50px;
+        bottom: 100px;
       }
 
       .app_title {
@@ -61,6 +61,10 @@
         font-size: 20px;
         color: grey;
         margin-bottom: 15px;
+      }
+
+      hax-app-location-list {
+        margin-bottom: 5em;
       }
     </style>
 
@@ -80,7 +84,7 @@
       <hax-app-location-list></hax-app-location-list>
       <div class="newbook_btn">
         <paper-icon-button id="newbook" icon="add-circle"></paper-icon-button>
-        <paper-tooltip for="newbook" position="left">New Project</paper-tooltip>
+        <paper-tooltip for="newbook" position="left">Create New Project</paper-tooltip>
       </div>
     </div>
 

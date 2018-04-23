@@ -28,8 +28,11 @@
     "case": "^1.5.4",
     "cheerio": "^1.0.0-rc.2",
     "electron-packager": "^12.0.1",
+<<<<<<< HEAD
     "electron-reload": "^1.2.2",
     "electron-reloader": "^0.2.0",
+=======
+>>>>>>> 59d6710383a28122fe7595534403c0911753e864
     "electron-store": "^1.3.0",
     "electron-window-state": "^4.1.1",
     "markdown": "^0.5.0",
