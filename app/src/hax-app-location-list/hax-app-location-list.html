@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
 
 
 <dom-module id="hax-app-location-list">
@@ -42,12 +43,12 @@
         color: #9DAAB6;
       }
 
-      .course_image {
+      iron-image {
+        display: block;
         width: 75px;
         height: 75px;
         float: left;
         margin-right: 15px;
-        background-color: gray;
       }
 
       @media screen and (max-width: 390px) {
@@ -66,7 +67,7 @@
     <div id="locationMenu">
       <template is="dom-repeat" items="[[projects]]" as="item">
         <paper-card>
-          <div class="course_image"></div>
+          <iron-image src="[[item.image]]" sizing="cover"></iron-image>
           <paper-icon-button id="more_btn" icon="more-horiz"></paper-icon-button>
           <div class="list-item" data-location$="[[item.location]]" on-click="__selectProject">
             <div class="title">[[item.title]]</div>
