@@ -1,7 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../../bower_components/iron-image/iron-image.html">
-
+<link rel="import" href="hax-app-location-list-item.html">
 
 <dom-module id="hax-app-location-list">
   <template>
@@ -9,72 +8,11 @@
       :host {
         display: block;
       }
-
-      h3 {
-        padding: 0;
-        margin: 0;
-      }
-
-      .title {
-        text-transform: uppercase;
-        font-size: 20px;
-        font-weight: bold;
-      }
-
-      #locationMenu {
-        width: 100%;
-      }
-
-      paper-card {
-        width: 100%;
-        margin-bottom: 20px;
-        padding: 20px;
-        border-radius: 3px;
-      }
-
-      paper-card:hover {
-        box-shadow: 0 3px 8px 0 darkgray;
-      }
-
-      paper-icon-button#more_btn {
-        position: absolute;
-        top: 5px;
-        right: 10px;
-        color: #9DAAB6;
-      }
-
-      iron-image {
-        display: block;
-        width: 75px;
-        height: 75px;
-        float: left;
-        margin-right: 15px;
-      }
-
-      @media screen and (max-width: 390px) {
-        .list-item {
-          clear: left;
-        }
-      }
-
-      @media screen and (max-width: 390px) {
-        .course_image {
-          margin-bottom: 10px;
-        }
-      }
     </style>
 
     <div id="locationMenu">
-      <template is="dom-repeat" items="[[projects]]" as="item">
-        <paper-card>
-          <iron-image src="[[item.image]]" sizing="cover"></iron-image>
-          <paper-icon-button id="more_btn" icon="more-horiz"></paper-icon-button>
-          <div class="list-item" data-location$="[[item.location]]" on-click="__selectProject">
-            <div class="title">[[item.title]]</div>
-            <div class="location">[[item.location]]</div>
-            <div class="last-edited">[[item.lastEdited]]</div>
-          </div>
-        </paper-card>
+      <template is="dom-repeat" items="[[projects]]" as="project">
+        <hax-app-location-list-item project="[[project]]"></hax-app-location-list-item>
       </template>
     </div>
   </template>
@@ -91,6 +29,10 @@
         }
       },
 
+      listeners: {
+        'project-selected': '__projectSelected'
+      },
+
       ready: function () {
         ipcRenderer.send('get-projects');
         ipcRenderer.on('get-projects', (e, projects) => {
@@ -103,10 +45,8 @@
         });
       },
 
-      __selectProject: function (e) {
-        const target = e.target;
-        const dataLocation = target.getAttribute('data-location');
-        ipcRenderer.send('project-selected', dataLocation);
+      __projectSelected: function (e, project) {
+        ipcRenderer.send('project-selected', project.location);
       },
 
     });

@@ -98,6 +98,7 @@ const globals = {
    */
   Project: {
     title: null,
+    outlineSchema: null,
     location: null,
     lastEdited: null,
   },
@@ -241,7 +242,8 @@ ipcMain.on('get-projects', (e) => {
 });
 
 ipcMain.on('project-selected', (e, projectLocation) => {
-  let win = new BrowserWindow({ width: 800, height: 600 })
+  const project = globals.getProject(projectLocation);
+  let win = new BrowserWindow({ title: project.title, width: 800, height: 600 })
   win.on('closed', () => {
     win = null
   });
