@@ -95,12 +95,14 @@ const globals = {
    * @property {string} title - Title of the project
    * @property {string} location - Path of the project on the users computer
    * @property {date} lastEdited - Last edit date of the
+   * @property {number} windowId - Id of the active window that is displaying the project
    */
   Project: {
     title: null,
     outlineSchema: null,
     location: null,
     lastEdited: null,
+    windowId: null
   },
 
   /**
@@ -113,6 +115,23 @@ const globals = {
     if (currentProjectList) {
       const project = currentProjectList.find(p => {
         return p.location === projectLocation
+      });
+      return project;
+    }
+    else {
+      return null;
+    }
+  },
+  /**
+   * Return a single project
+   * @param {string} projectLocation
+   * @return {Project}
+   */
+  getProjectByWindowId(windowId) {
+    const currentProjectList = this.getProjects();
+    if (currentProjectList) {
+      const project = currentProjectList.find(p => {
+        return p.windowId === windowId
       });
       return project;
     }
@@ -136,7 +155,7 @@ const globals = {
   /**
    * Add or update new project
    * @param {Project} project 
-   * @return {Project}
+   * @return {void}
    */
   setProject(project) {
     let newProject = Object.assign({}, this.Project, project);
@@ -252,11 +271,16 @@ ipcMain.on('project-selected', (e, projectLocation) => {
     protocol: 'file:',
     slashes: true,
   }));
+  // update the project to have an active window id
+  globals.setProject(Object.assign(project, {windowId: win.id}));
 });
 
-ipcMain.on('load-project', (e, project) => {
-  console.log('Load the project', project);
-});
+ipcMain.on('project-init', (e, args) => {
+  const windowId = args.windowId;
+  const win = BrowserWindow.fromId(windowId);
+  const project = globals.getProjectByWindowId(windowId);
+  win.webContents.send('project-init', project);
+})
 
 ipcMain.on('set-active-page', (e, page) => {
   globals.setActivePage(page);

@@ -12,8 +12,28 @@
     
   </template>
   <script>
+    const electron = require('electron');
+    const { ipcRenderer, remote } = electron;
+    const _ = require('underscore');
+
     Polymer({
-      is: 'hax-app-project'
+      is: 'hax-app-project',
+
+      properties: {
+        project: {
+          type: Object,
+          value: null
+        }
+      },
+
+      ready: function () {
+        const windowId = remote.getCurrentWindow().id;
+        // get the project
+        ipcRenderer.send('project-init', { windowId: windowId });
+        ipcRenderer.on('project-init', (e, project) => {
+          this.set('project', project);
+        });
+      }
     });
   </script>
 </dom-module>
