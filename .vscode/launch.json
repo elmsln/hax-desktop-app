@@ -10,7 +10,16 @@
       "windows": {
         "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
       },
-      "args" : ["."]
+      "args": [
+        "."
+      ]
+    },
+    {
+      "name": "Debug Demo",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://127.0.0.1:8081/demo/index.html",
+      "webRoot": "${workspaceFolder}/app"
     }
   ]
 }

@@ -4,6 +4,7 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
+    "debug-demo": "cd app && polymer serve",
     "start": "electron .",
     "build": "bash build.sh",
     "package-mac": "electron-packager . --overwrite --icon=assets/icons/mac/lrn_icon.icns --prune=true --out=release-builds",
