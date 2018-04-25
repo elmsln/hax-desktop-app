@@ -1,0 +1,109 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+<dom-module id="hax-app-project-ui">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      #header {
+        display: flex;
+        align-items: center;
+      }
+
+      h1 {
+        margin: 0;
+        text-align: center;
+      }
+
+      #header .center {
+        flex: 1 1 auto;
+        justify-self: center;
+      }
+
+      #header .left,
+      #header .right {
+        width: 5em;
+      }
+    </style>
+
+    <header id="header">
+      <div class="left">
+        <paper-icon-button id="back" icon="icons:arrow-back"></paper-icon-button>
+      </div>
+      <div class="center">
+        <h1>[[project.title]]</h1>
+      </div>
+      <div class="right">
+      </div>
+    </header>
+
+    <!-- if we have not outline then we need to present the user with some options -->
+    <paper-dialog id="modal" modal opened="[[__noOutline]]">
+      <h2>No Outline Found</h2>
+      <div class="buttons">
+        <paper-button id="findOutline">Find Outline</paper-button>
+        <paper-button id="generateOutline">Generate Outline</paper-button>
+      </div>
+    </paper-dialog>
+
+    <slot></slot>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'hax-app-project-ui',
+
+      properties: {
+        project: {
+          type: Object,
+          value: null
+        },
+        /**
+         * Internal state of the project not having
+         * an outline.
+         */
+        __noOutline: {
+          type: Boolean,
+          computed: '__computeNoOutline(project.outlineLocation)'
+        },
+      },
+
+      observers: [
+        '__projectChanged(project.*)'
+      ],
+
+      listeners: {
+        'findOutline.tap': '__findOutlineTapped',
+        'generateOutline.tap': '__generateOutlineTapped',
+        'back.tap': '__backTapped'
+      },
+
+      __projectChanged: function (property) {
+        const project = property.value;
+      },
+
+      __computeNoOutline: function (outlineLocation) {
+        return outlineLocation === null || outlineLocation === "";
+      },
+
+      __findOutlineTapped: function (e) {
+        this.fire('find-outline-init', this.project);
+      },
+
+      __generateOutlineTapped: function (e) {
+        this.fire('generate-outline-init', this.project);
+      },
+
+      __backTapped: function (e) {
+        this.fire('back');
+      },
+
+    });
+  </script>
+</dom-module>
