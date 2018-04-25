@@ -247,7 +247,15 @@ ipcMain.on('project-selected', (e, projectLocation) => {
   win.on('closed', () => {
     win = null
   });
-  win.loadURL(`file://${projectLocation}`);
+  win.loadURL(url.format({
+    pathname: path.join(__dirname, 'app', 'project.html'),
+    protocol: 'file:',
+    slashes: true,
+  }));
+});
+
+ipcMain.on('load-project', (e, project) => {
+  console.log('Load the project', project);
 });
 
 ipcMain.on('set-active-page', (e, page) => {
