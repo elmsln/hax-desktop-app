@@ -1,29 +1,27 @@
 {
-  "name": "electron-quick-start",
+  "name": "hax-desktop-app",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A desktop interface for using HAX.",
   "main": "main.js",
   "scripts": {
-    "debug-demo": "cd app && polymer serve",
     "start": "electron .",
     "build": "bash build.sh",
+    "debug-demo": "cd app && polymer serve",
+    "test": "mocha",
     "package-mac": "electron-packager . --overwrite --icon=assets/icons/mac/lrn_icon.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . hax-desktop-app --overwrite --asar --icon=assets/icons/win/lrn_icon.ico  --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Hax-Desktop app\"",
     "package-linux": "electron-packager . hax-desktop-app --overwrite --asar --icon=assets/icons/lin/lrn_icon.png --prune=true --out=release-builds"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/LRNWebComponents/hax-desktop-app",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "HAX"
   ],
-  "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
     "devtron": "^1.4.0",
-    "electron": "^1.8.4"
+    "electron": "^1.8.4",
+    "mocha": "^5.1.1"
   },
   "dependencies": {
     "case": "^1.5.4",
