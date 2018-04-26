@@ -146,7 +146,7 @@ const globals = {
     const existingProject = this.getProject(project.location) || null;
     // if we have an existing project then merge that with new Project
     if (existingProject) {
-      newProject = Object.assign({}, newProject, existingProject);
+      newProject = Object.assign({}, existingProject, newProject);
     }
     // update the last edit date
     newProject = Object.assign({}, newProject, {
@@ -163,7 +163,14 @@ const globals = {
     else {
       store.set('projects.list', [newProject, ...currentProjectList]);
     }
+    // update project list
     mainWindow.webContents.send('projects-updated', this.getProjects());
+    // update project window
+    const projectWindow = this.getWindowByProjectLocation(newProject.location);
+    if (projectWindow) {
+      const projectWindowInstance = BrowserWindow.fromId(projectWindow.id);
+      projectWindowInstance.webContents.send('project-updated', newProject);
+    }
   },
   /**
    * Remove project from Project list
@@ -175,7 +182,7 @@ const globals = {
     store.set('projects.list', [newProjectList]);
     mainWindow.webContents.send('projects-updated', this.getProjects());
   },
-  
+
   /**
    * Windows
    * @param {Window[]} list
@@ -224,7 +231,7 @@ const globals = {
   setWindow(window) {
     const currentWindowList = this.getWindows();
     // remove any window that is currently in the list
-    const newWindowList = currentWindowList.filter(w =>  w.id !== window.id && w.location !== window.location);
+    const newWindowList = currentWindowList.filter(w => w.id !== window.id && w.location !== window.location);
     newWindowList.push(window);
     this.Windows.list = newWindowList;
   },
@@ -261,7 +268,7 @@ const globals = {
     }
     return null;
   },
-  
+
   getActivePage() {
     return global.page;
   },
@@ -430,3 +437,11 @@ ipcMain.on('commit-to-git', (e) => {
     console.log('when we\'re ready:  && git add -A && git commit -m "updated pages" && git push origin master will actually work');
   });
 })
+
+ipcMain.on('update-project', (e, project) => {
+  globals.setProject(project);
+});
+
+ipcMain.on('project-back', (e, project) => {
+  mainWindow.focus();
+});

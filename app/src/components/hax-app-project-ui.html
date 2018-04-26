@@ -89,7 +89,7 @@
       },
 
       __computeNoOutline: function (outlineLocation) {
-        return outlineLocation === null || outlineLocation === "";
+        return outlineLocation === null || outlineLocation === "" || outlineLocation === undefined;
       },
 
       __findOutlineTapped: function (e) {
