@@ -71,7 +71,7 @@ if (process.env.NODE_ENV !== 'production') {
     ],
     label: 'New Window',
   },
-);
+  );
 }
 
 /**
@@ -82,8 +82,6 @@ const globals = {
    * Project
    * @type {object}
    * @property {array} list - Listing of projects
-   * @method getProjects
-   * @method add
    */
   Projects: {
     list: []
@@ -115,23 +113,6 @@ const globals = {
     if (currentProjectList) {
       const project = currentProjectList.find(p => {
         return p.location === projectLocation
-      });
-      return project;
-    }
-    else {
-      return null;
-    }
-  },
-  /**
-   * Return a single project
-   * @param {string} projectLocation
-   * @return {Project}
-   */
-  getProjectByWindowId(windowId) {
-    const currentProjectList = this.getProjects();
-    if (currentProjectList) {
-      const project = currentProjectList.find(p => {
-        return p.windowId === windowId
       });
       return project;
     }
@@ -194,7 +175,78 @@ const globals = {
     store.set('projects.list', [newProjectList]);
     mainWindow.webContents.send('projects-updated', this.getProjects());
   },
-
+  
+  /**
+   * Windows
+   * @param {Window[]} list
+   */
+  Windows: {
+    list: []
+  },
+  /**
+   * Window
+   * @param {number} id
+   * @param {string} location
+   */
+  Window: {
+    id: null,
+    location: null
+  },
+  /**
+   * Get the active instance of a window based on
+   * window id.
+   * @param {number} id - window id
+   * @return {Window}
+   */
+  getWindow(id) {
+    const windows = this.getWindows();
+    const window = windows.find(w => w.id === id);
+    return BrowserWindow.fromId(id);
+  },
+  /**
+   * Get a list of all Windows
+   * @returns {Window[]}
+   */
+  getWindows() {
+    const windows = this.Windows || {};
+    if (windows.list) {
+      return windows.list;
+    }
+    else {
+      return [];
+    }
+  },
+  /**
+   * Set Window
+   * @param {Window} window
+   * @return {void}
+   */
+  setWindow(window) {
+    const currentWindowList = this.getWindows();
+    // remove any window that is currently in the list
+    const newWindowList = currentWindowList.filter(w =>  w.id !== window.id && w.location !== window.location);
+    newWindowList.push(window);
+    this.Windows.list = newWindowList;
+  },
+  /**
+   * Return a single project
+   * @param {string} projectLocation
+   * @return {Project}
+   */
+  getProjectByWindowId(windowId) {
+    const currentWindowList = this.getWindows();
+    if (currentWindowList) {
+      const window = currentWindowList.find(w => {
+        return w.id === windowId
+      });
+      if (window) {
+        const project = this.getProject(window.location);
+        return project;
+      }
+    }
+    return null;
+  },
+  
   getActivePage() {
     return global.page;
   },
@@ -271,8 +323,11 @@ ipcMain.on('project-selected', (e, projectLocation) => {
     protocol: 'file:',
     slashes: true,
   }));
-  // update the project to have an active window id
-  globals.setProject(Object.assign(project, {windowId: win.id}));
+  const window = {
+    id: win.id,
+    location: projectLocation
+  };
+  globals.setWindow(window);
 });
 
 ipcMain.on('project-init', (e, args) => {
