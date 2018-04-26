@@ -236,6 +236,17 @@ const globals = {
     this.Windows.list = newWindowList;
   },
   /**
+   * Delete Window
+   * @param {Window} window 
+   */
+  deleteWindow(window) {
+    const currentWindowList = this.getWindows();
+    console.log(currentWindowList);
+    // remove any window that is currently in the list
+    const newWindowList = currentWindowList.filter(w => w.id !== window.id);
+    this.Windows.list = newWindowList;
+  },
+  /**
    * Return a single project
    * @param {string} projectLocation
    * @return {Project}
@@ -355,6 +366,11 @@ ipcMain.on('project-selected', (e, projectLocation) => {
       protocol: 'file:',
       slashes: true,
     }));
+    win.on('close', e => {
+      const windowId = e.sender.id;
+      const window = Object.assign(globals.Window, {id: windowId});
+      globals.deleteWindow(window);
+    });
     const window = {
       id: win.id,
       location: projectLocation
