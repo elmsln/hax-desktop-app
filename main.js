@@ -246,6 +246,21 @@ const globals = {
     }
     return null;
   },
+  /**
+   * Return a Window object by passing a project location
+   * @param {string} location
+   * @return {Window}
+   */
+  getWindowByProjectLocation(location) {
+    const windows = this.getWindows();
+    if (windows) {
+      const window = windows.find(w => w.location === location);
+      if (window) {
+        return window;
+      }
+    }
+    return null;
+  },
   
   getActivePage() {
     return global.page;
@@ -312,22 +327,33 @@ ipcMain.on('get-projects', (e) => {
   mainWindow.webContents.send('get-projects', projects);
 });
 
+/**
+ * Project is selected, this will set it up in a new window
+ * or activate the window in which it has already been initiated.
+ */
 ipcMain.on('project-selected', (e, projectLocation) => {
   const project = globals.getProject(projectLocation);
-  let win = new BrowserWindow({ title: project.title, width: 800, height: 600 })
-  win.on('closed', () => {
-    win = null
-  });
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'app', 'project.html'),
-    protocol: 'file:',
-    slashes: true,
-  }));
-  const window = {
-    id: win.id,
-    location: projectLocation
-  };
-  globals.setWindow(window);
+  const window = globals.getWindowByProjectLocation(projectLocation);
+  if (window) {
+    const existingWindow = BrowserWindow.fromId(window.id);
+    existingWindow.focus();
+  }
+  else {
+    let win = new BrowserWindow({ title: project.title, width: 800, height: 600 })
+    win.on('closed', () => {
+      win = null
+    });
+    win.loadURL(url.format({
+      pathname: path.join(__dirname, 'app', 'project.html'),
+      protocol: 'file:',
+      slashes: true,
+    }));
+    const window = {
+      id: win.id,
+      location: projectLocation
+    };
+    globals.setWindow(window);
+  }
 });
 
 ipcMain.on('project-init', (e, args) => {
