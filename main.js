@@ -9,6 +9,7 @@ const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electr
 const { getPage, savePage, parseOutline, getOutlinePage, createPage } = require('./util/page');
 const mainWindowCreate = require('./util/mainWindow');
 const generateOutlineFile = require('./util/generateOutlineFile');
+const importFromGitbook = require('./util/importFromGitbook')
 
 let mainWindow;
 
@@ -463,3 +464,16 @@ ipcMain.on('project-generate-outline-init', async (e, project) => {
     console.log(error)
   }
 });
+
+ipcMain.on('project-import-from-gitbook-init', async (e, project) => {
+  try {
+    // attempt to save outline
+    const outline = await importFromGitbook(project.location);
+    // if it saved then we will update the project outline location
+    project = globals.getProject(project.location);
+    outlineLocation = `${project.location}/outline.json`;
+    globals.setProject(Object.assign(project, {outlineLocation, outlineLocation}))
+  } catch (error) {
+    console.log(error)
+  }
+})

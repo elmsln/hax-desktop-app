@@ -78,6 +78,7 @@
       <div class="buttons">
         <paper-button id="findOutline">Find Outline</paper-button>
         <paper-button id="generateOutline">Create Outline</paper-button>
+        <paper-button id="importFromGitbook">Import From Gitbook</paper-button>
       </div>
     </paper-dialog>
 
@@ -111,6 +112,7 @@
       listeners: {
         'findOutline.tap': '__findOutlineTapped',
         'generateOutline.tap': '__generateOutlineTapped',
+        'importFromGitbook.tap': '__importFromGitbookTapped',
         'back.tap': '__backTapped'
       },
 
@@ -128,6 +130,10 @@
 
       __generateOutlineTapped: function (e) {
         this.fire('generate-outline-init', this.project);
+      },
+
+      __importFromGitbookTapped: function (e) {
+        this.fire('import-from-gitbook-init', this.project);
       },
 
       __backTapped: function (e) {

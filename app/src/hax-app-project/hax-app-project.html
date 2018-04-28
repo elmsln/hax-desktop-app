@@ -64,6 +64,11 @@
           ipcRenderer.send('project-generate-outline-init', this.project);
         });
 
+        this.addEventListener('import-from-gitbook-init', (e) => {
+          console.log(e)
+          ipcRenderer.send('project-import-from-gitbook-init', this.project);
+        });
+
         this.addEventListener('back', (e) => {
           ipcRenderer.send('project-back');
         });
