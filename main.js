@@ -5,47 +5,24 @@ const path = require('path');
 //const BrowserWindow = electron.remote.BrowserWindow; //for new window -tom
 const Store = require('electron-store');
 const store = new Store();
-const windowStateKeeper = require('electron-window-state');
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
 const { getPage, savePage, parseOutline, getOutlinePage, createPage } = require('./util/page');
+const mainWindowCreate = require('./util/mainWindow');
 const generateOutlineFile = require('./util/generateOutlineFile');
 
 let mainWindow;
 
 app.on('ready', () => {
-  // Load the previous state with fallback to defaults
-  let mainWindowState = windowStateKeeper({
-    defaultWidth: 600,
-    defaultHeight: 800
-  });
-  // create window
-  mainWindow = new BrowserWindow({
-    'x': mainWindowState.x,
-    'y': mainWindowState.y,
-    'width': mainWindowState.width,
-    'height': mainWindowState.height,
-    'show': false,
-  });
-  // Let us register listeners on the window, so we can update the state
-  // automatically (the listeners will be removed when the window is closed)
-  // and restore the maximized or full screen state
-  mainWindowState.manage(mainWindow);
-  // load html into window
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'app', 'main.html'),
-    protocol: 'file:',
-    slashes: true,
-  }));
-  // Show window when page is ready
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.show()
-  });
-
+  mainWindow = mainWindowCreate();
   // Build main menu
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   // Insert the Menu into the app
   Menu.setApplicationMenu(mainMenu);
-});
+})
+
+app.on("window-all-closed", function() {
+  app.quit();
+})
 
 // Set the Main Menu
 const mainMenuTemplate = [
@@ -458,8 +435,16 @@ ipcMain.on('update-project', (e, project) => {
   globals.setProject(project);
 });
 
+/**
+ * When you hit the back button in the project
+ * then bring up the main window.
+ */
 ipcMain.on('project-back', (e, project) => {
-  mainWindow.focus();
+  try {
+    mainWindow.focus();
+  } catch (error) {
+    mainWindow = mainWindowCreate();
+  }
 });
 
 /**
