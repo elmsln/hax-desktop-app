@@ -11,30 +11,56 @@
         display: block;
       }
 
-      #header {
-        display: flex;
-        align-items: center;
+      .info_icon {
+        background-color: #3884FF;
+        position: relative;
+        top: -24px;
+        color: #fff;
+        padding: 5px;
       }
 
-      h1 {
-        margin: 0;
-        text-align: center;
+      paper-button {
+        background-color: #3884FF;
+        color: #fff;
       }
 
-      #header .center {
-        flex: 1 1 auto;
-        justify-self: center;
+      .buttons {
+        margin: 15px 0 5px;
       }
 
-      #header .left,
-      #header .right {
-        width: 5em;
+      iron-icon#info {
+        position: relative;
+        left: 240px;
+        height: 30px;
+        width: 30px;
       }
+
+        #header {
+          display: flex;
+          align-items: center;
+          border-bottom: solid 2px #D3DCE4;
+          padding: 5px 0;
+        }
+
+        h1 {
+          margin: 0;
+          text-align: center;
+        }
+
+        #header .center {
+          flex: 1 1 auto;
+          justify-self: center;
+        }
+
+        #header .left,
+        #header .right {
+          width: 5em;
+        }
     </style>
 
     <header id="header">
       <div class="left">
-        <paper-icon-button id="back" icon="icons:arrow-back"></paper-icon-button>
+        <paper-icon-button id="back" icon="icons:arrow-back" noink></paper-icon-button>
       </div>
       <div class="center">
         <h1>[[project.title]]</h1>
@@ -43,14 +69,18 @@
       </div>
     </header>
 
-    <!-- if we have not outline then we need to present the user with some options -->
+    <!-- if we have no outline then we need to present the user with some options -->
     <paper-dialog id="modal" modal opened="[[__noOutline]]">
+        <div class="info_icon">
+                <iron-icon id="info" icon="info"></iron-icon>
+        </div>
       <h2>No Outline Found</h2>
       <div class="buttons">
         <paper-button id="findOutline">Find Outline</paper-button>
-        <paper-button id="generateOutline">Generate Outline</paper-button>
+        <paper-button id="generateOutline">Create Outline</paper-button>
       </div>
     </paper-dialog>
+
 
     <slot></slot>
 

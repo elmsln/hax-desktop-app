@@ -15,6 +15,7 @@
         width: 0em;
         transition: all .3s ease-in-out;
         display: flex;
+        flex-direction: column;
         overflow: hidden;
         background-color: #f3f3f3;
         padding: .5em;
@@ -35,13 +36,13 @@
 
     <div id="drawer">
       <map-menu id="menu" opened selected="[[activePage]]"></map-menu>
+      <lrnsys-outline id="outline"></lrnsys-outline>
     </div>
 
     <div id="content">
       <div id="header">
         <paper-icon-button disabled$="__menuTransitioning" id="menuTrigger" icon="menu"></paper-icon-button>
       </div>
-      <lrnsys-outline id="outline"></lrnsys-outline>
       <div id="slot">
         <slot></slot>
       </div>
