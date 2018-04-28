@@ -8,6 +8,7 @@ const store = new Store();
 const windowStateKeeper = require('electron-window-state');
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
 const { getPage, savePage, parseOutline, getOutlinePage, createPage } = require('./util/page');
+const generateOutlineFile = require('./util/generateOutlineFile');
 
 let mainWindow;
 
@@ -97,7 +98,6 @@ const globals = {
    */
   Project: {
     title: null,
-    outlineSchema: null,
     location: null,
     lastEdited: null,
     windowId: null
@@ -460,4 +460,21 @@ ipcMain.on('update-project', (e, project) => {
 
 ipcMain.on('project-back', (e, project) => {
   mainWindow.focus();
+});
+
+/**
+ * @param {Event} e
+ * @param {Project} project
+ */
+ipcMain.on('project-generate-outline-init', async (e, project) => {
+  project = globals.getProject(project.location)
+  // define new outline location
+  const outlineLocation = path.join(project.location, 'outline.json')
+  // generate the new outline
+  try {
+    const outlineGenerated = await generateOutlineFile(outlineLocation)
+    globals.setProject(Object.assign(project, { outlineLocation: outlineLocation }))
+  } catch (error) {
+    console.log(error)
+  }
 });

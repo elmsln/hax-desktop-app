@@ -31,6 +31,7 @@
     "electron-window-state": "^4.1.1",
     "markdown": "^0.5.0",
     "marked": "^0.3.7",
+    "rimraf": "^2.6.2",
     "rxjs": "^5.5.5",
     "showdown": "^1.8.6",
     "turndown": "^4.0.1",

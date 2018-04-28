@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../hax-app-outline/hax-app-outline.html">
 <link rel="import" href="../components/hax-app-project-ui.html">
 
 <dom-module id="hax-app-project">
@@ -9,7 +10,9 @@
       }
     </style>
 
-    <hax-app-project-ui project="[[project]]"></hax-app-project-ui>
+    <hax-app-project-ui project="[[project]]">
+      <hax-app-outline project="[[project]]"></hax-app-outline>
+    </hax-app-project-ui>
 
   </template>
   <script>
@@ -59,8 +62,6 @@
 
         this.addEventListener('generate-outline-init', (e) => {
           ipcRenderer.send('project-generate-outline-init', this.project);
-          let project = e.detail;
-          console.log(`Generate event triggered for this project:`, e);
         });
 
         this.addEventListener('back', (e) => {
