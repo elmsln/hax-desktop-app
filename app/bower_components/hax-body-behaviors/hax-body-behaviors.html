@@ -270,10 +270,10 @@ with the hax-body element which manages elements.
         }
         // fire event so we know they have been set for the store to collect
         // only fire if we haven't already so multiple elements don't keep bubbling
-        if (tag !== '' && typeof Polymer.HaxStore !== typeof undefined && typeof Polymer.HaxStore.instance !== typeof undefined && typeof Polymer.HaxStore.instance.elementList[tag.toLowerCase()] === typeof undefined) {
+        if (tag !== '' && typeof Polymer.HaxStore !== typeof undefined && typeof Polymer.HaxStore.instance !== typeof undefined && Polymer.HaxStore.instance != null && typeof Polymer.HaxStore.instance.elementList !== typeof undefined && typeof Polymer.HaxStore.instance.elementList[tag.toLowerCase()] === typeof undefined) {
           this.fire('hax-register-properties', {'tag': tag.toLowerCase(), 'properties': props});
         }
-        else if (typeof Polymer.HaxStore !== typeof undefined && typeof Polymer.HaxStore.instance !== typeof undefined && typeof Polymer.HaxStore.instance.elementList[this.tagName.toLowerCase()] === typeof undefined) {
+        else if (typeof Polymer.HaxStore !== typeof undefined && typeof Polymer.HaxStore.instance !== typeof undefined && Polymer.HaxStore.instance != null && typeof Polymer.HaxStore.instance.elementList !== typeof undefined  && typeof Polymer.HaxStore.instance.elementList[this.tagName.toLowerCase()] === typeof undefined) {
           this.fire('hax-register-properties', {'tag': this.tagName.toLowerCase(), 'properties': props});
         }
         // only set these when tag hasn't been force fed
@@ -366,28 +366,37 @@ with the hax-body element which manages elements.
         'type': 'object',
         'properties': {}
       };
+      schema.properties = this._getHaxJSONSchemaProperty(settings, target);
+      return schema;
+    },
+    /**
+     * Internal helper for getHaxJSONSchema to buiild the properties object
+     * correctly with support for recursive nesting thx to objects / arrays.
+     */
+    _getHaxJSONSchemaProperty: function(settings, target) {
+      var props = {};
       for (var value in settings) {
         if (settings.hasOwnProperty(value)) {
           if (typeof settings[value].property !== typeof undefined) {
-            schema.properties[settings[value].property] = {
+            props[settings[value].property] = {
               'title': settings[value].title,
               'type': target.getHaxJSONSchemaType(settings[value].inputMethod)
             };
             if (typeof target[settings[value].property] !== typeof undefined) {
-              schema.properties[settings[value].property].value = target[settings[value].property];
+              props[settings[value].property].value = target[settings[value].property];
             }
             if (settings[value].validationType == 'url') {
-              schema.properties[settings[value].property].format = 'uri';
+              props[settings[value].property].format = 'uri';
             }
             if (settings[value].inputMethod == 'datepicker') {
-              schema.properties[settings[value].property].format = 'date-time';
+              props[settings[value].property].format = 'date-time';
             }
             if (settings[value].validation != '.*') {
-              schema.properties[settings[value].property].pattern = settings[value].validation;
+              props[settings[value].property].pattern = settings[value].validation;
             }
             switch (settings[value].inputMethod) {
               case 'number':
-                schema.properties[settings[value].property].component = {
+                props[settings[value].property].component = {
                   'name': 'paper-input',
                   'valueProperty': 'selected',
                   'properties': {
@@ -402,7 +411,7 @@ with the hax-body element which manages elements.
                     slot += '<paper-item value="' + val + '">' + settings[value].options[val] + '</paper-item>' + '\n';
                   }
                 }
-                schema.properties[settings[value].property].component = {
+                props[settings[value].property].component = {
                   'name': 'dropdown-select',
                   'valueProperty': 'value',
                   'slot': slot,
@@ -412,16 +421,19 @@ with the hax-body element which manages elements.
                 };
               break;
               case 'textarea':
-                schema.properties[settings[value].property].component = {
+                props[settings[value].property].component = {
                   'name': 'paper-textarea',
                   'valueProperty': 'value',
                   'properties': {
                     'required': settings[value].required
+                  },
+                  'attributes': {
+                    'auto-validate': 'auto-validate'
                   }
                 };
               break;
               case 'code-editor':
-                schema.properties[settings[value].property].component = {
+                props[settings[value].property].component = {
                   'name': 'code-editor',
                   'valueProperty': 'editorValue',
                   'attributes': {
@@ -437,17 +449,27 @@ with the hax-body element which manages elements.
                   }
                 };
               break;
+              case 'array':
+                props[settings[value].property].items = {
+                  "type": "object",
+                  "properties": this._getHaxJSONSchemaProperty(settings[value].properties, target)
+                }
+              break;
               case 'textfield':
-                schema.properties[settings[value].property].component = {
+                props[settings[value].property].component = {
                   'name': 'paper-input',
                   'valueProperty': 'value',
                   'properties': {
                     'required': settings[value].required
+                  },
+                  'attributes': {
+                    'auto-validate': 'auto-validate'
                   }
                 };
+                console.log(props[settings[value].property]);
               break;
               case 'colorpicker':
-                schema.properties[settings[value].property].component = {
+                props[settings[value].property].component = {
                   'name': 'paper-swatch-picker',
                   'valueProperty': 'color',
                   'properties': {
@@ -455,39 +477,49 @@ with the hax-body element which manages elements.
                   }
                 };
               break;
+              case 'datepicker':
+                props[settings[value].property].component = {
+                  'name': 'app-datepicker',
+                  'valueProperty': 'date',
+                  'properties': {
+                    'required': settings[value].required,
+                    'autoUpdateDate': true,
+                  }
+                };
+              break;
             }
           }
           else if (target.hasAttribute(settings[value].attribute) || ['id', 'class', 'style', 'property', 'prefix', 'typeof', 'resource'].includes(settings[value].attribute)) {
-            schema.properties[settings[value].attribute] = {
+            props[settings[value].attribute] = {
               'title': settings[value].title,
               'type': target.getHaxJSONSchemaType(settings[value].inputMethod)
             };
             // special support for className
             if (settings[value].attribute === 'class') {
-              schema.properties[settings[value].attribute].value = target.className;
+              props[settings[value].attribute].value = target.className;
             }
             else if (settings[value].attribute === 'style') {
-              schema.properties[settings[value].attribute].value = target.style.cssText;
+              props[settings[value].attribute].value = target.style.cssText;
             }
             else if (typeof target.attributes[settings[value].attribute] !== typeof undefined) {
-              schema.properties[settings[value].attribute].value = target.getAttribute(settings[value].attribute);
+              props[settings[value].attribute].value = target.getAttribute(settings[value].attribute);
             }
             // special validation on uri based attributes
             if (value == 'href' || value == 'src') {
-              schema.properties[settings[value].attribute].format = 'uri';
+              props[settings[value].attribute].format = 'uri';
             }
             if (settings[value].validationType == 'url') {
-              schema.properties[settings[value].attribute].format = 'uri';
+              props[settings[value].attribute].format = 'uri';
             }
             if (settings[value].inputMethod == 'datepicker') {
-              schema.properties[settings[value].attribute].format = 'date-time';
+              props[settings[value].attribute].format = 'date-time';
             }
             if (settings[value].validation != '.*') {
-              schema.properties[settings[value].attribute].pattern = settings[value].validation;
+              props[settings[value].attribute].pattern = settings[value].validation;
             }
             switch (settings[value].inputMethod) {
               case 'number':
-                schema.properties[settings[value].attribute].component = {
+                props[settings[value].attribute].component = {
                   'name': 'paper-input',
                   'valueProperty': 'selected',
                   'properties': {
@@ -502,7 +534,7 @@ with the hax-body element which manages elements.
                     slot += '<paper-item value="' + val + '">' + settings[value].options[val] + '</paper-item>' + '\n';
                   }
                 }
-                schema.properties[settings[value].attribute].component = {
+                props[settings[value].attribute].component = {
                   'name': 'dropdown-select',
                   'valueProperty': 'value',
                   'slot': slot,
@@ -512,7 +544,7 @@ with the hax-body element which manages elements.
                 };
               break;
               case 'textarea':
-                schema.properties[settings[value].attribute].component = {
+                props[settings[value].attribute].component = {
                   'name': 'paper-textarea',
                   'valueProperty': 'value',
                   'properties': {
@@ -521,7 +553,7 @@ with the hax-body element which manages elements.
                 };
               break;
               case 'code-editor':
-                schema.properties[settings[value].attribute].component = {
+                props[settings[value].attribute].component = {
                   'name': 'code-editor',
                   'valueProperty': 'editorValue',
                   'attributes': {
@@ -538,7 +570,7 @@ with the hax-body element which manages elements.
                 };
               break;
               case 'textfield':
-                schema.properties[settings[value].attribute].component = {
+                props[settings[value].attribute].component = {
                   'name': 'paper-input',
                   'valueProperty': 'value',
                   'properties': {
@@ -547,7 +579,7 @@ with the hax-body element which manages elements.
                 };
               break;
               case 'colorpicker':
-                schema.properties[settings[value].attribute].component = {
+                props[settings[value].attribute].component = {
                   'name': 'paper-swatch-picker',
                   'valueProperty': 'color',
                   'properties': {
@@ -559,7 +591,7 @@ with the hax-body element which manages elements.
           }
           else {
             // @todo slot should support other editor types... maybe
-            schema.properties[settings[value].slot] = {
+            props[settings[value].slot] = {
               'title': settings[value].title,
               'type': target.getHaxJSONSchemaType(settings[value].inputMethod),
               'value': '',
@@ -592,11 +624,11 @@ with the hax-body element which manages elements.
                 }
               }
             }
-            schema.properties[settings[value].slot].component.slot = '<template>' + slot + '</template>';
+            props[settings[value].slot].component.slot = '<template>' + slot + '</template>';
           }
         }
       }
-      return schema;
+      return props;
     },
     /**
      * Convert input method to schedma type
@@ -619,6 +651,9 @@ with the hax-body element which manages elements.
           case 'textfield':
             return 'string';
           break;
+          case 'array':
+            return 'array';
+          break;
           default:
             return 'string';
           break;
@@ -629,7 +664,7 @@ with the hax-body element which manages elements.
      * List valid input methods.
      */
     validHAXPropertyInputMethod: function() {
-      var methods = ['flipboolean', 'boolean', 'select', 'textfield', 'textarea', 'datepicker', 'colorpicker', 'number', 'code-editor'];
+      var methods = ['flipboolean', 'boolean', 'select', 'textfield', 'textarea', 'datepicker', 'colorpicker', 'number', 'code-editor', 'array'];
       return methods;
     },
     /**

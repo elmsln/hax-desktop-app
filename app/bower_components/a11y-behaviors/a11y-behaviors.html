@@ -1,15 +1,14 @@
-<!--
-`a11y-behaviors`
- A behavior for mixing-in a11y functions and capabilities.
-
-@microcopy - the mental model for this element
- - a11y - short hand for accessibility
-
--->
 <script>
   // ensure A11yBehaviors exists
   window.A11yBehaviors = window.A11yBehaviors || {};
-
+  /**
+   * `A11yBehaviors.A11y` provides some helper functions to improve accessibility
+   * of elements. It has a color contrast detector which can be used to indicate
+   * if the background color is such that we need to change the text to light or
+   * dark. It also has a helper for setting a property relative to this change.
+   *
+   * @polymerBehavior A11yBehaviors.A11y
+   **/
   window.A11yBehaviors.A11y = {
     /**
      * Get a a11y safe text color based on background color

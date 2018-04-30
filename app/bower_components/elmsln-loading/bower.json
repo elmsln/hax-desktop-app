@@ -5,9 +5,8 @@
   "dependencies": {
     "polymer": "Polymer/Polymer#^2.3.1",
     "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.1.0",
-    "paper-spinner": "PolymerElements/paper-spinner#^1.2.1",
-    "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.4",
-    "lrn-icons": "LRNWebComponents/lrn-icons#^1.3.0"
+    "lrn-icons": "LRNWebComponents/lrn-icons#^1.3.0",
+    "iron-icon": "PolymerElements/iron-icon#^2.1.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

@@ -1,4 +1,4 @@
-<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/paper-avatar/paper-avatar.html">
 
 <dom-module id="hax-app-location-list-item">
   <template>
@@ -40,10 +40,7 @@
         color: #9DAAB6;
       }
 
-      iron-image {
-        display: block;
-        width: 75px;
-        height: 75px;
+      paper-avatar {
         float: left;
         margin-right: 15px;
       }
@@ -62,7 +59,7 @@
     </style>
 
     <paper-card>
-      <iron-image src="[[project.image]]" sizing="cover"></iron-image>
+      <paper-avatar label="test" color="#1565c0 blue darken-3"></paper-avatar>
       <paper-icon-button id="more_btn" icon="more-horiz"></paper-icon-button>
       <div class="list-item" on-click="__projectSelected">
         <div class="title">[[project.title]]</div>
