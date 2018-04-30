@@ -12,7 +12,7 @@ module.exports = (location) => {
           const outlineJSON = JSON.parse(outline);
           const length = outlineJSON.length;
           if (length >= 0) {
-            resolve(outline);
+            resolve(outlineJSON);
           }
           else {
             reject(Error('Invalid outline.'));

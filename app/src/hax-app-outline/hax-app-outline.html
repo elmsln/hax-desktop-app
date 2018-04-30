@@ -36,7 +36,7 @@
       
     </style>
     
-    <hax-app-outline-ui id="ui" outline="[[outline]]" active-page="[[activePge]]">
+    <hax-app-outline-ui id="ui" outline="[[__outline]]" active-page="[[activePge]]">
       <slot></slot>
     </hax-app-outline-ui>
     
@@ -45,7 +45,10 @@
     Polymer({ 
       is: 'hax-app-outline',
       properties: {
-        outline: {
+        project: {
+          type: Object,
+        },
+        __outline: {
           type: Array,
           value: [],
         },
@@ -63,32 +66,24 @@
         },
       },
 
-      ready: function () {
-        this.addPageTarget = this.$.pageName;
-        // get the current outline
-        ipcRenderer.on('outline-changed', (e, outline) => {
-          this.outline = outline;
-        });
-        // get the current active page
-        ipcRenderer.on('active-page-changed', (e, activePage) => {
-          this.activePage = activePage;
-        });
+      observers: [
+        '__projectChanged(project)'
+      ],
 
-        // capture all clicks and look for href to set the active page
-        this.addEventListener('click', (e) => {
-          // find out if the target has a data-href
-          const href = e.target.getAttribute('data-href');
-          if (href) {
-            ipcRenderer.send('set-active-page', href);
+      __projectChanged: function (project) {
+        if (project) {
+          if (project.outlineLocation) {
+            ipcRenderer.send('outline-init', this.project);
           }
-        });
+        }
       },
 
-      handleCreatePage: function(){
-        ipcRenderer.send('create-page', { fileName: pageName, content: ""});
-        ipcRenderer.send('update-summary', { fileName: pageName});
-        ipcRenderer.send('commit-to-git', {});
-      }
+      ready: function () {
+        ipcRenderer.on('outline-updated', (e, outline) => {
+          this.set('__outline', []);
+          this.set('__outline', outline);
+        });
+      },
 
     });
   </script>

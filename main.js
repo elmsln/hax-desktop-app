@@ -9,9 +9,14 @@ const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electr
 const { getPage, savePage, parseOutline, getOutlinePage, createPage } = require('./util/page');
 const mainWindowCreate = require('./util/mainWindow');
 const generateOutlineFile = require('./util/generateOutlineFile');
+const getOutline = require('./util/getOutline');
 const importFromGitbook = require('./util/importFromGitbook')
+const graphqlServer = require('./server');
 
 let mainWindow;
+
+// GraphQL Server
+// graphqlServer.start(() => console.log('Server is running on localhost:4000'))
 
 app.on('ready', () => {
   mainWindow = mainWindowCreate();
@@ -71,12 +76,14 @@ const globals = {
    * @type {object}
    * @property {string} title - Title of the project
    * @property {string} location - Path of the project on the users computer
+   * @property {string} outlineLocation - Location of the outline location
    * @property {date} lastEdited - Last edit date of the
    * @property {number} windowId - Id of the active window that is displaying the project
    */
   Project: {
     title: null,
     location: null,
+    outlineLocation: null,
     lastEdited: null,
     windowId: null
   },
@@ -258,6 +265,78 @@ const globals = {
     return null;
   },
 
+  /**
+   * Outlines
+   * 
+   * @param {Outline[]} list
+   */
+  Outlines: {
+    list: []
+  },
+  /**
+   * Outline
+   * 
+   * @param {Project.location} projectLocation
+   * @param {array} tree
+   */
+  Outline: {
+    projectLocation: null,
+    tree: []
+  },
+  /**
+   * Get Outline
+   * @param {Project} project
+   */
+  async getOutline(project) {
+    const outline = await getOutline(project.outlineLocation);
+    return outline;
+  },
+  /**
+   * Get Outlines
+   */
+  getOutlines() {
+    const outlines = this.Outlines || {};
+    if (outlines.list) {
+      return outlines.list;
+    }
+    else {
+      return [];
+    }
+  },
+  /**
+   * Create or update the Outline
+   * @param {Outline} outline 
+   */
+  setOutline(outline) {
+    const outlineList = this.getOutlines();
+    // remove any window that is currently in the list
+    const newOutlineList = outlineList.filter(o => o.outlineLocation !== outline.projectLocation);
+    newOutlineList.push(outline);
+    this.Outline.list = newOutlineList;
+    this.outlineUpdated(outline.projectLocation);
+  },
+  /**
+   * Delete Outline
+   * @param {Project.location} projectLocation 
+   */
+  deleteOutline(projectLocation) {
+    const outlineList = this.getOutlines();
+    // remove any window that is currently in the list
+    const newOutlineList = outlineList.filter(o => o.outlineLocation !== outline.projectLocation);
+    this.Outline.list = newOutlineList;
+    this.outlineUpdated(outline.projectLocation);
+  },
+  /**
+   * Notify everyone that need to know that the outline has been updated
+   * @param {Project.location} projectLocation 
+   */
+  outlineUpdated(projectLocation) {
+    const windowID = this.getWindowByProjectLocation(projectLocation);
+    const window = BrowserWindow.fromId(windowID);
+    const outline = this.getOutline(projectLocation);
+    window.webContents.send('outline-updated', outline);
+  },
+
   getActivePage() {
     return global.page;
   },
@@ -269,53 +348,6 @@ const globals = {
     const content = getPage(page);
     mainWindow.webContents.send('active-content-changed', content);
   },
-
-  getOutline() {
-    return global.outline;
-  },
-  setOutline(outline) {
-    global.outline = outline;
-    mainWindow.webContents.send('outline-changed', outline);
-  },
-
-  getLocation() {
-    return global.location;
-  },
-  setLocation(location) {
-    global.location = location;
-    mainWindow.webContents.send('location-changed', location);
-    // get new outline
-    const outline = parseOutline();
-    // store the outline
-    globals.setOutline(outline);
-    // store the location in the location list
-    globals.addToLocationList(location);
-  },
-
-  getLocationList() {
-    if (global.locationList) {
-      return global.locationList;
-    }
-    else {
-      return store.get('location-list');
-    }
-  },
-  addToLocationList(location) {
-    let newLocationList = [];
-    const locationList = store.get('location-list') ? store.get('location-list') : [];
-    // if the location already exists add remove it from the list 
-    if (locationList.includes(location)) {
-      newLocationList = locationList.filter(l => l !== location);
-    }
-    // add the location to the top of the list
-    newLocationList.push(location);
-    globals.setLocationList(newLocationList);
-  },
-  setLocationList(locations) {
-    global.locationList = locations;
-    store.set('location-list', locations);
-    mainWindow.webContents.send('location-list-changed', locations);
-  }
 }
 
 ipcMain.on('get-projects', (e) => {
@@ -364,31 +396,6 @@ ipcMain.on('project-init', (e, args) => {
   win.webContents.send('project-init', project);
 })
 
-ipcMain.on('set-active-page', (e, page) => {
-  globals.setActivePage(page);
-});
-
-ipcMain.on('save-page', (e, content) => {
-  const activePage = globals.getActivePage();
-  const saved = savePage(activePage, content);
-  mainWindow.webContents.send('save-page-success');
-});
-
-ipcMain.on('create-page', (e, pageInfo) => {
-  const fileName = pageInfo.fileName;
-  const content = pageInfo.content;
-  const updated = createPage(fileName, content);
-  mainWindow.webContents.send('create-page-success');
-});
-
-//wIp 
-ipcMain.on('update-summary', (e, pageInfo) => {
-  // const pageTite = pageInfo.fileName;
-  // const activePage = global.getActivePage();
-  // const updated = addToSumm(pageTite, activePage);
-  // mainWindow.webContents.send('update-summary-success');
-});
-
 ipcMain.on('open-project-prompt', (e) => {
   let location = '';
   const locations = dialog.showOpenDialog({ properties: ['openDirectory'] });
@@ -403,16 +410,6 @@ ipcMain.on('open-project-prompt', (e) => {
     });
   }
 });
-
-ipcMain.on('app-initialized', (e, arg) => {
-  // Initialize locations
-  const locationList = globals.getLocationList();
-  globals.setLocationList(locationList);
-});
-
-ipcMain.on('change-location', (e, location) => {
-  globals.setLocation(location);
-})
 
 /**
  * Commit to git by accessing the current folder
@@ -432,6 +429,14 @@ ipcMain.on('commit-to-git', (e) => {
   });
 })
 
+
+/**
+ * Project Events Section
+ */
+
+ /**
+  * Update the given project
+  */
 ipcMain.on('update-project', (e, project) => {
   globals.setProject(project);
 });
@@ -465,6 +470,9 @@ ipcMain.on('project-generate-outline-init', async (e, project) => {
   }
 });
 
+/**
+ * Import the project from gitbook file.
+ */
 ipcMain.on('project-import-from-gitbook-init', async (e, project) => {
   try {
     // attempt to save outline
@@ -477,3 +485,15 @@ ipcMain.on('project-import-from-gitbook-init', async (e, project) => {
     console.log(error)
   }
 })
+
+/**
+ * Outline
+ */
+ipcMain.on('outline-init', async (e, project) => {
+  if (project) {
+    if (project.outlineLocation) {
+      const outline = await globals.getOutline(project);
+      e.sender.webContents.send('outline-updated', outline);
+    }
+  }
+});
