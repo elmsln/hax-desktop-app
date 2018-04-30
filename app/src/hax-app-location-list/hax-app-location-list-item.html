@@ -43,6 +43,10 @@
       paper-avatar {
         float: left;
         margin-right: 15px;
+        margin-bottom: 5px;
+        width: 75px;
+        height: 75px;
+        background-color: #3884FF;
       }
 
       @media screen and (max-width: 390px) {
@@ -59,7 +63,7 @@
     </style>
 
     <paper-card>
-      <paper-avatar label="test" color="#1565c0 blue darken-3"></paper-avatar>
+      <paper-avatar label="[[project.title]]"></paper-avatar>
       <paper-icon-button id="more_btn" icon="more-horiz"></paper-icon-button>
       <div class="list-item" on-click="__projectSelected">
         <div class="title">[[project.title]]</div>
