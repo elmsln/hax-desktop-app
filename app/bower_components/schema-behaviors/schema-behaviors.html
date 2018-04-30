@@ -1,15 +1,15 @@
-<!--
-`schema-behaviors`
-A behavior for mixing-in schema and common schema operations.
-
-@microcopy - the mental model for this element
- - schema - metadata model to provide machine wiring to webcomponents.
-
--->
 <script>
   // ensure SchemaBehaviors exists
   window.SchemaBehaviors = window.SchemaBehaviors || {};
-
+  /**
+   * `SchemaBehaviors.Schema` makes it easier to wire custom elements for
+   * schematic metadata by allowing prefixes to be defined in an object
+   * structure. This makes it easier to add and remove them then working
+   * against the attribute directly. It also helps with generating
+   * resource IDs automatically if they don't already exist on the element.
+   *
+   * @polymerBehavior SchemaBehaviors.Schema
+   **/
   window.SchemaBehaviors.Schema = {
     properties: {
       /**

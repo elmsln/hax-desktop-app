@@ -11,15 +11,15 @@
     "web-component-tester": "^4.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
-  "homepage": "https://github.com/LRNWebComponents/schema-behaviors",
-  "version": "0.1.0",
-  "_release": "0.1.0",
+  "homepage": "https://github.com/LRNWebcomponents/schema-behaviors",
+  "version": "0.2.0",
+  "_release": "0.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.0",
-    "commit": "24d7a553e5ce2b3a40064c086069cd2a92a9da47"
+    "tag": "0.2.0",
+    "commit": "33513d350e53612cd7a47d1e796d6107d9872201"
   },
-  "_source": "https://github.com/LRNWebComponents/schema-behaviors.git",
-  "_target": "^0.1.0",
-  "_originalSource": "LRNWebComponents/schema-behaviors"
+  "_source": "https://github.com/LRNWebcomponents/schema-behaviors.git",
+  "_target": "^0.2.0",
+  "_originalSource": "LRNWebcomponents/schema-behaviors"
 }

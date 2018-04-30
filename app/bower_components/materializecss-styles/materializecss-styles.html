@@ -16,7 +16,14 @@ Some styling helpers from the materializecss project
 <script>
   // ensure HAXBehaviors exists globally before acting on them
   window.MaterializeCSSBehaviors = window.MaterializeCSSBehaviors || {};
-  // create a behavior for elements that have a 'hax' edit state connotation
+  /**
+   * `MaterializeCSSBehaviors.ColorBehaviors` some basic but annoying transforms to go
+   * from a color code to the materializeCSS color name or the reverse, to go from
+   * a css class name back to a color value. These are especially useful when needing
+   * to modify one color code relative to the class value of a parent / related tag.
+   *
+   * @polymerBehavior MaterializeCSSBehaviors.ColorBehaviors
+   **/
   window.MaterializeCSSBehaviors.ColorBehaviors = {
     /**
      * Get the Materialize color classes mapping based on defined parts

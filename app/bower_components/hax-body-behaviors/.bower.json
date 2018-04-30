@@ -12,12 +12,12 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebcomponents/hax-body-behaviors",
-  "version": "1.10.1",
-  "_release": "1.10.1",
+  "version": "1.11.3",
+  "_release": "1.11.3",
   "_resolution": {
     "type": "version",
-    "tag": "1.10.1",
-    "commit": "c404a71db02df78900ab497805c9af61b56a519e"
+    "tag": "1.11.3",
+    "commit": "9b9403500324e29f5cf474bb54ae396324c40230"
   },
   "_source": "https://github.com/LRNWebcomponents/hax-body-behaviors.git",
   "_target": "^1.10.0",

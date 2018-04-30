@@ -1,6 +1,6 @@
 {
   "name": "eco-json-schema-form",
-  "version": "1.0.0-lrn8",
+  "version": "1.0.0-lrn10",
   "authors": [
     "Eric Coutu <eric.coutu@gmail.com>"
   ],
@@ -34,7 +34,9 @@
     "iron-pages": "PolymerElements/iron-pages#^1.0.8",
     "iron-validator-behavior": "PolymerElements/iron-validator-behavior#^1.0.1",
     "geo-location": "^1.0.6",
-    "google-map": "GoogleWebComponents/google-map#^1.1.13"
+    "google-map": "GoogleWebComponents/google-map#^1.1.13",
+    "paper-tooltip": "PolymerElements/paper-tooltip#^2.1.1",
+    "paper-collapse-item": "Collaborne/paper-collapse-item#^2.3.0"
   },
   "devDependencies": {
     "ace-builds": "^1.2.5",
@@ -44,13 +46,13 @@
     "paper-styles": "^1.1.5",
     "web-component-tester": "^4.3.5"
   },
-  "_release": "1.0.0-lrn8",
+  "_release": "1.0.0-lrn10",
   "_resolution": {
     "type": "version",
-    "tag": "v1.0.0-lrn8",
-    "commit": "38b97d47c5f54e6ce4e2526b2adccfee33000ba8"
+    "tag": "v1.0.0-lrn10",
+    "commit": "27f27542ad19a73ffcb91b43f7f498314dd16539"
   },
   "_source": "https://github.com/LRNWebComponents/eco-json-schema-form.git",
-  "_target": "1.0.0-lrn8",
+  "_target": "v1.0.0-lrn10",
   "_originalSource": "LRNWebComponents/eco-json-schema-form"
 }

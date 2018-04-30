@@ -17,13 +17,32 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        background-color: #f3f3f3;
-        padding: .5em;
+        padding: 1px;
+        background-color: #f5f7f9;
         @apply --hax-app-outline-ui-drawer;
+      }
+
+      .drawer_wrap {
+        padding: 10px;
       }
 
       :host[opened] #drawer {
         width: 20em;
+      }
+
+      paper-icon-button#menuTrigger {
+        top: -15px;
+        right: 40px;
+        height: 50px;
+        width: 50px;
+      }
+
+      paper-icon-button#editBtn {
+        float: right;
+      }
+
+      .outline_menu {
+        background-color: #fff;
       }
 
       #content {
@@ -35,8 +54,13 @@
 
 
     <div id="drawer">
-      <map-menu id="menu" opened selected="[[activePage]]"></map-menu>
-      <lrnsys-outline id="outline"></lrnsys-outline>
+      <div class="outline_menu">
+        <paper-icon-button id="editBtn" icon="icons:create"></paper-icon-button>
+      </div>
+      <div class="drawer_wrap">
+        <map-menu id="menu" opened selected="[[activePage]]"></map-menu>
+        <lrnsys-outline id="outline"></lrnsys-outline>
+      </div>
     </div>
 
     <div id="content">
@@ -93,7 +117,8 @@
 
       listeners: {
         'menu.Tap': '__menuTap',
-        'menuTrigger.tap': '__menuTriggerTap'
+        'menuTrigger.tap': '__menuTriggerTap',
+        'editBtn.tap': '__editBtnTap',
       },
 
       /**
@@ -138,6 +163,10 @@
       __menuTriggerTap: function (e) {
         this.opened = !this.opened;
       },
+
+      // __editBtnTap: function (e) {
+      //   this.
+      // },
 
     });
   </script>
