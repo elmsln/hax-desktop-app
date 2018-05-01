@@ -1,4 +1,5 @@
-<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../hax-body-behaviors/hax-body-behaviors.html">
 
 <dom-module id="meme-maker">
   <template>
@@ -37,12 +38,11 @@
         font-family: "Impact", "Arial Black", "sans serif";
         line-height: 1.2;
 
-        font-size: 20px;
-        font-size: [[fontSize]];
+        font-size: 36px;
 
         color: white;
         text-shadow:
-          -1px -1px 0 #000,  
+          -1px -1px 0 #000,
           1px -1px 0 #000,
           -1px 1px 0 #000,
           1px 1px 0 #000;
@@ -56,48 +56,123 @@
 
         .top-text,
         .bottom-text {
-          font-size: calc([[fontSize]] - ([[fontSize]] / 4));
+          font-size: 20px;
         }
 
       }
     </style>
-    
     <figure>
-      <img src="[[imageUrl]]" alt="">
+      <img src="[[imageUrl]]" alt="[[alt]]">
       <figcaption class="top-text">[[topText]]</figcaption>
       <figcaption class="bottom-text">[[bottomText]]</figcaption>
     </figure>
   </template>
-
   <script>
-    /**
-     * `meme-maker`
-     * 
-     *
-     * @customElement
-     * @polymer
-     * @demo demo/index.html
-     */
-    class MemeMaker extends Polymer.Element {
-      static get is() { return 'meme-maker'; }
-      static get properties() {
-        return {
-          imageUrl: {
-            type: String
+    Polymer({
+      is: 'meme-maker',
+      behaviors: [
+        HAXBehaviors.PropertiesBehaviors,
+      ],
+      properties: {
+        /**
+         * Alt data passed down to appropriate tag
+         */
+        alt: {
+          type: String,
+        },
+        /**
+         * url to the meme image
+         */
+        imageUrl: {
+          type: String,
+        },
+        /**
+         * Text on top of the image.
+         */
+        topText: {
+          type: String,
+        },
+        /**
+         * Bottom text for the image.
+         */
+        bottomText: {
+          type: String,
+        },
+      },
+      /**
+       * Attached to the DOM, now fire.
+       */
+      attached: function() {
+        // Establish hax property binding
+        let props = {
+          'canScale': true,
+          'canPosition': true,
+          'canEditSource': false,
+          'gizmo': {
+            'title': 'Meme',
+            'description': 'Make a meme out of an image',
+            'icon': 'editor:title',
+            'color': 'orange',
+            'groups': ['Content', 'Text', 'Meme', 'Funny'],
+            'handles': [
+              {
+                'type': 'image',
+                'source': 'imageUrl',
+                'title': 'topText',
+                'author': 'bottomText',
+                'alt': 'alt',
+              }
+            ],
+            'meta': {
+              'author': 'LRNWebComponents'
+            }
           },
-          topText: {
-            type: String
-          },
-          bottomText: {
-            type: String
-          },
-          fontSize: {
-            type: String
+          'settings': {
+            'quick': [
+              {
+                'property': 'topText',
+                'title': 'Top text',
+                'description': 'Top text of the meme.',
+                'inputMethod': 'textfield',
+                'icon': 'editor:title',
+              },
+              {
+                'property': 'bottomText',
+                'title': 'Bottom text',
+                'description': 'The date this was accessed.',
+                'inputMethod': 'textfield',
+                'icon': 'editor:title',
+              },
+            ],
+            'configure': [
+              {
+                'property': 'imageUrl',
+                'title': 'Source',
+                'description': 'The source url for the element this is citing.',
+                'inputMethod': 'textfield',
+                'icon': 'link',
+              },
+              {
+                'property': 'topText',
+                'title': 'Top text',
+                'description': 'Top text of the meme.',
+                'inputMethod': 'textfield',
+                'icon': 'editor:title',
+              },
+              {
+                'property': 'bottomText',
+                'title': 'Bottom text',
+                'description': 'The date this was accessed.',
+                'inputMethod': 'textfield',
+                'icon': 'editor:title',
+              },
+            ],
+            'advanced': [
+            ]
           }
         };
-      }
-    }
-
-    window.customElements.define(MemeMaker.is, MemeMaker);
+        this.setHaxProperties(props);
+      },
+    });
   </script>
 </dom-module>

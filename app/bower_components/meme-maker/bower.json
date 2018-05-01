@@ -2,19 +2,18 @@
   "name": "meme-maker",
   "main": "meme-maker.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.0"
+    "polymer": "Polymer/polymer#^1.11.0",
+    "hax-body-behaviors": "LRNWebcomponents/hax-body-behaviors#^1.4.0"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   },
-  "resolutions": {
-    "polymer": "^2.0.0"
-  },
   "license": "MIT",
   "author": [
-    "Ire Aderinokun <iaderinokun@gmail.com>"
+    "Ire Aderinokun <iaderinokun@gmail.com>",
+    "Bryan Ollendyke <btopro@gmail.com>"
   ],
   "keywords": [
     "web-components",
@@ -23,6 +22,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/ireade/meme-maker"
+    "url": "git://github.com/btopro/meme-maker"
   }
 }

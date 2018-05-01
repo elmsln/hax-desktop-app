@@ -15,7 +15,7 @@
     "multiple-choice": "LRNWebComponents/multiple-choice#^0.3.0",
     "wave-player": "LRNWebComponents/wave-player#^1.0.1",
     "lrn-table": "LRNWebComponents/lrn-table#^0.5.1",
-    "meme-maker": "LRNWebComponents/meme-maker#^1.0.0",
+    "meme-maker": "LRNWebComponents/meme-maker#1.0.0-lrn1",
     "lrn-math": "LRNWebComponents/lrn-math#^1.0.0",
     "aframe-player": "LRNWebComponents/aframe-player#^0.0.1",
     "paper-audio-player": "LRNWebComponents/paper-audio-player#^1.1.1",
