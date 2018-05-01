@@ -11,6 +11,7 @@ const mainWindowCreate = require('./util/mainWindow');
 const generateOutlineFile = require('./util/generateOutlineFile');
 const getOutline = require('./util/getOutline');
 const importFromGitbook = require('./util/importFromGitbook')
+const updateOutlineFiles = require('./util/updateOutlineFiles')
 // const graphqlServer = require('./server');
 
 let mainWindow;
@@ -324,8 +325,9 @@ const globals = {
    * @param {Outline} outline 
    */
   setOutline(outline) {
+    // get the current list
     const outlineList = this.getOutlines();
-    // remove any window that is currently in the list
+    // remove any outline that is currently in the list
     let newOutlineList = outlineList.filter(o => o.outlineLocation !== outline.projectLocation);
     newOutlineList.push(outline);
     this.Outlines.list = newOutlineList;
@@ -363,6 +365,21 @@ const globals = {
       const newEditState = !currentEditState
       const newOutline = Object.assign(outline, { editing: newEditState })
       this.setOutline(newOutline)
+    }
+  },
+  /**
+   * Updates the outline tree and runs diffing on the outline
+   * then updates the files on the file system.
+   * 
+   * @param {Outline} outline 
+   */
+  updateOutlineTree(outline) {
+    // get the current outline
+    const oldOutline = this.getOutline(outline.projectLocation)
+    const newOutline = Object.assign(oldOutline, outline)
+    if (oldOutline) {
+      // update the outline tree files on the file system
+      const treeUpdated = updateOutlineFiles(newOutline, oldOutline)
     }
   },
 
@@ -532,4 +549,8 @@ ipcMain.on('outline-edit-toggle', (e, project) => {
       globals.toggleOutlineEdit(project.location)
     }
   }
+})
+
+ipcMain.on('update-outline-tree', (e, outline) => {
+  globals.updateOutlineTree(outline)
 })

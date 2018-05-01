@@ -97,7 +97,7 @@
       },
 
       __saveOutline: function (e, outlineTree) {
-        const newOutline = Object.assign(this.__outline, { tree, outlineTree });
+        const newOutline = Object.assign(this.__outline, { tree: outlineTree });
         ipcRenderer.send('update-outline-tree', newOutline);
       },
 
