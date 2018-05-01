@@ -16,7 +16,7 @@
     "paper-swatch-picker": "PolymerElements/paper-swatch-picker#^2.0.1",
     "paper-slider": "PolymerElements/paper-slider#^2.0.4",
     "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.1",
-    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.11.3",
+    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.11.4",
     "paper-toggle-button": "PolymerElements/paper-toggle-button#^2.0.0",
     "vaadin-split-layout": "vaadin/vaadin-split-layout#^1.1.0",
     "elmsln-loading": "LRNWebComponents/elmsln-loading#^1.0.0",
@@ -111,15 +111,15 @@
     "paper-toast": "^2.0.0"
   },
   "homepage": "https://github.com/LRNWebComponents/hax-body",
-  "version": "0.12.1",
-  "_release": "0.12.1",
+  "version": "0.12.2",
+  "_release": "0.12.2",
   "_resolution": {
     "type": "version",
-    "tag": "0.12.1",
-    "commit": "2e3d1f6a7078bbdf9fc417f25411618412c00d59"
+    "tag": "0.12.2",
+    "commit": "6cf7aa71ed516002a0c200bda3ab8f59c75b3872"
   },
   "_source": "https://github.com/LRNWebComponents/hax-body.git",
-  "_target": "^0.12.1",
+  "_target": "^0.12.2",
   "_originalSource": "LRNWebComponents/hax-body",
   "_direct": true
 }
