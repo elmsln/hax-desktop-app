@@ -55,7 +55,9 @@
 
     <div id="drawer">
       <div class="outline_menu">
-        <paper-icon-button id="editBtn" icon="icons:create"></paper-icon-button>
+        <paper-icon-button hidden$="[[editing]]" id="editBtn" icon="icons:create"></paper-icon-button>
+        <paper-icon-button hidden$="[[!editing]]" id="saveBtn" icon="icons:save"></paper-icon-button>
+        <paper-icon-button hidden$="[[!editing]]" id="cancelBtn" icon="icons:cancel"></paper-icon-button>
       </div>
       <div class="drawer_wrap">
         <map-menu hidden$="[[editing]]" id="menu" opened selected="[[activePage]]"></map-menu>
@@ -123,6 +125,8 @@
         'menu.Tap': '__menuTap',
         'menuTrigger.tap': '__menuTriggerTap',
         'editBtn.tap': '__editBtnTap',
+        'saveBtn.tap': '__saveBtnTap',
+        'cancelBtn.tap': '__cancelBtnTap',
       },
 
       /**
@@ -172,6 +176,22 @@
 
       __editBtnTap: function (e) {
         this.fire('edit-toggle');
+      },
+
+      /** 
+       * Save the outline
+       */
+      __saveBtnTap: function (e) {
+        const newOutline = this.$.outline.getData();
+        this.fire('save-outline', newOutline);
+      },
+
+      /** 
+       * Cancel the outline editing and
+       * return to it's default state
+       */
+      __cancelBtnTap: function (e) {
+        this.fire('cancel-outline');
       },
 
     });

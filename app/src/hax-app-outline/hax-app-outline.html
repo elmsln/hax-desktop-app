@@ -36,7 +36,7 @@
       
     </style>
     
-    <hax-app-outline-ui id="ui" outline="[[__outline]]" editing="[[__editing]]" active-page="[[activePge]]">
+    <hax-app-outline-ui id="ui" outline="[[__outline.tree]]" editing="[[__outline.editing]]" active-page="[[activePge]]">
       <slot></slot>
     </hax-app-outline-ui>
     
@@ -48,13 +48,9 @@
         project: {
           type: Object,
         },
-        __editing: {
-          type: Boolean,
-          value: false,
-        },
         __outline: {
-          type: Array,
-          value: [],
+          type: Object,
+          value: {}
         },
         addPageTarget:{
           type: Object,
@@ -71,11 +67,13 @@
       },
 
       observers: [
-        '__projectChanged(project)'
+        '__projectChanged(project)',
       ],
 
       listeners: {
-        'ui.edit-toggle': '__editOutlineToggle'
+        'ui.edit-toggle': '__editOutlineToggle',
+        'ui.save-outline': '__saveOutline',
+        'ui.cancel-outline': '__cancelOutline',
       },
 
       __projectChanged: function (project) {
@@ -88,19 +86,22 @@
 
       ready: function () {
         ipcRenderer.on('outline-updated', (e, outline) => {
-          console.log(outline)
-          if (typeof outline.editing !== 'undefined') {
-            this.set('__editing', outline.editing);
-          }
-          if (outline.tree) {
-            this.set('__outline', []);
-            this.set('__outline', outline.tree);
-          }
+          this.set('__outline', outline);
+          this.notifyPath('outline.tree');
+          this.notifyPath('outline.editing');
         });
       },
 
       __editOutlineToggle: function (e) {
         ipcRenderer.send('outline-edit-toggle', this.project);
+      },
+
+      __saveOutline: function (e, outlineTree) {
+        const newOutline = Object.assign(this.__outline, { tree, outlineTree });
+        ipcRenderer.send('update-outline-tree', newOutline);
+      },
+
+      __cancelOutline: function (e) {
       },
 
     });
