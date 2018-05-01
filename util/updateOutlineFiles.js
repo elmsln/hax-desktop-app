@@ -1,6 +1,5 @@
 const fs = require('diff')
 const path = require('path')
-var changesets = require('diff-json')
 
 /**
  * Takes a path
