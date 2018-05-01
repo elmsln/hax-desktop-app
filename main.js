@@ -11,7 +11,7 @@ const mainWindowCreate = require('./util/mainWindow');
 const generateOutlineFile = require('./util/generateOutlineFile');
 const getOutline = require('./util/getOutline');
 const importFromGitbook = require('./util/importFromGitbook')
-const graphqlServer = require('./server');
+// const graphqlServer = require('./server');
 
 let mainWindow;
 

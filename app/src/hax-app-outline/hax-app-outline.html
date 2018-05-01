@@ -89,7 +89,7 @@
       ready: function () {
         ipcRenderer.on('outline-updated', (e, outline) => {
           console.log(outline)
-          if (outline.editing) {
+          if (typeof outline.editing !== 'undefined') {
             this.set('__editing', outline.editing);
           }
           if (outline.tree) {
