@@ -26,7 +26,7 @@ app.on('ready', () => {
   Menu.setApplicationMenu(mainMenu);
 })
 
-app.on("window-all-closed", function() {
+app.on("window-all-closed", function () {
   app.quit();
 })
 
@@ -281,13 +281,29 @@ const globals = {
    */
   Outline: {
     projectLocation: null,
+    editing: false,
     tree: []
+  },
+  async initOutline(projectLocation) {
+    const project = this.getProject(projectLocation)
+    const tree = await this.getOutlineTree(project)
+    const outline = await Object.assign(this.Outline, { projectLocation: projectLocation, tree: tree })
+    this.setOutline(outline);
+  },
+  /**
+   * Get outline by Project Location
+   * @param {Project.location} projectLocation 
+   */
+  getOutline(projectLocation) {
+    const outlines = this.getOutlines();
+    const outline = outlines.find(o => o.projectLocation === projectLocation)
+    return outline;
   },
   /**
    * Get Outline
    * @param {Project} project
    */
-  async getOutline(project) {
+  async getOutlineTree(project) {
     const outline = await getOutline(project.outlineLocation);
     return outline;
   },
@@ -310,10 +326,10 @@ const globals = {
   setOutline(outline) {
     const outlineList = this.getOutlines();
     // remove any window that is currently in the list
-    const newOutlineList = outlineList.filter(o => o.outlineLocation !== outline.projectLocation);
+    let newOutlineList = outlineList.filter(o => o.outlineLocation !== outline.projectLocation);
     newOutlineList.push(outline);
-    this.Outline.list = newOutlineList;
-    this.outlineUpdated(outline.projectLocation);
+    this.Outlines.list = newOutlineList;
+    this.outlineUpdated(outline.projectLocation)
   },
   /**
    * Delete Outline
@@ -331,10 +347,23 @@ const globals = {
    * @param {Project.location} projectLocation 
    */
   outlineUpdated(projectLocation) {
-    const windowID = this.getWindowByProjectLocation(projectLocation);
-    const window = BrowserWindow.fromId(windowID);
+    const window = this.getWindowByProjectLocation(projectLocation);
+    const windowInstance = BrowserWindow.fromId(window.id);
     const outline = this.getOutline(projectLocation);
-    window.webContents.send('outline-updated', outline);
+    windowInstance.webContents.send('outline-updated', outline);
+  },
+  /**
+   * Toggle Outline Edit State
+   * @param {Project.location} projectLocation 
+   */
+  toggleOutlineEdit(projectLocation) {
+    const outline = this.getOutline(projectLocation)
+    if (outline) {
+      const currentEditState = outline.editing
+      const newEditState = !currentEditState
+      const newOutline = Object.assign(outline, { editing: newEditState })
+      this.setOutline(newOutline)
+    }
   },
 
   getActivePage() {
@@ -378,7 +407,7 @@ ipcMain.on('project-selected', (e, projectLocation) => {
     }));
     win.on('close', e => {
       const windowId = e.sender.id;
-      const window = Object.assign(globals.Window, {id: windowId});
+      const window = Object.assign(globals.Window, { id: windowId });
       globals.deleteWindow(window);
     });
     const window = {
@@ -434,9 +463,9 @@ ipcMain.on('commit-to-git', (e) => {
  * Project Events Section
  */
 
- /**
-  * Update the given project
-  */
+/**
+ * Update the given project
+ */
 ipcMain.on('update-project', (e, project) => {
   globals.setProject(project);
 });
@@ -480,7 +509,7 @@ ipcMain.on('project-import-from-gitbook-init', async (e, project) => {
     // if it saved then we will update the project outline location
     project = globals.getProject(project.location);
     outlineLocation = `${project.location}/outline.json`;
-    globals.setProject(Object.assign(project, {outlineLocation, outlineLocation}))
+    globals.setProject(Object.assign(project, { outlineLocation, outlineLocation }))
   } catch (error) {
     console.log(error)
   }
@@ -492,8 +521,15 @@ ipcMain.on('project-import-from-gitbook-init', async (e, project) => {
 ipcMain.on('outline-init', async (e, project) => {
   if (project) {
     if (project.outlineLocation) {
-      const outline = await globals.getOutline(project);
-      e.sender.webContents.send('outline-updated', outline);
+      globals.initOutline(project.location);
     }
   }
-});
+})
+
+ipcMain.on('outline-edit-toggle', (e, project) => {
+  if (project) {
+    if (project.location) {
+      globals.toggleOutlineEdit(project.location)
+    }
+  }
+})

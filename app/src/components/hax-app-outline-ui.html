@@ -58,8 +58,8 @@
         <paper-icon-button id="editBtn" icon="icons:create"></paper-icon-button>
       </div>
       <div class="drawer_wrap">
-        <map-menu id="menu" opened selected="[[activePage]]"></map-menu>
-        <lrnsys-outline id="outline"></lrnsys-outline>
+        <map-menu hidden$="[[editing]]" id="menu" opened selected="[[activePage]]"></map-menu>
+        <lrnsys-outline hidden$="[[!editing]]" id="outline"></lrnsys-outline>
       </div>
     </div>
 
@@ -94,6 +94,10 @@
           type: Array,
           value: [],
           observer: '__outlineChanged'
+        },
+        editing: {
+          type: Boolean,
+          value: false
         },
         /** 
          * Current active page
@@ -132,8 +136,10 @@
        * Set or update map menu and outline editor
        */
       __setData: function (outline) {
-        this.$.menu.setData(outline);
-        this.$.outline.setData(outline);
+        if (outline) {
+          this.$$('#menu').setData(outline);
+          this.$$('#outline').setData(outline);
+        }
       },
 
       /**
@@ -164,9 +170,9 @@
         this.opened = !this.opened;
       },
 
-      // __editBtnTap: function (e) {
-      //   this.
-      // },
+      __editBtnTap: function (e) {
+        this.fire('edit-toggle');
+      },
 
     });
   </script>

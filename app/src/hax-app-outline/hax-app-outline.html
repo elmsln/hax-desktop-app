@@ -36,7 +36,7 @@
       
     </style>
     
-    <hax-app-outline-ui id="ui" outline="[[__outline]]" active-page="[[activePge]]">
+    <hax-app-outline-ui id="ui" outline="[[__outline]]" editing="[[__editing]]" active-page="[[activePge]]">
       <slot></slot>
     </hax-app-outline-ui>
     
@@ -47,6 +47,10 @@
       properties: {
         project: {
           type: Object,
+        },
+        __editing: {
+          type: Boolean,
+          value: false,
         },
         __outline: {
           type: Array,
@@ -70,6 +74,10 @@
         '__projectChanged(project)'
       ],
 
+      listeners: {
+        'ui.edit-toggle': '__editOutlineToggle'
+      },
+
       __projectChanged: function (project) {
         if (project) {
           if (project.outlineLocation) {
@@ -80,9 +88,19 @@
 
       ready: function () {
         ipcRenderer.on('outline-updated', (e, outline) => {
-          this.set('__outline', []);
-          this.set('__outline', outline);
+          console.log(outline)
+          if (outline.editing) {
+            this.set('__editing', outline.editing);
+          }
+          if (outline.tree) {
+            this.set('__outline', []);
+            this.set('__outline', outline.tree);
+          }
         });
+      },
+
+      __editOutlineToggle: function (e) {
+        ipcRenderer.send('outline-edit-toggle', this.project);
       },
 
     });
