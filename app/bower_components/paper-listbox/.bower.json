@@ -62,6 +62,6 @@
     "commit": "db318be20ba612b175ea30f30aa7c1da688df0a3"
   },
   "_source": "https://github.com/PolymerElements/paper-listbox.git",
-  "_target": "^2.0.0",
+  "_target": "1 - 2",
   "_originalSource": "PolymerElements/paper-listbox"
 }

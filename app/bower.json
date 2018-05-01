@@ -2,15 +2,24 @@
   "name": "hax",
   "main": "index.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.11.0",
-    "hax-body": "LRNWebcomponents/hax-body#^0.11.0",
+    "polymer": "Polymer/polymer#^2.6.0",
+    "hax-body": "LRNWebComponents/hax-body#^0.12.1",
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
     "paper-item": "PolymerElements/paper-item#^2.0.0",
     "pdf-element": "LRNWebcomponents/pdf-element#^1.3.0",
     "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^2.0.0",
     "hax-body-behaviors": "LRNWebcomponents/hax-body-behaviors#^1.10.0",
     "lrnsys-outline": "LRNWebComponents/lrnsys-outline#^0.0.1",
-    "map-menu": "LRNWebComponents/map-menu#master"
+    "map-menu": "LRNWebComponents/map-menu#master",
+    "app-editor-hax": "LRNWebComponents/app-editor-hax",
+    "multiple-choice": "LRNWebComponents/multiple-choice#^0.3.0",
+    "wave-player": "LRNWebComponents/wave-player#^1.0.1",
+    "lrn-table": "LRNWebComponents/lrn-table#^0.5.1",
+    "meme-maker": "LRNWebComponents/meme-maker#1.0.0-lrn1",
+    "lrn-math": "LRNWebComponents/lrn-math#^1.0.0",
+    "aframe-player": "LRNWebComponents/aframe-player#^0.0.1",
+    "paper-audio-player": "LRNWebComponents/paper-audio-player#^1.1.1",
+    "lrndesign-blockquote": "LRNWebComponents/lrndesign-blockquote#^1.3.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

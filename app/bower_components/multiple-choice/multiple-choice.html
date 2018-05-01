@@ -59,9 +59,16 @@ Ask the user a question from a set of possible answers.
     Polymer({
 
       is: 'multiple-choice',
-      behaviors: [HAXBehaviors.PropertiesBehaviors, MaterializeCSSBehaviors.ColorBehaviors, SchemaBehaviors.Schema],
+      hostAttributes: {
+        'typeof': 'oer:Assessment',
+      },
+      behaviors: [
+        HAXBehaviors.PropertiesBehaviors,
+        MaterializeCSSBehaviors.ColorBehaviors,
+        SchemaBehaviors.Schema
+      ],
       observers: [
-        '_answersChanged(displayedAnswers.*)'
+        '_valueChanged(displayedAnswers.*)'
       ],
       properties: {
         /**
@@ -142,7 +149,18 @@ Ask the user a question from a set of possible answers.
         randomize: {
           type: Boolean,
           value: true,
+          reflectToAttribute: true,
         },
+      },
+      /**
+       * Notice an answer has changed and update the DOM.
+       */
+      _valueChanged: function(e) {
+        for (var i in e.base) {
+          for (var j in e.base[i]) {
+            this.notifyPath('displayedAnswers.' + i + '.' + j);
+          }
+        }
       },
       /**
        * Reset user answers and shuffle the board again.
@@ -196,16 +214,6 @@ Ask the user a question from a set of possible answers.
         }
       },
       /**
-       * Notice an answer has changed and update the DOM.
-       */
-      _answersChanged: function(e) {
-        for (var i in e.base) {
-          for (var j in e.base[i]) {
-            this.notifyPath('displayedAnswers.' + i + '.' + j);
-          }
-        }
-      },
-      /**
        * Figure out the order of the answers which will be displayed
        */
       _computeDisplayedAnswers: function(answers, randomize) {
@@ -234,9 +242,6 @@ Ask the user a question from a set of possible answers.
        */
       attached: function() {
         this.$.toast.fitInto = this;
-        // set typeof to supporting material
-        this.setAttribute('typeof', 'oer:Assessment');
-
         // Establish hax property binding
         let props = {
           'canScale': true,
@@ -282,16 +287,21 @@ Ask the user a question from a set of possible answers.
                 'title': 'Answer set',
                 'description': 'Answers in a multiple choice',
                 'inputMethod': 'array',
-                'items': {
-                  'correct': {
+                'properties': [
+                  {
+                    'property': 'correct',
                     'title': 'Correct',
-                    'type': 'boolean'
+                    'description': 'If this is correct or not',
+                    'inputMethod': 'boolean',
                   },
-                  'label': {
+                  {
+                    'property': 'label',
                     'title': 'Answer',
-                    'type': 'string'
-                  }
-                }
+                    'description': 'Possible answer to the question',
+                    'inputMethod': 'textfield',
+                    'required': true,
+                  },
+                ]
               },
               {
                 'property': 'correctText',
