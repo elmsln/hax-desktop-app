@@ -4,7 +4,7 @@
   "main": "multiple-choice.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.10.1",
-    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.2.0",
+    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.11.3",
     "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.0.0",
     "schema-behaviors": "LRNWebComponents/schema-behaviors",
     "paper-radio-button": "PolymerElements/paper-radio-button#^2.1.0",
@@ -18,14 +18,15 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebComponents/multiple-choice",
-  "version": "0.2.0",
-  "_release": "0.2.0",
+  "version": "0.3.0",
+  "_release": "0.3.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.2.0",
-    "commit": "e74dd01c74618a182b36931d082dcc965717b570"
+    "tag": "0.3.0",
+    "commit": "d3a771804bc07b3f7ad57d37851a0f5f4c5a9347"
   },
   "_source": "https://github.com/LRNWebComponents/multiple-choice.git",
-  "_target": "^0.2.0",
-  "_originalSource": "LRNWebComponents/multiple-choice"
+  "_target": "^0.3.0",
+  "_originalSource": "LRNWebComponents/multiple-choice",
+  "_direct": true
 }
