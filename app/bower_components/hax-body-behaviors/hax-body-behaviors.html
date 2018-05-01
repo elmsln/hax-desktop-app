@@ -481,9 +481,13 @@ with the hax-body element which manages elements.
                   'name': 'paper-icon-picker',
                   'valueProperty': 'icon',
                   'properties': {
-                    'required': settings[value].required
+                    'required': settings[value].required,
                   }
                 };
+                // support options array of icons to pick from
+                if (settings[value].options.constructor === Array) {
+                  props[settings[value].property].component.properties.iconList = settings[value].options;
+                }
               break;
               case 'datepicker':
                 props[settings[value].property].component = {
