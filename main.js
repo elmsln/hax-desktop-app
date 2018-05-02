@@ -409,6 +409,14 @@ const globals = {
     const window = this.getWindowByProjectLocation(outline.projectLocation);
     const windowInstance = BrowserWindow.fromId(window.id);
     windowInstance.webContents.send('active-page-updated', pageContents);
+  },/**
+   * Notify everyone that need to know that the outline has been updated
+   * @param {Project.location} projectLocation 
+   */
+  outlineFileUpdated(outline) {
+    const window = this.getWindowByProjectLocation(outline.projectLocation);
+    const windowInstance = BrowserWindow.fromId(window.id);
+    windowInstance.webContents.send('outline-file-updated');
   },
   /**
    * Toggle Outline Edit State
@@ -438,6 +446,7 @@ const globals = {
       const updatedOutline = updateOutlineFiles(newOutline, oldOutline)
       // update the outline file
       const project = this.getProject(updatedOutline.projectLocation);
+      this.outlineFileUpdated(updatedOutline);
       const outlinefileUpdated = setOutline(project.outlineLocation, JSON.stringify(updatedOutline.tree));
       this.setOutline(updatedOutline);
     }

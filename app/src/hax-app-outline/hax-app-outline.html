@@ -109,6 +109,10 @@
           this.notifyPath('outline.tree');
           this.notifyPath('outline.editing');
         });
+        ipcRenderer.on('outline-file-updated', (e) => {
+          this.$.toast.show('outline saved');
+          ipcRenderer.send('outline-edit-toggle', this.project);
+        });
         ipcRenderer.on('active-page-updated', (e, pageContents) => {
           this.__activePageContents = pageContents;
           this.$.editor.import(pageContents);
@@ -133,6 +137,7 @@
       },
 
       __cancelOutline: function (e) {
+        ipcRenderer.send('outline-edit-toggle', this.project);
       },
 
       __activePageSelected: function (e, activePage) {
@@ -171,7 +176,6 @@
       },
 
       __isEditing: function (editing) {
-        console.log(editing);
         return editing ? true : false;
       },
       
