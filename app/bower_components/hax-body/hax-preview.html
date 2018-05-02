@@ -5,6 +5,7 @@
 <link rel="import" href="../paper-input/paper-textarea.html">
 <link rel="import" href="../code-editor/code-editor.html">
 <link rel="import" href="../app-datepicker/app-datepicker.html">
+<link rel="import" href="../paper-icon-picker/paper-icon-picker.html">
 <link rel="import" href="../vaadin-split-layout/vaadin-split-layout.html">
 <!--
 `hax-preview`
@@ -316,7 +317,7 @@ An element that can generate a form
                     schema.properties[property].component.properties.value = element.properties[property];
                   }
                 }
-                if (element.properties[property] != null && element.properties[property].constructor === Array) {
+                if (element.properties[property] != null && element.properties[property].constructor === Array && !element.properties[property].readOnly) {
                   try {
                     newValue.set(property, element.properties[property]);
                   }
@@ -324,7 +325,7 @@ An element that can generate a form
 
                   }
                 }
-                else if (element.properties[property] != null && element.properties[property].constructor === Object) {
+                else if (element.properties[property] != null && element.properties[property].constructor === Object && !element.properties[property].readOnly) {
                   try {
                     newValue.set(property, element.properties[property]);
                   }

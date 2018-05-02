@@ -466,7 +466,6 @@ with the hax-body element which manages elements.
                     'auto-validate': 'auto-validate'
                   }
                 };
-                console.log(props[settings[value].property]);
               break;
               case 'colorpicker':
                 props[settings[value].property].component = {
@@ -476,6 +475,19 @@ with the hax-body element which manages elements.
                     'required': settings[value].required
                   }
                 };
+              break;
+              case 'iconpicker':
+                props[settings[value].property].component = {
+                  'name': 'paper-icon-picker',
+                  'valueProperty': 'icon',
+                  'properties': {
+                    'required': settings[value].required,
+                  }
+                };
+                // support options array of icons to pick from
+                if (settings[value].options.constructor === Array) {
+                  props[settings[value].property].component.properties.iconList = settings[value].options;
+                }
               break;
               case 'datepicker':
                 props[settings[value].property].component = {
@@ -647,6 +659,7 @@ with the hax-body element which manages elements.
           case 'select':
           case 'textarea':
           case 'colorpicker':
+          case 'iconpicker':
           case 'datepicker':
           case 'textfield':
             return 'string';
@@ -664,7 +677,7 @@ with the hax-body element which manages elements.
      * List valid input methods.
      */
     validHAXPropertyInputMethod: function() {
-      var methods = ['flipboolean', 'boolean', 'select', 'textfield', 'textarea', 'datepicker', 'colorpicker', 'number', 'code-editor', 'array'];
+      var methods = ['flipboolean', 'boolean', 'select', 'textfield', 'textarea', 'datepicker', 'colorpicker', 'iconpicker', 'number', 'code-editor', 'array'];
       return methods;
     },
     /**
