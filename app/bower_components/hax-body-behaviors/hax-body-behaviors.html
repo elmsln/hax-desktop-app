@@ -501,7 +501,7 @@ with the hax-body element which manages elements.
               break;
             }
           }
-          else if (target.hasAttribute(settings[value].attribute) || ['id', 'class', 'style', 'property', 'prefix', 'typeof', 'resource'].includes(settings[value].attribute)) {
+          else if (typeof settings[value].attribute !== typeof undefined) {
             props[settings[value].attribute] = {
               'title': settings[value].title,
               'type': target.getHaxJSONSchemaType(settings[value].inputMethod)

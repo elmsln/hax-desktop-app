@@ -3,10 +3,12 @@
 <link rel="import" href="../../bower_components/map-menu/map-menu.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../../bower_components/materializecss-styles/materializecss-styles.html">
 
 <dom-module id="hax-app-outline-ui">
   <template>
-    <style>
+    <style include="materializecss-styles">
       :host {
         display: flex;
       }
@@ -57,21 +59,20 @@
         display: flex;
         justify-content: flex-end;
         position: fixed;
-        bottom: 2em;
-        right: 2em;
+        bottom: 16px;
+        right: 16px;
+        background-color: #EEEEEE;
+        opacity: .6;
+        transition: .6s all ease;
+      }
+      #operations:hover,#operations:focus {
+        opacity: .95;
       }
 
       #operations paper-icon-button {
-        width: 75px;
-        height: 75px;
+        width: 50px;
+        height: 50px;
         display: flex;
-      }
-
-      #contentSave {
-        color: #3884FF;
-      }
-      #contentCancel {
-        color: gray;
       }
     </style>
 
@@ -94,10 +95,29 @@
       </div>
       <slot></slot>
       <div id="operations">
-        <paper-icon-button id="contentCancel" icon="icons:cancel"></paper-icon-button>
-        <paper-icon-button id="contentSave" icon="icons:save"></paper-icon-button>
+        <paper-icon-button id="contentSave" icon="icons:save" class="green-text text-darken-3"></paper-icon-button>
+        <paper-tooltip
+          for="contentSave"
+          position="top"
+          offset="6">
+          Save file
+        </paper-tooltip>
+        <paper-icon-button id="contentCancel" icon="icons:cancel" class="red-text text-darken-3"></paper-icon-button>
+        <paper-tooltip
+          for="contentCancel"
+          position="top"
+          offset="6">
+          Reset file
+        </paper-tooltip>
+
         <div class="submenu">
-          <paper-button id="markdownToHTML">markdown to html</paper-button>
+          <paper-icon-button id="markdownToHTML" icon="icons:receipt" class="grey-text text-darken-3"></paper-icon-button>
+          <paper-tooltip
+            for="markdownToHTML"
+            position="top"
+            offset="6">
+            Convert markdown to html
+          </paper-tooltip>
         </div>
       </div>
     </div>
