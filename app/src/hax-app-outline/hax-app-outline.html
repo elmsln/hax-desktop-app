@@ -39,7 +39,7 @@
       
     </style>
     
-    <hax-app-outline-ui id="ui" outline="[[__outline.tree]]" editing="[[__outline.editing]]" active-page="[[activePge]]">
+    <hax-app-outline-ui id="ui" outline="[[__outline.tree]]" editing="[[__isEditing(__outline.editing)]]" active-page="[[activePge]]">
       <app-editor-hax id="editor" app-store-connection='{"url":"appstore.json"}'></app-editor-hax>
       <slot></slot>
     </hax-app-outline-ui>
@@ -168,6 +168,11 @@
 
       __contentMarkdownToHTML: function (e) {
         ipcRenderer.send('markdown-to-html', this.__activePageContents);
+      },
+
+      __isEditing: function (editing) {
+        console.log(editing);
+        return editing ? true : false;
       },
       
 
