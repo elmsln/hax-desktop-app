@@ -15,6 +15,7 @@ const updateOutlineFiles = require('./util/updateOutlineFiles')
 const loadPage = require('./util/loadPage');
 const savePage = require('./util/savePage');
 const markdownToHTML = require('./util/markdownToHTML')
+const projectInitFolder = require('./util/projectInitFolder')
 // const graphqlServer = require('./server');
 
 let mainWindow;
@@ -180,6 +181,30 @@ const globals = {
     const newProjectList = currentProjectList.filter(p => p.location === projectLocation);
     store.set('projects.list', [newProjectList]);
     mainWindow.webContents.send('projects-updated', this.getProjects());
+  },
+  /**
+   * Starts a new project
+   */
+  initProject() {
+    const locations = dialog.showOpenDialog({ properties: ['promptToCreate', 'createDirectory', 'openDirectory'] });
+    if (_.isArray(locations)) {
+      // get the location
+      location = _.first(locations);
+      try {
+        projectInitFolder(location);
+      } catch (error) {
+        dialog.showErrorBox('Folder Create Error', 'Could not create folder. Make sure the folder is empty.');
+        return;
+      }
+      pathArray = location.split('/');
+      title = pathArray[pathArray.length - 1];
+      outline = path.join(location, 'outline.json');
+      // set the location
+      globals.setProject({
+        title: title,
+        location: location
+      });
+    }
   },
 
   /**
@@ -639,3 +664,13 @@ ipcMain.on('markdown-to-html', (e, markdown) => {
   const html = markdownToHTML(markdown)
   e.sender.webContents.send('markdown-to-html', html)
 })
+
+
+
+
+/**
+ * Homepage Events Section
+ */
+ipcMain.on('new-project', (e) => {
+  globals.initProject();
+});

@@ -102,6 +102,10 @@
         }
       },
 
+      listeners: {
+        'newbook.tap': '__newbookTap'
+      },
+
       openProject: function () {
         ipcRenderer.send('open-project-prompt');
       },
@@ -110,6 +114,10 @@
         ipcRenderer.on('location-changed', (e) => {
           this.location = remote.getGlobal('location');
         });
+      },
+
+      __newbookTap: function () {
+        ipcRenderer.send('new-project');
       },
 
     });
