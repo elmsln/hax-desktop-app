@@ -113,15 +113,14 @@
     "paper-toast": "^2.0.0"
   },
   "homepage": "https://github.com/LRNWebComponents/hax-body",
-  "version": "0.12.3",
-  "_release": "0.12.3",
+  "version": "0.12.4",
+  "_release": "0.12.4",
   "_resolution": {
     "type": "version",
-    "tag": "0.12.3",
-    "commit": "00c5990c17b21b5ec4b90e807b5f36d34bab62a5"
+    "tag": "0.12.4",
+    "commit": "398d3a7ed6d28128c8f5cf4cb51b46c4496e62ad"
   },
   "_source": "https://github.com/LRNWebComponents/hax-body.git",
-  "_target": "^0.12.3",
-  "_originalSource": "LRNWebComponents/hax-body",
-  "_direct": true
+  "_target": "^0.12.1",
+  "_originalSource": "LRNWebComponents/hax-body"
 }
