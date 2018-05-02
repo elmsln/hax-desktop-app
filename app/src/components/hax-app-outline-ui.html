@@ -12,6 +12,7 @@
       }
 
       #drawer {
+        min-width: 0;
         width: 0em;
         transition: all .3s ease-in-out;
         display: flex;
@@ -27,6 +28,7 @@
       }
 
       :host[opened] #drawer {
+        min-width: 20em;
         width: 20em;
       }
 
