@@ -14,6 +14,7 @@ const importFromGitbook = require('./util/importFromGitbook')
 const updateOutlineFiles = require('./util/updateOutlineFiles')
 const loadPage = require('./util/loadPage');
 const savePage = require('./util/savePage');
+const markdownToHTML = require('./util/markdownToHTML')
 // const graphqlServer = require('./server');
 
 let mainWindow;
@@ -629,4 +630,12 @@ ipcMain.on('active-page-selected', (e, { outlineProjectLocation, activePage }) =
 ipcMain.on('save-content', (e, { outlineProjectLocation, content}) => {
   const outline = globals.getOutline(outlineProjectLocation);
   globals.updateActivePage(outline, content);
+})
+
+/**
+ * Convert markdown to html
+ */
+ipcMain.on('markdown-to-html', (e, markdown) => {
+  const html = markdownToHTML(markdown)
+  e.sender.webContents.send('markdown-to-html', html)
 })

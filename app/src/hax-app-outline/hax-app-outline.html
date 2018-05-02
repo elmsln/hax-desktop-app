@@ -91,7 +91,8 @@
         'ui.active-page-selected': '__activePageSelected',
         'ui.content-save': '__contentSave',
         'ui.content-cancel': '__contentCancel',
-        'editor.app-editor-hax-save': '__editorSaved'
+        'ui.markdown-to-html': '__contentMarkdownToHTML',
+        'editor.app-editor-hax-save': '__editorSaved',
       },
 
       __projectChanged: function (project) {
@@ -110,6 +111,11 @@
         });
         ipcRenderer.on('active-page-updated', (e, pageContents) => {
           this.__activePageContents = pageContents;
+          this.$.editor.import(pageContents);
+        });
+        ipcRenderer.on('markdown-to-html', (e, pageContents) => {
+          // don't update this.__activePageContents yet
+          // let the user confirm
           this.$.editor.import(pageContents);
         });
         ipcRenderer.on('active-page-saved-success', (e) => {
@@ -158,6 +164,10 @@
         if (this.__activePageContents) {
           this.$.editor.import(this.__activePageContents)
         }
+      },
+
+      __contentMarkdownToHTML: function (e) {
+        ipcRenderer.send('markdown-to-html', this.__activePageContents);
       },
       
 

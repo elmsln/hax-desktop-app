@@ -96,6 +96,9 @@
       <div id="operations">
         <paper-icon-button id="contentCancel" icon="icons:cancel"></paper-icon-button>
         <paper-icon-button id="contentSave" icon="icons:save"></paper-icon-button>
+        <div class="submenu">
+          <paper-button id="markdownToHTML">markdown to html</paper-button>
+        </div>
       </div>
     </div>
 
@@ -156,6 +159,7 @@
         'menu.selected': '__menuItemSelected',
         'contentSave.tap': '__contentSaveTap',
         'contentCancel.tap': '__contentCancelTap',
+        'markdownToHTML.tap': '__markdownToHTMLTap'
       },
 
       /**
@@ -233,6 +237,10 @@
 
       __contentCancelTap: function (e) {
         this.fire('content-cancel');
+      },
+
+      __markdownToHTMLTap: function (e) {
+        this.fire('markdown-to-html');
       },
 
     });
