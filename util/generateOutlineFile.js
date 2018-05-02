@@ -6,7 +6,7 @@ module.exports = (location) => {
 
   const outlineGenerated = new Promise((resolve, reject) => {
     try {
-      const outline = fs.writeFileSync(location, '[]', {
+      const outline = fs.writeFileSync(location, '', {
         flag: 'wx'
       })
       resolve(outline)
