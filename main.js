@@ -16,6 +16,7 @@ const loadPage = require('./util/loadPage');
 const savePage = require('./util/savePage');
 const markdownToHTML = require('./util/markdownToHTML')
 const projectInitFolder = require('./util/projectInitFolder')
+const setOutline = require('./util/setOutline')
 // const graphqlServer = require('./server');
 
 let mainWindow;
@@ -431,10 +432,14 @@ const globals = {
   updateOutlineTree(outline) {
     // get the current outline
     const oldOutline = this.getOutline(outline.projectLocation)
-    const newOutline = Object.assign(oldOutline, outline)
+    const newOutline = Object.assign({}, oldOutline, outline)
     if (oldOutline) {
       // update the outline tree files on the file system
-      const treeUpdated = updateOutlineFiles(newOutline, oldOutline)
+      const updatedOutline = updateOutlineFiles(newOutline, oldOutline)
+      // update the outline file
+      const project = this.getProject(updatedOutline.projectLocation);
+      const outlinefileUpdated = setOutline(project.outlineLocation, JSON.stringify(updatedOutline.tree));
+      this.setOutline(updatedOutline);
     }
   },
   /**

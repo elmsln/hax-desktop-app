@@ -1,16 +1,47 @@
-const fs = require('diff')
+const fs = require('fs')
 const path = require('path')
+const Case = require('case')
+const setOutline = require('./setOutline')
 
 /**
  * Takes a path
  * @param {string} location 
  * @param {Outline.tree} outlineTree 
+ * 
+ * @return {Outline}
  */
 module.exports = (newOutline, oldOutline) => {
-  // // array of Ids in new outline
-  // const newIds = newOutline.tree.map(o => o.id);
-  // // array of Ids in old outline
-  // const oldIds = oldOutline.tree.map(o => o.id);
-  // // find new items added
-  // const addedIds = newIds.filter(newId => );
+  // array of Ids in new outline
+  const newIds = newOutline.tree.map(o => o.id);
+  // array of Ids in old outline
+  const oldIds = oldOutline.tree.map(o => o.id);
+  // find new items added
+  const addedIds = newIds.filter(newId => !oldIds.includes(newId));
+  // find items deleted
+  const deletedIds = oldIds.filter(oldId => !newIds.includes(oldId))
+
+  const newOutlineTree = newOutline.tree.map(i => {
+    // find out if it's a new item
+    const newItem = addedIds.includes(i.id);
+    if (newItem) {
+      // create the file
+      try {
+        const filename = `${Case.snake(i.title)}.html`;
+        const fileAdded = fs.writeFileSync(path.join(newOutline.projectLocation, filename), '', 'utf8')
+        // if we successfully added the file then we'll update 
+        // the item to know about the new location
+        i.location = filename;
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    return i;
+  })
+
+  /**
+   * @todo Handle the removed files
+   */
+
+  // update the outline file.
+  return Object.assign({}, newOutline, { tree: newOutlineTree });
 }
