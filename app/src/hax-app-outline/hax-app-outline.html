@@ -70,11 +70,18 @@
           type: Boolean,
           value: true
         },
+        /**
+         * Cacehed version of the page contents
+         * loaded from the file.
+         */
+        __activePageContents: {
+          type: String,
+          value: null
+        }
       },
 
       observers: [
         '__projectChanged(project)',
-        '__activePageChanged(__outline.activePage)'
       ],
 
       listeners: {
@@ -102,19 +109,12 @@
           this.notifyPath('outline.editing');
         });
         ipcRenderer.on('active-page-updated', (e, pageContents) => {
+          this.__activePageContents = pageContents;
           this.$.editor.import(pageContents);
         });
         ipcRenderer.on('active-page-saved-success', (e) => {
           this.$.toast.show('page saved');
         });
-      },
-
-      __activePageChanged: function (page, prevPage) {
-        if (page !== prevPage) {
-          if (typeof page === 'string') {
-            Polymer.dom(this);
-          }
-        }
       },
 
       __editOutlineToggle: function (e) {
@@ -130,7 +130,6 @@
       },
 
       __activePageSelected: function (e, activePage) {
-        console.log(this.__outline);
         ipcRenderer.send('active-page-selected', {
           outlineProjectLocation: this.__outline.projectLocation,
           activePage: activePage
@@ -156,6 +155,9 @@
       },
       
       __contentCancel: function (e) {
+        if (this.__activePageContents) {
+          this.$.editor.import(this.__activePageContents)
+        }
       },
       
 
