@@ -57,9 +57,7 @@
       },
 
       _click: function () {
-        if (this.url) {
-          this.fire('link-clicked', { id: this.id });
-        }
+        this.fire('link-clicked', { id: this.id });
       },
 
       attached: function () {

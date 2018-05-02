@@ -10,7 +10,7 @@
     "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^2.0.0",
     "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.11.5",
     "lrnsys-outline": "LRNWebComponents/lrnsys-outline#^0.0.1",
-    "map-menu": "LRNWebComponents/map-menu#master",
+    "map-menu": "LRNWebComponents/map-menu#^1.0.3",
     "app-editor-hax": "LRNWebComponents/app-editor-hax",
     "multiple-choice": "LRNWebComponents/multiple-choice#^0.3.0",
     "wave-player": "LRNWebComponents/wave-player#^1.0.1",
