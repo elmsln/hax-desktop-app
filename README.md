@@ -9,7 +9,7 @@ HAX but running on your desktop. In the future this will be built to multiple pl
 To build HAX desktop from source, run the following
 
 ```
-git clone git@github.com:LRNWebComponents/hax-desktop-app.git
+git clone https://github.com/LRNWebComponents/hax-desktop-app.git
 cd hax-desktop-app
 sh build.sh
 ```
