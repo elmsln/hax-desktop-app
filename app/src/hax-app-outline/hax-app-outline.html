@@ -68,12 +68,14 @@
 
       observers: [
         '__projectChanged(project)',
+        '__activePageChanged(__outline.activePage)'
       ],
 
       listeners: {
         'ui.edit-toggle': '__editOutlineToggle',
         'ui.save-outline': '__saveOutline',
         'ui.cancel-outline': '__cancelOutline',
+        'ui.active-page-selected': '__activePageSelected'
       },
 
       __projectChanged: function (project) {
@@ -90,6 +92,17 @@
           this.notifyPath('outline.tree');
           this.notifyPath('outline.editing');
         });
+        ipcRenderer.on('active-page-updated', (e, pageContents) => {
+          console.log(pageContents);
+        });
+      },
+
+      __activePageChanged: function (page, prevPage) {
+        if (page !== prevPage) {
+          if (typeof page === 'string') {
+            Polymer.dom(this);
+          }
+        }
       },
 
       __editOutlineToggle: function (e) {
@@ -103,6 +116,13 @@
 
       __cancelOutline: function (e) {
       },
+
+      __activePageSelected: function (e, activePage) {
+        ipcRenderer.send('active-page-selected', {
+          outlineProjectLocation: this.__outline.projectLocation,
+          activePage: activePage
+        });
+      }
 
     });
   </script>

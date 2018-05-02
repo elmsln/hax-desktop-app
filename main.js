@@ -12,6 +12,7 @@ const generateOutlineFile = require('./util/generateOutlineFile');
 const getOutline = require('./util/getOutline');
 const importFromGitbook = require('./util/importFromGitbook')
 const updateOutlineFiles = require('./util/updateOutlineFiles')
+const loadPage = require('./util/loadPage');
 // const graphqlServer = require('./server');
 
 let mainWindow;
@@ -293,6 +294,7 @@ const globals = {
   Outline: {
     projectLocation: null,
     editing: false,
+    activePage: null,
     tree: []
   },
   async initOutline(projectLocation) {
@@ -335,6 +337,13 @@ const globals = {
    * @param {Outline} outline 
    */
   setOutline(outline) {
+    const oldOutline = this.getOutline(outline.projectLocation)
+    if (oldOutline) {
+      if (outline.activePage !== oldOutline.activePage) {
+        const pagehtml = this.loadActivePage(outline);
+        this.activePageUpdated(outline, pagehtml);
+      }
+    }
     // get the current list
     const outlineList = this.getOutlines();
     // remove any outline that is currently in the list
@@ -365,6 +374,15 @@ const globals = {
     windowInstance.webContents.send('outline-updated', outline);
   },
   /**
+   * Notify everyone that need to know that the outline has been updated
+   * @param {Project.location} projectLocation 
+   */
+  activePageUpdated(outline, pageContents) {
+    const window = this.getWindowByProjectLocation(outline.projectLocation);
+    const windowInstance = BrowserWindow.fromId(window.id);
+    windowInstance.webContents.send('active-page-updated', pageContents);
+  },
+  /**
    * Toggle Outline Edit State
    * @param {Project.location} projectLocation 
    */
@@ -392,17 +410,19 @@ const globals = {
       const treeUpdated = updateOutlineFiles(newOutline, oldOutline)
     }
   },
-
-  getActivePage() {
-    return global.page;
-  },
-  setActivePage(page) {
-    global.page = page;
-    // changed the active page
-    mainWindow.webContents.send('active-page-changed', page);
-    // update the active content
-    const content = getPage(page);
-    mainWindow.webContents.send('active-content-changed', content);
+  /**
+   * Retrieve the Files from the file system and send them
+   * on the main thread.
+   * @param {Outline} outline 
+   * @return {html}
+   */
+  loadActivePage(outline) {
+    // get the active item in the outline tree
+    const activeOutineItem = outline.tree.find(i => i.id === outline.activePage);
+    const pathToFile = path.join(outline.projectLocation, activeOutineItem.location);
+    // load the page contents
+    const html = loadPage(pathToFile);
+    return html;
   },
 }
 
@@ -563,4 +583,10 @@ ipcMain.on('outline-edit-toggle', (e, project) => {
 
 ipcMain.on('update-outline-tree', (e, outline) => {
   globals.updateOutlineTree(outline)
+})
+
+ipcMain.on('active-page-selected', (e, { outlineProjectLocation, activePage }) => {
+  const outline = globals.getOutline(outlineProjectLocation);
+  const newOutline = Object.assign({}, outline, { activePage, activePage });
+  globals.setOutline(newOutline);
 })

@@ -126,6 +126,7 @@
         'editBtn.tap': '__editBtnTap',
         'saveBtn.tap': '__saveBtnTap',
         'cancelBtn.tap': '__cancelBtnTap',
+        'menu.selected': '__menuItemSelected'
       },
 
       /**
@@ -191,6 +192,10 @@
        */
       __cancelBtnTap: function (e) {
         this.fire('cancel-outline');
+      },
+
+      __menuItemSelected: function (e, activePage) {
+        this.fire('active-page-selected', activePage);
       },
 
     });
