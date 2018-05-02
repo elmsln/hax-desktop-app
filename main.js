@@ -6,13 +6,14 @@ const path = require('path');
 const Store = require('electron-store');
 const store = new Store();
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
-const { getPage, savePage, parseOutline, getOutlinePage, createPage } = require('./util/page');
+const { getPage, parseOutline, getOutlinePage, createPage } = require('./util/page');
 const mainWindowCreate = require('./util/mainWindow');
 const generateOutlineFile = require('./util/generateOutlineFile');
 const getOutline = require('./util/getOutline');
 const importFromGitbook = require('./util/importFromGitbook')
 const updateOutlineFiles = require('./util/updateOutlineFiles')
 const loadPage = require('./util/loadPage');
+const savePage = require('./util/savePage');
 // const graphqlServer = require('./server');
 
 let mainWindow;
@@ -347,7 +348,7 @@ const globals = {
     // get the current list
     const outlineList = this.getOutlines();
     // remove any outline that is currently in the list
-    let newOutlineList = outlineList.filter(o => o.outlineLocation !== outline.projectLocation);
+    let newOutlineList = outlineList.filter(o => o.projectLocation !== outline.projectLocation);
     newOutlineList.push(outline);
     this.Outlines.list = newOutlineList;
     this.outlineUpdated(outline.projectLocation)
@@ -424,6 +425,36 @@ const globals = {
     const html = loadPage(pathToFile);
     return html;
   },
+  /**
+   * Retrieve the Files from the file system and send them
+   * on the main thread.
+   * @param {Outline} outline 
+   * @param {string} content  New file contents
+   * 
+   * @todo need to handle error states
+   */
+  updateActivePage(outline, content) {
+    // get the active item in the outline tree
+    const activeOutineItem = outline.tree.find(i => i.id === outline.activePage);
+    const pathToFile = path.join(outline.projectLocation, activeOutineItem.location);
+    // load the page contents
+    try {
+      savePage(pathToFile, content);
+      this.notifySuccessfullActivePageUpdate(outline);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  /**
+   * Notify the renderer that the page has been
+   * successfully saved
+   */
+  notifySuccessfullActivePageUpdate(outline) {
+    const window = this.getWindowByProjectLocation(outline.projectLocation);
+    const windowInstance = BrowserWindow.fromId(window.id);
+    windowInstance.webContents.send('active-page-saved-success');
+  }
 }
 
 ipcMain.on('get-projects', (e) => {
@@ -589,4 +620,13 @@ ipcMain.on('active-page-selected', (e, { outlineProjectLocation, activePage }) =
   const outline = globals.getOutline(outlineProjectLocation);
   const newOutline = Object.assign({}, outline, { activePage, activePage });
   globals.setOutline(newOutline);
+})
+
+/**
+ * @param {Event} e
+ * @param {object} outlineProjectLocation, content 
+ */
+ipcMain.on('save-content', (e, { outlineProjectLocation, content}) => {
+  const outline = globals.getOutline(outlineProjectLocation);
+  globals.updateActivePage(outline, content);
 })

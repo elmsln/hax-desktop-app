@@ -52,6 +52,27 @@
         flex: 1 1 auto;
         padding: 1em;
       }
+
+      #operations {
+        display: flex;
+        justify-content: flex-end;
+        position: fixed;
+        bottom: 2em;
+        right: 2em;
+      }
+
+      #operations paper-icon-button {
+        width: 75px;
+        height: 75px;
+        display: flex;
+      }
+
+      #contentSave {
+        color: #3884FF;
+      }
+      #contentCancel {
+        color: gray;
+      }
     </style>
 
 
@@ -72,7 +93,12 @@
         <paper-icon-button disabled$="__menuTransitioning" id="menuTrigger" icon="menu"></paper-icon-button>
       </div>
       <slot></slot>
+      <div id="operations">
+        <paper-icon-button id="contentCancel" icon="icons:cancel"></paper-icon-button>
+        <paper-icon-button id="contentSave" icon="icons:save"></paper-icon-button>
+      </div>
     </div>
+
 
 
   </template>
@@ -127,7 +153,9 @@
         'editBtn.tap': '__editBtnTap',
         'saveBtn.tap': '__saveBtnTap',
         'cancelBtn.tap': '__cancelBtnTap',
-        'menu.selected': '__menuItemSelected'
+        'menu.selected': '__menuItemSelected',
+        'contentSave.tap': '__contentSaveTap',
+        'contentCancel.tap': '__contentCancelTap',
       },
 
       /**
@@ -197,6 +225,14 @@
 
       __menuItemSelected: function (e, activePage) {
         this.fire('active-page-selected', activePage);
+      },
+
+      __contentSaveTap: function (e) {
+        this.fire('content-save');
+      },
+
+      __contentCancelTap: function (e) {
+        this.fire('content-cancel');
       },
 
     });

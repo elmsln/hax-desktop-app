@@ -2,7 +2,9 @@
 <link rel="import" href="../../bower_components/lrnsys-outline/lrnsys-outline.html">
 <link rel="import" href="../../bower_components/map-menu/map-menu.html">
 <link rel="import" href="../../bower_components/app-editor-hax/app-editor-hax.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../components/hax-app-outline-ui.html">
+
 
 <dom-module id="hax-app-outline">
   <template>
@@ -41,6 +43,8 @@
       <app-editor-hax id="editor" app-store-connection='{"url":"appstore.json"}'></app-editor-hax>
       <slot></slot>
     </hax-app-outline-ui>
+
+    <paper-toast id="toast"></paper-toast>
     
   </template>
   <script>
@@ -77,7 +81,10 @@
         'ui.edit-toggle': '__editOutlineToggle',
         'ui.save-outline': '__saveOutline',
         'ui.cancel-outline': '__cancelOutline',
-        'ui.active-page-selected': '__activePageSelected'
+        'ui.active-page-selected': '__activePageSelected',
+        'ui.content-save': '__contentSave',
+        'ui.content-cancel': '__contentCancel',
+        'editor.app-editor-hax-save': '__editorSaved'
       },
 
       __projectChanged: function (project) {
@@ -96,7 +103,9 @@
         });
         ipcRenderer.on('active-page-updated', (e, pageContents) => {
           this.$.editor.import(pageContents);
-          console.log(pageContents);
+        });
+        ipcRenderer.on('active-page-saved-success', (e) => {
+          this.$.toast.show('page saved');
         });
       },
 
@@ -121,11 +130,34 @@
       },
 
       __activePageSelected: function (e, activePage) {
+        console.log(this.__outline);
         ipcRenderer.send('active-page-selected', {
           outlineProjectLocation: this.__outline.projectLocation,
           activePage: activePage
         });
-      }
+      },
+
+       /**
+        * When we notice that hax is saved then we'll send
+        * it to the main thread for ultimate saving.
+        */
+       __editorSaved: function (e, content) {
+         ipcRenderer.send('save-content', {
+            outlineProjectLocation: this.__outline.projectLocation,
+            content: content
+         });
+       },
+
+      /**
+       * This triggers HAX editor to save
+       */
+      __contentSave: function (e) {
+        this.$.editor.save();
+      },
+      
+      __contentCancel: function (e) {
+      },
+      
 
     });
   </script>
