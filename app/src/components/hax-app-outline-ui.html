@@ -2,7 +2,6 @@
 <link rel="import" href="../../bower_components/lrnsys-outline/lrnsys-outline.html">
 <link rel="import" href="../../bower_components/map-menu/map-menu.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bower_components/app-editor-hax/app-editor-hax.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 
 <dom-module id="hax-app-outline-ui">
@@ -70,7 +69,7 @@
       <div id="header">
         <paper-icon-button disabled$="__menuTransitioning" id="menuTrigger" icon="menu"></paper-icon-button>
       </div>
-      <app-editor-hax id="editor" app-store-connection='{"url":"appstore.json"}'></app-editor-hax>
+      <slot></slot>
     </div>
 
 

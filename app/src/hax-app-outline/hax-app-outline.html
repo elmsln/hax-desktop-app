@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/lrnsys-outline/lrnsys-outline.html">
 <link rel="import" href="../../bower_components/map-menu/map-menu.html">
+<link rel="import" href="../../bower_components/app-editor-hax/app-editor-hax.html">
 <link rel="import" href="../components/hax-app-outline-ui.html">
 
 <dom-module id="hax-app-outline">
@@ -37,6 +38,7 @@
     </style>
     
     <hax-app-outline-ui id="ui" outline="[[__outline.tree]]" editing="[[__outline.editing]]" active-page="[[activePge]]">
+      <app-editor-hax id="editor" app-store-connection='{"url":"appstore.json"}'></app-editor-hax>
       <slot></slot>
     </hax-app-outline-ui>
     
@@ -93,6 +95,7 @@
           this.notifyPath('outline.editing');
         });
         ipcRenderer.on('active-page-updated', (e, pageContents) => {
+          this.$.editor.import(pageContents);
           console.log(pageContents);
         });
       },
