@@ -197,10 +197,10 @@
        * Set or update map menu and outline editor
        */
       __setData: function (outline) {
-        if (outline) {
-          this.$$('#menu').setData(outline);
+        if (outline && typeof outline === 'object' && outline.constructor === Array && outline.length > 0) {
           this.$$('#outline').setData(outline);
         }
+        this.$$('#menu').setData(outline);
       },
 
       /**
