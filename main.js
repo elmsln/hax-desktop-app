@@ -20,7 +20,6 @@ const setOutline = require('./util/setOutline')
 // const graphqlServer = require('./server');
 
 let mainWindow;
-
 // GraphQL Server
 // graphqlServer.start(() => console.log('Server is running on localhost:4000'))
 
@@ -325,7 +324,7 @@ const globals = {
     activePage: null,
     tree: []
   },
-  async initOutline(projectLocation) {
+  initOutline: async function (projectLocation) {
     const project = this.getProject(projectLocation)
     const tree = await this.getOutlineTree(project)
     const outline = await Object.assign(this.Outline, { projectLocation: projectLocation, tree: tree })
@@ -335,18 +334,27 @@ const globals = {
    * Get outline by Project Location
    * @param {Project.location} projectLocation 
    */
-  getOutline(projectLocation) {
-    const outlines = this.getOutlines();
-    const outline = outlines.find(o => o.projectLocation === projectLocation)
-    return outline;
+  getOutline: async function (projectLocation) {
+    try {
+      const outlines = await this.getOutlines();
+      const outline = await outlines.find(o => o.projectLocation === projectLocation)
+      return outline;
+    } catch (error) {
+      console.log(error);
+    }
+    return [];
   },
   /**
    * Get Outline
    * @param {Project} project
    */
-  async getOutlineTree(project) {
-    const outline = await getOutline(project.outlineLocation);
-    return outline;
+  getOutlineTree: async function (project) {
+    try {
+      return await getOutline(project.outlineLocation);
+    } catch (error) {
+      console.log(error);
+    }
+    return [];
   },
   /**
    * Get Outlines
@@ -364,8 +372,9 @@ const globals = {
    * Create or update the Outline
    * @param {Outline} outline 
    */
-  setOutline(outline) {
-    const oldOutline = this.getOutline(outline.projectLocation)
+  setOutline: async function (outline) {
+    await outline;
+    const oldOutline = await this.getOutline(outline.projectLocation)
     if (oldOutline) {
       if (outline.activePage !== oldOutline.activePage) {
         const pagehtml = this.loadActivePage(outline);
@@ -373,7 +382,7 @@ const globals = {
       }
     }
     // get the current list
-    const outlineList = this.getOutlines();
+    const outlineList = await this.getOutlines();
     // remove any outline that is currently in the list
     let newOutlineList = outlineList.filter(o => o.projectLocation !== outline.projectLocation);
     newOutlineList.push(outline);
@@ -395,10 +404,10 @@ const globals = {
    * Notify everyone that need to know that the outline has been updated
    * @param {Project.location} projectLocation 
    */
-  outlineUpdated(projectLocation) {
+  outlineUpdated: async function (projectLocation) {
     const window = this.getWindowByProjectLocation(projectLocation);
     const windowInstance = BrowserWindow.fromId(window.id);
-    const outline = this.getOutline(projectLocation);
+    const outline = await this.getOutline(projectLocation);
     windowInstance.webContents.send('outline-updated', outline);
   },
   /**
@@ -422,12 +431,12 @@ const globals = {
    * Toggle Outline Edit State
    * @param {Project.location} projectLocation 
    */
-  toggleOutlineEdit(projectLocation) {
-    const outline = this.getOutline(projectLocation)
+  toggleOutlineEdit: async function (projectLocation) {
+    const outline = await this.getOutline(projectLocation)
     if (outline) {
       const currentEditState = outline.editing
       const newEditState = !currentEditState
-      const newOutline = Object.assign(outline, { editing: newEditState })
+      const newOutline = Object.assign({}, outline, { editing: newEditState })
       this.setOutline(newOutline)
     }
   },
