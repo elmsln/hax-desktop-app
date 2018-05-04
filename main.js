@@ -373,7 +373,6 @@ const globals = {
    * @param {Outline} outline 
    */
   setOutline: async function (outline) {
-    await outline;
     const oldOutline = await this.getOutline(outline.projectLocation)
     if (oldOutline) {
       if (outline.activePage !== oldOutline.activePage) {
@@ -446,9 +445,9 @@ const globals = {
    * 
    * @param {Outline} outline 
    */
-  updateOutlineTree(outline) {
+  updateOutlineTree: async function (outline) {
     // get the current outline
-    const oldOutline = this.getOutline(outline.projectLocation)
+    const oldOutline = await this.getOutline(outline.projectLocation)
     const newOutline = Object.assign({}, oldOutline, outline)
     if (oldOutline) {
       // update the outline tree files on the file system
@@ -456,7 +455,7 @@ const globals = {
       // update the outline file
       const project = this.getProject(updatedOutline.projectLocation);
       this.outlineFileUpdated(updatedOutline);
-      const outlinefileUpdated = setOutline(project.outlineLocation, JSON.stringify(updatedOutline.tree));
+      const outlinefileUpdated = await setOutline(project.outlineLocation, JSON.stringify(updatedOutline.tree));
       this.setOutline(updatedOutline);
     }
   },
@@ -471,7 +470,7 @@ const globals = {
     const activeOutineItem = outline.tree.find(i => i.id === outline.activePage);
     const pathToFile = path.join(outline.projectLocation, activeOutineItem.location);
     // load the page contents
-    const html = loadPage(pathToFile);
+    const html = loadPage(pathToFile) || '';
     return html;
   },
   /**
@@ -665,8 +664,8 @@ ipcMain.on('update-outline-tree', (e, outline) => {
   globals.updateOutlineTree(outline)
 })
 
-ipcMain.on('active-page-selected', (e, { outlineProjectLocation, activePage }) => {
-  const outline = globals.getOutline(outlineProjectLocation);
+ipcMain.on('active-page-selected', async (e, { outlineProjectLocation, activePage }) => {
+  const outline = await globals.getOutline(outlineProjectLocation);
   const newOutline = Object.assign({}, outline, { activePage, activePage });
   globals.setOutline(newOutline);
 })
@@ -675,8 +674,8 @@ ipcMain.on('active-page-selected', (e, { outlineProjectLocation, activePage }) =
  * @param {Event} e
  * @param {object} outlineProjectLocation, content 
  */
-ipcMain.on('save-content', (e, { outlineProjectLocation, content}) => {
-  const outline = globals.getOutline(outlineProjectLocation);
+ipcMain.on('save-content', async (e, { outlineProjectLocation, content}) => {
+  const outline = await globals.getOutline(outlineProjectLocation);
   globals.updateActivePage(outline, content);
 })
 
