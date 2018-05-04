@@ -111,8 +111,8 @@
       ready: function () {
         ipcRenderer.on('outline-updated', (e, outline) => {
           this.set('__outline', outline);
-          this.notifyPath('outline.tree');
-          this.notifyPath('outline.editing');
+          this.notifyPath('__outline.tree');
+          this.notifyPath('__outline.editing');
         });
         ipcRenderer.on('outline-file-updated', (e) => {
           this.$.toast.show('outline saved');
