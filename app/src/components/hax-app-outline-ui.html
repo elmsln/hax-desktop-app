@@ -94,7 +94,7 @@
         <paper-icon-button disabled$="__menuTransitioning" id="menuTrigger" icon="menu"></paper-icon-button>
       </div>
       <slot></slot>
-      <div id="operations">
+      <div id="operations" hidden$="[[!editingPage]]">
         <paper-icon-button id="contentSave" icon="icons:save" class="green-text text-darken-3"></paper-icon-button>
         <paper-tooltip
           for="contentSave"
@@ -147,6 +147,10 @@
           observer: '__outlineChanged'
         },
         editing: {
+          type: Boolean,
+          value: false
+        },
+        editingPage: {
           type: Boolean,
           value: false
         },

@@ -51,8 +51,16 @@ is no edit state and that it is always editing effectively.
          */
         appStoreConnection: {
           type: Object,
+        },
+        editing: {
+          type: Boolean
         }
       },
+
+      observers: [
+        '__editingChanged(editing)'
+      ],
+
       /**
        * Basic save event to make targetting easier.
        */
@@ -80,6 +88,15 @@ is no edit state and that it is always editing effectively.
         //   Polymer.HaxStore.write('editMode', true, this);
         // }, 250);
       },
+
+      __editingChanged: function (editing) {
+        if (editing) {
+          Polymer.HaxStore.write('editMode', true, this);
+        }
+        else {
+          Polymer.HaxStore.write('editMode', false, this);
+        }
+      }
     });
   </script>
 </dom-module>
