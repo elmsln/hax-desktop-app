@@ -455,7 +455,7 @@ const globals = {
       // update the outline file
       const project = this.getProject(updatedOutline.projectLocation);
       this.outlineFileUpdated(updatedOutline);
-      const outlinefileUpdated = await setOutline(project.outlineLocation, JSON.stringify(updatedOutline.tree));
+      const outlinefileUpdated = await setOutline(project.outlineLocation, updatedOutline.tree);
       this.setOutline(updatedOutline);
     }
   },
