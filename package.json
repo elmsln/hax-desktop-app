@@ -39,6 +39,6 @@
     "turndown": "^4.0.1",
     "underscore": "^1.8.3",
     "unique-file-name": "^0.1.7",
-    "uuid": "^3.2.1",
+    "uuid": "^3.2.1"
   }
 }
