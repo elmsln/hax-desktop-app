@@ -1,0 +1,316 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../hax-body-behaviors/hax-body-behaviors.html">
+<link rel="import" href="../schema-behaviors/schema-behaviors.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../materializecss-styles/materializecss-styles.html">
+<link rel="import" href="../a11y-behaviors/a11y-behaviors.html">
+
+<!--
+`self-check`
+A LRN element
+
+@demo demo/index.html
+
+@microcopy - the mental model for this element
+ -
+ -
+
+-->
+
+<dom-module id="self-check">
+  <template>
+    <style include="materializecss-styles">
+      :host {
+        display: block;
+        overflow: hidden;
+      }
+
+      :host[correct] #answer {
+        visibility: visible;
+        opacity: 1;
+        transition: all 0.5s ease-in-out;
+        height: 50px;
+      }
+
+      paper-icon-button#checkBtn {
+        float: right;
+        margin-bottom: 5px;
+        width: 50px;
+        height: 50px;
+      }
+
+      iron-icon#checkmark {
+        width: 35px;
+        height: 35px;
+        padding: 5px;
+      }
+
+      .heading {
+        text-transform: uppercase;
+        font-size: 22px;
+        margin: 10px;
+      }
+
+      #header_wrap {
+        display: inline-flex;
+        width: 100%;
+        margin: 10px 0 10px;
+      }
+
+      #question {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      #answer {
+        visibility: hidden;
+        opacity: 0;
+        background-color: #fafafa;
+        padding: 25px;
+        width: 100%;
+      }
+
+      .triangle {
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-bottom: 20px solid;
+        position: relative;
+        top: 11px;
+        left: -1px;
+      }
+    </style>
+
+    <paper-card image="[[image]]">
+      <div class="triangle" style$="border-bottom-color:[[backgroundColor]];"></div>
+      <div id="header_wrap" class$="[[backgroundColorClass]] [[textColorClass]]">
+        <iron-icon id="checkmark" icon="icons:check-circle"></iron-icon>
+        <div class="heading">[[title]]</div>
+      </div>
+      <div id="question">
+        [[question]]
+        <slot name="question"></slot>
+      </div>
+      <paper-icon-button id="checkBtn" icon="icons:expand-more" on-click="openAnswer" noink></paper-icon-button>
+    </paper-card>
+
+    <div id="answer" class="dropdown_answer">
+      [[answer]]
+      <slot></slot>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'self-check',
+      behaviors: [
+        HAXBehaviors.PropertiesBehaviors,
+        SchemaBehaviors.Schema,
+        A11yBehaviors.A11y,
+        MaterializeCSSBehaviors.ColorBehaviors,
+      ],
+      properties: {
+        /**
+         * Title.
+         */
+        title: {
+          type: String,
+          value: '',
+        },
+        /**
+         * Question.
+         */
+        question: {
+          type: String,
+          value: '',
+        },
+        /**
+         * Image.
+         */
+        image: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
+        },
+        /**
+         * Property for toggling "checkBtn".
+         */
+        correct: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true,
+        },
+        /**
+         * Adjust text color.
+         */
+        textColor: {
+          type: String,
+          value: '#ffffff',
+          reflectToAttribute: true,
+        },
+        /**
+         * Text color color.
+         */
+         textColorClass: {
+          type: String,
+          value: null,
+          reflectToAttribute: true,
+          computed: '_computeColorClass(textColor)',
+        },
+        /**
+         * Background color.
+         */
+         backgroundColor: {
+          type: String,
+          value: '#1e88e5',
+          reflectToAttribute: true,
+          observer: '_backgroundColorChanged',
+        },
+        /**
+         * Text color color.
+         */
+         backgroundColorClass: {
+          type: String,
+          reflectToAttribute: true,
+          computed: '_computeColorClass(backgroundColor)',
+        },
+      },
+
+      /**
+       * Property for toggling "checkBtn".
+       */
+
+      openAnswer: function () {
+        this.correct = !this.correct;
+      },
+      /**
+       * Attached to the DOM, now fire.
+       */
+      attached: function () {
+        // Establish hax property binding
+        let props = {
+          'canScale': true,
+          'canPosition': true,
+          'canEditSource': false,
+          'gizmo': {
+            'title': 'Self-Check',
+            'description': 'The user will be able to complete a self-check.',
+            'icon': 'icons:check-circle',
+            'color': 'orange',
+            'groups': ['Video', 'Media'],
+            'handles': [
+              {
+                'type': 'image',
+                'source': 'image',
+                'title': 'question',
+                'description': 'answer'
+              }
+            ],
+            'meta': {
+              'author': 'LRNWebComponents'
+            }
+          },
+          'settings': {
+            'quick': [
+              {
+                'property': 'title',
+                'title': 'Title',
+                'description': 'The title of the element',
+                'inputMethod': 'textfield',
+                'icon': 'editor:title',
+              },
+              {
+                'property': 'image',
+                'title': 'Image',
+                'description': 'The image of the element',
+                'inputMethod': 'textfield',
+                'icon': 'editor:insert-photo',
+              },
+
+            ],
+            'configure': [
+              {
+                'property': 'title',
+                'title': 'Title',
+                'description': 'The title of the element',
+                'inputMethod': 'textfield',
+                'icon': 'editor:title',
+              },
+              {
+                'property': 'image',
+                'title': 'Image',
+                'description': 'The image of the element',
+                'inputMethod': 'textfield',
+                'icon': 'editor:insert-photo',
+              },
+              {
+                'property': 'question',
+                'title': 'Question to ask',
+                'description': 'This is where you enter a question for the self-check.',
+                'inputMethod': 'textfield',
+                'required': true,
+              },
+              {
+                'property': 'answer',
+                'title': 'Answer',
+                'description': 'This is where you enter a question for the self-check.',
+                'inputMethod': 'textfield',
+                'required': true,
+              },
+              {
+                'property': 'backgroundColor',
+                'title': 'Background color',
+                'description': 'Select the background color used',
+                'inputMethod': 'colorpicker',
+                'icon': 'editor:format-color-fill',
+              }
+            ],
+            'advanced': [
+            ]
+          }
+        };
+        this.setHaxProperties(props);
+      },
+
+      /**
+       * Notice background color changed
+       */
+       _backgroundColorChanged: function(newValue, oldValue) {
+        if (typeof newValue !== typeof undefined && newValue != null) {
+          // sees if there's enough contrast and adjusts them accordingly
+          this.computeTextPropContrast('textColor', 'backgroundColor');
+        }
+      },
+      /**
+       * Primary color changed, spread into internals.
+       */
+      _primaryColorChanged: function(newValue, oldValue) {
+        if (newValue != null && typeof this.source !== typeof undefined) {
+          this.videoColor = newValue.substring(1);
+          // aggressive rebuild of source so vimeo picks up
+          // the color change and updates the URL to match
+          var source = this.source;
+          this.set('source', '');
+          this.set('source', source);
+        }
+      },
+      /**
+       * Make class from color value
+       */
+      _computeColorClass: function(color) {
+        if (color != null && color.toLowerCase() == '#ffffff') {
+          return 'white-text';
+        }
+        else if (color != null && color == '#000000') {
+          return 'black-text';
+        }
+        else if (color != null && color.substring(0, 1) == '#') {
+          return this._colorTransform(color.toLowerCase(), '', '');
+        }
+      },
+    });
+  </script>
+</dom-module>

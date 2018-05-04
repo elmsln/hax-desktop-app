@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>self-check demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../self-check.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic self-check demo</h3>
+      <demo-snippet>
+        <template>
+          <self-check title="self check" image="https://ieltsonlinetests.com/sites/default/files/diagramlarge.png">
+            <span slot="question">What color represents the largest slice of pie in the pie graph?</span>
+            <slot>Orange is the largest section of the pie chart.</slot>
+          </self-check>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
