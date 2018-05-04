@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const Case = require('case')
 const setOutline = require('./setOutline')
+const unusedFilename = require('unused-filename');
 
 /**
  * Takes a path
@@ -24,16 +25,12 @@ module.exports = (newOutline, oldOutline) => {
     // find out if it's a new item
     const newItem = addedIds.includes(i.id);
     if (newItem) {
-      // create the file
-      try {
-        const filename = `${Case.snake(i.title)}.html`;
-        const fileAdded = fs.writeFileSync(path.join(newOutline.projectLocation, filename), '', 'utf8')
-        // if we successfully added the file then we'll update 
-        // the item to know about the new location
-        i.location = filename;
-      } catch (error) {
-        console.log(error)
-      }
+      // get the unique filename
+      const uniqueFilename = unusedFilename.sync(path.join(newOutline.projectLocation, `${i.title}.html`))
+      const fileAdded = fs.writeFileSync(uniqueFilename, '', 'utf8')
+      // if we successfully added the file then we'll update 
+      // the item to know about the new location
+      i.location = uniqueFilename;
     }
     return i;
   })
