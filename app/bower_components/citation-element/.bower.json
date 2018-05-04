@@ -4,9 +4,9 @@
   "main": "citation-element.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.10.1",
-    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.2.0",
-    "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.0.0",
-    "schema-behaviors": "LRNWebcomponents/schema-behaviors#^0.1.0"
+    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.12.0",
+    "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.2.1",
+    "schema-behaviors": "LRNWebComponents/schema-behaviors#^0.2.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -15,14 +15,15 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebcomponents/citation-element",
-  "version": "0.1.0",
-  "_release": "0.1.0",
+  "version": "1.0.1",
+  "_release": "1.0.1",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.0",
-    "commit": "c011610c6623db32306804d7037b34462adddf42"
+    "tag": "1.0.1",
+    "commit": "081e233ec0b49e291a4f148589af632d7750243c"
   },
   "_source": "https://github.com/LRNWebcomponents/citation-element.git",
-  "_target": "^0.1.0",
-  "_originalSource": "LRNWebcomponents/citation-element"
+  "_target": "^1.0.1",
+  "_originalSource": "LRNWebcomponents/citation-element",
+  "_direct": true
 }
