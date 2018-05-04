@@ -20,7 +20,8 @@
     "paper-audio-player": "LRNWebComponents/paper-audio-player#^1.1.1",
     "lrndesign-blockquote": "LRNWebComponents/lrndesign-blockquote#^1.3.0",
     "magazine-cover": "LRNWebComponents/magazine-cover#^1.1.4",
-    "hax-body": "LRNWebComponents/hax-body#^0.12.5"
+    "hax-body": "LRNWebComponents/hax-body#^0.12.5",
+    "citation-element": "LRNWebcomponents/citation-element#^1.0.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

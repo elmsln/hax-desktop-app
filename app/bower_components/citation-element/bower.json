@@ -4,9 +4,9 @@
   "main": "citation-element.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.10.1",
-    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.2.0",
-    "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.0.0",
-    "schema-behaviors": "LRNWebcomponents/schema-behaviors#^0.1.0"
+    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.12.0",
+    "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.2.1",
+    "schema-behaviors": "LRNWebComponents/schema-behaviors#^0.2.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
