@@ -15,14 +15,13 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebComponents/lrnsys-outline",
-  "version": "0.0.1",
-  "_release": "0.0.1",
+  "_release": "409c70fd30",
   "_resolution": {
-    "type": "version",
-    "tag": "0.0.1",
+    "type": "branch",
+    "branch": "master",
     "commit": "409c70fd308ffa7356a2225b709df20c7edb5c4e"
   },
   "_source": "https://github.com/LRNWebComponents/lrnsys-outline.git",
-  "_target": "^0.0.1",
+  "_target": "master",
   "_originalSource": "LRNWebComponents/lrnsys-outline"
 }

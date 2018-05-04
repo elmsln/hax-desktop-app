@@ -23,6 +23,6 @@
     "commit": "30c93c5dc8ec8a4c952b70859f491723b309b7b5"
   },
   "_source": "https://github.com/LRNWebComponents/task-list.git",
-  "_target": "^0.1.1",
+  "_target": "^0.1.3",
   "_originalSource": "LRNWebComponents/task-list"
 }
