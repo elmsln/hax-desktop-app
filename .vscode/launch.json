@@ -15,6 +15,20 @@
       ]
     },
     {
+        "type": "node",
+        "request": "launch",
+        "name": "Mocha Current File",
+        "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+        "args": [
+            "--timeout",
+            "999999",
+            "--colors",
+            "${workspaceFolder}/test/test.js"
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen"
+    },
+    {
       "name": "Debug Demo",
       "type": "chrome",
       "request": "launch",

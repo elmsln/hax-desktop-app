@@ -4,7 +4,6 @@
   "activePage": null,
   "tree": [
     {
-      "children": [],
       "id": "66geHA2KyHWjugGlscRrLNso8nxZ3qBT",
       "indent": 0,
       "location": "README.md",
@@ -17,10 +16,9 @@
       "indent": 0,
       "order": 1,
       "parent": null,
-      "title": "NewPage"
+      "title": "Killswitch"
     },
     {
-      "children": [],
       "id": "00ZnlIoJY8qx4AhkgoZ7TzeZ0um1gGbn",
       "indent": 0,
       "location": "administration/course-overview.md",
@@ -29,7 +27,6 @@
       "title": "Course Overview"
     },
     {
-      "children": [],
       "id": "outline-item-694",
       "indent": 0,
       "location": "/Users/scienceonlineed/gitbooks/chem110/Another Page you need to know about.html",
@@ -38,7 +35,6 @@
       "title": "Another Page you need to know about"
     },
     {
-      "children": [],
       "id": "VIEucLuHoRFsQOS2Qzs6Yp45G9b3w6YJ",
       "indent": 0,
       "location": "teaching-staff.md",
@@ -47,7 +43,6 @@
       "title": "Teaching Staff"
     },
     {
-      "children": [],
       "id": "H0qNG1uUNxLErVnnrCQeOfHWDp1Mt7H9",
       "indent": 0,
       "location": "assignments.md",
@@ -56,7 +51,6 @@
       "title": "Assignments"
     },
     {
-      "children": [],
       "id": "lwCMVQXJDEjPPfOo4fHTqhlOxzAoxHZe",
       "indent": 0,
       "location": "resources.md",
@@ -65,7 +59,6 @@
       "title": "Resources"
     },
     {
-      "children": [],
       "id": "FA1FLkO9Dv5BHXt8uwsVXGpafnjgTLTb",
       "indent": 0,
       "location": "schedule.md",
@@ -74,7 +67,6 @@
       "title": "Schedule"
     },
     {
-      "children": [],
       "id": "Gsygz3yqXczsK0VBSGKTMB7OJuxa9MAa",
       "indent": 0,
       "location": "canvas-how-tos.md",
@@ -83,7 +75,6 @@
       "title": "Canvas How-Tos"
     },
     {
-      "children": [],
       "id": "ufWsSGfuFuw2mjKlqb9Q875koiv7xu2T",
       "indent": 0,
       "location": "technical-issues.md",
@@ -92,7 +83,6 @@
       "title": "Technical Issues"
     },
     {
-      "children": [],
       "id": "t1EQEQZJW9EK4vsEZkNCM5vdc43sGK1t",
       "indent": 0,
       "location": "skills-check.md",
@@ -101,7 +91,6 @@
       "title": "Skills Check"
     },
     {
-      "children": [],
       "id": "95fKXm4vlGsDHsjg8Br4EUnE3N3GBRYy",
       "indent": 0,
       "location": "algebra.md",
@@ -110,7 +99,6 @@
       "title": "Algebra"
     },
     {
-      "children": [],
       "id": "FhZalkKiA9O1ELWvs6tc20LXqKFreUe5",
       "indent": 0,
       "location": "metric-conversions.md",
@@ -119,7 +107,6 @@
       "title": "Metric Conversions"
     },
     {
-      "children": [],
       "id": "bS8m5mhJaBVlYfe6RlZyKrxWVV1ibKqx",
       "indent": 0,
       "location": "significant-figures-and-scientific-notation.md",
@@ -128,7 +115,6 @@
       "title": "Significant Figures and Scientific Notation"
     },
     {
-      "children": [],
       "id": "praTmBMG5HiYEGz04mNdfEyJCGIEA8hg",
       "indent": 0,
       "location": "density-and-dimensional-analysis.md",
@@ -137,7 +123,6 @@
       "title": "Density and Dimensional Analysis"
     },
     {
-      "children": [],
       "id": "L1Y8P4xQvETIHDvPeDg3FxGwpdBmtlE6",
       "indent": 0,
       "location": "chemical-nomenclature.md",
@@ -146,7 +131,6 @@
       "title": "Naming Chemical Compounds"
     },
     {
-      "children": [],
       "id": "QpaqJyFn1yFjKKjJonEZM71ffZbOaYwg",
       "indent": 0,
       "location": "lesson-1.md",
@@ -155,53 +139,6 @@
       "title": "Week 1"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "nItkdj2HUSz5c7xB5svovYwPdDheZbOp",
-          "indent": 1,
-          "location": "lesson-1/lesson-11/structure-of-an-atom.md",
-          "order": 0,
-          "parent": "L79JdGKLIwPg2LL0IE8x4ZK8qwH41l8P",
-          "title": "video: Structure of an atom"
-        },
-        {
-          "children": [],
-          "id": "TQbQsRLFIyvBVHtIg2hIfnJXFIVCVOwu",
-          "indent": 1,
-          "location": "lesson-1/lesson-11/quiz-test-yourself.md",
-          "order": 1,
-          "parent": "L79JdGKLIwPg2LL0IE8x4ZK8qwH41l8P",
-          "title": "Try it!"
-        },
-        {
-          "children": [],
-          "id": "xS7hYzSgrMzkXfZIaGt5BaCRsbCUSusN",
-          "indent": 1,
-          "location": "lesson-1/lesson-11/isotope-abundance/video-overview.md",
-          "order": 2,
-          "parent": "L79JdGKLIwPg2LL0IE8x4ZK8qwH41l8P",
-          "title": "video: Isotopes and Atomic Mass"
-        },
-        {
-          "children": [],
-          "id": "j1DMEhW3R6c4BAvI7MERG6jwG10rRpAw",
-          "indent": 1,
-          "location": "lesson-1/lesson-11/isotope-abundance/video-solved-problem.md",
-          "order": 3,
-          "parent": "L79JdGKLIwPg2LL0IE8x4ZK8qwH41l8P",
-          "title": "video: Solved problem"
-        },
-        {
-          "children": [],
-          "id": "JqfbbKig6YYhGUoIhyGYjkaYfYRSSK2R",
-          "indent": 1,
-          "location": "lesson-1/lesson-11/isotope-abundance/try-it.md",
-          "order": 4,
-          "parent": "L79JdGKLIwPg2LL0IE8x4ZK8qwH41l8P",
-          "title": "Try it!"
-        }
-      ],
       "id": "L79JdGKLIwPg2LL0IE8x4ZK8qwH41l8P",
       "indent": 0,
       "location": "lesson-1/lesson-11.md",
@@ -210,7 +147,6 @@
       "title": "Atoms and the Elements"
     },
     {
-      "children": [],
       "id": "nItkdj2HUSz5c7xB5svovYwPdDheZbOp",
       "indent": 1,
       "location": "lesson-1/lesson-11/structure-of-an-atom.md",
@@ -219,7 +155,6 @@
       "title": "video: Structure of an atom"
     },
     {
-      "children": [],
       "id": "TQbQsRLFIyvBVHtIg2hIfnJXFIVCVOwu",
       "indent": 1,
       "location": "lesson-1/lesson-11/quiz-test-yourself.md",
@@ -228,7 +163,6 @@
       "title": "Try it!"
     },
     {
-      "children": [],
       "id": "xS7hYzSgrMzkXfZIaGt5BaCRsbCUSusN",
       "indent": 1,
       "location": "lesson-1/lesson-11/isotope-abundance/video-overview.md",
@@ -237,7 +171,6 @@
       "title": "video: Isotopes and Atomic Mass"
     },
     {
-      "children": [],
       "id": "j1DMEhW3R6c4BAvI7MERG6jwG10rRpAw",
       "indent": 1,
       "location": "lesson-1/lesson-11/isotope-abundance/video-solved-problem.md",
@@ -246,7 +179,6 @@
       "title": "video: Solved problem"
     },
     {
-      "children": [],
       "id": "JqfbbKig6YYhGUoIhyGYjkaYfYRSSK2R",
       "indent": 1,
       "location": "lesson-1/lesson-11/isotope-abundance/try-it.md",
@@ -255,35 +187,6 @@
       "title": "Try it!"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "PjxjcdgZP26dgr1RyTeRAw5VDromn22r",
-          "indent": 1,
-          "location": "lesson-1/lesson-11/ions-and-molecules/molecules.md",
-          "order": 0,
-          "parent": "cCd0tXUxMPmnSiC5sluIef3HLbCCYCoU",
-          "title": "video: Atoms versus Molecules"
-        },
-        {
-          "children": [],
-          "id": "wHDbarGXbrgHmuNdhfUsrUX4WmOnnyDT",
-          "indent": 1,
-          "location": "lesson-1/lesson-11/ions-and-molecules/video-ions.md",
-          "order": 1,
-          "parent": "cCd0tXUxMPmnSiC5sluIef3HLbCCYCoU",
-          "title": "video: Ions"
-        },
-        {
-          "children": [],
-          "id": "jbjHxEADVhRKSJpeRDWMctiBnxuMCLjF",
-          "indent": 1,
-          "location": "lesson-1/lesson-11/ions-and-molecules/try-it.md",
-          "order": 2,
-          "parent": "cCd0tXUxMPmnSiC5sluIef3HLbCCYCoU",
-          "title": "Try it!"
-        }
-      ],
       "id": "cCd0tXUxMPmnSiC5sluIef3HLbCCYCoU",
       "indent": 0,
       "location": "lesson-1/lesson-11/ions-and-molecules.md",
@@ -292,7 +195,6 @@
       "title": "Ions and Molecules"
     },
     {
-      "children": [],
       "id": "PjxjcdgZP26dgr1RyTeRAw5VDromn22r",
       "indent": 1,
       "location": "lesson-1/lesson-11/ions-and-molecules/molecules.md",
@@ -301,7 +203,6 @@
       "title": "video: Atoms versus Molecules"
     },
     {
-      "children": [],
       "id": "wHDbarGXbrgHmuNdhfUsrUX4WmOnnyDT",
       "indent": 1,
       "location": "lesson-1/lesson-11/ions-and-molecules/video-ions.md",
@@ -310,7 +211,6 @@
       "title": "video: Ions"
     },
     {
-      "children": [],
       "id": "jbjHxEADVhRKSJpeRDWMctiBnxuMCLjF",
       "indent": 1,
       "location": "lesson-1/lesson-11/ions-and-molecules/try-it.md",
@@ -319,26 +219,6 @@
       "title": "Try it!"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "9btp0NbKwmSX8XkjHvhGS5UhWguC4qdt",
-          "indent": 1,
-          "location": "lesson-1/video-1.md",
-          "order": 0,
-          "parent": "zNKeJOZTkbdPj6QgD85QYzWFOGuzM7Aa",
-          "title": "video: The mole"
-        },
-        {
-          "children": [],
-          "id": "9PtwrClr9kNI4czF8OdKkHQYB8pORdPM",
-          "indent": 1,
-          "location": "lesson-1/test-yourself.md",
-          "order": 1,
-          "parent": "zNKeJOZTkbdPj6QgD85QYzWFOGuzM7Aa",
-          "title": "Try it!"
-        }
-      ],
       "id": "zNKeJOZTkbdPj6QgD85QYzWFOGuzM7Aa",
       "indent": 0,
       "location": "lesson-1/the-mole.md",
@@ -347,7 +227,6 @@
       "title": "The Mole"
     },
     {
-      "children": [],
       "id": "9btp0NbKwmSX8XkjHvhGS5UhWguC4qdt",
       "indent": 1,
       "location": "lesson-1/video-1.md",
@@ -356,7 +235,6 @@
       "title": "video: The mole"
     },
     {
-      "children": [],
       "id": "9PtwrClr9kNI4czF8OdKkHQYB8pORdPM",
       "indent": 1,
       "location": "lesson-1/test-yourself.md",
@@ -365,44 +243,6 @@
       "title": "Try it!"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "CaOeCeYFGOEiQeeY8UlrAReExflgBH5t",
-          "indent": 1,
-          "location": "lesson-1/intro-to-energy/video-energy.md",
-          "order": 0,
-          "parent": "KbTnOYIrVSiMScxSOA5KleFY2vK2EYRd",
-          "title": "video: Intro to Energy"
-        },
-        {
-          "children": [],
-          "id": "OC7wqX07aL3FWSr9lmQXBeqpNbFoknSL",
-          "indent": 1,
-          "location": "lesson-1/intro-to-energy/video-state-functions.md",
-          "order": 1,
-          "parent": "KbTnOYIrVSiMScxSOA5KleFY2vK2EYRd",
-          "title": "video: State Functions"
-        },
-        {
-          "children": [],
-          "id": "D6TJWlhCa6NRJPMsb0wMz7rqCRsLdGrh",
-          "indent": 1,
-          "location": "lesson-1/intro-to-energy/video-electrostatic-potential-energy.md",
-          "order": 2,
-          "parent": "KbTnOYIrVSiMScxSOA5KleFY2vK2EYRd",
-          "title": "video: Electrostatic Potential Energy"
-        },
-        {
-          "children": [],
-          "id": "MmZrpB9NSFuVS8AMTblwhXV7VfayVWMU",
-          "indent": 1,
-          "location": "lesson-1/intro-to-energy/enthalpy.md",
-          "order": 3,
-          "parent": "KbTnOYIrVSiMScxSOA5KleFY2vK2EYRd",
-          "title": "video: Enthalpy"
-        }
-      ],
       "id": "KbTnOYIrVSiMScxSOA5KleFY2vK2EYRd",
       "indent": 0,
       "location": "lesson-1/intro-to-energy.md",
@@ -411,7 +251,6 @@
       "title": "What is Energy?"
     },
     {
-      "children": [],
       "id": "CaOeCeYFGOEiQeeY8UlrAReExflgBH5t",
       "indent": 1,
       "location": "lesson-1/intro-to-energy/video-energy.md",
@@ -420,7 +259,6 @@
       "title": "video: Intro to Energy"
     },
     {
-      "children": [],
       "id": "OC7wqX07aL3FWSr9lmQXBeqpNbFoknSL",
       "indent": 1,
       "location": "lesson-1/intro-to-energy/video-state-functions.md",
@@ -429,7 +267,6 @@
       "title": "video: State Functions"
     },
     {
-      "children": [],
       "id": "D6TJWlhCa6NRJPMsb0wMz7rqCRsLdGrh",
       "indent": 1,
       "location": "lesson-1/intro-to-energy/video-electrostatic-potential-energy.md",
@@ -438,7 +275,6 @@
       "title": "video: Electrostatic Potential Energy"
     },
     {
-      "children": [],
       "id": "MmZrpB9NSFuVS8AMTblwhXV7VfayVWMU",
       "indent": 1,
       "location": "lesson-1/intro-to-energy/enthalpy.md",
@@ -447,7 +283,6 @@
       "title": "video: Enthalpy"
     },
     {
-      "children": [],
       "id": "u0G9sgTaay99HqlmjiBbCNgVZ12F3vSN",
       "indent": 0,
       "location": "lesson-1/weekly-recap.md",
@@ -456,7 +291,6 @@
       "title": "Weekly Recap"
     },
     {
-      "children": [],
       "id": "Q77Vek9SUOngFv2KODJRl3e0uqWAjh6S",
       "indent": 0,
       "location": "lesson-2.md",
@@ -465,35 +299,6 @@
       "title": "Week 2"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "eaqbC8vfzrnmtXOHzesZprMviyo6tCPM",
-          "indent": 1,
-          "location": "lesson-1/light-energy/video-light-energy.md",
-          "order": 0,
-          "parent": "zfppTJAY1EZGKKRcuDxIOFuRtAr57GCV",
-          "title": "video: Characteristics of Light"
-        },
-        {
-          "children": [],
-          "id": "JPyQuKlsIM2Q18EfZasRXJ7P3NqfBTxn",
-          "indent": 1,
-          "location": "lesson-1/light-energy/video-light-as-a-particle.md",
-          "order": 1,
-          "parent": "zfppTJAY1EZGKKRcuDxIOFuRtAr57GCV",
-          "title": "video: Light as a Particle"
-        },
-        {
-          "children": [],
-          "id": "TOAip3ZRc0gQMi5lKnHFdxKhdWqe2vaW",
-          "indent": 1,
-          "location": "lesson-1/light-energy/try-it.md",
-          "order": 2,
-          "parent": "zfppTJAY1EZGKKRcuDxIOFuRtAr57GCV",
-          "title": "Try it!"
-        }
-      ],
       "id": "zfppTJAY1EZGKKRcuDxIOFuRtAr57GCV",
       "indent": 0,
       "location": "lesson-1/light-energy.md",
@@ -502,7 +307,6 @@
       "title": "Light energy"
     },
     {
-      "children": [],
       "id": "eaqbC8vfzrnmtXOHzesZprMviyo6tCPM",
       "indent": 1,
       "location": "lesson-1/light-energy/video-light-energy.md",
@@ -511,7 +315,6 @@
       "title": "video: Characteristics of Light"
     },
     {
-      "children": [],
       "id": "JPyQuKlsIM2Q18EfZasRXJ7P3NqfBTxn",
       "indent": 1,
       "location": "lesson-1/light-energy/video-light-as-a-particle.md",
@@ -520,7 +323,6 @@
       "title": "video: Light as a Particle"
     },
     {
-      "children": [],
       "id": "TOAip3ZRc0gQMi5lKnHFdxKhdWqe2vaW",
       "indent": 1,
       "location": "lesson-1/light-energy/try-it.md",
@@ -529,7 +331,6 @@
       "title": "Try it!"
     },
     {
-      "children": [],
       "id": "izHyjsozwdqq0TnrIwCdHHbVbjARz7LV",
       "indent": 0,
       "location": "lesson-1/line-spectra.md",
@@ -538,26 +339,6 @@
       "title": "Line Spectra"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "z2QtB1LeRoDdkDb1WBIzGB2ncupUWSAx",
-          "indent": 1,
-          "location": "lesson-1/bohr-model/bohrs-model-of-the-atom.md",
-          "order": 0,
-          "parent": "lfVjrJW6up1fPxjOst1Fy3xDoSIlJjl5",
-          "title": "Bohr's Model of the Atom"
-        },
-        {
-          "children": [],
-          "id": "4vkAOH1UHFFEIcapMxksieflyEriRk9U",
-          "indent": 1,
-          "location": "lesson-1/bohr-model/bohr-model-calculations.md",
-          "order": 1,
-          "parent": "lfVjrJW6up1fPxjOst1Fy3xDoSIlJjl5",
-          "title": "Try it!"
-        }
-      ],
       "id": "lfVjrJW6up1fPxjOst1Fy3xDoSIlJjl5",
       "indent": 0,
       "location": "lesson-1/bohr-model.md",
@@ -566,7 +347,6 @@
       "title": "Bohr Model"
     },
     {
-      "children": [],
       "id": "z2QtB1LeRoDdkDb1WBIzGB2ncupUWSAx",
       "indent": 1,
       "location": "lesson-1/bohr-model/bohrs-model-of-the-atom.md",
@@ -575,7 +355,6 @@
       "title": "Bohr's Model of the Atom"
     },
     {
-      "children": [],
       "id": "4vkAOH1UHFFEIcapMxksieflyEriRk9U",
       "indent": 1,
       "location": "lesson-1/bohr-model/bohr-model-calculations.md",
@@ -584,7 +363,6 @@
       "title": "Try it!"
     },
     {
-      "children": [],
       "id": "94HeYpz8PRlsgO7edQkfKVQ8h58d2L7E",
       "indent": 0,
       "location": "lesson-1/the-quantum-world.md",
@@ -593,26 +371,6 @@
       "title": "The Quantum World"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "YnXZSuOHfH2B0XdlIX847mENhiuZ3zcu",
-          "indent": 1,
-          "location": "lesson-2/quantum-numbers/quantum-numbers.md",
-          "order": 0,
-          "parent": "mMFUIpMFW7fAYDsNKXkLbWJNp6Ew6F9m",
-          "title": "Quantum Numbers"
-        },
-        {
-          "children": [],
-          "id": "ymMcyjy2o4PmbyqMC1OVmAoCj11jve2w",
-          "indent": 1,
-          "location": "lesson-2/quantum-numbers/quantum-number-practice.md",
-          "order": 1,
-          "parent": "mMFUIpMFW7fAYDsNKXkLbWJNp6Ew6F9m",
-          "title": "Try it!"
-        }
-      ],
       "id": "mMFUIpMFW7fAYDsNKXkLbWJNp6Ew6F9m",
       "indent": 0,
       "location": "lesson-2/quantum-numbers.md",
@@ -621,7 +379,6 @@
       "title": "Quantum Numbers"
     },
     {
-      "children": [],
       "id": "YnXZSuOHfH2B0XdlIX847mENhiuZ3zcu",
       "indent": 1,
       "location": "lesson-2/quantum-numbers/quantum-numbers.md",
@@ -630,7 +387,6 @@
       "title": "Quantum Numbers"
     },
     {
-      "children": [],
       "id": "ymMcyjy2o4PmbyqMC1OVmAoCj11jve2w",
       "indent": 1,
       "location": "lesson-2/quantum-numbers/quantum-number-practice.md",
@@ -639,17 +395,6 @@
       "title": "Try it!"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "79ebfXrCErajom2LCYnQ6xXTpzAJPuBB",
-          "indent": 1,
-          "location": "lesson-1/orbitals/orbital-characteristics.md",
-          "order": 0,
-          "parent": "2y4yA5P7RjhYkOCXeqCQwIQwHdQkICjw",
-          "title": "Orbital Characteristics"
-        }
-      ],
       "id": "2y4yA5P7RjhYkOCXeqCQwIQwHdQkICjw",
       "indent": 0,
       "location": "lesson-1/orbitals.md",
@@ -658,7 +403,6 @@
       "title": "Orbitals"
     },
     {
-      "children": [],
       "id": "79ebfXrCErajom2LCYnQ6xXTpzAJPuBB",
       "indent": 1,
       "location": "lesson-1/orbitals/orbital-characteristics.md",
@@ -667,7 +411,6 @@
       "title": "Orbital Characteristics"
     },
     {
-      "children": [],
       "id": "qZqzWt58ZPVJt7VE5qiu3M2f7cFzFlMD",
       "indent": 0,
       "location": "lesson-2/weekly-recap.md",
@@ -676,7 +419,6 @@
       "title": "Weekly Recap"
     },
     {
-      "children": [],
       "id": "q648TFSK30XJw3Ec4h2naqAyAVX8zqEz",
       "indent": 0,
       "location": "lesson-3.md",
@@ -685,7 +427,6 @@
       "title": "Week 3"
     },
     {
-      "children": [],
       "id": "fhOv3zvcYdFpesnqNU2g1IUcodM6Tj65",
       "indent": 0,
       "location": "effective-nuclear-charge.md",
@@ -694,7 +435,6 @@
       "title": "Effective Nuclear Charge"
     },
     {
-      "children": [],
       "id": "brVSgLtZDGJlB6gFJinuMR6gnBJh5MbW",
       "indent": 0,
       "location": "electron-spin.md",
@@ -703,62 +443,6 @@
       "title": "Electron Spin"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "9WkQhmdCZ17spnA506hK5F0Lth0mq3Mm",
-          "indent": 1,
-          "location": "lesson-3/electron-configuration/orbital-filling.md",
-          "order": 0,
-          "parent": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
-          "title": "Orbital Filling"
-        },
-        {
-          "children": [],
-          "id": "mXWeGbbHRa1heVMcj2L086dOjPTbNHqF",
-          "indent": 1,
-          "location": "lesson-3/electron-configuration/excited-states.md",
-          "order": 1,
-          "parent": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
-          "title": "Excited States"
-        },
-        {
-          "children": [],
-          "id": "liTTcZr65nAybRhZNuuJy2RNvFUnRLH3",
-          "indent": 1,
-          "location": "lesson-3/electron-configuration/the-periodic-table.md",
-          "order": 2,
-          "parent": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
-          "title": "The Periodic Table"
-        },
-        {
-          "children": [],
-          "id": "NUuWPSTAxVLN5wX04ngncFXTuHvP3Y0z",
-          "indent": 1,
-          "location": "lesson-3/electron-configuration/classification-of-electrons.md",
-          "order": 3,
-          "parent": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
-          "title": "Classification of Electrons"
-        },
-        {
-          "children": [],
-          "id": "keXcXJvPaFOgote3B3o9TQ11kqlF0Iyf",
-          "indent": 1,
-          "location": "lesson-3/electron-configuration/configuration-of-ions.md",
-          "order": 4,
-          "parent": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
-          "title": "Configuration of Ions"
-        },
-        {
-          "children": [],
-          "id": "7NevnhJpQiyXHNjFbpLcAbUMJJFpkCGN",
-          "indent": 1,
-          "location": "lesson-3/electron-configuration/try-it.md",
-          "order": 5,
-          "parent": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
-          "title": "Try it!"
-        }
-      ],
       "id": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
       "indent": 0,
       "location": "lesson-3/electron-configuration.md",
@@ -767,7 +451,6 @@
       "title": "Electron Configuration"
     },
     {
-      "children": [],
       "id": "9WkQhmdCZ17spnA506hK5F0Lth0mq3Mm",
       "indent": 1,
       "location": "lesson-3/electron-configuration/orbital-filling.md",
@@ -776,7 +459,6 @@
       "title": "Orbital Filling"
     },
     {
-      "children": [],
       "id": "mXWeGbbHRa1heVMcj2L086dOjPTbNHqF",
       "indent": 1,
       "location": "lesson-3/electron-configuration/excited-states.md",
@@ -785,7 +467,6 @@
       "title": "Excited States"
     },
     {
-      "children": [],
       "id": "liTTcZr65nAybRhZNuuJy2RNvFUnRLH3",
       "indent": 1,
       "location": "lesson-3/electron-configuration/the-periodic-table.md",
@@ -794,7 +475,6 @@
       "title": "The Periodic Table"
     },
     {
-      "children": [],
       "id": "NUuWPSTAxVLN5wX04ngncFXTuHvP3Y0z",
       "indent": 1,
       "location": "lesson-3/electron-configuration/classification-of-electrons.md",
@@ -803,7 +483,6 @@
       "title": "Classification of Electrons"
     },
     {
-      "children": [],
       "id": "keXcXJvPaFOgote3B3o9TQ11kqlF0Iyf",
       "indent": 1,
       "location": "lesson-3/electron-configuration/configuration-of-ions.md",
@@ -812,7 +491,6 @@
       "title": "Configuration of Ions"
     },
     {
-      "children": [],
       "id": "7NevnhJpQiyXHNjFbpLcAbUMJJFpkCGN",
       "indent": 1,
       "location": "lesson-3/electron-configuration/try-it.md",
@@ -821,44 +499,6 @@
       "title": "Try it!"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "s1SndM23G4dF9GLRfDldrGTseIorBvyR",
-          "indent": 1,
-          "location": "lesson-3/video-atomic-radius.md",
-          "order": 0,
-          "parent": "sTUEaUin6NVF9roW3X1BwKW6F99O4pO9",
-          "title": "video: Atomic Radius"
-        },
-        {
-          "children": [],
-          "id": "y9B7S7fP2T49oUwbouGtp3NBuFDutxI4",
-          "indent": 1,
-          "location": "lesson-3/video-ionization-energt.md",
-          "order": 1,
-          "parent": "sTUEaUin6NVF9roW3X1BwKW6F99O4pO9",
-          "title": "video: Ionization Energy"
-        },
-        {
-          "children": [],
-          "id": "9J0ZNZ7kvdcgKSMZSlJzXFlN0V6uDn2D",
-          "indent": 1,
-          "location": "lesson-3/video-electron-affinity.md",
-          "order": 2,
-          "parent": "sTUEaUin6NVF9roW3X1BwKW6F99O4pO9",
-          "title": "video: Electron Affinity"
-        },
-        {
-          "children": [],
-          "id": "nVByIt0fnrb6ghL2m4Xl4jUaA08YKKSN",
-          "indent": 1,
-          "location": "lesson-3/ion-size.md",
-          "order": 3,
-          "parent": "sTUEaUin6NVF9roW3X1BwKW6F99O4pO9",
-          "title": "video: Ion Size"
-        }
-      ],
       "id": "sTUEaUin6NVF9roW3X1BwKW6F99O4pO9",
       "indent": 0,
       "location": "periodic-trends.md",
@@ -867,7 +507,6 @@
       "title": "Periodic Trends"
     },
     {
-      "children": [],
       "id": "s1SndM23G4dF9GLRfDldrGTseIorBvyR",
       "indent": 1,
       "location": "lesson-3/video-atomic-radius.md",
@@ -876,7 +515,6 @@
       "title": "video: Atomic Radius"
     },
     {
-      "children": [],
       "id": "y9B7S7fP2T49oUwbouGtp3NBuFDutxI4",
       "indent": 1,
       "location": "lesson-3/video-ionization-energt.md",
@@ -885,7 +523,6 @@
       "title": "video: Ionization Energy"
     },
     {
-      "children": [],
       "id": "9J0ZNZ7kvdcgKSMZSlJzXFlN0V6uDn2D",
       "indent": 1,
       "location": "lesson-3/video-electron-affinity.md",
@@ -894,7 +531,6 @@
       "title": "video: Electron Affinity"
     },
     {
-      "children": [],
       "id": "nVByIt0fnrb6ghL2m4Xl4jUaA08YKKSN",
       "indent": 1,
       "location": "lesson-3/ion-size.md",
@@ -903,7 +539,6 @@
       "title": "video: Ion Size"
     },
     {
-      "children": [],
       "id": "wMTs14T8topGlX8hGZPnYRexTvc8vkj4",
       "indent": 0,
       "location": "exam-1.md",
@@ -912,7 +547,6 @@
       "title": "Exam 1 Preparation"
     },
     {
-      "children": [],
       "id": "1mlWqjneIr99VuSb7iGD0WlA23qqo1Au",
       "indent": 0,
       "location": "week-4.md",
@@ -921,7 +555,6 @@
       "title": "Week 4"
     },
     {
-      "children": [],
       "id": "bpAU6emz8NvZOxQ7IOzLKNMMIgGoWCrp",
       "indent": 0,
       "location": "week-4/introduction-to-molecules.md",
@@ -930,7 +563,6 @@
       "title": "Introduction to Compounds"
     },
     {
-      "children": [],
       "id": "5Sx8wxIXPH7PYwNwbjOpfFbG5MeLZzSk",
       "indent": 0,
       "location": "week-4/calculating-percent-composition.md",
@@ -939,7 +571,6 @@
       "title": "Percent Composition"
     },
     {
-      "children": [],
       "id": "vBrtLEAkCkqNNbIAbukaEbxLRuPXnA5S",
       "indent": 0,
       "location": "week-4/determining-chemical-formula.md",
@@ -948,7 +579,6 @@
       "title": "Determining Chemical Formula"
     },
     {
-      "children": [],
       "id": "DnDQ55qdBsaazRJz2A71qpiZDpv2Aa9m",
       "indent": 0,
       "location": "week-4/introduction-to-bonding.md",
@@ -957,7 +587,6 @@
       "title": "Introduction to Bonding"
     },
     {
-      "children": [],
       "id": "2CAy5gC1Lk6zL426O78G5yMwnzKcNXii",
       "indent": 0,
       "location": "week-4/ionic-bonding.md",
@@ -966,7 +595,6 @@
       "title": "Ionic Bonding"
     },
     {
-      "children": [],
       "id": "3qlDCYoS9WhM0ECPDr763aCZmGs3ixnf",
       "indent": 0,
       "location": "week-5.md",
@@ -975,7 +603,6 @@
       "title": "Week 5"
     },
     {
-      "children": [],
       "id": "NNxksKJclrbOPNwbR4FOS6f4DQukRj77",
       "indent": 0,
       "location": "test.md",
@@ -984,7 +611,6 @@
       "title": "Covalent Bonding"
     },
     {
-      "children": [],
       "id": "P26U4ICXSL3itzB9Hcf992qB9D99ia18",
       "indent": 0,
       "location": "bond-polarity-and-electronegativity.md",
@@ -993,44 +619,6 @@
       "title": "Bond Polarity & Electronegativity"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "RadgvPmmPN9n0wdGqri4wbnk67vUbh8P",
-          "indent": 1,
-          "location": "lewis-structures/formal-charge.md",
-          "order": 0,
-          "parent": "DfurjqeJc5Tz7tJXjygNLvkmvhzb0IiM",
-          "title": "Formal Charge"
-        },
-        {
-          "children": [],
-          "id": "DnI8tUKLtslmEoemAfRNlwNQDVLWXbce",
-          "indent": 1,
-          "location": "lewis-structures/drawing-lewis-structures.md",
-          "order": 1,
-          "parent": "DfurjqeJc5Tz7tJXjygNLvkmvhzb0IiM",
-          "title": "Drawing Lewis Structures"
-        },
-        {
-          "children": [],
-          "id": "AexzhCQNhnlL39ly2ospOZO2RmtbVF4t",
-          "indent": 1,
-          "location": "lewis-structures/try-it-drawing-lewis-structures.md",
-          "order": 2,
-          "parent": "DfurjqeJc5Tz7tJXjygNLvkmvhzb0IiM",
-          "title": "Try it: Drawing Lewis Structures"
-        },
-        {
-          "children": [],
-          "id": "pEUF7bD0gXrfaWuwMKbcvkqSZfJoI2Rl",
-          "indent": 1,
-          "location": "lewis-structures/skeletal-structures.md",
-          "order": 3,
-          "parent": "DfurjqeJc5Tz7tJXjygNLvkmvhzb0IiM",
-          "title": "Skeletal Structures"
-        }
-      ],
       "id": "DfurjqeJc5Tz7tJXjygNLvkmvhzb0IiM",
       "indent": 0,
       "location": "lewis-structures.md",
@@ -1039,7 +627,6 @@
       "title": "Lewis Structures"
     },
     {
-      "children": [],
       "id": "RadgvPmmPN9n0wdGqri4wbnk67vUbh8P",
       "indent": 1,
       "location": "lewis-structures/formal-charge.md",
@@ -1048,7 +635,6 @@
       "title": "Formal Charge"
     },
     {
-      "children": [],
       "id": "DnI8tUKLtslmEoemAfRNlwNQDVLWXbce",
       "indent": 1,
       "location": "lewis-structures/drawing-lewis-structures.md",
@@ -1057,7 +643,6 @@
       "title": "Drawing Lewis Structures"
     },
     {
-      "children": [],
       "id": "AexzhCQNhnlL39ly2ospOZO2RmtbVF4t",
       "indent": 1,
       "location": "lewis-structures/try-it-drawing-lewis-structures.md",
@@ -1066,7 +651,6 @@
       "title": "Try it: Drawing Lewis Structures"
     },
     {
-      "children": [],
       "id": "pEUF7bD0gXrfaWuwMKbcvkqSZfJoI2Rl",
       "indent": 1,
       "location": "lewis-structures/skeletal-structures.md",
@@ -1075,7 +659,6 @@
       "title": "Skeletal Structures"
     },
     {
-      "children": [],
       "id": "xTA5BV9oC9wMKE69v4LlVGTyggIUEAjB",
       "indent": 0,
       "location": "week-6.md",
@@ -1084,7 +667,6 @@
       "title": "Week 6"
     },
     {
-      "children": [],
       "id": "zBPk1wItth4zDHqD49liRxjWHqdmIzW8",
       "indent": 0,
       "location": "exceptions-to-the-octet.md",
@@ -1093,7 +675,6 @@
       "title": "Exceptions to the Octet"
     },
     {
-      "children": [],
       "id": "GF8nSc9RaEietaUtxV6Pf0tGuQWyt3ii",
       "indent": 0,
       "location": "resonance.md",
@@ -1102,35 +683,6 @@
       "title": "Resonance"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "nESoYZtBuQ4sXehc1WoxUod1SOvLcaUX",
-          "indent": 1,
-          "location": "intro-to-geometry.md",
-          "order": 0,
-          "parent": "MlxEXJNZ8yRHukc5iUuQ17S0EQMHBw9S",
-          "title": "Intro to Geometry"
-        },
-        {
-          "children": [],
-          "id": "PVLlkYLVTq6ANgcWhPY614vBTl21ZHSK",
-          "indent": 1,
-          "location": "key-concepts.md",
-          "order": 1,
-          "parent": "MlxEXJNZ8yRHukc5iUuQ17S0EQMHBw9S",
-          "title": "Key Concepts"
-        },
-        {
-          "children": [],
-          "id": "6HDTxLv8oVAqWNMvzbqlWfbXKj3O3wSc",
-          "indent": 1,
-          "location": "try-it-electron-domain-geometry.md",
-          "order": 2,
-          "parent": "MlxEXJNZ8yRHukc5iUuQ17S0EQMHBw9S",
-          "title": "Try it: Electron Domain Geometry"
-        }
-      ],
       "id": "MlxEXJNZ8yRHukc5iUuQ17S0EQMHBw9S",
       "indent": 0,
       "location": "vsepr-theory.md",
@@ -1139,7 +691,6 @@
       "title": "VSEPR Theory"
     },
     {
-      "children": [],
       "id": "nESoYZtBuQ4sXehc1WoxUod1SOvLcaUX",
       "indent": 1,
       "location": "intro-to-geometry.md",
@@ -1148,7 +699,6 @@
       "title": "Intro to Geometry"
     },
     {
-      "children": [],
       "id": "PVLlkYLVTq6ANgcWhPY614vBTl21ZHSK",
       "indent": 1,
       "location": "key-concepts.md",
@@ -1157,7 +707,6 @@
       "title": "Key Concepts"
     },
     {
-      "children": [],
       "id": "6HDTxLv8oVAqWNMvzbqlWfbXKj3O3wSc",
       "indent": 1,
       "location": "try-it-electron-domain-geometry.md",
@@ -1166,7 +715,6 @@
       "title": "Try it: Electron Domain Geometry"
     },
     {
-      "children": [],
       "id": "NSlYOlXqLaISU0I3SM3FrTG4J4FCqsvr",
       "indent": 0,
       "location": "week-7.md",
@@ -1175,7 +723,6 @@
       "title": "Week 7"
     },
     {
-      "children": [],
       "id": "tFXqQ0lC0qmFJjLeBVUu12c81nMII6zh",
       "indent": 0,
       "location": "lesson-1/molecular-geometry.md",
@@ -1184,7 +731,6 @@
       "title": "Molecular Geometry"
     },
     {
-      "children": [],
       "id": "maryXngV0qWiZYovNxpY2sRnSExZhcJC",
       "indent": 0,
       "location": "lesson-1/molecular-polarity.md",
@@ -1193,53 +739,6 @@
       "title": "Molecular Polarity"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "xJ26OiNqdgcX5SimoRXATbBa0BQV4Jg7",
-          "indent": 1,
-          "location": "lesson-1/hybridization/sp3-hybridization.md",
-          "order": 0,
-          "parent": "IzxDNc3ylC4WApFcAhU7G59QWTUWC6fL",
-          "title": "sp3 hybridization"
-        },
-        {
-          "children": [],
-          "id": "n8x0KGmNsOgNwJyI4rA1vpyIbiAuCCJs",
-          "indent": 1,
-          "location": "lesson-1/hybridization/sp2-hybridization.md",
-          "order": 1,
-          "parent": "IzxDNc3ylC4WApFcAhU7G59QWTUWC6fL",
-          "title": "sp2 hybridization"
-        },
-        {
-          "children": [],
-          "id": "pxfpFGb42ByO2dRGE7qY1WmC2MFAcnQn",
-          "indent": 1,
-          "location": "lesson-1/hybridization/sp-hybridization.md",
-          "order": 2,
-          "parent": "IzxDNc3ylC4WApFcAhU7G59QWTUWC6fL",
-          "title": "sp hybridization"
-        },
-        {
-          "children": [],
-          "id": "nZqgkyRoRRZ2D6MEBlUzoxAdMp742w1V",
-          "indent": 1,
-          "location": "lesson-1/hybridization/delocalized-pi-bonding.md",
-          "order": 3,
-          "parent": "IzxDNc3ylC4WApFcAhU7G59QWTUWC6fL",
-          "title": "Delocalized pi bonding"
-        },
-        {
-          "children": [],
-          "id": "thzdrAwlbhtyg00gTg1uWxMEQfCOGcuv",
-          "indent": 1,
-          "location": "lesson-1/hybridization/test-yourself.md",
-          "order": 4,
-          "parent": "IzxDNc3ylC4WApFcAhU7G59QWTUWC6fL",
-          "title": "Test Yourself"
-        }
-      ],
       "id": "IzxDNc3ylC4WApFcAhU7G59QWTUWC6fL",
       "indent": 0,
       "location": "lesson-1/hybridization.md",
@@ -1248,7 +747,6 @@
       "title": "Valence Bond Theory"
     },
     {
-      "children": [],
       "id": "xJ26OiNqdgcX5SimoRXATbBa0BQV4Jg7",
       "indent": 1,
       "location": "lesson-1/hybridization/sp3-hybridization.md",
@@ -1257,7 +755,6 @@
       "title": "sp3 hybridization"
     },
     {
-      "children": [],
       "id": "n8x0KGmNsOgNwJyI4rA1vpyIbiAuCCJs",
       "indent": 1,
       "location": "lesson-1/hybridization/sp2-hybridization.md",
@@ -1266,7 +763,6 @@
       "title": "sp2 hybridization"
     },
     {
-      "children": [],
       "id": "pxfpFGb42ByO2dRGE7qY1WmC2MFAcnQn",
       "indent": 1,
       "location": "lesson-1/hybridization/sp-hybridization.md",
@@ -1275,7 +771,6 @@
       "title": "sp hybridization"
     },
     {
-      "children": [],
       "id": "nZqgkyRoRRZ2D6MEBlUzoxAdMp742w1V",
       "indent": 1,
       "location": "lesson-1/hybridization/delocalized-pi-bonding.md",
@@ -1284,7 +779,6 @@
       "title": "Delocalized pi bonding"
     },
     {
-      "children": [],
       "id": "thzdrAwlbhtyg00gTg1uWxMEQfCOGcuv",
       "indent": 1,
       "location": "lesson-1/hybridization/test-yourself.md",
@@ -1293,7 +787,6 @@
       "title": "Test Yourself"
     },
     {
-      "children": [],
       "id": "ptiA2oH04upXk9A0WT9duIIF0thC2lVN",
       "indent": 0,
       "location": "exam-2.md",
@@ -1302,7 +795,6 @@
       "title": "Exam 2 Preparation"
     },
     {
-      "children": [],
       "id": "2wlTyoxejM1QLNImN3x5sa24l0LgdUzZ",
       "indent": 0,
       "location": "week-8.md",
@@ -1311,35 +803,6 @@
       "title": "Week 8"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "TRF5ZVOpxVbnO8MawzSHbygxHtErUiDy",
-          "indent": 1,
-          "location": "week-8/intro-to-organic/hydrocarbons.md",
-          "order": 0,
-          "parent": "GZmsOuRrJEAcvfVkE5QYU4ZIwoxYYso1",
-          "title": "Hydrocarbons"
-        },
-        {
-          "children": [],
-          "id": "GnogzBvHyvWgWSnuzZjgFV8L23h1tMEC",
-          "indent": 1,
-          "location": "week-8/intro-to-organic/isomers.md",
-          "order": 1,
-          "parent": "GZmsOuRrJEAcvfVkE5QYU4ZIwoxYYso1",
-          "title": "Isomers"
-        },
-        {
-          "children": [],
-          "id": "gY2iru53IP38mjTtT0If2WBz39oyXm1n",
-          "indent": 1,
-          "location": "week-8/intro-to-organic/functional-groups.md",
-          "order": 2,
-          "parent": "GZmsOuRrJEAcvfVkE5QYU4ZIwoxYYso1",
-          "title": "Functional Groups"
-        }
-      ],
       "id": "GZmsOuRrJEAcvfVkE5QYU4ZIwoxYYso1",
       "indent": 0,
       "location": "week-8/intro-to-organic.md",
@@ -1348,7 +811,6 @@
       "title": "Intro to Organic"
     },
     {
-      "children": [],
       "id": "TRF5ZVOpxVbnO8MawzSHbygxHtErUiDy",
       "indent": 1,
       "location": "week-8/intro-to-organic/hydrocarbons.md",
@@ -1357,7 +819,6 @@
       "title": "Hydrocarbons"
     },
     {
-      "children": [],
       "id": "GnogzBvHyvWgWSnuzZjgFV8L23h1tMEC",
       "indent": 1,
       "location": "week-8/intro-to-organic/isomers.md",
@@ -1366,7 +827,6 @@
       "title": "Isomers"
     },
     {
-      "children": [],
       "id": "gY2iru53IP38mjTtT0If2WBz39oyXm1n",
       "indent": 1,
       "location": "week-8/intro-to-organic/functional-groups.md",
@@ -1375,62 +835,6 @@
       "title": "Functional Groups"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "gQs8tGl62aAhPGAjI30SNg5wQf7N4x0X",
-          "indent": 1,
-          "location": "week-8/intermolecular-forces/overview.md",
-          "order": 0,
-          "parent": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
-          "title": "Overview"
-        },
-        {
-          "children": [],
-          "id": "cDKQQJkrj6TLy6jHzRyfDhRXW28W2rCj",
-          "indent": 1,
-          "location": "week-8/intermolecular-forces/forces-involving-ions.md",
-          "order": 1,
-          "parent": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
-          "title": "Forces involving ions"
-        },
-        {
-          "children": [],
-          "id": "ZRcCaYJtF8U9QPIyF6rM1vodNsotyhPG",
-          "indent": 1,
-          "location": "week-8/intermolecular-forces/polar-molecules.md",
-          "order": 2,
-          "parent": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
-          "title": "Polar Molecules"
-        },
-        {
-          "children": [],
-          "id": "EAx5dFhSMaomPpjhbNzLVULOOgsagPVp",
-          "indent": 1,
-          "location": "week-8/intermolecular-forces/hydrogen-bonding.md",
-          "order": 3,
-          "parent": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
-          "title": "Hydrogen bonding"
-        },
-        {
-          "children": [],
-          "id": "gxul9E9f7KYR26IRRXCmhd828E3bL7fn",
-          "indent": 1,
-          "location": "week-8/intermolecular-forces/dispersion-forces.md",
-          "order": 4,
-          "parent": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
-          "title": "Dispersion Forces"
-        },
-        {
-          "children": [],
-          "id": "9qOkPao3J43DjTF5EsxNiwHMkc3Vhd8E",
-          "indent": 1,
-          "location": "week-8/intermolecular-forces/summary.md",
-          "order": 5,
-          "parent": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
-          "title": "Summary"
-        }
-      ],
       "id": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
       "indent": 0,
       "location": "week-8/intermolecular-forces.md",
@@ -1439,7 +843,6 @@
       "title": "Intermolecular forces"
     },
     {
-      "children": [],
       "id": "gQs8tGl62aAhPGAjI30SNg5wQf7N4x0X",
       "indent": 1,
       "location": "week-8/intermolecular-forces/overview.md",
@@ -1448,7 +851,6 @@
       "title": "Overview"
     },
     {
-      "children": [],
       "id": "cDKQQJkrj6TLy6jHzRyfDhRXW28W2rCj",
       "indent": 1,
       "location": "week-8/intermolecular-forces/forces-involving-ions.md",
@@ -1457,7 +859,6 @@
       "title": "Forces involving ions"
     },
     {
-      "children": [],
       "id": "ZRcCaYJtF8U9QPIyF6rM1vodNsotyhPG",
       "indent": 1,
       "location": "week-8/intermolecular-forces/polar-molecules.md",
@@ -1466,7 +867,6 @@
       "title": "Polar Molecules"
     },
     {
-      "children": [],
       "id": "EAx5dFhSMaomPpjhbNzLVULOOgsagPVp",
       "indent": 1,
       "location": "week-8/intermolecular-forces/hydrogen-bonding.md",
@@ -1475,7 +875,6 @@
       "title": "Hydrogen bonding"
     },
     {
-      "children": [],
       "id": "gxul9E9f7KYR26IRRXCmhd828E3bL7fn",
       "indent": 1,
       "location": "week-8/intermolecular-forces/dispersion-forces.md",
@@ -1484,7 +883,6 @@
       "title": "Dispersion Forces"
     },
     {
-      "children": [],
       "id": "9qOkPao3J43DjTF5EsxNiwHMkc3Vhd8E",
       "indent": 1,
       "location": "week-8/intermolecular-forces/summary.md",
@@ -1493,7 +891,6 @@
       "title": "Summary"
     },
     {
-      "children": [],
       "id": "luLToX9Jfhcg8aABKiJvUoSC7dN6niuy",
       "indent": 0,
       "location": "week-9.md",
@@ -1502,7 +899,6 @@
       "title": "Week 9"
     },
     {
-      "children": [],
       "id": "hKbjwD0Rd21P7o9nAPKeIuyFsc5XalU5",
       "indent": 0,
       "location": "week-9/phase-changes.md",
@@ -1511,26 +907,6 @@
       "title": "Phase Changes"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "7knYObs9Vsd2AAO1YkDq9CEWUYBQ4Ovu",
-          "indent": 1,
-          "location": "week-9/heating-curve-calculations.md",
-          "order": 0,
-          "parent": "fZ6PR0h1Mum8Z3SdBgu0AWa3qwRD4Th6",
-          "title": "Heating Curve Calculations"
-        },
-        {
-          "children": [],
-          "id": "fHZ9O1sMpgLo7W6TuzP6nKT7gumJi0QO",
-          "indent": 1,
-          "location": "week-9/try-it.md",
-          "order": 1,
-          "parent": "fZ6PR0h1Mum8Z3SdBgu0AWa3qwRD4Th6",
-          "title": "Try it!"
-        }
-      ],
       "id": "fZ6PR0h1Mum8Z3SdBgu0AWa3qwRD4Th6",
       "indent": 0,
       "location": "week-9/heating-curves.md",
@@ -1539,7 +915,6 @@
       "title": "Heating Curves"
     },
     {
-      "children": [],
       "id": "7knYObs9Vsd2AAO1YkDq9CEWUYBQ4Ovu",
       "indent": 1,
       "location": "week-9/heating-curve-calculations.md",
@@ -1548,7 +923,6 @@
       "title": "Heating Curve Calculations"
     },
     {
-      "children": [],
       "id": "fHZ9O1sMpgLo7W6TuzP6nKT7gumJi0QO",
       "indent": 1,
       "location": "week-9/try-it.md",
@@ -1557,7 +931,6 @@
       "title": "Try it!"
     },
     {
-      "children": [],
       "id": "N9oD5l80QTs8jPeqDlHRTt3KTouO1Zp1",
       "indent": 0,
       "location": "week-9/vapor-pressure.md",
@@ -1566,7 +939,6 @@
       "title": "Vapor Pressure"
     },
     {
-      "children": [],
       "id": "q0hDAbv73vGdq0YSRiet1Thta54jBKlW",
       "indent": 0,
       "location": "week-9/phase-diagrams.md",
@@ -1575,7 +947,6 @@
       "title": "Phase Diagrams"
     },
     {
-      "children": [],
       "id": "n5nF22y205LrGMv5NH1hM5wj1pDOsQuE",
       "indent": 0,
       "location": "week-9/liquid-properties.md",
@@ -1584,7 +955,6 @@
       "title": "Liquid Properties"
     },
     {
-      "children": [],
       "id": "UnmgIeAzn6lZugkDztx1vtXRx7m4z4bc",
       "indent": 0,
       "location": "week-10.md",
@@ -1593,7 +963,6 @@
       "title": "Week 10"
     },
     {
-      "children": [],
       "id": "olAAYDxHDLloHSmuYI5fC8Sgmo2tx82I",
       "indent": 0,
       "location": "week-10/dissolution-process.md",
@@ -1602,26 +971,6 @@
       "title": "Dissolution Process"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "2sWBAzyoC81oXf34zd4jgeG0AQsBZYqP",
-          "indent": 1,
-          "location": "week-10/electrolytes/identifying-electrolytes.md",
-          "order": 0,
-          "parent": "HpHLuAnwlAMgHQfUVGDGXxze2PdKvHxZ",
-          "title": "Identifying Electrolytes"
-        },
-        {
-          "children": [],
-          "id": "lNh47r7goUBr9oX9zbZEEhyT4wkqnahV",
-          "indent": 1,
-          "location": "week-10/electrolytes/try-it-electrolytes.md",
-          "order": 1,
-          "parent": "HpHLuAnwlAMgHQfUVGDGXxze2PdKvHxZ",
-          "title": "Try it!"
-        }
-      ],
       "id": "HpHLuAnwlAMgHQfUVGDGXxze2PdKvHxZ",
       "indent": 0,
       "location": "week-10/electrolytes.md",
@@ -1630,7 +979,6 @@
       "title": "Electrolytes"
     },
     {
-      "children": [],
       "id": "2sWBAzyoC81oXf34zd4jgeG0AQsBZYqP",
       "indent": 1,
       "location": "week-10/electrolytes/identifying-electrolytes.md",
@@ -1639,7 +987,6 @@
       "title": "Identifying Electrolytes"
     },
     {
-      "children": [],
       "id": "lNh47r7goUBr9oX9zbZEEhyT4wkqnahV",
       "indent": 1,
       "location": "week-10/electrolytes/try-it-electrolytes.md",
@@ -1648,17 +995,6 @@
       "title": "Try it!"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "Mf8trNSw4RBSgDzPtWAg5dgfxr6Wduvz",
-          "indent": 1,
-          "location": "week-10/solubility/types-of-solutions.md",
-          "order": 0,
-          "parent": "Ob6LWo7haUSuobe8hyGoEHfOEAKxvMgL",
-          "title": "Types of Solutions"
-        }
-      ],
       "id": "Ob6LWo7haUSuobe8hyGoEHfOEAKxvMgL",
       "indent": 0,
       "location": "week-10/solubility.md",
@@ -1667,7 +1003,6 @@
       "title": "Solubility"
     },
     {
-      "children": [],
       "id": "Mf8trNSw4RBSgDzPtWAg5dgfxr6Wduvz",
       "indent": 1,
       "location": "week-10/solubility/types-of-solutions.md",
@@ -1676,7 +1011,6 @@
       "title": "Types of Solutions"
     },
     {
-      "children": [],
       "id": "rMYXhZahqflbZwsuSS0061NhEQzxuHAC",
       "indent": 0,
       "location": "exam-3.md",
@@ -1685,7 +1019,6 @@
       "title": "Exam 3 Preparation"
     },
     {
-      "children": [],
       "id": "CEE93hVVWm5vuFYbQ7K0AT3bfQLncWUe",
       "indent": 0,
       "location": "week-11.md",
@@ -1694,44 +1027,6 @@
       "title": "Week 11"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "B0DHyiBZik5BOdIWSzFxn44mRlPCRnfj",
-          "indent": 1,
-          "location": "week-11/concentration/units-of-concentration.md",
-          "order": 0,
-          "parent": "TuuIkuFXEH8u4wWmL00ftAo7da8T7Tmf",
-          "title": "Units of Concentration"
-        },
-        {
-          "children": [],
-          "id": "1sSatXQxtCTA8BTXgrukJIP8RGtzskUt",
-          "indent": 1,
-          "location": "week-11/concentration/concentration-of-ions.md",
-          "order": 1,
-          "parent": "TuuIkuFXEH8u4wWmL00ftAo7da8T7Tmf",
-          "title": "Concentration of Ions"
-        },
-        {
-          "children": [],
-          "id": "glpEyc0pCWn6ZiNcjnPblvIEsAM7Q9re",
-          "indent": 1,
-          "location": "week-11/concentration/dilution.md",
-          "order": 2,
-          "parent": "TuuIkuFXEH8u4wWmL00ftAo7da8T7Tmf",
-          "title": "Dilution"
-        },
-        {
-          "children": [],
-          "id": "YPgQ2Puqyw1BJQinoByW8nA7dYHPeg4C",
-          "indent": 1,
-          "location": "week-11/concentration/try-it-dilution.md",
-          "order": 3,
-          "parent": "TuuIkuFXEH8u4wWmL00ftAo7da8T7Tmf",
-          "title": "Try it: Dilution"
-        }
-      ],
       "id": "TuuIkuFXEH8u4wWmL00ftAo7da8T7Tmf",
       "indent": 0,
       "location": "week-11/concentration.md",
@@ -1740,7 +1035,6 @@
       "title": "Concentration"
     },
     {
-      "children": [],
       "id": "B0DHyiBZik5BOdIWSzFxn44mRlPCRnfj",
       "indent": 1,
       "location": "week-11/concentration/units-of-concentration.md",
@@ -1749,7 +1043,6 @@
       "title": "Units of Concentration"
     },
     {
-      "children": [],
       "id": "1sSatXQxtCTA8BTXgrukJIP8RGtzskUt",
       "indent": 1,
       "location": "week-11/concentration/concentration-of-ions.md",
@@ -1758,7 +1051,6 @@
       "title": "Concentration of Ions"
     },
     {
-      "children": [],
       "id": "glpEyc0pCWn6ZiNcjnPblvIEsAM7Q9re",
       "indent": 1,
       "location": "week-11/concentration/dilution.md",
@@ -1767,7 +1059,6 @@
       "title": "Dilution"
     },
     {
-      "children": [],
       "id": "YPgQ2Puqyw1BJQinoByW8nA7dYHPeg4C",
       "indent": 1,
       "location": "week-11/concentration/try-it-dilution.md",
@@ -1776,17 +1067,6 @@
       "title": "Try it: Dilution"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "4pQAjR4Hs6E46QakHLk5qzpIBuOntKsG",
-          "indent": 1,
-          "location": "week-11/intro-to-gases/kinetic-molecular-theory.md",
-          "order": 0,
-          "parent": "MsFVC5j8IW7HCmpJiH0mpdOYHUcA7WU2",
-          "title": "Kinetic Molecular Theory"
-        }
-      ],
       "id": "MsFVC5j8IW7HCmpJiH0mpdOYHUcA7WU2",
       "indent": 0,
       "location": "week-11/intro-to-gases.md",
@@ -1795,7 +1075,6 @@
       "title": "Intro to Gases"
     },
     {
-      "children": [],
       "id": "4pQAjR4Hs6E46QakHLk5qzpIBuOntKsG",
       "indent": 1,
       "location": "week-11/intro-to-gases/kinetic-molecular-theory.md",
@@ -1804,7 +1083,6 @@
       "title": "Kinetic Molecular Theory"
     },
     {
-      "children": [],
       "id": "7puPE8rlRPipLBsYg5L1d8OrUvQn4xWN",
       "indent": 0,
       "location": "week-12.md",
@@ -1813,7 +1091,6 @@
       "title": "Week 12"
     },
     {
-      "children": [],
       "id": "j9OS0b7msMWikCX3Loxomk8UUX8LY7iC",
       "indent": 0,
       "location": "week-12/gas-laws.md",
@@ -1822,7 +1099,6 @@
       "title": "Gas Laws"
     },
     {
-      "children": [],
       "id": "QgRjuBaGbsLPM4afMeSlB6gCfL94PA29",
       "indent": 0,
       "location": "week-12/stp.md",
@@ -1831,7 +1107,6 @@
       "title": "STP"
     },
     {
-      "children": [],
       "id": "yOvlxbxIBpaVhSRYsS9Si6Sz20gDpCTw",
       "indent": 0,
       "location": "week-12/density-and-ideal-gases.md",
@@ -1840,7 +1115,6 @@
       "title": "Density and Ideal Gases"
     },
     {
-      "children": [],
       "id": "SlfY0KSMAUJTpaNmR4Y850ttkE58edC9",
       "indent": 0,
       "location": "week-12/partial-pressure.md",
@@ -1849,7 +1123,6 @@
       "title": "Partial Pressure"
     },
     {
-      "children": [],
       "id": "SlX0rweJHleBwcGVWo2vy2yEx356lsc3",
       "indent": 0,
       "location": "week-12/change-of-states.md",
@@ -1858,7 +1131,6 @@
       "title": "Change of States"
     },
     {
-      "children": [],
       "id": "0QfvLSxeJ2qZ2IGnFxtlkvjYseA2fDgQ",
       "indent": 0,
       "location": "week-12/solubility-of-gases.md",
@@ -1867,26 +1139,6 @@
       "title": "Solubility of Gases"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "LCSmYwBcXnlLMhMvYlwtvEKy1viHiel4",
-          "indent": 1,
-          "location": "week-12/intro-to-chemical-reactions/balancing-chemical-reactions.md",
-          "order": 0,
-          "parent": "2IvQdf1tTG58il0YTfVTYzpzHWAG6UKz",
-          "title": "Balancing Chemical Reactions"
-        },
-        {
-          "children": [],
-          "id": "85OzL7LW4hoVc1ejCMISc3yfw1WOQNdV",
-          "indent": 1,
-          "location": "week-12/intro-to-chemical-reactions/reaction-types.md",
-          "order": 1,
-          "parent": "2IvQdf1tTG58il0YTfVTYzpzHWAG6UKz",
-          "title": "Reaction Types"
-        }
-      ],
       "id": "2IvQdf1tTG58il0YTfVTYzpzHWAG6UKz",
       "indent": 0,
       "location": "week-12/intro-to-chemical-reactions.md",
@@ -1895,7 +1147,6 @@
       "title": "Intro to Chemical Reactions"
     },
     {
-      "children": [],
       "id": "LCSmYwBcXnlLMhMvYlwtvEKy1viHiel4",
       "indent": 1,
       "location": "week-12/intro-to-chemical-reactions/balancing-chemical-reactions.md",
@@ -1904,7 +1155,6 @@
       "title": "Balancing Chemical Reactions"
     },
     {
-      "children": [],
       "id": "85OzL7LW4hoVc1ejCMISc3yfw1WOQNdV",
       "indent": 1,
       "location": "week-12/intro-to-chemical-reactions/reaction-types.md",
@@ -1913,7 +1163,6 @@
       "title": "Reaction Types"
     },
     {
-      "children": [],
       "id": "YC409Ga40g34QlPN6HkiUA6jYVjAaUBa",
       "indent": 0,
       "location": "week-13.md",
@@ -1922,53 +1171,6 @@
       "title": "Week 13"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "V9qPgfRcIftxglXCVQqpQSRSVm74qO6n",
-          "indent": 1,
-          "location": "week-13/double-displacement/test.md",
-          "order": 0,
-          "parent": "S4pSzJO0SdpBeZr3jyA3mdvAWWTm1kfL",
-          "title": "Precipitation"
-        },
-        {
-          "children": [],
-          "id": "NHixlV6CbbBs4ZOya6hEEfXtYhUDFJTN",
-          "indent": 1,
-          "location": "week-13/double-displacement/gas-evolution.md",
-          "order": 1,
-          "parent": "S4pSzJO0SdpBeZr3jyA3mdvAWWTm1kfL",
-          "title": "Gas Evolution"
-        },
-        {
-          "children": [],
-          "id": "YW3eaDTtXE0FAJ7W9Tjmrq8KpGAa37gQ",
-          "indent": 1,
-          "location": "week-13/double-displacement/strong-acid-strong-base.md",
-          "order": 2,
-          "parent": "S4pSzJO0SdpBeZr3jyA3mdvAWWTm1kfL",
-          "title": "Strong acid-Strong base"
-        },
-        {
-          "children": [],
-          "id": "CXoTxnW9TbeY3tJ4mBqIkiDjAlQvaOm6",
-          "indent": 1,
-          "location": "week-13/double-displacement/weak-acidbase-strong-baseacid.md",
-          "order": 3,
-          "parent": "S4pSzJO0SdpBeZr3jyA3mdvAWWTm1kfL",
-          "title": "Weak Acid(Base) - Strong Base(Acid)"
-        },
-        {
-          "children": [],
-          "id": "YwEnxUGVQcTz1k7ahSderzBP4dPB2bYe",
-          "indent": 1,
-          "location": "week-13/double-displacement/try-it-net-ionic-equation.md",
-          "order": 4,
-          "parent": "S4pSzJO0SdpBeZr3jyA3mdvAWWTm1kfL",
-          "title": "Try it: Net Ionic Equation"
-        }
-      ],
       "id": "S4pSzJO0SdpBeZr3jyA3mdvAWWTm1kfL",
       "indent": 0,
       "location": "week-13/double-displacement.md",
@@ -1977,7 +1179,6 @@
       "title": "Double Displacement"
     },
     {
-      "children": [],
       "id": "V9qPgfRcIftxglXCVQqpQSRSVm74qO6n",
       "indent": 1,
       "location": "week-13/double-displacement/test.md",
@@ -1986,7 +1187,6 @@
       "title": "Precipitation"
     },
     {
-      "children": [],
       "id": "NHixlV6CbbBs4ZOya6hEEfXtYhUDFJTN",
       "indent": 1,
       "location": "week-13/double-displacement/gas-evolution.md",
@@ -1995,7 +1195,6 @@
       "title": "Gas Evolution"
     },
     {
-      "children": [],
       "id": "YW3eaDTtXE0FAJ7W9Tjmrq8KpGAa37gQ",
       "indent": 1,
       "location": "week-13/double-displacement/strong-acid-strong-base.md",
@@ -2004,7 +1203,6 @@
       "title": "Strong acid-Strong base"
     },
     {
-      "children": [],
       "id": "CXoTxnW9TbeY3tJ4mBqIkiDjAlQvaOm6",
       "indent": 1,
       "location": "week-13/double-displacement/weak-acidbase-strong-baseacid.md",
@@ -2013,7 +1211,6 @@
       "title": "Weak Acid(Base) - Strong Base(Acid)"
     },
     {
-      "children": [],
       "id": "YwEnxUGVQcTz1k7ahSderzBP4dPB2bYe",
       "indent": 1,
       "location": "week-13/double-displacement/try-it-net-ionic-equation.md",
@@ -2022,26 +1219,6 @@
       "title": "Try it: Net Ionic Equation"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "qy2XeXxUbaMYPb91kTdl5a6ACAWZZOr0",
-          "indent": 1,
-          "location": "week-13/single-displacement-and-redox/oxidation-number.md",
-          "order": 0,
-          "parent": "WZXiIyMg5lYqqXMeNBIxG4sjpagYLium",
-          "title": "Oxidation Number"
-        },
-        {
-          "children": [],
-          "id": "hnRegVKILE3qMwT8ZT4AOirTTCYcvq1e",
-          "indent": 1,
-          "location": "week-13/single-displacement-and-redox/try-it-oxidation-number.md",
-          "order": 1,
-          "parent": "WZXiIyMg5lYqqXMeNBIxG4sjpagYLium",
-          "title": "Try it: Oxidation Number"
-        }
-      ],
       "id": "WZXiIyMg5lYqqXMeNBIxG4sjpagYLium",
       "indent": 0,
       "location": "week-13/single-displacement-and-redox.md",
@@ -2050,7 +1227,6 @@
       "title": "Single Displacement & Redox"
     },
     {
-      "children": [],
       "id": "qy2XeXxUbaMYPb91kTdl5a6ACAWZZOr0",
       "indent": 1,
       "location": "week-13/single-displacement-and-redox/oxidation-number.md",
@@ -2059,7 +1235,6 @@
       "title": "Oxidation Number"
     },
     {
-      "children": [],
       "id": "hnRegVKILE3qMwT8ZT4AOirTTCYcvq1e",
       "indent": 1,
       "location": "week-13/single-displacement-and-redox/try-it-oxidation-number.md",
@@ -2068,44 +1243,6 @@
       "title": "Try it: Oxidation Number"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "UhiyQqA72z2CmAJBCBq7iFAD1JgTizpG",
-          "indent": 1,
-          "location": "week-13/yield.md",
-          "order": 0,
-          "parent": "g3pInfE89LtTOmrlukeUHmvK0LhxggD6",
-          "title": "Theoretical Yield"
-        },
-        {
-          "children": [],
-          "id": "biiT0dbdihaVnHOP4PGog7r1LHxWTQco",
-          "indent": 1,
-          "location": "week-13/limiting-reactant.md",
-          "order": 1,
-          "parent": "g3pInfE89LtTOmrlukeUHmvK0LhxggD6",
-          "title": "Limiting Reactant"
-        },
-        {
-          "children": [],
-          "id": "RnUMSQljpHYSKntvQVsQSj6GYPKySAsJ",
-          "indent": 1,
-          "location": "week-13/percent-yield.md",
-          "order": 2,
-          "parent": "g3pInfE89LtTOmrlukeUHmvK0LhxggD6",
-          "title": "Percent Yield"
-        },
-        {
-          "children": [],
-          "id": "pNNZFbklZwJm15ahEYqHYPcb2a958VYO",
-          "indent": 1,
-          "location": "week-13/try-it-reaction-calculations.md",
-          "order": 3,
-          "parent": "g3pInfE89LtTOmrlukeUHmvK0LhxggD6",
-          "title": "Try it: Reaction Calculations"
-        }
-      ],
       "id": "g3pInfE89LtTOmrlukeUHmvK0LhxggD6",
       "indent": 0,
       "location": "week-13/stoichiometry.md",
@@ -2114,7 +1251,6 @@
       "title": "Reaction Stoichiometry"
     },
     {
-      "children": [],
       "id": "UhiyQqA72z2CmAJBCBq7iFAD1JgTizpG",
       "indent": 1,
       "location": "week-13/yield.md",
@@ -2123,7 +1259,6 @@
       "title": "Theoretical Yield"
     },
     {
-      "children": [],
       "id": "biiT0dbdihaVnHOP4PGog7r1LHxWTQco",
       "indent": 1,
       "location": "week-13/limiting-reactant.md",
@@ -2132,7 +1267,6 @@
       "title": "Limiting Reactant"
     },
     {
-      "children": [],
       "id": "RnUMSQljpHYSKntvQVsQSj6GYPKySAsJ",
       "indent": 1,
       "location": "week-13/percent-yield.md",
@@ -2141,7 +1275,6 @@
       "title": "Percent Yield"
     },
     {
-      "children": [],
       "id": "pNNZFbklZwJm15ahEYqHYPcb2a958VYO",
       "indent": 1,
       "location": "week-13/try-it-reaction-calculations.md",
@@ -2150,7 +1283,6 @@
       "title": "Try it: Reaction Calculations"
     },
     {
-      "children": [],
       "id": "D8PmY7HY4s5MbZ8DmLIZM7I6HA0gByaW",
       "indent": 0,
       "location": "exam-4-preparation.md",
@@ -2159,7 +1291,6 @@
       "title": "Exam 4 Preparation"
     },
     {
-      "children": [],
       "id": "gRvBF7npeE6UVKYkPJyIGYDK8bNaNhJj",
       "indent": 0,
       "location": "week-14.md",
@@ -2168,7 +1299,6 @@
       "title": "Week 14"
     },
     {
-      "children": [],
       "id": "ThUVE5wSa9wDLdDlw3VAcQllhUC0ECVZ",
       "indent": 0,
       "location": "week-13/combustion-analysis.md",
@@ -2177,17 +1307,6 @@
       "title": "Combustion Analysis"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "X1XoCo7VvawuPjPhfmTmvneTfSMSWbNV",
-          "indent": 1,
-          "location": "week-13/reaction-enthalpies/try-it-reaction-enthalpies.md",
-          "order": 0,
-          "parent": "fgupcsd1ta4ts8LPoSu9UW74PzNoc8CR",
-          "title": "Try it: Reaction Enthalpies"
-        }
-      ],
       "id": "fgupcsd1ta4ts8LPoSu9UW74PzNoc8CR",
       "indent": 0,
       "location": "week-13/reaction-enthalpies.md",
@@ -2196,7 +1315,6 @@
       "title": "Reaction Enthalpies"
     },
     {
-      "children": [],
       "id": "X1XoCo7VvawuPjPhfmTmvneTfSMSWbNV",
       "indent": 1,
       "location": "week-13/reaction-enthalpies/try-it-reaction-enthalpies.md",
@@ -2205,17 +1323,6 @@
       "title": "Try it: Reaction Enthalpies"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "R4GCPmHZAe22KQWI6rL2UXFUZIe9sgSw",
-          "indent": 1,
-          "location": "week-13/calorimetry/try-it-calorimetry.md",
-          "order": 0,
-          "parent": "p9ZJOYzGNMRzbNT79oLQ7Z1C7LvhDSCE",
-          "title": "Try it: Calorimetry"
-        }
-      ],
       "id": "p9ZJOYzGNMRzbNT79oLQ7Z1C7LvhDSCE",
       "indent": 0,
       "location": "week-13/calorimetry.md",
@@ -2224,7 +1331,6 @@
       "title": "Calorimetry"
     },
     {
-      "children": [],
       "id": "R4GCPmHZAe22KQWI6rL2UXFUZIe9sgSw",
       "indent": 1,
       "location": "week-13/calorimetry/try-it-calorimetry.md",
@@ -2233,17 +1339,6 @@
       "title": "Try it: Calorimetry"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "fHWzQdVteyLW0zzIFWKCDGVKI8sYXXRI",
-          "indent": 1,
-          "location": "week-13/hess-law/try-it-hesss-law.md",
-          "order": 0,
-          "parent": "PkGuwBcjK7EH3hfBrg7XlYwKQCvpLYPE",
-          "title": "Try it: Hess's Law"
-        }
-      ],
       "id": "PkGuwBcjK7EH3hfBrg7XlYwKQCvpLYPE",
       "indent": 0,
       "location": "week-13/hess-law.md",
@@ -2252,7 +1347,6 @@
       "title": "Hess' Law"
     },
     {
-      "children": [],
       "id": "fHWzQdVteyLW0zzIFWKCDGVKI8sYXXRI",
       "indent": 1,
       "location": "week-13/hess-law/try-it-hesss-law.md",
@@ -2261,17 +1355,6 @@
       "title": "Try it: Hess's Law"
     },
     {
-      "children": [
-        {
-          "children": [],
-          "id": "qPJuInXuGYboocMozV43waWqEsekHM3x",
-          "indent": 1,
-          "location": "week-13/heats-of-formation/try-it-heats-of-formation.md",
-          "order": 0,
-          "parent": "xnGpOUa9nIbAZqgoFB063PmoMRVDAj9y",
-          "title": "Try it: Heats of Formation"
-        }
-      ],
       "id": "xnGpOUa9nIbAZqgoFB063PmoMRVDAj9y",
       "indent": 0,
       "location": "week-13/heats-of-formation.md",
@@ -2280,7 +1363,6 @@
       "title": "Heats of Formation"
     },
     {
-      "children": [],
       "id": "qPJuInXuGYboocMozV43waWqEsekHM3x",
       "indent": 1,
       "location": "week-13/heats-of-formation/try-it-heats-of-formation.md",
@@ -2289,7 +1371,6 @@
       "title": "Try it: Heats of Formation"
     },
     {
-      "children": [],
       "id": "w2hbXisg5fUkhQHeaKlNA8QcYUgzmiyI",
       "indent": 0,
       "location": "week-13/bond-dissociation-energies.md",
@@ -2298,7 +1379,6 @@
       "title": "Bond dissociation energies"
     },
     {
-      "children": [],
       "id": "pOrhYhHzygxkv3FFg4iqOmVT04rrS2mZ",
       "indent": 0,
       "location": "week-15.md",
@@ -2307,7 +1387,6 @@
       "title": "Week 15"
     },
     {
-      "children": [],
       "id": "VCk66PwSq49WgSJAF14akLcPKFbauQ4w",
       "indent": 0,
       "location": "final-exam.md",

@@ -13,8 +13,6 @@ const filenamify = require('filenamify')
  * @return {Outline}
  */
 module.exports = (newOutline, oldOutline) => {
-  fs.writeFileSync(path.join(__dirname, '../test/updateOutlineFilesTest/newOultine.json'), JSON.stringify(newOutline, null, 2));
-  fs.writeFileSync(path.join(__dirname, '../test/updateOutlineFilesTest/oldOultine.json'), JSON.stringify(oldOutline, null, 2));
   // array of Ids in new outline
   const newIds = newOutline.tree.map(o => o.id);
   // array of Ids in old outline
