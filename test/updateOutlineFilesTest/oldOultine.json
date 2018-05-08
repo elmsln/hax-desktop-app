@@ -1,0 +1,1399 @@
+{
+  "projectLocation": "/Users/scienceonlineed/gitbooks/chem110",
+  "editing": true,
+  "activePage": null,
+  "tree": [
+    {
+      "id": "66geHA2KyHWjugGlscRrLNso8nxZ3qBT",
+      "indent": 0,
+      "location": "README.md",
+      "order": 0,
+      "parent": null,
+      "title": "Orientation"
+    },
+    {
+      "id": "outline-item-350",
+      "indent": 0,
+      "order": 1,
+      "parent": null,
+      "title": "OldPage",
+      "location": "/Users/scienceonlineed/gitbooks/chem110/OldPage.html"
+    },
+    {
+      "id": "00ZnlIoJY8qx4AhkgoZ7TzeZ0um1gGbn",
+      "indent": 0,
+      "location": "administration/course-overview.md",
+      "order": 2,
+      "parent": null,
+      "title": "Course Overview"
+    },
+    {
+      "id": "outline-item-694",
+      "indent": 0,
+      "location": "/Users/scienceonlineed/gitbooks/chem110/Another Page you need to know about.html",
+      "order": 3,
+      "parent": null,
+      "title": "Another Page you need to know about"
+    },
+    {
+      "id": "VIEucLuHoRFsQOS2Qzs6Yp45G9b3w6YJ",
+      "indent": 0,
+      "location": "teaching-staff.md",
+      "order": 4,
+      "parent": null,
+      "title": "Teaching Staff"
+    },
+    {
+      "id": "H0qNG1uUNxLErVnnrCQeOfHWDp1Mt7H9",
+      "indent": 0,
+      "location": "assignments.md",
+      "order": 5,
+      "parent": null,
+      "title": "Assignments"
+    },
+    {
+      "id": "lwCMVQXJDEjPPfOo4fHTqhlOxzAoxHZe",
+      "indent": 0,
+      "location": "resources.md",
+      "order": 6,
+      "parent": null,
+      "title": "Resources"
+    },
+    {
+      "id": "FA1FLkO9Dv5BHXt8uwsVXGpafnjgTLTb",
+      "indent": 0,
+      "location": "schedule.md",
+      "order": 7,
+      "parent": null,
+      "title": "Schedule"
+    },
+    {
+      "id": "Gsygz3yqXczsK0VBSGKTMB7OJuxa9MAa",
+      "indent": 0,
+      "location": "canvas-how-tos.md",
+      "order": 8,
+      "parent": null,
+      "title": "Canvas How-Tos"
+    },
+    {
+      "id": "ufWsSGfuFuw2mjKlqb9Q875koiv7xu2T",
+      "indent": 0,
+      "location": "technical-issues.md",
+      "order": 9,
+      "parent": null,
+      "title": "Technical Issues"
+    },
+    {
+      "id": "t1EQEQZJW9EK4vsEZkNCM5vdc43sGK1t",
+      "indent": 0,
+      "location": "skills-check.md",
+      "order": 10,
+      "parent": null,
+      "title": "Skills Check"
+    },
+    {
+      "id": "95fKXm4vlGsDHsjg8Br4EUnE3N3GBRYy",
+      "indent": 0,
+      "location": "algebra.md",
+      "order": 11,
+      "parent": null,
+      "title": "Algebra"
+    },
+    {
+      "id": "FhZalkKiA9O1ELWvs6tc20LXqKFreUe5",
+      "indent": 0,
+      "location": "metric-conversions.md",
+      "order": 12,
+      "parent": null,
+      "title": "Metric Conversions"
+    },
+    {
+      "id": "bS8m5mhJaBVlYfe6RlZyKrxWVV1ibKqx",
+      "indent": 0,
+      "location": "significant-figures-and-scientific-notation.md",
+      "order": 13,
+      "parent": null,
+      "title": "Significant Figures and Scientific Notation"
+    },
+    {
+      "id": "praTmBMG5HiYEGz04mNdfEyJCGIEA8hg",
+      "indent": 0,
+      "location": "density-and-dimensional-analysis.md",
+      "order": 14,
+      "parent": null,
+      "title": "Density and Dimensional Analysis"
+    },
+    {
+      "id": "L1Y8P4xQvETIHDvPeDg3FxGwpdBmtlE6",
+      "indent": 0,
+      "location": "chemical-nomenclature.md",
+      "order": 15,
+      "parent": null,
+      "title": "Naming Chemical Compounds"
+    },
+    {
+      "id": "QpaqJyFn1yFjKKjJonEZM71ffZbOaYwg",
+      "indent": 0,
+      "location": "lesson-1.md",
+      "order": 16,
+      "parent": null,
+      "title": "Week 1"
+    },
+    {
+      "id": "L79JdGKLIwPg2LL0IE8x4ZK8qwH41l8P",
+      "indent": 0,
+      "location": "lesson-1/lesson-11.md",
+      "order": 17,
+      "parent": null,
+      "title": "Atoms and the Elements"
+    },
+    {
+      "id": "nItkdj2HUSz5c7xB5svovYwPdDheZbOp",
+      "indent": 1,
+      "location": "lesson-1/lesson-11/structure-of-an-atom.md",
+      "order": 0,
+      "parent": "L79JdGKLIwPg2LL0IE8x4ZK8qwH41l8P",
+      "title": "video: Structure of an atom"
+    },
+    {
+      "id": "TQbQsRLFIyvBVHtIg2hIfnJXFIVCVOwu",
+      "indent": 1,
+      "location": "lesson-1/lesson-11/quiz-test-yourself.md",
+      "order": 1,
+      "parent": "L79JdGKLIwPg2LL0IE8x4ZK8qwH41l8P",
+      "title": "Try it!"
+    },
+    {
+      "id": "xS7hYzSgrMzkXfZIaGt5BaCRsbCUSusN",
+      "indent": 1,
+      "location": "lesson-1/lesson-11/isotope-abundance/video-overview.md",
+      "order": 2,
+      "parent": "L79JdGKLIwPg2LL0IE8x4ZK8qwH41l8P",
+      "title": "video: Isotopes and Atomic Mass"
+    },
+    {
+      "id": "j1DMEhW3R6c4BAvI7MERG6jwG10rRpAw",
+      "indent": 1,
+      "location": "lesson-1/lesson-11/isotope-abundance/video-solved-problem.md",
+      "order": 3,
+      "parent": "L79JdGKLIwPg2LL0IE8x4ZK8qwH41l8P",
+      "title": "video: Solved problem"
+    },
+    {
+      "id": "JqfbbKig6YYhGUoIhyGYjkaYfYRSSK2R",
+      "indent": 1,
+      "location": "lesson-1/lesson-11/isotope-abundance/try-it.md",
+      "order": 4,
+      "parent": "L79JdGKLIwPg2LL0IE8x4ZK8qwH41l8P",
+      "title": "Try it!"
+    },
+    {
+      "id": "cCd0tXUxMPmnSiC5sluIef3HLbCCYCoU",
+      "indent": 0,
+      "location": "lesson-1/lesson-11/ions-and-molecules.md",
+      "order": 18,
+      "parent": null,
+      "title": "Ions and Molecules"
+    },
+    {
+      "id": "PjxjcdgZP26dgr1RyTeRAw5VDromn22r",
+      "indent": 1,
+      "location": "lesson-1/lesson-11/ions-and-molecules/molecules.md",
+      "order": 0,
+      "parent": "cCd0tXUxMPmnSiC5sluIef3HLbCCYCoU",
+      "title": "video: Atoms versus Molecules"
+    },
+    {
+      "id": "wHDbarGXbrgHmuNdhfUsrUX4WmOnnyDT",
+      "indent": 1,
+      "location": "lesson-1/lesson-11/ions-and-molecules/video-ions.md",
+      "order": 1,
+      "parent": "cCd0tXUxMPmnSiC5sluIef3HLbCCYCoU",
+      "title": "video: Ions"
+    },
+    {
+      "id": "jbjHxEADVhRKSJpeRDWMctiBnxuMCLjF",
+      "indent": 1,
+      "location": "lesson-1/lesson-11/ions-and-molecules/try-it.md",
+      "order": 2,
+      "parent": "cCd0tXUxMPmnSiC5sluIef3HLbCCYCoU",
+      "title": "Try it!"
+    },
+    {
+      "id": "zNKeJOZTkbdPj6QgD85QYzWFOGuzM7Aa",
+      "indent": 0,
+      "location": "lesson-1/the-mole.md",
+      "order": 19,
+      "parent": null,
+      "title": "The Mole"
+    },
+    {
+      "id": "9btp0NbKwmSX8XkjHvhGS5UhWguC4qdt",
+      "indent": 1,
+      "location": "lesson-1/video-1.md",
+      "order": 0,
+      "parent": "zNKeJOZTkbdPj6QgD85QYzWFOGuzM7Aa",
+      "title": "video: The mole"
+    },
+    {
+      "id": "9PtwrClr9kNI4czF8OdKkHQYB8pORdPM",
+      "indent": 1,
+      "location": "lesson-1/test-yourself.md",
+      "order": 1,
+      "parent": "zNKeJOZTkbdPj6QgD85QYzWFOGuzM7Aa",
+      "title": "Try it!"
+    },
+    {
+      "id": "KbTnOYIrVSiMScxSOA5KleFY2vK2EYRd",
+      "indent": 0,
+      "location": "lesson-1/intro-to-energy.md",
+      "order": 20,
+      "parent": null,
+      "title": "What is Energy?"
+    },
+    {
+      "id": "CaOeCeYFGOEiQeeY8UlrAReExflgBH5t",
+      "indent": 1,
+      "location": "lesson-1/intro-to-energy/video-energy.md",
+      "order": 0,
+      "parent": "KbTnOYIrVSiMScxSOA5KleFY2vK2EYRd",
+      "title": "video: Intro to Energy"
+    },
+    {
+      "id": "OC7wqX07aL3FWSr9lmQXBeqpNbFoknSL",
+      "indent": 1,
+      "location": "lesson-1/intro-to-energy/video-state-functions.md",
+      "order": 1,
+      "parent": "KbTnOYIrVSiMScxSOA5KleFY2vK2EYRd",
+      "title": "video: State Functions"
+    },
+    {
+      "id": "D6TJWlhCa6NRJPMsb0wMz7rqCRsLdGrh",
+      "indent": 1,
+      "location": "lesson-1/intro-to-energy/video-electrostatic-potential-energy.md",
+      "order": 2,
+      "parent": "KbTnOYIrVSiMScxSOA5KleFY2vK2EYRd",
+      "title": "video: Electrostatic Potential Energy"
+    },
+    {
+      "id": "MmZrpB9NSFuVS8AMTblwhXV7VfayVWMU",
+      "indent": 1,
+      "location": "lesson-1/intro-to-energy/enthalpy.md",
+      "order": 3,
+      "parent": "KbTnOYIrVSiMScxSOA5KleFY2vK2EYRd",
+      "title": "video: Enthalpy"
+    },
+    {
+      "id": "u0G9sgTaay99HqlmjiBbCNgVZ12F3vSN",
+      "indent": 0,
+      "location": "lesson-1/weekly-recap.md",
+      "order": 21,
+      "parent": null,
+      "title": "Weekly Recap"
+    },
+    {
+      "id": "Q77Vek9SUOngFv2KODJRl3e0uqWAjh6S",
+      "indent": 0,
+      "location": "lesson-2.md",
+      "order": 22,
+      "parent": null,
+      "title": "Week 2"
+    },
+    {
+      "id": "zfppTJAY1EZGKKRcuDxIOFuRtAr57GCV",
+      "indent": 0,
+      "location": "lesson-1/light-energy.md",
+      "order": 23,
+      "parent": null,
+      "title": "Light energy"
+    },
+    {
+      "id": "eaqbC8vfzrnmtXOHzesZprMviyo6tCPM",
+      "indent": 1,
+      "location": "lesson-1/light-energy/video-light-energy.md",
+      "order": 0,
+      "parent": "zfppTJAY1EZGKKRcuDxIOFuRtAr57GCV",
+      "title": "video: Characteristics of Light"
+    },
+    {
+      "id": "JPyQuKlsIM2Q18EfZasRXJ7P3NqfBTxn",
+      "indent": 1,
+      "location": "lesson-1/light-energy/video-light-as-a-particle.md",
+      "order": 1,
+      "parent": "zfppTJAY1EZGKKRcuDxIOFuRtAr57GCV",
+      "title": "video: Light as a Particle"
+    },
+    {
+      "id": "TOAip3ZRc0gQMi5lKnHFdxKhdWqe2vaW",
+      "indent": 1,
+      "location": "lesson-1/light-energy/try-it.md",
+      "order": 2,
+      "parent": "zfppTJAY1EZGKKRcuDxIOFuRtAr57GCV",
+      "title": "Try it!"
+    },
+    {
+      "id": "izHyjsozwdqq0TnrIwCdHHbVbjARz7LV",
+      "indent": 0,
+      "location": "lesson-1/line-spectra.md",
+      "order": 24,
+      "parent": null,
+      "title": "Line Spectra"
+    },
+    {
+      "id": "lfVjrJW6up1fPxjOst1Fy3xDoSIlJjl5",
+      "indent": 0,
+      "location": "lesson-1/bohr-model.md",
+      "order": 25,
+      "parent": null,
+      "title": "Bohr Model"
+    },
+    {
+      "id": "z2QtB1LeRoDdkDb1WBIzGB2ncupUWSAx",
+      "indent": 1,
+      "location": "lesson-1/bohr-model/bohrs-model-of-the-atom.md",
+      "order": 0,
+      "parent": "lfVjrJW6up1fPxjOst1Fy3xDoSIlJjl5",
+      "title": "Bohr's Model of the Atom"
+    },
+    {
+      "id": "4vkAOH1UHFFEIcapMxksieflyEriRk9U",
+      "indent": 1,
+      "location": "lesson-1/bohr-model/bohr-model-calculations.md",
+      "order": 1,
+      "parent": "lfVjrJW6up1fPxjOst1Fy3xDoSIlJjl5",
+      "title": "Try it!"
+    },
+    {
+      "id": "94HeYpz8PRlsgO7edQkfKVQ8h58d2L7E",
+      "indent": 0,
+      "location": "lesson-1/the-quantum-world.md",
+      "order": 26,
+      "parent": null,
+      "title": "The Quantum World"
+    },
+    {
+      "id": "mMFUIpMFW7fAYDsNKXkLbWJNp6Ew6F9m",
+      "indent": 0,
+      "location": "lesson-2/quantum-numbers.md",
+      "order": 27,
+      "parent": null,
+      "title": "Quantum Numbers"
+    },
+    {
+      "id": "YnXZSuOHfH2B0XdlIX847mENhiuZ3zcu",
+      "indent": 1,
+      "location": "lesson-2/quantum-numbers/quantum-numbers.md",
+      "order": 0,
+      "parent": "mMFUIpMFW7fAYDsNKXkLbWJNp6Ew6F9m",
+      "title": "Quantum Numbers"
+    },
+    {
+      "id": "ymMcyjy2o4PmbyqMC1OVmAoCj11jve2w",
+      "indent": 1,
+      "location": "lesson-2/quantum-numbers/quantum-number-practice.md",
+      "order": 1,
+      "parent": "mMFUIpMFW7fAYDsNKXkLbWJNp6Ew6F9m",
+      "title": "Try it!"
+    },
+    {
+      "id": "2y4yA5P7RjhYkOCXeqCQwIQwHdQkICjw",
+      "indent": 0,
+      "location": "lesson-1/orbitals.md",
+      "order": 28,
+      "parent": null,
+      "title": "Orbitals"
+    },
+    {
+      "id": "79ebfXrCErajom2LCYnQ6xXTpzAJPuBB",
+      "indent": 1,
+      "location": "lesson-1/orbitals/orbital-characteristics.md",
+      "order": 0,
+      "parent": "2y4yA5P7RjhYkOCXeqCQwIQwHdQkICjw",
+      "title": "Orbital Characteristics"
+    },
+    {
+      "id": "qZqzWt58ZPVJt7VE5qiu3M2f7cFzFlMD",
+      "indent": 0,
+      "location": "lesson-2/weekly-recap.md",
+      "order": 29,
+      "parent": null,
+      "title": "Weekly Recap"
+    },
+    {
+      "id": "q648TFSK30XJw3Ec4h2naqAyAVX8zqEz",
+      "indent": 0,
+      "location": "lesson-3.md",
+      "order": 30,
+      "parent": null,
+      "title": "Week 3"
+    },
+    {
+      "id": "fhOv3zvcYdFpesnqNU2g1IUcodM6Tj65",
+      "indent": 0,
+      "location": "effective-nuclear-charge.md",
+      "order": 31,
+      "parent": null,
+      "title": "Effective Nuclear Charge"
+    },
+    {
+      "id": "brVSgLtZDGJlB6gFJinuMR6gnBJh5MbW",
+      "indent": 0,
+      "location": "electron-spin.md",
+      "order": 32,
+      "parent": null,
+      "title": "Electron Spin"
+    },
+    {
+      "id": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
+      "indent": 0,
+      "location": "lesson-3/electron-configuration.md",
+      "order": 33,
+      "parent": null,
+      "title": "Electron Configuration"
+    },
+    {
+      "id": "9WkQhmdCZ17spnA506hK5F0Lth0mq3Mm",
+      "indent": 1,
+      "location": "lesson-3/electron-configuration/orbital-filling.md",
+      "order": 0,
+      "parent": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
+      "title": "Orbital Filling"
+    },
+    {
+      "id": "mXWeGbbHRa1heVMcj2L086dOjPTbNHqF",
+      "indent": 1,
+      "location": "lesson-3/electron-configuration/excited-states.md",
+      "order": 1,
+      "parent": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
+      "title": "Excited States"
+    },
+    {
+      "id": "liTTcZr65nAybRhZNuuJy2RNvFUnRLH3",
+      "indent": 1,
+      "location": "lesson-3/electron-configuration/the-periodic-table.md",
+      "order": 2,
+      "parent": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
+      "title": "The Periodic Table"
+    },
+    {
+      "id": "NUuWPSTAxVLN5wX04ngncFXTuHvP3Y0z",
+      "indent": 1,
+      "location": "lesson-3/electron-configuration/classification-of-electrons.md",
+      "order": 3,
+      "parent": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
+      "title": "Classification of Electrons"
+    },
+    {
+      "id": "keXcXJvPaFOgote3B3o9TQ11kqlF0Iyf",
+      "indent": 1,
+      "location": "lesson-3/electron-configuration/configuration-of-ions.md",
+      "order": 4,
+      "parent": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
+      "title": "Configuration of Ions"
+    },
+    {
+      "id": "7NevnhJpQiyXHNjFbpLcAbUMJJFpkCGN",
+      "indent": 1,
+      "location": "lesson-3/electron-configuration/try-it.md",
+      "order": 5,
+      "parent": "73M1qdSB9763Z5fRiq9b5HAJgmIFbmxS",
+      "title": "Try it!"
+    },
+    {
+      "id": "sTUEaUin6NVF9roW3X1BwKW6F99O4pO9",
+      "indent": 0,
+      "location": "periodic-trends.md",
+      "order": 34,
+      "parent": null,
+      "title": "Periodic Trends"
+    },
+    {
+      "id": "s1SndM23G4dF9GLRfDldrGTseIorBvyR",
+      "indent": 1,
+      "location": "lesson-3/video-atomic-radius.md",
+      "order": 0,
+      "parent": "sTUEaUin6NVF9roW3X1BwKW6F99O4pO9",
+      "title": "video: Atomic Radius"
+    },
+    {
+      "id": "y9B7S7fP2T49oUwbouGtp3NBuFDutxI4",
+      "indent": 1,
+      "location": "lesson-3/video-ionization-energt.md",
+      "order": 1,
+      "parent": "sTUEaUin6NVF9roW3X1BwKW6F99O4pO9",
+      "title": "video: Ionization Energy"
+    },
+    {
+      "id": "9J0ZNZ7kvdcgKSMZSlJzXFlN0V6uDn2D",
+      "indent": 1,
+      "location": "lesson-3/video-electron-affinity.md",
+      "order": 2,
+      "parent": "sTUEaUin6NVF9roW3X1BwKW6F99O4pO9",
+      "title": "video: Electron Affinity"
+    },
+    {
+      "id": "nVByIt0fnrb6ghL2m4Xl4jUaA08YKKSN",
+      "indent": 1,
+      "location": "lesson-3/ion-size.md",
+      "order": 3,
+      "parent": "sTUEaUin6NVF9roW3X1BwKW6F99O4pO9",
+      "title": "video: Ion Size"
+    },
+    {
+      "id": "wMTs14T8topGlX8hGZPnYRexTvc8vkj4",
+      "indent": 0,
+      "location": "exam-1.md",
+      "order": 35,
+      "parent": null,
+      "title": "Exam 1 Preparation"
+    },
+    {
+      "id": "1mlWqjneIr99VuSb7iGD0WlA23qqo1Au",
+      "indent": 0,
+      "location": "week-4.md",
+      "order": 36,
+      "parent": null,
+      "title": "Week 4"
+    },
+    {
+      "id": "bpAU6emz8NvZOxQ7IOzLKNMMIgGoWCrp",
+      "indent": 0,
+      "location": "week-4/introduction-to-molecules.md",
+      "order": 37,
+      "parent": null,
+      "title": "Introduction to Compounds"
+    },
+    {
+      "id": "5Sx8wxIXPH7PYwNwbjOpfFbG5MeLZzSk",
+      "indent": 0,
+      "location": "week-4/calculating-percent-composition.md",
+      "order": 38,
+      "parent": null,
+      "title": "Percent Composition"
+    },
+    {
+      "id": "vBrtLEAkCkqNNbIAbukaEbxLRuPXnA5S",
+      "indent": 0,
+      "location": "week-4/determining-chemical-formula.md",
+      "order": 39,
+      "parent": null,
+      "title": "Determining Chemical Formula"
+    },
+    {
+      "id": "DnDQ55qdBsaazRJz2A71qpiZDpv2Aa9m",
+      "indent": 0,
+      "location": "week-4/introduction-to-bonding.md",
+      "order": 40,
+      "parent": null,
+      "title": "Introduction to Bonding"
+    },
+    {
+      "id": "2CAy5gC1Lk6zL426O78G5yMwnzKcNXii",
+      "indent": 0,
+      "location": "week-4/ionic-bonding.md",
+      "order": 41,
+      "parent": null,
+      "title": "Ionic Bonding"
+    },
+    {
+      "id": "3qlDCYoS9WhM0ECPDr763aCZmGs3ixnf",
+      "indent": 0,
+      "location": "week-5.md",
+      "order": 42,
+      "parent": null,
+      "title": "Week 5"
+    },
+    {
+      "id": "NNxksKJclrbOPNwbR4FOS6f4DQukRj77",
+      "indent": 0,
+      "location": "test.md",
+      "order": 43,
+      "parent": null,
+      "title": "Covalent Bonding"
+    },
+    {
+      "id": "P26U4ICXSL3itzB9Hcf992qB9D99ia18",
+      "indent": 0,
+      "location": "bond-polarity-and-electronegativity.md",
+      "order": 44,
+      "parent": null,
+      "title": "Bond Polarity & Electronegativity"
+    },
+    {
+      "id": "DfurjqeJc5Tz7tJXjygNLvkmvhzb0IiM",
+      "indent": 0,
+      "location": "lewis-structures.md",
+      "order": 45,
+      "parent": null,
+      "title": "Lewis Structures"
+    },
+    {
+      "id": "RadgvPmmPN9n0wdGqri4wbnk67vUbh8P",
+      "indent": 1,
+      "location": "lewis-structures/formal-charge.md",
+      "order": 0,
+      "parent": "DfurjqeJc5Tz7tJXjygNLvkmvhzb0IiM",
+      "title": "Formal Charge"
+    },
+    {
+      "id": "DnI8tUKLtslmEoemAfRNlwNQDVLWXbce",
+      "indent": 1,
+      "location": "lewis-structures/drawing-lewis-structures.md",
+      "order": 1,
+      "parent": "DfurjqeJc5Tz7tJXjygNLvkmvhzb0IiM",
+      "title": "Drawing Lewis Structures"
+    },
+    {
+      "id": "AexzhCQNhnlL39ly2ospOZO2RmtbVF4t",
+      "indent": 1,
+      "location": "lewis-structures/try-it-drawing-lewis-structures.md",
+      "order": 2,
+      "parent": "DfurjqeJc5Tz7tJXjygNLvkmvhzb0IiM",
+      "title": "Try it: Drawing Lewis Structures"
+    },
+    {
+      "id": "pEUF7bD0gXrfaWuwMKbcvkqSZfJoI2Rl",
+      "indent": 1,
+      "location": "lewis-structures/skeletal-structures.md",
+      "order": 3,
+      "parent": "DfurjqeJc5Tz7tJXjygNLvkmvhzb0IiM",
+      "title": "Skeletal Structures"
+    },
+    {
+      "id": "xTA5BV9oC9wMKE69v4LlVGTyggIUEAjB",
+      "indent": 0,
+      "location": "week-6.md",
+      "order": 46,
+      "parent": null,
+      "title": "Week 6"
+    },
+    {
+      "id": "zBPk1wItth4zDHqD49liRxjWHqdmIzW8",
+      "indent": 0,
+      "location": "exceptions-to-the-octet.md",
+      "order": 47,
+      "parent": null,
+      "title": "Exceptions to the Octet"
+    },
+    {
+      "id": "GF8nSc9RaEietaUtxV6Pf0tGuQWyt3ii",
+      "indent": 0,
+      "location": "resonance.md",
+      "order": 48,
+      "parent": null,
+      "title": "Resonance"
+    },
+    {
+      "id": "MlxEXJNZ8yRHukc5iUuQ17S0EQMHBw9S",
+      "indent": 0,
+      "location": "vsepr-theory.md",
+      "order": 49,
+      "parent": null,
+      "title": "VSEPR Theory"
+    },
+    {
+      "id": "nESoYZtBuQ4sXehc1WoxUod1SOvLcaUX",
+      "indent": 1,
+      "location": "intro-to-geometry.md",
+      "order": 0,
+      "parent": "MlxEXJNZ8yRHukc5iUuQ17S0EQMHBw9S",
+      "title": "Intro to Geometry"
+    },
+    {
+      "id": "PVLlkYLVTq6ANgcWhPY614vBTl21ZHSK",
+      "indent": 1,
+      "location": "key-concepts.md",
+      "order": 1,
+      "parent": "MlxEXJNZ8yRHukc5iUuQ17S0EQMHBw9S",
+      "title": "Key Concepts"
+    },
+    {
+      "id": "6HDTxLv8oVAqWNMvzbqlWfbXKj3O3wSc",
+      "indent": 1,
+      "location": "try-it-electron-domain-geometry.md",
+      "order": 2,
+      "parent": "MlxEXJNZ8yRHukc5iUuQ17S0EQMHBw9S",
+      "title": "Try it: Electron Domain Geometry"
+    },
+    {
+      "id": "NSlYOlXqLaISU0I3SM3FrTG4J4FCqsvr",
+      "indent": 0,
+      "location": "week-7.md",
+      "order": 50,
+      "parent": null,
+      "title": "Week 7"
+    },
+    {
+      "id": "tFXqQ0lC0qmFJjLeBVUu12c81nMII6zh",
+      "indent": 0,
+      "location": "lesson-1/molecular-geometry.md",
+      "order": 51,
+      "parent": null,
+      "title": "Molecular Geometry"
+    },
+    {
+      "id": "maryXngV0qWiZYovNxpY2sRnSExZhcJC",
+      "indent": 0,
+      "location": "lesson-1/molecular-polarity.md",
+      "order": 52,
+      "parent": null,
+      "title": "Molecular Polarity"
+    },
+    {
+      "id": "IzxDNc3ylC4WApFcAhU7G59QWTUWC6fL",
+      "indent": 0,
+      "location": "lesson-1/hybridization.md",
+      "order": 53,
+      "parent": null,
+      "title": "Valence Bond Theory"
+    },
+    {
+      "id": "xJ26OiNqdgcX5SimoRXATbBa0BQV4Jg7",
+      "indent": 1,
+      "location": "lesson-1/hybridization/sp3-hybridization.md",
+      "order": 0,
+      "parent": "IzxDNc3ylC4WApFcAhU7G59QWTUWC6fL",
+      "title": "sp3 hybridization"
+    },
+    {
+      "id": "n8x0KGmNsOgNwJyI4rA1vpyIbiAuCCJs",
+      "indent": 1,
+      "location": "lesson-1/hybridization/sp2-hybridization.md",
+      "order": 1,
+      "parent": "IzxDNc3ylC4WApFcAhU7G59QWTUWC6fL",
+      "title": "sp2 hybridization"
+    },
+    {
+      "id": "pxfpFGb42ByO2dRGE7qY1WmC2MFAcnQn",
+      "indent": 1,
+      "location": "lesson-1/hybridization/sp-hybridization.md",
+      "order": 2,
+      "parent": "IzxDNc3ylC4WApFcAhU7G59QWTUWC6fL",
+      "title": "sp hybridization"
+    },
+    {
+      "id": "nZqgkyRoRRZ2D6MEBlUzoxAdMp742w1V",
+      "indent": 1,
+      "location": "lesson-1/hybridization/delocalized-pi-bonding.md",
+      "order": 3,
+      "parent": "IzxDNc3ylC4WApFcAhU7G59QWTUWC6fL",
+      "title": "Delocalized pi bonding"
+    },
+    {
+      "id": "thzdrAwlbhtyg00gTg1uWxMEQfCOGcuv",
+      "indent": 1,
+      "location": "lesson-1/hybridization/test-yourself.md",
+      "order": 4,
+      "parent": "IzxDNc3ylC4WApFcAhU7G59QWTUWC6fL",
+      "title": "Test Yourself"
+    },
+    {
+      "id": "ptiA2oH04upXk9A0WT9duIIF0thC2lVN",
+      "indent": 0,
+      "location": "exam-2.md",
+      "order": 54,
+      "parent": null,
+      "title": "Exam 2 Preparation"
+    },
+    {
+      "id": "2wlTyoxejM1QLNImN3x5sa24l0LgdUzZ",
+      "indent": 0,
+      "location": "week-8.md",
+      "order": 55,
+      "parent": null,
+      "title": "Week 8"
+    },
+    {
+      "id": "GZmsOuRrJEAcvfVkE5QYU4ZIwoxYYso1",
+      "indent": 0,
+      "location": "week-8/intro-to-organic.md",
+      "order": 56,
+      "parent": null,
+      "title": "Intro to Organic"
+    },
+    {
+      "id": "TRF5ZVOpxVbnO8MawzSHbygxHtErUiDy",
+      "indent": 1,
+      "location": "week-8/intro-to-organic/hydrocarbons.md",
+      "order": 0,
+      "parent": "GZmsOuRrJEAcvfVkE5QYU4ZIwoxYYso1",
+      "title": "Hydrocarbons"
+    },
+    {
+      "id": "GnogzBvHyvWgWSnuzZjgFV8L23h1tMEC",
+      "indent": 1,
+      "location": "week-8/intro-to-organic/isomers.md",
+      "order": 1,
+      "parent": "GZmsOuRrJEAcvfVkE5QYU4ZIwoxYYso1",
+      "title": "Isomers"
+    },
+    {
+      "id": "gY2iru53IP38mjTtT0If2WBz39oyXm1n",
+      "indent": 1,
+      "location": "week-8/intro-to-organic/functional-groups.md",
+      "order": 2,
+      "parent": "GZmsOuRrJEAcvfVkE5QYU4ZIwoxYYso1",
+      "title": "Functional Groups"
+    },
+    {
+      "id": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
+      "indent": 0,
+      "location": "week-8/intermolecular-forces.md",
+      "order": 57,
+      "parent": null,
+      "title": "Intermolecular forces"
+    },
+    {
+      "id": "gQs8tGl62aAhPGAjI30SNg5wQf7N4x0X",
+      "indent": 1,
+      "location": "week-8/intermolecular-forces/overview.md",
+      "order": 0,
+      "parent": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
+      "title": "Overview"
+    },
+    {
+      "id": "cDKQQJkrj6TLy6jHzRyfDhRXW28W2rCj",
+      "indent": 1,
+      "location": "week-8/intermolecular-forces/forces-involving-ions.md",
+      "order": 1,
+      "parent": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
+      "title": "Forces involving ions"
+    },
+    {
+      "id": "ZRcCaYJtF8U9QPIyF6rM1vodNsotyhPG",
+      "indent": 1,
+      "location": "week-8/intermolecular-forces/polar-molecules.md",
+      "order": 2,
+      "parent": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
+      "title": "Polar Molecules"
+    },
+    {
+      "id": "EAx5dFhSMaomPpjhbNzLVULOOgsagPVp",
+      "indent": 1,
+      "location": "week-8/intermolecular-forces/hydrogen-bonding.md",
+      "order": 3,
+      "parent": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
+      "title": "Hydrogen bonding"
+    },
+    {
+      "id": "gxul9E9f7KYR26IRRXCmhd828E3bL7fn",
+      "indent": 1,
+      "location": "week-8/intermolecular-forces/dispersion-forces.md",
+      "order": 4,
+      "parent": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
+      "title": "Dispersion Forces"
+    },
+    {
+      "id": "9qOkPao3J43DjTF5EsxNiwHMkc3Vhd8E",
+      "indent": 1,
+      "location": "week-8/intermolecular-forces/summary.md",
+      "order": 5,
+      "parent": "SmgRc9k5xtGICospb3Zhed79nBPyS9Vd",
+      "title": "Summary"
+    },
+    {
+      "id": "luLToX9Jfhcg8aABKiJvUoSC7dN6niuy",
+      "indent": 0,
+      "location": "week-9.md",
+      "order": 58,
+      "parent": null,
+      "title": "Week 9"
+    },
+    {
+      "id": "hKbjwD0Rd21P7o9nAPKeIuyFsc5XalU5",
+      "indent": 0,
+      "location": "week-9/phase-changes.md",
+      "order": 59,
+      "parent": null,
+      "title": "Phase Changes"
+    },
+    {
+      "id": "fZ6PR0h1Mum8Z3SdBgu0AWa3qwRD4Th6",
+      "indent": 0,
+      "location": "week-9/heating-curves.md",
+      "order": 60,
+      "parent": null,
+      "title": "Heating Curves"
+    },
+    {
+      "id": "7knYObs9Vsd2AAO1YkDq9CEWUYBQ4Ovu",
+      "indent": 1,
+      "location": "week-9/heating-curve-calculations.md",
+      "order": 0,
+      "parent": "fZ6PR0h1Mum8Z3SdBgu0AWa3qwRD4Th6",
+      "title": "Heating Curve Calculations"
+    },
+    {
+      "id": "fHZ9O1sMpgLo7W6TuzP6nKT7gumJi0QO",
+      "indent": 1,
+      "location": "week-9/try-it.md",
+      "order": 1,
+      "parent": "fZ6PR0h1Mum8Z3SdBgu0AWa3qwRD4Th6",
+      "title": "Try it!"
+    },
+    {
+      "id": "N9oD5l80QTs8jPeqDlHRTt3KTouO1Zp1",
+      "indent": 0,
+      "location": "week-9/vapor-pressure.md",
+      "order": 61,
+      "parent": null,
+      "title": "Vapor Pressure"
+    },
+    {
+      "id": "q0hDAbv73vGdq0YSRiet1Thta54jBKlW",
+      "indent": 0,
+      "location": "week-9/phase-diagrams.md",
+      "order": 62,
+      "parent": null,
+      "title": "Phase Diagrams"
+    },
+    {
+      "id": "n5nF22y205LrGMv5NH1hM5wj1pDOsQuE",
+      "indent": 0,
+      "location": "week-9/liquid-properties.md",
+      "order": 63,
+      "parent": null,
+      "title": "Liquid Properties"
+    },
+    {
+      "id": "UnmgIeAzn6lZugkDztx1vtXRx7m4z4bc",
+      "indent": 0,
+      "location": "week-10.md",
+      "order": 64,
+      "parent": null,
+      "title": "Week 10"
+    },
+    {
+      "id": "olAAYDxHDLloHSmuYI5fC8Sgmo2tx82I",
+      "indent": 0,
+      "location": "week-10/dissolution-process.md",
+      "order": 65,
+      "parent": null,
+      "title": "Dissolution Process"
+    },
+    {
+      "id": "HpHLuAnwlAMgHQfUVGDGXxze2PdKvHxZ",
+      "indent": 0,
+      "location": "week-10/electrolytes.md",
+      "order": 66,
+      "parent": null,
+      "title": "Electrolytes"
+    },
+    {
+      "id": "2sWBAzyoC81oXf34zd4jgeG0AQsBZYqP",
+      "indent": 1,
+      "location": "week-10/electrolytes/identifying-electrolytes.md",
+      "order": 0,
+      "parent": "HpHLuAnwlAMgHQfUVGDGXxze2PdKvHxZ",
+      "title": "Identifying Electrolytes"
+    },
+    {
+      "id": "lNh47r7goUBr9oX9zbZEEhyT4wkqnahV",
+      "indent": 1,
+      "location": "week-10/electrolytes/try-it-electrolytes.md",
+      "order": 1,
+      "parent": "HpHLuAnwlAMgHQfUVGDGXxze2PdKvHxZ",
+      "title": "Try it!"
+    },
+    {
+      "id": "Ob6LWo7haUSuobe8hyGoEHfOEAKxvMgL",
+      "indent": 0,
+      "location": "week-10/solubility.md",
+      "order": 67,
+      "parent": null,
+      "title": "Solubility"
+    },
+    {
+      "id": "Mf8trNSw4RBSgDzPtWAg5dgfxr6Wduvz",
+      "indent": 1,
+      "location": "week-10/solubility/types-of-solutions.md",
+      "order": 0,
+      "parent": "Ob6LWo7haUSuobe8hyGoEHfOEAKxvMgL",
+      "title": "Types of Solutions"
+    },
+    {
+      "id": "rMYXhZahqflbZwsuSS0061NhEQzxuHAC",
+      "indent": 0,
+      "location": "exam-3.md",
+      "order": 68,
+      "parent": null,
+      "title": "Exam 3 Preparation"
+    },
+    {
+      "id": "CEE93hVVWm5vuFYbQ7K0AT3bfQLncWUe",
+      "indent": 0,
+      "location": "week-11.md",
+      "order": 69,
+      "parent": null,
+      "title": "Week 11"
+    },
+    {
+      "id": "TuuIkuFXEH8u4wWmL00ftAo7da8T7Tmf",
+      "indent": 0,
+      "location": "week-11/concentration.md",
+      "order": 70,
+      "parent": null,
+      "title": "Concentration"
+    },
+    {
+      "id": "B0DHyiBZik5BOdIWSzFxn44mRlPCRnfj",
+      "indent": 1,
+      "location": "week-11/concentration/units-of-concentration.md",
+      "order": 0,
+      "parent": "TuuIkuFXEH8u4wWmL00ftAo7da8T7Tmf",
+      "title": "Units of Concentration"
+    },
+    {
+      "id": "1sSatXQxtCTA8BTXgrukJIP8RGtzskUt",
+      "indent": 1,
+      "location": "week-11/concentration/concentration-of-ions.md",
+      "order": 1,
+      "parent": "TuuIkuFXEH8u4wWmL00ftAo7da8T7Tmf",
+      "title": "Concentration of Ions"
+    },
+    {
+      "id": "glpEyc0pCWn6ZiNcjnPblvIEsAM7Q9re",
+      "indent": 1,
+      "location": "week-11/concentration/dilution.md",
+      "order": 2,
+      "parent": "TuuIkuFXEH8u4wWmL00ftAo7da8T7Tmf",
+      "title": "Dilution"
+    },
+    {
+      "id": "YPgQ2Puqyw1BJQinoByW8nA7dYHPeg4C",
+      "indent": 1,
+      "location": "week-11/concentration/try-it-dilution.md",
+      "order": 3,
+      "parent": "TuuIkuFXEH8u4wWmL00ftAo7da8T7Tmf",
+      "title": "Try it: Dilution"
+    },
+    {
+      "id": "MsFVC5j8IW7HCmpJiH0mpdOYHUcA7WU2",
+      "indent": 0,
+      "location": "week-11/intro-to-gases.md",
+      "order": 71,
+      "parent": null,
+      "title": "Intro to Gases"
+    },
+    {
+      "id": "4pQAjR4Hs6E46QakHLk5qzpIBuOntKsG",
+      "indent": 1,
+      "location": "week-11/intro-to-gases/kinetic-molecular-theory.md",
+      "order": 0,
+      "parent": "MsFVC5j8IW7HCmpJiH0mpdOYHUcA7WU2",
+      "title": "Kinetic Molecular Theory"
+    },
+    {
+      "id": "7puPE8rlRPipLBsYg5L1d8OrUvQn4xWN",
+      "indent": 0,
+      "location": "week-12.md",
+      "order": 72,
+      "parent": null,
+      "title": "Week 12"
+    },
+    {
+      "id": "j9OS0b7msMWikCX3Loxomk8UUX8LY7iC",
+      "indent": 0,
+      "location": "week-12/gas-laws.md",
+      "order": 73,
+      "parent": null,
+      "title": "Gas Laws"
+    },
+    {
+      "id": "QgRjuBaGbsLPM4afMeSlB6gCfL94PA29",
+      "indent": 0,
+      "location": "week-12/stp.md",
+      "order": 74,
+      "parent": null,
+      "title": "STP"
+    },
+    {
+      "id": "yOvlxbxIBpaVhSRYsS9Si6Sz20gDpCTw",
+      "indent": 0,
+      "location": "week-12/density-and-ideal-gases.md",
+      "order": 75,
+      "parent": null,
+      "title": "Density and Ideal Gases"
+    },
+    {
+      "id": "SlfY0KSMAUJTpaNmR4Y850ttkE58edC9",
+      "indent": 0,
+      "location": "week-12/partial-pressure.md",
+      "order": 76,
+      "parent": null,
+      "title": "Partial Pressure"
+    },
+    {
+      "id": "SlX0rweJHleBwcGVWo2vy2yEx356lsc3",
+      "indent": 0,
+      "location": "week-12/change-of-states.md",
+      "order": 77,
+      "parent": null,
+      "title": "Change of States"
+    },
+    {
+      "id": "0QfvLSxeJ2qZ2IGnFxtlkvjYseA2fDgQ",
+      "indent": 0,
+      "location": "week-12/solubility-of-gases.md",
+      "order": 78,
+      "parent": null,
+      "title": "Solubility of Gases"
+    },
+    {
+      "id": "2IvQdf1tTG58il0YTfVTYzpzHWAG6UKz",
+      "indent": 0,
+      "location": "week-12/intro-to-chemical-reactions.md",
+      "order": 79,
+      "parent": null,
+      "title": "Intro to Chemical Reactions"
+    },
+    {
+      "id": "LCSmYwBcXnlLMhMvYlwtvEKy1viHiel4",
+      "indent": 1,
+      "location": "week-12/intro-to-chemical-reactions/balancing-chemical-reactions.md",
+      "order": 0,
+      "parent": "2IvQdf1tTG58il0YTfVTYzpzHWAG6UKz",
+      "title": "Balancing Chemical Reactions"
+    },
+    {
+      "id": "85OzL7LW4hoVc1ejCMISc3yfw1WOQNdV",
+      "indent": 1,
+      "location": "week-12/intro-to-chemical-reactions/reaction-types.md",
+      "order": 1,
+      "parent": "2IvQdf1tTG58il0YTfVTYzpzHWAG6UKz",
+      "title": "Reaction Types"
+    },
+    {
+      "id": "YC409Ga40g34QlPN6HkiUA6jYVjAaUBa",
+      "indent": 0,
+      "location": "week-13.md",
+      "order": 80,
+      "parent": null,
+      "title": "Week 13"
+    },
+    {
+      "id": "S4pSzJO0SdpBeZr3jyA3mdvAWWTm1kfL",
+      "indent": 0,
+      "location": "week-13/double-displacement.md",
+      "order": 81,
+      "parent": null,
+      "title": "Double Displacement"
+    },
+    {
+      "id": "V9qPgfRcIftxglXCVQqpQSRSVm74qO6n",
+      "indent": 1,
+      "location": "week-13/double-displacement/test.md",
+      "order": 0,
+      "parent": "S4pSzJO0SdpBeZr3jyA3mdvAWWTm1kfL",
+      "title": "Precipitation"
+    },
+    {
+      "id": "NHixlV6CbbBs4ZOya6hEEfXtYhUDFJTN",
+      "indent": 1,
+      "location": "week-13/double-displacement/gas-evolution.md",
+      "order": 1,
+      "parent": "S4pSzJO0SdpBeZr3jyA3mdvAWWTm1kfL",
+      "title": "Gas Evolution"
+    },
+    {
+      "id": "YW3eaDTtXE0FAJ7W9Tjmrq8KpGAa37gQ",
+      "indent": 1,
+      "location": "week-13/double-displacement/strong-acid-strong-base.md",
+      "order": 2,
+      "parent": "S4pSzJO0SdpBeZr3jyA3mdvAWWTm1kfL",
+      "title": "Strong acid-Strong base"
+    },
+    {
+      "id": "CXoTxnW9TbeY3tJ4mBqIkiDjAlQvaOm6",
+      "indent": 1,
+      "location": "week-13/double-displacement/weak-acidbase-strong-baseacid.md",
+      "order": 3,
+      "parent": "S4pSzJO0SdpBeZr3jyA3mdvAWWTm1kfL",
+      "title": "Weak Acid(Base) - Strong Base(Acid)"
+    },
+    {
+      "id": "YwEnxUGVQcTz1k7ahSderzBP4dPB2bYe",
+      "indent": 1,
+      "location": "week-13/double-displacement/try-it-net-ionic-equation.md",
+      "order": 4,
+      "parent": "S4pSzJO0SdpBeZr3jyA3mdvAWWTm1kfL",
+      "title": "Try it: Net Ionic Equation"
+    },
+    {
+      "id": "WZXiIyMg5lYqqXMeNBIxG4sjpagYLium",
+      "indent": 0,
+      "location": "week-13/single-displacement-and-redox.md",
+      "order": 82,
+      "parent": null,
+      "title": "Single Displacement & Redox"
+    },
+    {
+      "id": "qy2XeXxUbaMYPb91kTdl5a6ACAWZZOr0",
+      "indent": 1,
+      "location": "week-13/single-displacement-and-redox/oxidation-number.md",
+      "order": 0,
+      "parent": "WZXiIyMg5lYqqXMeNBIxG4sjpagYLium",
+      "title": "Oxidation Number"
+    },
+    {
+      "id": "hnRegVKILE3qMwT8ZT4AOirTTCYcvq1e",
+      "indent": 1,
+      "location": "week-13/single-displacement-and-redox/try-it-oxidation-number.md",
+      "order": 1,
+      "parent": "WZXiIyMg5lYqqXMeNBIxG4sjpagYLium",
+      "title": "Try it: Oxidation Number"
+    },
+    {
+      "id": "g3pInfE89LtTOmrlukeUHmvK0LhxggD6",
+      "indent": 0,
+      "location": "week-13/stoichiometry.md",
+      "order": 83,
+      "parent": null,
+      "title": "Reaction Stoichiometry"
+    },
+    {
+      "id": "UhiyQqA72z2CmAJBCBq7iFAD1JgTizpG",
+      "indent": 1,
+      "location": "week-13/yield.md",
+      "order": 0,
+      "parent": "g3pInfE89LtTOmrlukeUHmvK0LhxggD6",
+      "title": "Theoretical Yield"
+    },
+    {
+      "id": "biiT0dbdihaVnHOP4PGog7r1LHxWTQco",
+      "indent": 1,
+      "location": "week-13/limiting-reactant.md",
+      "order": 1,
+      "parent": "g3pInfE89LtTOmrlukeUHmvK0LhxggD6",
+      "title": "Limiting Reactant"
+    },
+    {
+      "id": "RnUMSQljpHYSKntvQVsQSj6GYPKySAsJ",
+      "indent": 1,
+      "location": "week-13/percent-yield.md",
+      "order": 2,
+      "parent": "g3pInfE89LtTOmrlukeUHmvK0LhxggD6",
+      "title": "Percent Yield"
+    },
+    {
+      "id": "pNNZFbklZwJm15ahEYqHYPcb2a958VYO",
+      "indent": 1,
+      "location": "week-13/try-it-reaction-calculations.md",
+      "order": 3,
+      "parent": "g3pInfE89LtTOmrlukeUHmvK0LhxggD6",
+      "title": "Try it: Reaction Calculations"
+    },
+    {
+      "id": "D8PmY7HY4s5MbZ8DmLIZM7I6HA0gByaW",
+      "indent": 0,
+      "location": "exam-4-preparation.md",
+      "order": 84,
+      "parent": null,
+      "title": "Exam 4 Preparation"
+    },
+    {
+      "id": "gRvBF7npeE6UVKYkPJyIGYDK8bNaNhJj",
+      "indent": 0,
+      "location": "week-14.md",
+      "order": 85,
+      "parent": null,
+      "title": "Week 14"
+    },
+    {
+      "id": "ThUVE5wSa9wDLdDlw3VAcQllhUC0ECVZ",
+      "indent": 0,
+      "location": "week-13/combustion-analysis.md",
+      "order": 86,
+      "parent": null,
+      "title": "Combustion Analysis"
+    },
+    {
+      "id": "fgupcsd1ta4ts8LPoSu9UW74PzNoc8CR",
+      "indent": 0,
+      "location": "week-13/reaction-enthalpies.md",
+      "order": 87,
+      "parent": null,
+      "title": "Reaction Enthalpies"
+    },
+    {
+      "id": "X1XoCo7VvawuPjPhfmTmvneTfSMSWbNV",
+      "indent": 1,
+      "location": "week-13/reaction-enthalpies/try-it-reaction-enthalpies.md",
+      "order": 0,
+      "parent": "fgupcsd1ta4ts8LPoSu9UW74PzNoc8CR",
+      "title": "Try it: Reaction Enthalpies"
+    },
+    {
+      "id": "p9ZJOYzGNMRzbNT79oLQ7Z1C7LvhDSCE",
+      "indent": 0,
+      "location": "week-13/calorimetry.md",
+      "order": 88,
+      "parent": null,
+      "title": "Calorimetry"
+    },
+    {
+      "id": "R4GCPmHZAe22KQWI6rL2UXFUZIe9sgSw",
+      "indent": 1,
+      "location": "week-13/calorimetry/try-it-calorimetry.md",
+      "order": 0,
+      "parent": "p9ZJOYzGNMRzbNT79oLQ7Z1C7LvhDSCE",
+      "title": "Try it: Calorimetry"
+    },
+    {
+      "id": "PkGuwBcjK7EH3hfBrg7XlYwKQCvpLYPE",
+      "indent": 0,
+      "location": "week-13/hess-law.md",
+      "order": 89,
+      "parent": null,
+      "title": "Hess' Law"
+    },
+    {
+      "id": "fHWzQdVteyLW0zzIFWKCDGVKI8sYXXRI",
+      "indent": 1,
+      "location": "week-13/hess-law/try-it-hesss-law.md",
+      "order": 0,
+      "parent": "PkGuwBcjK7EH3hfBrg7XlYwKQCvpLYPE",
+      "title": "Try it: Hess's Law"
+    },
+    {
+      "id": "xnGpOUa9nIbAZqgoFB063PmoMRVDAj9y",
+      "indent": 0,
+      "location": "week-13/heats-of-formation.md",
+      "order": 90,
+      "parent": null,
+      "title": "Heats of Formation"
+    },
+    {
+      "id": "qPJuInXuGYboocMozV43waWqEsekHM3x",
+      "indent": 1,
+      "location": "week-13/heats-of-formation/try-it-heats-of-formation.md",
+      "order": 0,
+      "parent": "xnGpOUa9nIbAZqgoFB063PmoMRVDAj9y",
+      "title": "Try it: Heats of Formation"
+    },
+    {
+      "id": "w2hbXisg5fUkhQHeaKlNA8QcYUgzmiyI",
+      "indent": 0,
+      "location": "week-13/bond-dissociation-energies.md",
+      "order": 91,
+      "parent": null,
+      "title": "Bond dissociation energies"
+    },
+    {
+      "id": "pOrhYhHzygxkv3FFg4iqOmVT04rrS2mZ",
+      "indent": 0,
+      "location": "week-15.md",
+      "order": 92,
+      "parent": null,
+      "title": "Week 15"
+    },
+    {
+      "id": "VCk66PwSq49WgSJAF14akLcPKFbauQ4w",
+      "indent": 0,
+      "location": "final-exam.md",
+      "order": 93,
+      "parent": null,
+      "title": "Final Exam"
+    }
+  ]
+}

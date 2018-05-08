@@ -3,6 +3,7 @@ const path = require('path')
 const Case = require('case')
 const setOutline = require('./setOutline')
 const unusedFilename = require('unused-filename');
+const filenamify = require('filenamify')
 
 /**
  * Takes a path
@@ -12,6 +13,8 @@ const unusedFilename = require('unused-filename');
  * @return {Outline}
  */
 module.exports = (newOutline, oldOutline) => {
+  fs.writeFileSync(path.join(__dirname, '../test/updateOutlineFilesTest/newOultine.json'), JSON.stringify(newOutline, null, 2));
+  fs.writeFileSync(path.join(__dirname, '../test/updateOutlineFilesTest/oldOultine.json'), JSON.stringify(oldOutline, null, 2));
   // array of Ids in new outline
   const newIds = newOutline.tree.map(o => o.id);
   // array of Ids in old outline
@@ -26,7 +29,8 @@ module.exports = (newOutline, oldOutline) => {
     const newItem = addedIds.includes(i.id);
     if (newItem) {
       // get the unique filename
-      const uniqueFilename = unusedFilename.sync(path.join(newOutline.projectLocation, `${i.title}.html`))
+      const safeFilename = filenamify(i.title,  {replacement: ''});
+      const uniqueFilename = unusedFilename.sync(path.join(newOutline.projectLocation, `${safeFilename}.html`))
       const fileAdded = fs.writeFileSync(uniqueFilename, '', 'utf8')
       // if we successfully added the file then we'll update 
       // the item to know about the new location
