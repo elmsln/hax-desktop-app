@@ -22,6 +22,16 @@ module.exports = (newOutline, oldOutline) => {
   // find items deleted
   const deletedIds = oldIds.filter(oldId => !newIds.includes(oldId))
 
+  // remove new files that have been removed to the outline
+  const deletedFiles = deletedIds.map(id => {
+    // get the full item from the oldOutline
+    const deletedItem = oldOutline.tree.find(item => item.id === id)
+    // delete the file
+    fs.unlinkSync(deletedItem.location)
+    return deletedItem.location
+  })
+
+  // add new files that have been added to the outline
   const newOutlineTree = newOutline.tree.map(i => {
     // find out if it's a new item
     const newItem = addedIds.includes(i.id);
@@ -37,9 +47,6 @@ module.exports = (newOutline, oldOutline) => {
     return i;
   })
 
-  /**
-   * @todo Handle the removed files
-   */
 
   // update the outline file.
   return Object.assign({}, newOutline, { tree: newOutlineTree });
