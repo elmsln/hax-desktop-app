@@ -37,12 +37,13 @@ module.exports = (newOutline, oldOutline) => {
     const newItem = addedIds.includes(i.id);
     if (newItem) {
       // get the unique filename
-      const safeFilename = filenamify(i.title,  {replacement: ''});
+      const safeFilename = filenamify(i.title,  {replacement: ''})
       const uniqueFilename = unusedFilename.sync(path.join(newOutline.projectLocation, `${safeFilename}.html`))
       const fileAdded = fs.writeFileSync(uniqueFilename, '', 'utf8')
       // if we successfully added the file then we'll update 
       // the item to know about the new location
-      i.location = uniqueFilename;
+      const newLocation = path.relative(newOutline.projectLocation, uniqueFilename);
+      i.location = newLocation;
     }
     return i;
   })
