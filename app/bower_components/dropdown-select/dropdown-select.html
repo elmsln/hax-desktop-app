@@ -34,14 +34,14 @@ An easy to use, works as expected dropdown menu. Add slotted items like follows:
         @apply --dropdown-listbox;
       }
     </style>
-    <paper-dropdown-menu 
+    <paper-dropdown-menu
       always-float-label$="[[alwaysFloatLabel]]"
-      id="menu" 
-      label$="[[label]]" 
+      id="menu"
+      label$="[[label]]"
       no-label-float$="[[noLabelFloat]]"
       on-selected-item-changed="_setSelectedValue">
-      <paper-listbox id="listbox" slot="dropdown-content" selected$="[[selectedIndex]]">
-        <slot></slot>
+      <paper-listbox id="listbox" slot="dropdown-content" selected$="[[__selectedIndex]]">
+        <slot id="content"></slot>
       </paper-listbox>
     </paper-dropdown-menu>
   </template>
@@ -56,38 +56,28 @@ An easy to use, works as expected dropdown menu. Add slotted items like follows:
          */
         label: {
           type: String,
-          value: 'Select an option.'
+          value: 'Select an option.',
         },
         /**
          * The default value
          */
         value: {
           type: String,
-          value: null,
           notify: true,
-        },
-        /**
-         * The index of the selected item
-         */
-        selectedIndex: {
-          type: Number,
-          reflectToAttribute: true,
-          notify: true,
-          computed: '_getSelectedIndex(value)',
         },
         /**
          * Set to true to always float the label.
          */
         alwaysFloatLabel: {
           type: Boolean,
-          value: false
+          value: false,
         },
         /**
-         * Set to true to disable the floating label. 
+         * Set to true to disable the floating label.
          */
         noLabelFloat: {
           type: Boolean,
-          value: false
+          value: false,
         },
       },
       /**
@@ -96,21 +86,23 @@ An easy to use, works as expected dropdown menu. Add slotted items like follows:
       _setSelectedValue: function(e) {
         if (e.detail.value !== null){
           let val = e.detail.value.getAttribute('value');
-          this.setAttribute('value',val);
-          this.fire('change',{'value': val});
+          this.value = val;
+          this.fire('change', {'value': val});
         }
       },
       /**
        * Get the index of the default value.
        */
-      _getSelectedIndex: function(value) {
-        this.__items = this.$$('#listbox').getElementsByTagName('paper-item');
-        for (var i=0; i<this.__items.length;i++){
-          if (value==this.__items[i].getAttribute('value')) {
-            return i;
+      attached: function() {
+        setTimeout( () => {
+          // only run on the first pass to set initial value
+          let children = this.getContentChildren('#content');
+          for (var i in children) {
+            if (typeof children[i].getAttribute === 'function' && this.value == children[i].getAttribute('value')) {
+              this.__selectedIndex = Number(i);
+            }
           }
-        }
-        return null;
+        }, 150);
       },
 
     });

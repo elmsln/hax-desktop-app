@@ -134,7 +134,7 @@ A LRN element that will change the world.
         outline-offset: 4px;
       }
       :host[edit-mode][hax-ray-mode] #bodycontainer ::slotted(*[data-editable])::before {
-        content: attr(data-hax-ray) " " attr(resource) " " attr(prefix);
+        content: attr(data-hax-ray) " " attr(resource) " " attr(typeof) " " attr(property) " " attr(content);
         font-size: 16px;
         font-style: italic;
         left: unset;
@@ -402,7 +402,7 @@ A LRN element that will change the world.
           }
           // keep everything NOT an element at this point, this helps
           // preserve whitespace because we're crazy about accuracy
-          else if (children[i].nodeType !== 1) {
+          else if (children[i].nodeType !== 1 && typeof children[i].textContent !== typeof undefined && children[i].textContent !== 'undefined') {
             content += children[i].textContent;
           }
         }
@@ -603,7 +603,7 @@ A LRN element that will change the world.
               }
               // keep everything NOT an element at this point, this helps
               // preserve whitespace because we're crazy about accuracy
-              else if (slotnodes[j].nodeType !== 1) {
+              else if (slotnodes[j].nodeType !== 1 && typeof slotnodes[j].textContent !== typeof undefined && slotnodes[j].textContent !== 'undefined') {
                 content += slotnodes[j].textContent;
               }
             }
@@ -700,42 +700,43 @@ A LRN element that will change the world.
        * Move grid plate around
        */
       haxMoveGridPlate: function(direction, node) {
+        // menu is actually in the element for render purposes
+        this.hideContextMenus();
         // support moving things multiple directions
         switch (direction) {
+          case 'first':
+            // ensure we can go up, first being a mode of up
+            if (node.previousElementSibling !== null) {
+              Polymer.dom(this).insertBefore(node, Polymer.dom(this).firstChild);
+            }
+          break;
           case 'up':
-            // menu is actually in the element for render purposes
-            // need to hide it, THEN check if thing above is null
-            this.hideContextMenus();
+            // ensure we can go up
             if (node.previousElementSibling !== null) {
               Polymer.dom(this).insertBefore(node, node.previousElementSibling);
             }
-            this.positionContextMenus(node);
-            setTimeout( () => {
-              if (typeof node.scrollIntoViewIfNeeded === 'function') {
-                node.scrollIntoViewIfNeeded(true);
-              }
-              else {
-                node.scrollIntoView({behavior: "smooth", inline: "center"});
-              }
-            }, 150);
           break;
           case 'down':
             if (node.nextElementSibling !== null) {
-              this.hideContextMenus();
               Polymer.dom(this).insertBefore(node.nextElementSibling, node);
-              this.positionContextMenus(node);
-              setTimeout( () => {
-                if (typeof node.scrollIntoViewIfNeeded === 'function') {
-                  node.scrollIntoViewIfNeeded(true);
-                }
-                else {
-                  node.scrollIntoView({behavior: "smooth", inline: "center"});
-                }
-              }, 150);
+            }
+          break;
+          case 'last':
+            if (node.nextElementSibling !== null) {
+              Polymer.dom(this).appendChild(node);
             }
           break;
           // @todo support other directions for when inside of an element
         }
+        this.positionContextMenus(node);
+        setTimeout( () => {
+          if (typeof node.scrollIntoViewIfNeeded === 'function') {
+            node.scrollIntoViewIfNeeded(true);
+          }
+          else {
+            node.scrollIntoView({behavior: "smooth", inline: "center"});
+          }
+        }, 150);
         return true;
       },
       /**
@@ -879,6 +880,9 @@ A LRN element that will change the world.
             ];
             Polymer.HaxStore.instance.haxAppPicker.presentOptions(options, '', 'Are you sure you want to delete this element?', 'delete');
           break;
+          case 'grid-plate-first':
+            this.haxMoveGridPlate('first', this.activeNode);
+          break;
           case 'grid-plate-up':
             this.haxMoveGridPlate('up', this.activeNode);
           break;
@@ -889,6 +893,9 @@ A LRN element that will change the world.
           break;
           case 'grid-plate-down':
             this.haxMoveGridPlate('down', this.activeNode);
+          break;
+          case 'grid-plate-last':
+            this.haxMoveGridPlate('last', this.activeNode);
           break;
           case 'close-menu':
             // this is the equivalent of hiding menus and resetting the board
@@ -992,6 +999,8 @@ A LRN element that will change the world.
           // ensure this is valid
           if (this._haxElementTest(node) && node.parentNode != null) {
             // keep looking til we are juuuust below the container
+            // @todo this is where we force a selection on highest level
+            // of the document
             while (node.parentNode.id != 'bodycontainer') {
               node = node.parentNode;
             }
