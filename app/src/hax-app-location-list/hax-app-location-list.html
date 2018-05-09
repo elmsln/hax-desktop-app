@@ -52,6 +52,7 @@
       listeners: {
         'project-selected': '__projectSelected',
         'project-delete': '__projectDelete',
+        'project-open-in-finder': 'projectOpenInFinder',
         'acceptProjectDelete.tap': '__acceptProjectDelete',
         'cancelProjectDelete.tap': '__cancelProjectDelete',
       },
@@ -88,7 +89,12 @@
 
       __clearProjectDeleteQueue: function (e) {
         this.set('__projectDeleteQueue', null)
-      }
+      },
+
+      projectOpenInFinder: function (e, project) {
+        ipcRenderer.send('project-open-in-finder', project)
+      },
+
     });
   </script>
 </dom-module>

@@ -600,6 +600,10 @@ ipcMain.on('project-delete', (e, project) => {
   globals.deleteProject(project.location)
 })
 
+ipcMain.on('project-open-in-finder', (e, project) => {
+  shell.showItemInFolder(`${project.outlineLocation}/`)
+})
+
 /**
  * When you hit the back button in the project
  * then bring up the main window.
