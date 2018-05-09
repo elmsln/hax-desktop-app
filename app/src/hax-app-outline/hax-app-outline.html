@@ -36,7 +36,26 @@
       button {
         margin-right:20%; 
       }
-      
+      app-editor-hax ::shadow hax-body[edit-mode] oer-schema {
+        border: 1px dotted black !important;
+      }
+      app-editor-hax ::shadow hax-body[edit-mode] oer-schema::before {
+        content: "OER " attr(resource) " " attr(typeof) " " attr(property) " " attr(content);
+        font-size: 8px;
+        font-style: italic;
+        left: unset;
+        right: unset;
+        top: unset;
+        background-color: #d3d3d3;
+        color: #000000;
+        bottom: unset;
+        width: auto;
+        padding: 0;
+        margin: -16px 0 0 0;
+        z-index: 1;
+        float: left;
+        line-height: 2;
+      }
     </style>
     
     <hax-app-outline-ui id="ui" outline="[[__outline.tree]]" editing="[[__isEditing(__outline.editing)]]" editing-page="[[__activateHaxEditor]]">
