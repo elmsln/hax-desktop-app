@@ -178,7 +178,7 @@ const globals = {
    */
   deleteProject(projectLocation) {
     const currentProjectList = this.getProjects(projectLocation);
-    const newProjectList = currentProjectList.filter(p => p.location === projectLocation);
+    const newProjectList = currentProjectList.filter(p => p.location !== projectLocation);
     store.set('projects.list', [newProjectList]);
     mainWindow.webContents.send('projects-updated', this.getProjects());
   },
@@ -595,6 +595,10 @@ ipcMain.on('commit-to-git', (e) => {
 ipcMain.on('update-project', (e, project) => {
   globals.setProject(project);
 });
+
+ipcMain.on('project-delete', (e, project) => {
+  globals.deleteProject(project.location)
+})
 
 /**
  * When you hit the back button in the project

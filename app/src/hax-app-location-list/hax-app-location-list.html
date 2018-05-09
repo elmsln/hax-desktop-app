@@ -18,7 +18,9 @@
 
     <div id="locationMenu">
       <template is="dom-repeat" items="[[projects]]" as="project">
-        <hax-app-location-list-item project="[[project]]"></hax-app-location-list-item>
+        <template is="dom-if" if="[[project.location]]">
+          <hax-app-location-list-item project="[[project]]"></hax-app-location-list-item>
+        </template>
       </template>
     </div>
 
@@ -50,8 +52,8 @@
       listeners: {
         'project-selected': '__projectSelected',
         'project-delete': '__projectDelete',
-        'acceptProjectDelete': '__acceptProjectDelete',
-        'cancelProjectDelete': '__cancelProjectDelete',
+        'acceptProjectDelete.tap': '__acceptProjectDelete',
+        'cancelProjectDelete.tap': '__cancelProjectDelete',
       },
 
       ready: function () {
@@ -77,6 +79,7 @@
 
       __acceptProjectDelete: function (e) {
         ipcRenderer.send('project-delete', this.__projectDeleteQueue)
+        this.__clearProjectDeleteQueue()
       },
 
       __cancelProjectDelete: function (e) {
