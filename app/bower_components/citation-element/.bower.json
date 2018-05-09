@@ -14,7 +14,7 @@
     "web-component-tester": "^4.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
-  "homepage": "https://github.com/LRNWebcomponents/citation-element",
+  "homepage": "https://github.com/LRNWebComponents/citation-element",
   "version": "1.0.1",
   "_release": "1.0.1",
   "_resolution": {
@@ -22,8 +22,7 @@
     "tag": "1.0.1",
     "commit": "081e233ec0b49e291a4f148589af632d7750243c"
   },
-  "_source": "https://github.com/LRNWebcomponents/citation-element.git",
+  "_source": "https://github.com/LRNWebComponents/citation-element.git",
   "_target": "^1.0.1",
-  "_originalSource": "LRNWebcomponents/citation-element",
-  "_direct": true
+  "_originalSource": "LRNWebComponents/citation-element"
 }

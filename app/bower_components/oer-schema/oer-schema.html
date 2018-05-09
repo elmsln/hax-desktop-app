@@ -37,6 +37,7 @@ A LRN element to wrap an oer schema prefix onto materials.
          */
         text: {
           type: String,
+          value: '',
         },
         /**
          * Property value for this oer resource
@@ -48,10 +49,9 @@ A LRN element to wrap an oer schema prefix onto materials.
         /**
          * Property value for this oer resource
          */
-        oerTypeOf: {
+        typeof: {
           type: String,
           value: 'Resource',
-          observer: '_oerTypeOfChanged',
         },
         /**
          * Related Resource ID
@@ -59,13 +59,6 @@ A LRN element to wrap an oer schema prefix onto materials.
         relatedResource: {
           type: String,
         },
-      },
-      /**
-       * Set attribute on element itself
-       */
-      _oerTypeOfChanged: function(newValue, oldValue) {
-        // force it to whatever the new value is
-        this.setAttribute('typeof', 'oer:' + newValue);
       },
       /**
        * Attached to the DOM, now fire.
@@ -111,7 +104,7 @@ A LRN element to wrap an oer schema prefix onto materials.
                 'icon': 'editor:title',
               },
               {
-                'property': 'oerTypeOf',
+                'property': 'typeof',
                 'title': 'Schema typeof',
                 'description': 'Schema typeof',
                 'inputMethod': 'select',
@@ -122,15 +115,15 @@ A LRN element to wrap an oer schema prefix onto materials.
                 'title': 'Schema property',
                 'description': 'The OER Schema property this represents',
                 'inputMethod': 'select',
-                'options': [
-                  'name',
-                  'additionalType',
-                  'description',
-                  'image',
-                  'mainEntityOfPage',
-                  'sameAs',
-                  'uri'
-                ],
+                'options': {
+                  'name' : 'name',
+                  'additionalType' : 'additionalType',
+                  'description' : 'description',
+                  'image' : 'image',
+                  'mainEntityOfPage' : 'mainEntityOfPage',
+                  'sameAs' : 'sameAs',
+                  'uri' : 'uri'
+                },
               },
               {
                 'property': 'relatedResource',
@@ -745,7 +738,7 @@ A LRN element to wrap an oer schema prefix onto materials.
         let types = {};
         for (var i in schema.classes) {
           if (typeof schema.classes[i].label !== typeof undefined && typeof schema.classes[i].subClassOf !== typeof undefined && (schema.classes[i].subClassOf.includes('Resource') || schema.classes[i].subClassOf.includes('LearningComponent') || schema.classes[i].subClassOf.includes('InstructionalPattern'))) {
-            types[i] = schema.classes[i].label;
+            types['oer:' + i] = schema.classes[i].label;
           }
         }
         return types;

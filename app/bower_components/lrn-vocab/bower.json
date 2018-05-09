@@ -1,12 +1,12 @@
 {
   "name": "lrn-vocab",
-  "description": "A LRN element",
+  "description": "Vocabulary term with visual treatment and semantic meaning.",
   "main": "lrn-vocab.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.10.1",
     "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.2.0",
     "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.0.0",
-    "schema-behaviors": "LRNWebcomponents/schema-behaviors#^0.1.0",
+    "schema-behaviors": "LRNWebcomponents/schema-behaviors#^0.2.0",
     "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#^2.2.0",
     "paper-dialog": "PolymerElements/paper-dialog#^2.1.1",
     "paper-button": "PolymerElements/paper-button#^2.1.0",

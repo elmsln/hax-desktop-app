@@ -4,11 +4,11 @@
   "main": "video-player.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.10.1",
-    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.3.0",
-    "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.0.0",
-    "schema-behaviors": "LRNWebComponents/schema-behaviors",
-    "a11y-behaviors": "LRNWebComponents/a11y-behaviors#^1.0.0",
-    "media-behaviors": "LRNWebComponents/media-behaviors#^1.1.2"
+    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.12.0",
+    "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.2.1",
+    "schema-behaviors": "LRNWebComponents/schema-behaviors#^0.2.0",
+    "a11y-behaviors": "LRNWebComponents/a11y-behaviors#^1.0.2",
+    "media-behaviors": "LRNWebComponents/media-behaviors#^1.1.3"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -17,14 +17,15 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebComponents/video-player",
-  "version": "1.8.0",
-  "_release": "1.8.0",
+  "version": "1.8.1",
+  "_release": "1.8.1",
   "_resolution": {
     "type": "version",
-    "tag": "1.8.0",
-    "commit": "e0c1f6ab8259853a89140e6d63e1960ab1905e6c"
+    "tag": "1.8.1",
+    "commit": "782edc9747b5cf4082b83a3112ee03ab44e0bd57"
   },
   "_source": "https://github.com/LRNWebComponents/video-player.git",
-  "_target": "^1.7.3",
-  "_originalSource": "LRNWebComponents/video-player"
+  "_target": "^1.8.1",
+  "_originalSource": "LRNWebComponents/video-player",
+  "_direct": true
 }

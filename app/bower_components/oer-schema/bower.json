@@ -1,10 +1,9 @@
 {
   "name": "oer-schema",
-  "description": "A LRN element",
+  "description": "Helpers for OER Schema integration",
   "main": "oer-schema.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
-    "lrnsys-behaviors": "LRNWebComponents/lrnsys-behaviors#^1.0.0",
     "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.11.1",
     "schema-behaviors": "LRNWebComponents/schema-behaviors#^0.2.0"
   },
