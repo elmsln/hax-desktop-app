@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>shibui-dropdown-menu demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../shibui-dropdown-menu.html">
+    <link rel="import" href="../../iron-image/iron-image.html">
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        body {
+          display: block;
+          font-family: sans-serif;
+        }
+
+        shibui-dropdown-menu {
+          --shibui-dropdown-color: #79589F;
+          --shibui-dropdown-content: {
+            width: 200px;
+          };
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic shibui-dropdown-menu demo</h3>
+      <demo-snippet>
+        <template>
+          <shibui-dropdown-menu>
+            <button slot="trigger">Trigger</button>
+            <a>Account Settings</a>
+            <a>Notifications</a>
+            <a>Sign out</a>
+          </shibui-dropdown-menu>
+        </template>
+      </demo-snippet>
+    </div>
+    <div class="vertical-section-container centered">
+      <h3>Basic shibui-dropdown-menu demo</h3>
+      <demo-snippet>
+        <template>
+          <custom-style>
+            <style is="custom-style" include="demo-pages-shared-styles">
+              .primary {
+                padding: 20px;
+
+                @apply --layout-vertical;
+                @apply --layout-center-center;
+              }
+
+              .primary > * {
+                padding: 3px;
+              }
+
+              .avatar {
+                width: 50px;
+                height: 50px;
+              }
+
+              .email {
+                font-size: 13px;
+                color: #96A3B6;
+              }
+            </style>
+          </custom-style>
+
+          <shibui-dropdown-menu>
+            <button slot="trigger">Trigger</button>
+            <a class="primary">
+              <iron-image
+                class="avatar"
+                sizing="cover" preload fade
+                sizing="contain"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAABsCAQAAAAlb59GAAAFPElEQVR4Ae3bXWgUVxvA8X+ym49G1GiNCUmLtsH2ouCrNpSKGgTBr/hBpDGtwTZolcREUdqLfly2VfyoXpRqg/rW0qKVRpOKClLEKEgktKKvBmNsSlBsKUaj1TTp6+w+9dKb3TlnzpnZ3bC//31gyMzxeSYjgUhLS0tLy6ecBnbRQgc99DNIhAiD9NNDBy3sZB3l5JMyCqhhP12IUlGusY8VjCOJlbCJdiKIhyKcZyPFJJlMlnKSCGKYw3GWkElSyKWRXxGL3aCeHBIqi3XcRnzoFnWESZBFXEd87BoLCFwxR5EA+oEiAlTDfSSg7lFNIEbwHRJwB8jDZ5O4iiSgy5Tio9n0IwnqLjPxyZv8gySwId7AB6uJIAnOodb+ZUWRJChq99LeIoIkSQ5VWDLb+Nl6yGn2sPlJezjNQ+NnbSYWTDI6CSMcYR5hnhZmPi1EjU7IFzE0wujfrfNMJpYptCOeu8QzGDGZMj4jRDwhtiKe+y8GahDPrUfFRsRzVXhUbDDqbkbVNoMnrRBPWgyerRCqwlxAPHYYDyoMTsLJ6JhqcELORVOWwXZ8BF2tiMc6CaNlHeK5eehaiHhuLRpyuW0wZYTRlcUA4rGb5KCsEfHcabw4g3iuDkWZRu8J9+BFE+K562SiZCli0Ga82IIYtAglJ1Puwn5EQQkRJKVuRcGhCFebECTww6MNMaoRV/rLhPlxn80AYtQ5XBQQRQybbz6+aecwRnFRMegouo4hxlUT137EuChT0FFGFDGuibi6EAu1a60tHYiFOokjH7HUVlR9bu2N42hiKkestREV7yHWmkFMDYjFthEinrDqb8t8GN6FWO0CU4mljA7EajvM33KoF6WVhWTxtGwqOEYUsVwzMXUgvvSIMzSx5UlNtDGA+FI7MfUgKVw3MfUjKVwfMQ0iKdwAMUWQFM4Zthc27G/F4X94DP/jvgNJ4drNR6qAMx+pdiIWu08bX7KexfyHEvIIESKPEqawmPXspo0HiMW2G/2NRaHbfEMtL5GBmwxeZhXf8ru/a4v5otnDJ7xKBroyKONTfvNv0cz3vEz8n4PMxEwG5XzPY88L0ijiuIZoN8QXFGPLc+z29CXQVeLah2h2ghewrZRTtl+/rUA0+pta/LKGIUSj5cQ1TmMQvsM0/PQa9+y94obziFIPmIzfpvEIUeqsvY+AagjCKkSpBlwV4xjMZfZdRFx7TCEKjiOuvU1Q3kVca0XJEsS1SQTlFcS1CpRkcgNxqZ6gbEBc6iIDRfUK00YZQXhdYQpZg7IcbinM8CX4bQJ/Ii71ko2GOsS1KzyLn8YrTa6r0RJW+qE/Mxa/FHAJce1/hNC0QHGmLsYPz9OFKDQHD5oV9+UyH46MPxCFDuJJkeIQOkg9Nm1Q3Mf6KMCjao3PtIot3YInEMWWYeCAxjupTWRhIpv3+QtRbC9G8riMKHeDdwjjRZhVWp9//kIuhkq5i2jUyweMR0cRH3MT0egOE7FgFkOIVg6nqGMCbiZSz084iFaDTMeSKhzEQ70c4kMqKaOEkYQJM5ISyqjkIw7Ri3jIoRKLapPmvzKuxLJaHCTBOazEB1UMIQlskEp8Mou7SIK6w3R8VMplJAFdZCI+y+NrJOD2kksgqgK8JftYRoAKOYwE0EEKCNxcOhEfu8IcEiTMWm4iPtTLakIkVA51dCMW62IN2SSFTBZxDAcx7DGtVJBBkimikXMeL8/hLA0UksTGUk0TnUQVh9qrfMVyxpAyRjODOnbQTDvd9DGAg8MAfXTTTjPbqWMGowhAWlpaWtq/y0nTbLJkZL4AAAAASUVORK5CYII=">
+              </iron-image>
+              <div class="name">Salte Shibui</div>
+              <div class="email">example@salte.io</div>
+            </a>
+            <a>Account Settings</a>
+            <a>Notifications</a>
+            <a>Sign out</a>
+          </shibui-dropdown-menu>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

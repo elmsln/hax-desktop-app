@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>shibui-dropdown-menu test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../shibui-dropdown-menu.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <shibui-dropdown-menu>
+          <button slot="trigger">Trigger</button>
+          <a>Account Settings</a>
+        </shibui-dropdown-menu>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('shibui-dropdown-menu', function() {
+        var element;
+        setup(function() {
+          element = fixture('basic');
+        });
+
+        test('the dropdown opens when the trigger is clicked', function() {
+          expect(element.opened).to.equal(false);
+          element._triggerElement.click();
+          expect(element.opened).to.equal(true);
+        });
+
+        test('the dropdown closes when the trigger is clicked', function() {
+          element.set('opened', true);
+          expect(element.opened).to.equal(true);
+          element._triggerElement.click();
+          expect(element.opened).to.equal(false);
+        });
+      });
+    </script>
+  </body>
+</html>

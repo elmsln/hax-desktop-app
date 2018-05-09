@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>shibui-dropdown test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../shibui-dropdown.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <shibui-dropdown>
+          <a>Account Settings</a>
+          <a>Account Settings</a>
+        </shibui-dropdown>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('shibui-dropdown', function() {
+        var element;
+        setup(function(done) {
+          element = fixture('basic');
+          Polymer.RenderStatus.afterNextRender(element, done);
+        });
+
+        test('the dropdown dynamically positions itself', function() {
+          element.set('opened', true);
+          expect(element.style.maxWidth).to.equal('calc(100% - 20px)');
+          expect(element.style.left).to.match(/^\d+px$/);
+          expect(element.style.top).to.match(/^\d+px$/);
+        });
+
+        test('the dropdown closes when an item is clicked', function(done) {
+          element.set('opened', true);
+          Polymer.RenderStatus.afterNextRender(element, function() {
+            element.querySelector('a:first-child').click();
+            expect(element.opened).to.equal(false);
+            done();
+          });
+        });
+
+        test('the dropdown closes when the background is clicked', function(done) {
+          element.set('opened', true);
+          expect(element.opened).to.equal(true);
+          Polymer.RenderStatus.afterNextRender(element, function() {
+            document.body.click();
+            expect(element.opened).to.equal(false);
+            done();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+{
+  "name": "shibui-dropdown-menu",
+  "description": "Simple, modern, and inspired dropdown menu",
+  "version": "1.2.0",
+  "authors": [
+    "The Salte Team"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "dropdown",
+    "simple"
+  ],
+  "main": "shibui-dropdown-menu.html",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ShibuiElements/shibui-dropdown-menu"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ShibuiElements/shibui-dropdown-menu",
+  "ignore": [],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1 - 2",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#1 - 2"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#1 - 2",
+    "iron-image": "PolymerElements/iron-image#1 - 2",
+    "web-component-tester": "^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.9",
+        "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0"
+      },
+      "devDependencies": {
+        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+        "iron-image": "PolymerElements/iron-image#^1.0.0",
+        "web-component-tester": "^4.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      }
+    }
+  }
+}

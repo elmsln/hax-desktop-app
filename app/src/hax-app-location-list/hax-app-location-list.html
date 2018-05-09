@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="hax-app-location-list-item.html">
 
 <dom-module id="hax-app-location-list">
@@ -8,6 +10,10 @@
       :host {
         display: block;
       }
+
+      #acceptProjectDelete {
+        color: #bf1919;
+      }
     </style>
 
     <div id="locationMenu">
@@ -15,6 +21,14 @@
         <hax-app-location-list-item project="[[project]]"></hax-app-location-list-item>
       </template>
     </div>
+
+    <paper-dialog id="confirmProjectDelete" modal>
+      <h2>Are you sure you want to delete this project?</h2>
+      <div class="buttons">
+        <paper-button id="cancelProjectDelete" dialog-dismiss autofocus>Cancel</paper-button>
+        <paper-button id="acceptProjectDelete" dialog-confirm>Accept</paper-button>
+      </div>
+    </paper-dialog>
   </template>
 
 
@@ -26,11 +40,18 @@
         projects: {
           type: Array,
           value: []
+        },
+        __projectDeleteQueue: {
+          type: Object,
+          value: null
         }
       },
 
       listeners: {
-        'project-selected': '__projectSelected'
+        'project-selected': '__projectSelected',
+        'project-delete': '__projectDelete',
+        'acceptProjectDelete': '__acceptProjectDelete',
+        'cancelProjectDelete': '__cancelProjectDelete',
       },
 
       ready: function () {
@@ -49,6 +70,22 @@
         ipcRenderer.send('project-selected', project.location);
       },
 
+      __projectDelete: function (e, project) {
+        this.set('__projectDeleteQueue', project)
+        this.$.confirmProjectDelete.open()
+      },
+
+      __acceptProjectDelete: function (e) {
+        ipcRenderer.send('project-delete', this.__projectDeleteQueue)
+      },
+
+      __cancelProjectDelete: function (e) {
+        this.__clearProjectDeleteQueue();
+      },
+
+      __clearProjectDeleteQueue: function (e) {
+        this.set('__projectDeleteQueue', null)
+      }
     });
   </script>
 </dom-module>

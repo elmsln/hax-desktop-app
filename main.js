@@ -688,8 +688,6 @@ ipcMain.on('markdown-to-html', (e, markdown) => {
 })
 
 
-
-
 /**
  * Homepage Events Section
  */

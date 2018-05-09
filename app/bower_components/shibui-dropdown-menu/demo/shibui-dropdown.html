@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>shibui-dropdown demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../shibui-dropdown.html">
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        body {
+          display: block;
+          font-family: sans-serif;
+        }
+
+        shibui-dropdown {
+          --shibui-dropdown-content: {
+            width: 200px;
+          };
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Positioned relative to its parent</h3>
+      <!-- TODO: https://github.com/PolymerElements/iron-demo-helpers/issues/54 -->
+      <demo-snippet>
+        <dom-bind>
+          <template is="dom-bind">
+            <input type="checkbox" checked="{{opened::change}}">
+            <shibui-dropdown opened="{{opened}}">
+              <a>Account Settings</a>
+              <a>Notifications</a>
+              <a>Sign out</a>
+            </shibui-dropdown>
+          </template>
+        </dom-bind>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

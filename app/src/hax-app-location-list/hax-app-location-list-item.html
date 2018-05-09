@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/paper-avatar/paper-avatar.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/shibui-dropdown-menu/shibui-dropdown-menu.html">
 
 <dom-module id="hax-app-location-list-item">
   <template>
@@ -33,13 +35,6 @@
         box-shadow: 0 3px 8px 0 darkgray;
       }
 
-      paper-icon-button#more_btn {
-        position: absolute;
-        top: 5px;
-        right: 10px;
-        color: #9DAAB6;
-      }
-
       paper-avatar {
         float: left;
         margin-right: 15px;
@@ -60,11 +55,30 @@
           margin-bottom: 10px;
         }
       }
+
+      #menu {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        color: #9DAAB6;
+      }
+
+      .menu-icon {
+        --iron-icon-height: 1em;
+        --iron-icon-width: 1em;
+      }
+
+      #deleteItem {
+        color: #bf1919;
+      }
     </style>
 
     <paper-card>
       <paper-avatar label="[[project.title]]"></paper-avatar>
-      <paper-icon-button id="more_btn" icon="more-horiz"></paper-icon-button>
+      <shibui-dropdown-menu id="menu">
+        <paper-icon-button slot="trigger" icon="more-horiz"></paper-icon-button>
+        <a id="deleteItem">delete <iron-icon icon="close" class="menu-icon"></iron-icon> </a>
+      </shibui-dropdown-menu>
       <div class="list-item" on-click="__projectSelected">
         <div class="title">[[project.title]]</div>
         <div class="location">[[project.location]]</div>
@@ -82,6 +96,14 @@
           type: Object,
           value: {}
         }
+      },
+
+      listeners: {
+        'deleteItem.tap': '__deleteItemTapped'
+      },
+
+      __deleteItemTapped: function (e) {
+        this.fire('project-delete', this.project)
       },
 
       __projectSelected: function (e) {
