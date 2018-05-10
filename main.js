@@ -202,7 +202,8 @@ const globals = {
       // set the location
       globals.setProject({
         title: title,
-        location: location
+        location: location,
+        outlineLocation: outline
       });
     }
   },

@@ -231,9 +231,7 @@
       
       __contentCancel: function (e) {
         this.set('__activateHaxEditor', false);
-        if (this.__activePageContents) {
-          this.$.editor.import(this.__activePageContents)
-        }
+        this.$.editor.import(this.__activePageContents)
       },
 
       __contentMarkdownToHTML: function (e) {
