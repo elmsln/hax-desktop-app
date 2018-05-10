@@ -233,6 +233,8 @@ A LRN element that will change the world.
         this.polyfillSafe = Polymer.HaxStore.instance.computePolyfillSafe();
         // mutation observer that ensures state of hax applied correctly
         this._observer = Polymer.dom(this).observeNodes(function(info) {
+          // FLUSH THE DOM SO IT RECOGNIZES THE NEW NODES
+          Polymer.dom.flush()
           // if we've got new nodes, we have to react to that
           if (info.addedNodes.length > 0) {
             info.addedNodes.map((node) => {
