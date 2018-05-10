@@ -39,7 +39,7 @@
       
     </style>
     
-    <hax-app-outline-ui id="ui" outline="[[__outline.tree]]" editing="[[__isEditing(__outline.editing)]]" editing-page="[[__activateHaxEditor]]">
+    <hax-app-outline-ui id="ui" outline="[[__outline.tree]]" editing="[[__isEditing(__outline.editing)]]" editing-page="[[__activateHaxEditor]]" show-default-message="[[__showDefaultMessage]]">
       <app-editor-hax id="editor" app-store-connection='{"url":"appstore.json"}' editing="[[__activateHaxEditor]]"></app-editor-hax>
       <slot></slot>
     </hax-app-outline-ui>
@@ -72,7 +72,7 @@
         },
         __activateHaxEditor: {
           type: Boolean,
-          computed: '__activateHaxEditorCompute(__outline.activePage)',
+          computed: false,
         },
         /**
          * Cacehed version of the page contents
@@ -81,12 +81,17 @@
         __activePageContents: {
           type: String,
           value: null
+        },
+        __showDefaultMessage: {
+          type: Boolean,
+          computed: '__showDefaultMessageCompute(__outline.activePage, __activateHaxEditor, __outline.editing)'
         }
       },
 
       observers: [
         '__projectChanged(project)',
-        '__activateHaxEditorChanged(__activateHaxEditor)'
+        '__activePageChanged(__outline.activePage)',
+        '__activateHaxEditorChanged(__activateHaxEditor)',
       ],
 
       listeners: {
@@ -98,6 +103,8 @@
         'ui.content-cancel': '__contentCancel',
         'ui.markdown-to-html': '__contentMarkdownToHTML',
         'editor.app-editor-hax-save': '__editorSaved',
+        'content-clicked': '__contentClicked',
+        'ui.*': '__uiEventHandler'
       },
 
       __projectChanged: function (project) {
@@ -130,6 +137,40 @@
         ipcRenderer.on('active-page-saved-success', (e) => {
           this.$.toast.show('page saved');
         });
+      },
+
+      /**
+       * If we have an active page and we're not in any other edit
+       * states.
+       */
+      __showDefaultMessageCompute: function (activePage, activateHaxEditor, outlineEditing) {
+        console.log(activePage, activateHaxEditor, outlineEditing)
+        if (activePage && !activateHaxEditor && !outlineEditing) {
+          return true
+        }
+        else {
+          return false
+        }
+      },
+
+      /**
+       * On active page change deactivate HAX editor
+       */
+      __activePageChanged: function (activePage) {
+        this.__activateHaxEditor = false
+      },
+
+      /**
+       * Listen for clicks on the slot. We are going to treat
+       * these as a trigger for hax edit state.
+       */
+      __contentClicked: function (e) {
+        const activePage = this.__outline.activePage || false;
+        const editingOutline = this.__outline.editing || false;
+
+        if (activePage && !editingOutline) {
+          this.__activateHaxEditor = true;
+        }
       },
 
       __editOutlineToggle: function (e) {
@@ -167,10 +208,12 @@
        * This triggers HAX editor to save
        */
       __contentSave: function (e) {
+        this.set('__activateHaxEditor', false);
         this.$.editor.save();
       },
       
       __contentCancel: function (e) {
+        this.set('__activateHaxEditor', false);
         if (this.__activePageContents) {
           this.$.editor.import(this.__activePageContents)
         }
@@ -182,10 +225,6 @@
 
       __isEditing: function (editing) {
         return editing ? true : false;
-      },
-
-      __activateHaxEditorCompute: function (activePage) {
-        return activePage ? true : false;
       },
 
       __activateHaxEditorChanged: function (activate) {

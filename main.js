@@ -468,10 +468,13 @@ const globals = {
   loadActivePage(outline) {
     // get the active item in the outline tree
     const activeOutineItem = outline.tree.find(i => i.id === outline.activePage);
-    const pathToFile = path.join(outline.projectLocation, activeOutineItem.location);
-    // load the page contents
-    const html = loadPage(pathToFile) || '';
-    return html;
+    if (activeOutineItem) {
+
+      const pathToFile = path.join(outline.projectLocation, activeOutineItem.location);
+      // load the page contents
+      const html = loadPage(pathToFile) || '';
+      return html;
+    }
   },
   /**
    * Retrieve the Files from the file system and send them
