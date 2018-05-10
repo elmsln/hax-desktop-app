@@ -82,7 +82,7 @@
     "oer-schema": "LRNWebComponents/oer-schema#^1.0.5",
     "multiple-choice": "LRNWebComponents/multiple-choice#^1.0.0",
     "tab-list": "LRNWebComponents/tab-list#^0.1.0",
-    "self-check": "LRNWebComponents/self-check#^0.0.2",
+    "self-check": "LRNWebComponents/self-check#^1.0.0",
     "q-r": "LRNWebComponents/q-r#^1.0.3"
   },
   "resolutions": {
@@ -117,14 +117,14 @@
     "paper-radio-button": "^2.1.0"
   },
   "homepage": "https://github.com/LRNWebComponents/hax-body",
-  "version": "0.12.10",
-  "_release": "0.12.10",
+  "version": "0.12.11",
+  "_release": "0.12.11",
   "_resolution": {
     "type": "version",
-    "tag": "0.12.10",
-    "commit": "a429c59e760c0c5715ac82afc89e684d34384abd"
+    "tag": "0.12.11",
+    "commit": "75af92913d85a5656928e59f93666f2df9bc579c"
   },
   "_source": "https://github.com/LRNWebComponents/hax-body.git",
-  "_target": "^0.12.10",
+  "_target": "^0.12.4",
   "_originalSource": "LRNWebComponents/hax-body"
 }
