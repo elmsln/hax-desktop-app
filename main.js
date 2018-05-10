@@ -179,7 +179,7 @@ const globals = {
   deleteProject(projectLocation) {
     const currentProjectList = this.getProjects(projectLocation);
     const newProjectList = currentProjectList.filter(p => p.location !== projectLocation);
-    store.set('projects.list', [newProjectList]);
+    store.set('projects.list', newProjectList);
     mainWindow.webContents.send('projects-updated', this.getProjects());
   },
   /**
