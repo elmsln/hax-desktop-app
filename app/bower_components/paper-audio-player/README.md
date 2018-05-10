@@ -1,5 +1,12 @@
 # paper-audio-player 
 
+## Forked by the LRNWebComponents team
+
+Fork provides better accessibility, updated polymer dependencies, HAX integration and Schema integrations.
+
+
+## Original file follows
+
 [![Build Status](https://travis-ci.org/gorork/paper-audio-player.svg?branch=master)](https://travis-ci.org/gorork/paper-audio-player) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/element/gorork/paper-audio-player)
 
 A custom audio player with material paper style and clean design.
@@ -88,8 +95,16 @@ Attribute     | Options                                 | Description
 `auto-play`   | *boolean*                               | Will start playing the audio file automatically
 `preload`     | *string*: `auto`, `metadata`, `none`    | Defines if audio file should be pre-loaded.
 `time-offset` | *number*                                | Sets the time offset in `seconds` for audio to start playing at this time.
+`ga-id`       | *string*                                | Sets Google Analytics tracking ID, e.g. `UA-000000-01`.
 
 **Note**: Just like in native audio element, the `preload` property will be ignored if `auto-play` is set on a player.
+
+#### Google Analytics
+
+If you add your unique GA tracking ID to a player (e.g. `ga-id="UA-000000-01"`), it will dispatch the following events to your GA: **Play**, **Pause**, **Scrub**, **Ended**.
+**Ended** means that audio played through to the very end.
+
+For each event Paper Player will pass an **event label** property that contains a `title` (if specified) or `src` value of an audio file.
 
 ## Development
 

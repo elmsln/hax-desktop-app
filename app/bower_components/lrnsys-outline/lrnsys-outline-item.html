@@ -2,6 +2,7 @@
 <link rel="import" href="../iron-list/iron-list.html">
 <link rel="import" href="../iron-a11y-keys/iron-a11y-keys.html">
 <link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
 
 <!--
 `lrnsys-outline-item`
@@ -21,39 +22,96 @@ A LRN element
     <style>
       :host {
         display: block;
+        --indent-multiplier: 20px;
       }
-      :host[indent="0"] {
-        padding-left: 0em;
+      :host [data-indent="0"] {
+        padding-left: 0;
       }
-      :host[indent="1"] {
-        padding-left: 2.5em;
+      :host [data-indent="1"] {
+        padding-left: calc(var(--indent-multiplier) * 1);
       }
-      :host[indent="2"] {
-        padding-left: 5em;
+      :host [data-indent="2"] {
+        padding-left: calc(var(--indent-multiplier) * 2);
       }
-      :host[indent="3"] {
-        padding-left: 7.5em;
+      :host [data-indent="3"] {
+        padding-left: calc(var(--indent-multiplier) * 3);
       }
-      :host[indent="4"] {
-        padding-left: 10em;
+      :host [data-indent="4"] {
+        padding-left: calc(var(--indent-multiplier) * 4);
       }
-      :host[indent="5"] {
-        padding-left: 12.5em;
+      :host [data-indent="5"] {
+        padding-left: calc(var(--indent-multiplier) * 5);
       }
-      :host[indent="6"] {
-        padding-left: 15em;
+      :host [data-indent="6"] {
+        padding-left: calc(var(--indent-multiplier) * 6);
       }
-      :host {
-        padding-left: 20em;
+      paper-icon-button {
+        font-size: 12px;
+        height: 16px;
+        width: 16px;
+        margin:0 2px;
+        padding: 0;
+        color: #AAAAAA;
+      }
+      paper-icon-button:focus,
+      paper-icon-button:hover {
+        color: #000000;
+      }
+      paper-icon-button#add:focus,
+      paper-icon-button#add:hover {
+        color: #00AA00;
+      }
+      paper-icon-button#delete:focus,
+      paper-icon-button#delete:hover {
+        color: #AA0000;
+      }
+      #wrapper {
+        display: inline-flex;
+        height: 40px;
+      }
+      .ops {
+        display: inline-flex;
+        visibility: hidden;
+        height: 40px;
+        vertical-align: top;
+        margin-left: 16px;
+        float: right;
+        margin: 0;
+      }
+      .ops div {
+        display: block;
+        width: 20px;
+      }
+      :host:hover .ops,
+      :host:focus .ops {
+        visibility: visible;
+      }
+      :host:hover,
+      :host:focus {
+        background-color: #F2F2F2;
       }
     </style>
-    <div id="wrapper" indent$="[[indent]]">
-      <paper-input 
-        id="input" 
-        label="Enter a page title" 
-        value$="[[title]]" 
+    <div id="wrapper" data-indent$="[[indent]]">
+      <paper-input
+        id="input"
+        label="Enter a page title"
+        value$="[[title]]"
         no-label-float>
       </paper-input>
+    </div>
+    <div class="ops">
+      <div>
+        <paper-icon-button title="move up" icon="icons:arrow-upward" on-tap="_up"></paper-icon-button>
+        <paper-icon-button title="move down" icon="icons:arrow-downward" on-tap="_down"></paper-icon-button>
+      </div>
+      <div>
+        <paper-icon-button title="bring in a level" icon="icons:arrow-back" on-tap="_outdent"></paper-icon-button>
+        <paper-icon-button title="indent item" icon="icons:arrow-forward" on-tap="_indent"></paper-icon-button>
+      </div>
+      <div>
+        <paper-icon-button id="add" title="add below here" icon="icons:add" on-tap="_add"></paper-icon-button>
+        <paper-icon-button id="delete" title="delete this" icon="icons:delete" on-tap="_delete"></paper-icon-button>
+      </div>
     </div>
     <iron-a11y-keys id="a11y" target="[[target]]" keys="enter"
     on-keys-pressed="_onEnter"></iron-a11y-keys>
@@ -81,11 +139,9 @@ A LRN element
     Polymer({
 
       is: 'lrnsys-outline-item',
-      
       listeners: {
         'change': '_onChange',
       },
-
       properties: {
         id: {
           type: String,
@@ -122,6 +178,25 @@ A LRN element
       value: function(){
         this.title = this.$.input.value;
         return this.title;
+      },
+      _delete: function() {
+        this.fire('delete-item', {item: this});
+      },
+      _indent: function() {
+        this.fire('indent-item', {item: this, increase: true});
+      },
+      _outdent: function() {
+        this.fire('indent-item', {item: this, increase: false});
+      },
+      _add: function() {
+        let i = this.$.input.querySelector('input').selectionStart, j = this.$.input.value;
+        this.fire('add-item', {item: this, value: j.slice(0, i), new: j.slice(i, j.length)});
+      },
+      _up: function() {
+        this.fire('move-item', {item: this, moveUp: true, byGroup: false});
+      },
+      _down: function() {
+        this.fire('move-item', {item: this, moveUp: false, byGroup: false});
       },
       setSelection: function(start,end){
         let s = start !== undefined ? start : 0, n = end !== undefined ? end : s;
@@ -162,7 +237,6 @@ A LRN element
       },
       _onTab: function(e){
         //e.preventDefault();
-        console.log(this.$.input.querySelector('input').selectionStart == 0);
         if (this.$.input.querySelector('input').selectionStart == 0) {
           e.preventDefault();
           this.fire('indent-item', {item: this, increase: true});

@@ -1,9 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../paper-spinner/paper-spinner-lite.html">
+<link rel="import" href="../paper-spinner/paper-spinner.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
-<link rel="import" href="../paper-styles/color.html">
 <link rel="import" href="../paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../materializecss-styles/materializecss-styles.html">
 <!--
@@ -112,7 +111,17 @@ ability to render csv files
       .mdl-data-table th.mdl-data-table__cell--non-numeric {
         text-align: left;
       }
-
+      #loading {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        transition: 1.2s all linear;
+        opacity: 0;
+      }
+      #loading[active] {
+        visibility: visible;
+        opacity: 1;
+      }
     </style>
     <iron-ajax
       auto
@@ -120,9 +129,7 @@ ability to render csv files
       handle-as="text"
       last-response="{{tableData}}"
       on-response="handleResponse"></iron-ajax>
-    <div id="loading">
-      <paper-spinner-lite active class="grey"></paper-spinner-lite>
-    </div>
+    <paper-spinner id="loading" active></paper-spinner>
     <table class="mdl-data-table" summary="[[summary]]">
     <template is="dom-if" if="[[caption]]">
       <caption>[[caption]]</caption>
@@ -202,7 +209,7 @@ ability to render csv files
       handleResponse: function(e) {
         this.table = this.CSVtoArray(this.tableData);
         this.tableHeadings = this.table.shift();
-        this.$.loading.innerHTML = '';
+        this.$.loading.active = false;
       },
       /**
        * Mix of solutions from https://stackoverflow.com/questions/8493195/how-can-i-parse-a-csv-string-with-javascript-which-contains-comma-in-data

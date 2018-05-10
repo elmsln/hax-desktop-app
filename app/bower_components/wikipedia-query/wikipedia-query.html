@@ -2,6 +2,7 @@
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../hax-body-behaviors/hax-body-behaviors.html">
 <link rel="import" href="../schema-behaviors/schema-behaviors.html">
+<link rel="import" href="../citation-element/citation-element.html">
 <!--
 `wikipedia-query`
 A LRN element
@@ -22,16 +23,22 @@ A LRN element
         border: 1px grey solid;
         padding: .5em 1em;
       }
+      citation-element {
+        background-color: #F8F8F8;
+        padding: 16px 8px;
+        font-size: 12px;
+      }
     </style>
     <iron-ajax
       hidden
       auto
-      url$="https://en.wikipedia.org/w/api.php?origin=*&action=query&titles={{search}}&prop=extracts&format=json"
+      url$="https://en.wikipedia.org/w/api.php?origin=*&action=query&titles=[[search]]&prop=extracts&format=json"
       handle-as="json"
       on-response="handleResponse"
       last-response="{{searchResponse}}"></iron-ajax>
-    <h3 hidden$="[[!showTitle]]">{{search}} Wikipedia article</h3>
+    <h3 hidden$="[[!showTitle]]">[[search]] Wikipedia article</h3>
     <div id="result" hidden$="[[!__rendercontent]]"></div>
+    <citation-element hidden$="[[!__rendercontent]]" creator="{Wikipedia contributors}" scope="sibling" license="by-sa" title="[[search]] --- {Wikipedia}{,} The Free Encyclopedia" source="https://en.wikipedia.org/w/index.php?title=[[search]]" date="[[__now]]"></citation-element>
   </template>
   <script>
     Polymer({
@@ -45,7 +52,6 @@ A LRN element
         showTitle: {
           type: Boolean,
           value: true,
-          reflectToAttribute: true,
         },
         /**
          * Search string.
@@ -53,7 +59,6 @@ A LRN element
         search: {
           type: String,
           value: 'Polymer (library)',
-          reflectToAttribute: true,
         },
         /**
          * Render the response as..
@@ -61,7 +66,6 @@ A LRN element
         renderAs: {
           type: String,
           value: 'content',
-          reflectToAttribute: true,
           observer: '_renderAsUpdated',
         },
         /**
@@ -75,6 +79,8 @@ A LRN element
        * attached
        */
       attached: function() {
+        let date = new Date(Date.now());
+        this.__now = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
         // Establish hax properties if they exist
         let props = {
           'canScale': true,
