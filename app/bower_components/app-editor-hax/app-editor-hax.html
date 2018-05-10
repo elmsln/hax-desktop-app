@@ -68,6 +68,8 @@ is no edit state and that it is always editing effectively.
       import: function(html) {
         // import the HTML blob to get going
         Polymer.HaxStore.instance.activeHaxBody.importContent(html);
+        // make sure we update the dom
+        Polymer.dom.flush();
         // fire event just letting things know this happened
         this.fire('app-editor-hax-import', true);
       },
