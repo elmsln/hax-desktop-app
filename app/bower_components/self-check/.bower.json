@@ -8,7 +8,8 @@
     "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.2.1",
     "schema-behaviors": "LRNWebComponents/schema-behaviors",
     "paper-card": "PolymerElements/paper-card#^2.1.0",
-    "a11y-behaviors": "LRNWebComponents/a11y-behaviors#^1.0.2"
+    "a11y-behaviors": "LRNWebComponents/a11y-behaviors#^1.0.2",
+    "paper-tooltip": "PolymerElements/paper-tooltip#^2.1.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -20,15 +21,15 @@
     "webcomponentsjs": "^0.7.24"
   },
   "homepage": "https://github.com/LRNWebComponents/self-check",
-  "version": "0.0.2",
-  "_release": "0.0.2",
+  "version": "1.0.1",
+  "_release": "1.0.1",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.2",
-    "commit": "6635b8f54904528939ca39d1a85af9b8ca361a55"
+    "tag": "1.0.1",
+    "commit": "27f9fecf630a5ab2c73bb9dc4a07644b52ab2785"
   },
   "_source": "https://github.com/LRNWebComponents/self-check.git",
-  "_target": "^0.0.2",
+  "_target": "^1.0.1",
   "_originalSource": "LRNWebComponents/self-check",
   "_direct": true
 }

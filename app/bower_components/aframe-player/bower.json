@@ -9,7 +9,8 @@
     "materializecss-styles": "LRNWebComponents/materializecss-styles#^0.0.5",
     "paper-spinner": "PolymerElements/paper-spinner#^1.2.1",
     "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.4",
-    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.0.1"
+    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.0.1",
+    "schema-behaviors": "LRNWebComponents/schema-behaviors#^0.2.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

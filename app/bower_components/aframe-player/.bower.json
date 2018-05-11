@@ -9,7 +9,8 @@
     "materializecss-styles": "LRNWebComponents/materializecss-styles#^0.0.5",
     "paper-spinner": "PolymerElements/paper-spinner#^1.2.1",
     "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.4",
-    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.0.1"
+    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.0.1",
+    "schema-behaviors": "LRNWebComponents/schema-behaviors#^0.2.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -18,15 +19,15 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebComponents/aframe-player",
-  "version": "0.0.1",
-  "_release": "0.0.1",
+  "version": "1.0.0",
+  "_release": "1.0.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.1",
-    "commit": "7599363269f825ab187b354e3f23e0c861d9fc48"
+    "tag": "1.0.0",
+    "commit": "a29af73d23dca68dc1818789116775e506669e4a"
   },
   "_source": "https://github.com/LRNWebComponents/aframe-player.git",
-  "_target": "^0.0.1",
+  "_target": "^1.0.0",
   "_originalSource": "LRNWebComponents/aframe-player",
   "_direct": true
 }

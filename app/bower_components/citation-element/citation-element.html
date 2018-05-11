@@ -125,8 +125,9 @@
        * Notice scope change.
        */
       _scopeChanged: function(newValue, oldValue) {
-        if (newValue === 'sibling') {
-          // @todo find the sibling element in the DOM and associate to it's resource ID
+        // make sure we actually have a sibling first
+        if (newValue === 'sibling' && Polymer.dom(this).previousElementSibling !== null) {
+          // find the sibling element in the DOM and associate to it's resource ID
           // also generate a resource ID if it doesn't have one
           if (Polymer.dom(this).previousElementSibling.getAttribute('resource')) {
            this.relatedResource = Polymer.dom(this).previousElementSibling.getAttribute('resource');
@@ -140,7 +141,7 @@
           Polymer.dom(this).previousElementSibling.setAttribute("prefix", this.getAttribute('prefix'));
         }
         else if (newValue === 'parent') {
-          // @todo find the parent and associate to it's resource ID, if it doesn't have one
+          // find the parent and associate to it's resource ID, if it doesn't have one
           // then let's make one dynamically
           if (Polymer.dom(this).parentNode.getAttribute('resource')) {
             this.relatedResource = Polymer.dom(this).parentNode.getAttribute('resource');

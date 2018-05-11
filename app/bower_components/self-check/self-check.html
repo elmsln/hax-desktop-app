@@ -3,6 +3,7 @@
 <link rel="import" href="../schema-behaviors/schema-behaviors.html">
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../materializecss-styles/materializecss-styles.html">
 <link rel="import" href="../a11y-behaviors/a11y-behaviors.html">
 
@@ -23,24 +24,39 @@ A LRN element
     <style include="materializecss-styles">
       :host {
         display: block;
+      }
+
+      paper-card {
         overflow: hidden;
       }
 
-      :host[correct] #answer {
-        visibility: visible;
-        opacity: 1;
-        transition: all 0.5s ease-in-out;
-        height: 50px;
-      }
-
       paper-icon-button#checkBtn {
-        float: right;
-        margin-bottom: 5px;
         width: 50px;
         height: 50px;
+        position: relative;
+        left: 16px;
+        bottom: -10px;
       }
 
-      iron-icon#checkmark {
+      .check_button {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      paper-icon-button#closeBtn {
+        width: 50px;
+        height: 50px;
+        position: relative;
+        left: 16px;
+        bottom: -16px;
+      }
+
+      .close_button {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      iron-icon#questionmark {
         width: 35px;
         height: 35px;
         padding: 5px;
@@ -55,20 +71,55 @@ A LRN element
       #header_wrap {
         display: inline-flex;
         width: 100%;
-        margin: 10px 0 10px;
+        margin: -20px 0 0;
       }
 
-      #question {
+      #question_wrap {
+        position: relative;
+      }
+
+      .question {
         font-size: 16px;
-        margin-bottom: 10px;
+        padding: 15px 15px;
       }
 
-      #answer {
+      :host[correct] .question {
+        display: none;
+      }
+
+      #answer_wrap {
         visibility: hidden;
         opacity: 0;
-        background-color: #fafafa;
-        padding: 25px;
+        background-color: #66bb6a;
+        border-top: 2px solid #fff;
         width: 100%;
+        top: 0;
+        transition: all 0.2s ease;
+        left: calc(100%);
+        position: absolute;
+      }
+
+      :host[correct] #answer_wrap {
+        visibility: visible;
+        opacity: 1;
+        position: relative;
+        left: 0;
+      }
+
+      .answer {
+        color: #fff;
+        font-size: 16px;
+        padding: 15px;
+        line-height: 1.2em;
+      }
+
+      #quote_start {
+        display: inline-flex;
+        transform: rotateY(180deg);
+      }
+
+      #quote_end {
+        display: inline-flex;
       }
 
       .triangle {
@@ -78,28 +129,36 @@ A LRN element
         border-right: 20px solid transparent;
         border-bottom: 20px solid;
         position: relative;
-        top: 11px;
+        top: -20px;
         left: -1px;
       }
     </style>
 
-    <paper-card image="[[image]]">
+    <paper-card image="[[image]]" alt="[[alt]]">
       <div class="triangle" style$="border-bottom-color:[[backgroundColor]];"></div>
       <div id="header_wrap" class$="[[backgroundColorClass]] [[textColorClass]]">
-        <iron-icon id="checkmark" icon="icons:check-circle"></iron-icon>
+        <iron-icon id="questionmark" icon="icons:help"></iron-icon>
         <div class="heading">[[title]]</div>
       </div>
-      <div id="question">
-        [[question]]
-        <slot name="question"></slot>
-      </div>
-      <paper-icon-button id="checkBtn" icon="icons:expand-more" on-click="openAnswer" noink></paper-icon-button>
-    </paper-card>
+      <div id="question_wrap">
+        <div class="question">
+          <slot name="question"></slot>
+          <div class="check_button">
+            <paper-icon-button id="checkBtn" icon="icons:check-circle" on-click="openAnswer" noink></paper-icon-button>
+            <paper-tooltip for="checkBtn" position="left">Reveal Answer</paper-tooltip>
+          </div>
+        </div>
 
-    <div id="answer" class="dropdown_answer">
-      [[answer]]
-      <slot></slot>
-    </div>
+        <div id="answer_wrap">
+          <div class="answer" class="dropdown_answer">
+            <slot></slot>
+            <div class="close_button">
+              <paper-icon-button id="closeBtn" icon="icons:close" on-click="openAnswer" noink></paper-icon-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </paper-card>
   </template>
 
   <script>
@@ -118,7 +177,7 @@ A LRN element
          */
         title: {
           type: String,
-          value: '',
+          value: 'Self-Check',
         },
         /**
          * Question.
@@ -131,6 +190,14 @@ A LRN element
          * Image.
          */
         image: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
+        },
+        /**
+         * Alt text for image.
+         */
+         alt: {
           type: String,
           value: '',
           reflectToAttribute: true,
@@ -154,7 +221,7 @@ A LRN element
         /**
          * Text color color.
          */
-         textColorClass: {
+        textColorClass: {
           type: String,
           value: null,
           reflectToAttribute: true,
@@ -163,16 +230,16 @@ A LRN element
         /**
          * Background color.
          */
-         backgroundColor: {
+        backgroundColor: {
           type: String,
-          value: '#1e88e5',
+          value: '#1976d2',
           reflectToAttribute: true,
           observer: '_backgroundColorChanged',
         },
         /**
          * Text color color.
          */
-         backgroundColorClass: {
+        backgroundColorClass: {
           type: String,
           reflectToAttribute: true,
           computed: '_computeColorClass(backgroundColor)',
@@ -200,7 +267,7 @@ A LRN element
             'description': 'The user will be able to complete a self-check.',
             'icon': 'icons:check-circle',
             'color': 'orange',
-            'groups': ['Video', 'Media'],
+            'groups': ['Image', 'Assessment'],
             'handles': [
               {
                 'type': 'image',
@@ -237,27 +304,31 @@ A LRN element
                 'title': 'Title',
                 'description': 'The title of the element',
                 'inputMethod': 'textfield',
-                'icon': 'editor:title',
               },
               {
                 'property': 'image',
                 'title': 'Image',
                 'description': 'The image of the element',
                 'inputMethod': 'textfield',
-                'icon': 'editor:insert-photo',
               },
               {
-                'property': 'question',
+                'property': 'alt',
+                'title': 'Alt Text',
+                'description': 'Add alt text to the image',
+                'inputMethod': 'alt',
+              },
+              {
+                'slot': 'question',
                 'title': 'Question to ask',
                 'description': 'This is where you enter a question for the self-check.',
-                'inputMethod': 'textfield',
+                'inputMethod': 'code-editor',
                 'required': true,
               },
               {
-                'property': 'answer',
+                'slot': '',
                 'title': 'Answer',
                 'description': 'This is where you enter a question for the self-check.',
-                'inputMethod': 'textfield',
+                'inputMethod': 'code-editor',
                 'required': true,
               },
               {
@@ -265,8 +336,7 @@ A LRN element
                 'title': 'Background color',
                 'description': 'Select the background color used',
                 'inputMethod': 'colorpicker',
-                'icon': 'editor:format-color-fill',
-              }
+              },
             ],
             'advanced': [
             ]
@@ -278,7 +348,7 @@ A LRN element
       /**
        * Notice background color changed
        */
-       _backgroundColorChanged: function(newValue, oldValue) {
+      _backgroundColorChanged: function (newValue, oldValue) {
         if (typeof newValue !== typeof undefined && newValue != null) {
           // sees if there's enough contrast and adjusts them accordingly
           this.computeTextPropContrast('textColor', 'backgroundColor');
@@ -287,7 +357,7 @@ A LRN element
       /**
        * Primary color changed, spread into internals.
        */
-      _primaryColorChanged: function(newValue, oldValue) {
+      _primaryColorChanged: function (newValue, oldValue) {
         if (newValue != null && typeof this.source !== typeof undefined) {
           this.videoColor = newValue.substring(1);
           // aggressive rebuild of source so vimeo picks up
@@ -300,7 +370,7 @@ A LRN element
       /**
        * Make class from color value
        */
-      _computeColorClass: function(color) {
+      _computeColorClass: function (color) {
         if (color != null && color.toLowerCase() == '#ffffff') {
           return 'white-text';
         }
