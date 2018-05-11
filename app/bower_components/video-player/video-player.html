@@ -28,14 +28,7 @@ A simple responsive video player
         margin-top: 16px;
         height: 0;
       }
-      :host[responsive] .responsive-video-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-      :host[responsive] .responsive-video-container video {
+      :host[responsive] .responsive-video-container * {
         position: absolute;
         top: 0;
         left: 0;
@@ -50,11 +43,16 @@ A simple responsive video player
       }
     </style>
     <div class="responsive-video-container">
-      <template is="dom-if" if="[[iframed]]">
-        <iframe resource$="[[schemaResourceID]]-video" src="[[src]]" width="[[width]]" height="[[height]]" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      <template is="dom-if" if="[[sandboxed]]">
+        <webview resource$="[[schemaResourceID]]-video" src$="[[src]]" width$="[[width]]" height$="[[height]]" frameborder="0"></webview>
       </template>
-      <template is="dom-if" if="[[!iframed]]">
-        <video resource$="[[schemaResourceID]]-video" src="[[src]]" width="[[width]]" height="[[height]]" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen controls></video>
+      <template is="dom-if" if="[[!sandboxed]]">
+        <template is="dom-if" if="[[iframed]]">
+          <iframe resource$="[[schemaResourceID]]-video" src$="[[src]]" width$="[[width]]" height$="[[height]]" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </template>
+        <template is="dom-if" if="[[!iframed]]">
+          <video resource$="[[schemaResourceID]]-video" src$="[[src]]" width$="[[width]]" height$="[[height]]" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen controls></video>
+        </template>
       </template>
     </div>
     <div id="videocaption" class$="video-caption [[secondaryColorClass]] [[textColorClass]]">
@@ -79,7 +77,6 @@ A simple responsive video player
          */
         source: {
           type: String,
-          reflectToAttribute: true,
         },
         /**
          * Computed / cleaned up source.
@@ -93,7 +90,14 @@ A simple responsive video player
          */
         iframed: {
           type: Boolean,
-          computed: '_sourceIsIframe(source)',
+          computed: '_computeIframed(source, sandboxed)',
+        },
+        /**
+         * Compute if this is a sandboxed system or not
+         */
+        sandboxed: {
+          type: Boolean,
+          computed: '_computeSandboxed(source)',
         },
         /**
          * Video width
@@ -122,7 +126,6 @@ A simple responsive video player
          */
         caption: {
           type: String,
-          reflectToAttribute: true,
         },
         /**
          * Primary Color.
@@ -130,7 +133,6 @@ A simple responsive video player
         primaryColor: {
           type: String,
           value: null,
-          reflectToAttribute: true,
           observer: '_primaryColorChanged',
         },
         /**
@@ -139,7 +141,6 @@ A simple responsive video player
         secondaryColor: {
           type: String,
           value: null,
-          reflectToAttribute: true,
           observer: '_secondaryColorChanged',
         },
         /**
@@ -148,14 +149,12 @@ A simple responsive video player
         textColor: {
           type: String,
           value: '#000000',
-          reflectToAttribute: true,
         },
         /**
          * Primary color class.
          */
         primaryColorClass: {
           type: String,
-          reflectToAttribute: true,
           computed: '_computeColorClass(primaryColor)',
         },
         /**
@@ -163,7 +162,6 @@ A simple responsive video player
          */
         secondaryColorClass: {
           type: String,
-          reflectToAttribute: true,
           computed: '_computeColorClass(secondaryColor)',
         },
         /**
@@ -171,17 +169,7 @@ A simple responsive video player
          */
         textColorClass: {
           type: String,
-          value: null,
-          reflectToAttribute: true,
           computed: '_computeColorClass(textColor)',
-        },
-        /**
-         * Simple video styles for consistent presentation.
-         */
-        videoStyle: {
-          type: String,
-          value: 'style1',
-          reflectToAttribute: true,
         },
         /**
          * Youtube cookie-less domain for privacy.
@@ -239,6 +227,39 @@ A simple responsive video player
           type: String,
           value: 'FF031D',
         },
+      },
+      /**
+       * Compute iframed status
+       */
+      _computeIframed: function(source, sandboxed) {
+        // make sure we take into account sandboxing as well
+        // so that we can manage the state effectively
+        if (this._sourceIsIframe(source) && !sandboxed) {
+          return true;
+        }
+        return false;
+      },
+      /**
+       * Compute sandboxed status
+       */
+      _computeSandboxed: function(source) {
+        // we have something that would require an iframe
+        // see if we have a local system that would want to sandbox instead
+        if (this._sourceIsIframe(source)) {
+          // fake the creation of a webview element to see if it's valid
+          // or not.
+          let test = document.createElement('webview');
+          // if this function exists it means that our deploy target
+          // is in a sandboxed environment and is not able to run iframe
+          // content with any real stability. This is beyond edge case but
+          // as this is an incredibly useful tag we want to make sure it
+          // can mutate to work in chromium and android environments
+          // which support such sandboxing
+          if (typeof test.reload === 'function') {
+            return true;
+          }
+        }
+        return false;
       },
       /**
        * Attached.
