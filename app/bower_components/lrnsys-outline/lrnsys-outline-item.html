@@ -193,10 +193,10 @@ A LRN element
         this.fire('add-item', {item: this, value: j.slice(0, i), new: j.slice(i, j.length)});
       },
       _up: function() {
-        this.fire('move-item', {item: this, moveUp: true, byGroup: false});
+        this.fire('move-item', {item: this, moveUp: true, byGroup: true});
       },
       _down: function() {
-        this.fire('move-item', {item: this, moveUp: false, byGroup: false});
+        this.fire('move-item', {item: this, moveUp: false, byGroup: true});
       },
       setSelection: function(start,end){
         let s = start !== undefined ? start : 0, n = end !== undefined ? end : s;

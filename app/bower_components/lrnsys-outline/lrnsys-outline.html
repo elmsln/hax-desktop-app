@@ -128,6 +128,7 @@ A LRN element
             {id: 'outline-item-'+this.__tempid, title: '', order: 0, parent: null}
           ];
         }
+        console.log('readysetData',this.data);
         this.setData(this.data);
       },
       /**
@@ -142,6 +143,7 @@ A LRN element
             data[i].id === data[i].id === undefined ? 'outline-item-'+this.__tempid : data[i].id;
           }
         }
+        console.log('setData',this.items);
         this.items = data;
       },
       /**
@@ -151,13 +153,14 @@ A LRN element
         for (i in this.items){
           this.items[i].order = this._getOrder(this.items[i]);
         }
-        console.log(this.items);
+        console.log('getData',this.items);
         return this.items;
       },
       /**
        * adds a new item
        */
        addItem: function(item){
+        console.log('addItem',item);
         let items = this.items, i = this.items.findIndex(j => j.id === item.id);
         this.__tempid = this.__tempid+1;
         items.splice(i+1, 0, {id: 'outline-item-'+this.__tempid, title: '', indent: item.indent, parent: item.parent});
@@ -170,6 +173,7 @@ A LRN element
        * removes an item
        */
        removeItem: function(item){
+        console.log('removeItem',item);
         let i = this.items.findIndex(j => j.id === item.id), items;
         if (confirm('Do you really want to delete '+this.items[i].title+'?')) {
           for (k in this.items){
@@ -186,12 +190,12 @@ A LRN element
        * moves an grop of items down
        */
       moveItem: function(item,moveUp,byGroup){
-        console.log(moveUp,byGroup);
+        console.log('moveItem',item,moveUp,byGroup);
         let start = this.items.findIndex(j => j.id === item.id), children = byGroup ? this._getNextSibling(item): start+1;
         let target = moveUp ? start-1 : start+1, total = children > -1 ? Math.abs(children-start) : Math.abs(this.items.length-1-start); 
         let items, items2, items3, items4;
+        console.log('moveItem',start,target);
         if(target > -1) {
-          this.items[start].parent = this.items[target].parent;
           items = this.items.slice(start,total+1)
           items2 = this.items.splice(start,total);
           items3 = this.items.splice(target,0,...items2);
@@ -204,7 +208,7 @@ A LRN element
        * refresh the array
        */
       _refreshData: function(){
-        items = this.items;
+        let items = this.items;
         this.items = [];
         this.items = items;
       },
@@ -212,6 +216,7 @@ A LRN element
        * increase indent
        */
       _increaseIndent: function(item){
+        console.log('_increaseIndent',item);
         let prev = this._getItemById(item.id,-1), next = this._getItemById(item.id,1), indent = item.indent;
         if(item !== undefined && prev !== undefined && item.indent - prev.indent <= 0) {
           item.indent = indent + 1;
@@ -227,6 +232,7 @@ A LRN element
        * decrease indent
        */
       _decreaseIndent: function(item){
+        console.log('_decreaseIndent',item);
         let next = this._getItemById(item.id,1), indent = item.indent;
         if(indent > 0) {
           item.indent = item.indent - 1;
