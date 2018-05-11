@@ -38,7 +38,8 @@ module.exports = (newOutline, oldOutline) => {
     if (newItem) {
       // get the unique filename
       const safeFilename = filenamify(i.title,  {replacement: ''})
-      const uniqueFilename = unusedFilename.sync(path.join(newOutline.projectLocation, `${safeFilename}.html`))
+      // create a new uniqueFilename. Make sure it's content directory
+      const uniqueFilename = unusedFilename.sync(path.join(newOutline.projectLocation, 'content', `${safeFilename}.html`))
       const fileAdded = fs.writeFileSync(uniqueFilename, '', 'utf8')
       // if we successfully added the file then we'll update 
       // the item to know about the new location

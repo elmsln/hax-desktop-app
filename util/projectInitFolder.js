@@ -12,4 +12,13 @@ module.exports = (location) => {
     const newOutlineLocation = path.join(location, 'outline.json');
     generateOutlineFile(newOutlineLocation);
   }
+  try {
+    // make a content folder
+    fs.mkdirSync(path.join(location, 'content'))
+    // make an assets folder
+    fs.mkdirSync(path.join(location, 'assets'))
+  }
+  catch(error) {
+    console.log(error)
+  }
 }
