@@ -19,8 +19,8 @@
         border: 1px dotted black !important;
       }
       hax-body[edit-mode] oer-schema::before {
-        content: 'OER';
-        font-size: 8px;
+        content: "OER: " attr(typeof);
+        font-size: 12px;
         font-style: italic;
         left: unset;
         right: unset;
@@ -29,10 +29,10 @@
         color: #000000;
         bottom: unset;
         width: auto;
-        padding: 2px;
-        margin: -16px 0 0 0;
         z-index: 1;
-        float: left;
+        padding: 2px;
+        margin: -24px 0 0 0;
+        position: absolute;
       }
     </style>
 
