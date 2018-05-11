@@ -4,6 +4,7 @@ const rimraf = require('rimraf')
 const getOutlineTest = require('./getOutlineTest')
 const generateOutlineTest =  require('./generateOutlineTest')
 const updateOutlineFilesTest = require('./updateOutlineFilesTest')
+const buildTest = require('./buildTest')
 
 describe('Running Tests', async () => {
 
@@ -21,7 +22,7 @@ describe('Running Tests', async () => {
   getOutlineTest()
   generateOutlineTest()
   updateOutlineFilesTest()
-
+  buildTest()
 
   after(async () => {
     const deleted = await rimraf(`${__dirname}/.tmp`, () => { return })

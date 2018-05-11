@@ -18,15 +18,14 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebComponents/multiple-choice",
-  "version": "1.0.0",
-  "_release": "1.0.0",
+  "version": "0.3.1",
+  "_release": "0.3.1",
   "_resolution": {
     "type": "version",
-    "tag": "1.0.0",
-    "commit": "a8fa7c3c059acf53844f37354d2b5add7ecf801b"
+    "tag": "0.3.1",
+    "commit": "c04165317730197929093938d6b1aadfe92a2878"
   },
   "_source": "https://github.com/LRNWebComponents/multiple-choice.git",
-  "_target": "^1.0.0",
-  "_originalSource": "LRNWebComponents/multiple-choice",
-  "_direct": true
+  "_target": "^0.3.0",
+  "_originalSource": "LRNWebComponents/multiple-choice"
 }

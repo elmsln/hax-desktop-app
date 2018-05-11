@@ -17,11 +17,11 @@ const savePage = require('./util/savePage');
 const markdownToHTML = require('./util/markdownToHTML')
 const projectInitFolder = require('./util/projectInitFolder')
 const setOutline = require('./util/setOutline')
-const graphqlServer = require('./server');
+// const graphqlServer = require('./server');
 
 let mainWindow;
 // GraphQL Server
-graphqlServer.start(() => console.log('Server is running on localhost:4000'))
+// graphqlServer.start(() => console.log('Server is running on localhost:4000'))
 
 app.on('ready', () => {
   mainWindow = mainWindowCreate();
