@@ -17,15 +17,14 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebComponents/video-player",
-  "version": "1.8.1",
-  "_release": "1.8.1",
+  "version": "1.9.0",
+  "_release": "1.9.0",
   "_resolution": {
     "type": "version",
-    "tag": "1.8.1",
-    "commit": "782edc9747b5cf4082b83a3112ee03ab44e0bd57"
+    "tag": "1.9.0",
+    "commit": "dcb88f0be77fd1fffd97474e5925090916998c2b"
   },
   "_source": "https://github.com/LRNWebComponents/video-player.git",
-  "_target": "^1.8.1",
-  "_originalSource": "LRNWebComponents/video-player",
-  "_direct": true
+  "_target": "^1.9.0",
+  "_originalSource": "LRNWebComponents/video-player"
 }

@@ -4,17 +4,16 @@
   "main": "lrnsys-layout.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
-    "lrnsys-behaviors": "LRNWebComponents/lrnsys-behaviors#^1.0.0",
-    "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.0.0",
+    "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.2.1",
     "paper-avatar": "LRNWebComponents/paper-avatar#1.0.5-lrn",
-    "app-layout": "PolymerElements/app-layout#^2.0.0",
+    "app-layout": "PolymerElements/app-layout#^2.1.1",
     "paper-tooltip": "PolymerElements/paper-tooltip#^2.0.0",
     "iron-collapse": "PolymerElements/iron-collapse#^2.0.0",
     "paper-drawer-panel": "PolymerElements/paper-drawer-panel#^2.0.0",
     "paper-dialog": "PolymerElements/paper-dialog#^2.0.0",
     "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#^2.1.0",
-    "iron-image": "PolymerElements/iron-image#^2.1.2",
-    "lrn-icons": "LRNWebComponents/lrn-icons#^1.0.13",
+    "iron-image": "PolymerElements/iron-image#^2.2.1",
+    "lrn-icons": "LRNWebComponents/lrn-icons#^1.4.0",
     "paper-button": "PolymerElements/paper-button#^2.0.0",
     "neon-animation": "PolymerElements/neon-animation#^2.0.2",
     "paper-input": "PolymerElements/paper-input#^2.1.1"
@@ -25,15 +24,15 @@
     "web-component-tester": "^4.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
-  "homepage": "https://github.com/LRNWebcomponents/lrnsys-layout",
-  "version": "1.4.5",
-  "_release": "1.4.5",
+  "homepage": "https://github.com/LRNWebComponents/lrnsys-layout",
+  "version": "1.4.6",
+  "_release": "1.4.6",
   "_resolution": {
     "type": "version",
-    "tag": "1.4.5",
-    "commit": "62fa223a350a9248522fb59dfefff1336fe9499b"
+    "tag": "1.4.6",
+    "commit": "419fe9fe13a8b9c91d317ad681b9c998c2ca367c"
   },
-  "_source": "https://github.com/LRNWebcomponents/lrnsys-layout.git",
-  "_target": "^1.4.4",
-  "_originalSource": "LRNWebcomponents/lrnsys-layout"
+  "_source": "https://github.com/LRNWebComponents/lrnsys-layout.git",
+  "_target": "^1.3.1",
+  "_originalSource": "LRNWebComponents/lrnsys-layout"
 }
