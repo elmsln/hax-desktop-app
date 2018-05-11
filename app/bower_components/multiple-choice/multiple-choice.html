@@ -104,6 +104,7 @@ Ask the user a question from a set of possible answers.
         hideTitle: {
           type: Boolean,
           value: false,
+          reflectToAttribute: true,
         },
         /**
          * Question to ask
@@ -267,31 +268,12 @@ Ask the user a question from a set of possible answers.
                 'inputMethod': 'textfield',
                 'icon': 'editor:title',
               },
-              {
-                'property': 'question',
-                'title': 'Question',
-                'description': 'Question for users to respond to.',
-                'inputMethod': 'textfield',
-                'icon': 'icons:help',
-              },
             ],
             'configure': [
               {
                 'property': 'title',
                 'title': 'Title',
                 'description': 'The title of the element',
-                'inputMethod': 'textfield',
-              },
-              {
-                'property': 'hideTitle',
-                'title': 'Hide title',
-                'description': 'Whether or not to display the title',
-                'inputMethod': 'boolean',
-              },
-              {
-                'property': 'question',
-                'title': 'Question',
-                'description': 'Question for users to respond to.',
                 'inputMethod': 'textfield',
               },
               {
