@@ -17,6 +17,7 @@ const savePage = require('./util/savePage');
 const markdownToHTML = require('./util/markdownToHTML')
 const projectInitFolder = require('./util/projectInitFolder')
 const setOutline = require('./util/setOutline')
+const build = require('./util/build')
 // const graphqlServer = require('./server');
 
 let mainWindow;
@@ -605,6 +606,11 @@ ipcMain.on('project-delete', (e, project) => {
 
 ipcMain.on('project-open-in-finder', (e, project) => {
   shell.showItemInFolder(`${project.outlineLocation}/`)
+})
+
+ipcMain.on('project-generate-build', (e, project) => {
+  const projectBuilt = build(project.location)
+  shell.showItemInFolder(path.join(project.location, '_build'))
 })
 
 /**

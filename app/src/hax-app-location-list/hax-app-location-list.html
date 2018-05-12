@@ -53,6 +53,7 @@
         'project-selected': '__projectSelected',
         'project-delete': '__projectDelete',
         'project-open-in-finder': 'projectOpenInFinder',
+        'project-generate-build': 'projectGenerateBuild',
         'acceptProjectDelete.tap': '__acceptProjectDelete',
         'cancelProjectDelete.tap': '__cancelProjectDelete',
       },
@@ -93,6 +94,10 @@
 
       projectOpenInFinder: function (e, project) {
         ipcRenderer.send('project-open-in-finder', project)
+      },
+
+      projectGenerateBuild: function (e, project) {
+        ipcRenderer.send('project-generate-build', project)
       },
 
     });
