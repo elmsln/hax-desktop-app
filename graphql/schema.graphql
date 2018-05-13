@@ -1,0 +1,21 @@
+type Project {
+  location: ID!,
+  title: String,
+  outlineLocation: String,
+  lastEdited: String
+},
+type Query {
+  hello: String!,
+  projects: [Project!],
+  project(id: ID!): Project
+},
+type Mutation {
+  createProject(title: String, location: String, outlineLocation: String): Project
+}
+type Counter {
+  count: Int!,
+  countStr: String,
+},
+type Subscription {
+  counter: Counter!
+},

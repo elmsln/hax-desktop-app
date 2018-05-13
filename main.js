@@ -2,7 +2,7 @@ const electron = require('electron');
 const _ = require('underscore');
 const url = require('url');
 const path = require('path');
-//const BrowserWindow = electron.remote.BrowserWindow; //for new window -tom
+const electronify = require('electronify-server');
 const Store = require('electron-store');
 const store = new Store();
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
@@ -18,11 +18,23 @@ const markdownToHTML = require('./util/markdownToHTML')
 const projectInitFolder = require('./util/projectInitFolder')
 const setOutline = require('./util/setOutline')
 const build = require('./util/build')
-// const graphqlServer = require('./server');
 
 let mainWindow;
-// GraphQL Server
-// graphqlServer.start(() => console.log('Server is running on localhost:4000'))
+
+// // GraphQL Server
+// electronify({
+//   command: 'node',
+//   args: ['./graphql'],
+//   url: 'http://localhost:4000',
+//   debug: true
+// })
+
+// electronify({
+//   command: 'node',
+//   args: ['./mongodb'],
+//   url: 'http://localhost:27017',
+//   debug: true
+// })
 
 app.on('ready', () => {
   mainWindow = mainWindowCreate();
