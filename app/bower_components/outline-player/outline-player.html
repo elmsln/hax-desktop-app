@@ -115,12 +115,12 @@ A LRN element
     </style>
     <iron-ajax
       auto
-      url="[[outlineLocation]]/outline.json"
+      url="[[outlineLocation]]outline.json"
       handle-as="json"
       last-response="{{_outlineData}}"></iron-ajax>
     <iron-ajax
       auto
-      url="[[outlineLocation]]/[[activeItem.location]]"
+      url="[[outlineLocation]][[activeItem.location]]"
       handle-as="text"
       loading="{{__loadingContent}}"
       last-response="{{_activeItemContent}}"></iron-ajax>
