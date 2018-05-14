@@ -54,15 +54,15 @@
     "webcomponentsjs": "^0.7.24"
   },
   "homepage": "https://github.com/LRNWebComponents/outline-player",
-  "version": "1.0.0",
-  "_release": "1.0.0",
+  "version": "1.0.1",
+  "_release": "1.0.1",
   "_resolution": {
     "type": "version",
-    "tag": "1.0.0",
-    "commit": "fba7d197fceac72a3973b0b81993d8c33d2aad60"
+    "tag": "1.0.1",
+    "commit": "c3f4e27d76d34716644f125ddfe6b7c57a9f875a"
   },
   "_source": "https://github.com/LRNWebComponents/outline-player.git",
-  "_target": "^1.0.0",
+  "_target": "^1.0.1",
   "_originalSource": "LRNWebComponents/outline-player",
   "_direct": true
 }

@@ -20,6 +20,6 @@
     "commit": "33513d350e53612cd7a47d1e796d6107d9872201"
   },
   "_source": "https://github.com/LRNWebComponents/schema-behaviors.git",
-  "_target": "*",
+  "_target": "^0.2.0",
   "_originalSource": "LRNWebComponents/schema-behaviors"
 }

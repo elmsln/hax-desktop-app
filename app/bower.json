@@ -36,7 +36,7 @@
     "lrn-calendar": "LRNWebcomponents/lrn-calendar#^0.1.0",
     "person-testimonial": "LRNWebComponents/person-testimonial#^1.0.2",
     "hero-banner": "LRNWebComponents/hero-banner#^1.0.0",
-    "outline-player": "LRNWebComponents/outline-player#^1.0.0",
+    "outline-player": "LRNWebComponents/outline-player#^1.0.1",
     "license-element": "LRNWebComponents/license-element#^1.0.0"
   },
   "devDependencies": {
