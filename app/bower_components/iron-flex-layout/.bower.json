@@ -59,6 +59,6 @@
     "commit": "67461d70607ca19d17b462b9a649c1585094f798"
   },
   "_source": "https://github.com/PolymerElements/iron-flex-layout.git",
-  "_target": "^2.0.3",
+  "_target": "1 - 2",
   "_originalSource": "PolymerElements/iron-flex-layout"
 }
