@@ -620,9 +620,12 @@ ipcMain.on('project-open-in-finder', (e, project) => {
   shell.showItemInFolder(`${project.outlineLocation}/`)
 })
 
+/**
+ * @todo build location should be variablized
+ */
 ipcMain.on('project-generate-build', (e, project) => {
   const projectBuilt = build(project.location)
-  shell.showItemInFolder(path.join(project.location, '_build'))
+  shell.showItemInFolder(path.join(project.location, '_site'))
 })
 
 /**

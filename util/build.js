@@ -1,6 +1,6 @@
 const fs = require('fs-extra')
 const path = require('path')
-const BUILD_DIR_NAME = '_build';
+const BUILD_DIR_NAME = '_site';
 const BOWER_COMPONENTS_DIR = '../app/bower_components'
 
 /**

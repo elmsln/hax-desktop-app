@@ -8,7 +8,7 @@ module.exports = () => {
   describe('buildTest', () => {
     // define the location of the default project
     const projectLocation = path.join(__dirname, '../assets/project_example')
-    const buildPath = path.join(projectLocation, '_build')
+    const buildPath = path.join(projectLocation, '_site')
     // run the build
     const built = build(projectLocation)
 
