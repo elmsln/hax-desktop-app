@@ -39,7 +39,7 @@
     </style>
     
     <hax-app-outline-ui id="ui" outline="[[__outline.tree]]" editing="[[__isEditing(__outline.editing)]]" editing-page="[[__activateHaxEditor]]" show-default-message="[[__showDefaultMessage]]">
-      <app-editor-hax id="editor" app-store-connection='{"url":"appstore.json"}' editing="[[__activateHaxEditor]]"></app-editor-hax>
+      <app-editor-hax id="editor" app-store-connection='[[__appStoreConnection]]' editing="[[__activateHaxEditor]]"></app-editor-hax>
     </hax-app-outline-ui>
 
     <paper-toast id="toast"></paper-toast>
@@ -63,6 +63,13 @@
         activePage: {
           type: String,
           value: '',
+        },
+        __projectId: {
+          type: String
+        },
+        __appStoreConnection: {
+          type: Object,
+          computed: '__appStoreConnectionCompute(__projectId)'
         },
         __menuOpened: {
           type: Boolean,
@@ -107,6 +114,7 @@
 
       __projectChanged: function (project) {
         if (project) {
+          this.__projectId = project.id;
           if (project.outlineLocation) {
             ipcRenderer.send('outline-init', this.project);
           }
@@ -147,6 +155,12 @@
         }
         else {
           return false
+        }
+      },
+
+      __appStoreConnectionCompute: function (projectId) {
+        return {
+          url: `http://localhost:3000/appstore/${projectId}`
         }
       },
 

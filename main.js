@@ -5,6 +5,9 @@ const path = require('path');
 const electronify = require('electronify-server');
 const Store = require('electron-store');
 const store = new Store();
+const childProcess = require('child_process');
+const spawn = childProcess.spawn;
+const _id = require('lodash-id');
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
 const { getPage, parseOutline, getOutlinePage, createPage } = require('./util/page');
 const mainWindowCreate = require('./util/mainWindow');
@@ -102,6 +105,7 @@ const globals = {
   /**
    * Project
    * @type {object}
+   * @property {string} id - Unique id of the project
    * @property {string} title - Title of the project
    * @property {string} location - Path of the project on the users computer
    * @property {string} outlineLocation - Location of the outline location
@@ -109,6 +113,7 @@ const globals = {
    * @property {number} windowId - Id of the active window that is displaying the project
    */
   Project: {
+    id: null,
     title: null,
     location: null,
     outlineLocation: null,
@@ -116,6 +121,18 @@ const globals = {
     windowId: null
   },
 
+  /**
+   * Get the project by id
+   * @todo this should be the way you get the project
+   * @param {id} id 
+   */
+  getProjectbyId(id) {
+    const currentProjectList = this.getProjects();
+    if (currentProjectList) {
+      return _id.getById(id)
+    }
+    return null;
+  },
   /**
    * Return a single project
    * @param {string} projectLocation
@@ -163,6 +180,7 @@ const globals = {
     }
     // update the last edit date
     newProject = Object.assign({}, newProject, {
+      id: _id.createId(),
       lastEdited: new Date()
     });
     // if we have an existing project then add it to the top of the list and remove

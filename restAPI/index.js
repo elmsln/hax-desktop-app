@@ -16,12 +16,12 @@ app.use(logger());
 app.use(koaBody({ multipart: true }));
 
 /**
- * Return an appstore file with the windowID
+ * Return an appstore file with the id
  * file upload path
  */
-router.get('/appstore/:windowID', (ctx, next) => {
-  const windowID = ctx.params.windowID || null;
-  if (!windowID) return;
+router.get('/appstore/:id', (ctx, next) => {
+  const id = ctx.params.id || null;
+  if (!id) return;
   // load the default appstore
   let appstore = fs.readFileSync(path.join(__dirname, '../app/appstore.json'), 'utf8')
   // turn it into json
@@ -31,7 +31,8 @@ router.get('/appstore/:windowID', (ctx, next) => {
     const title = _.get(app, 'details.title', null)
     if (title === "Local files") {
       _.set(app, 'connection.protocol', 'http')
-      _.set(app, 'connection.url', `/fileupload/${windowID}`)
+      _.set(app, 'connection.url', 'localhost:3000')
+      _.set(app, 'connection.operations.add.endPoint', `fileupload/${id}`)
     }
     return app
   })
