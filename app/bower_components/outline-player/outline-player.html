@@ -108,6 +108,11 @@ A LRN element
           background-color: var(--outline-player-light);
         }
       }
+      #slot {
+        padding: 1em;
+        max-width: 65em;
+        margin: auto;
+      }
     </style>
     <iron-ajax
       auto
@@ -147,7 +152,7 @@ A LRN element
           <paper-progress hidden$="[[!__loadingContent]]" value="10" indeterminate bottom-item></paper-progress>
         </app-toolbar>
       </app-header>
-      <div>
+      <div id="slot">
         <slot></slot>
     </div>
       </app-header-layout>
