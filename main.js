@@ -33,7 +33,7 @@ app.on('ready', () => {
   // Insert the Menu into the app
   Menu.setApplicationMenu(mainMenu);
   // start the restAPI
-  spawn('node', ['./restAPI'])
+  spawn('node', [path.join(process.cwd(), 'restAPI', 'index.js')])
     .then(function (result) {
       // Send output
       var stdout = result.stdout;

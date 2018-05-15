@@ -3,14 +3,10 @@ const path = require('path')
 const _ = require('lodash')
 const Koa = require('koa');
 const koaBody = require('koa-body');
-const logger = require('koa-logger');
 const Router = require('koa-router');
 const json = require('koa-json')
 const app = new Koa();
 const router = new Router();
-
-// logger 
-app.use(logger());
 
 // Enable multipart
 app.use(koaBody({ multipart: true }));
