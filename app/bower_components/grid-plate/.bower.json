@@ -22,15 +22,15 @@
     "webcomponentsjs": "^0.7.24"
   },
   "homepage": "https://github.com/LRNWebComponents/grid-plate",
-  "version": "0.0.1",
-  "_release": "0.0.1",
+  "version": "0.0.2",
+  "_release": "0.0.2",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.1",
-    "commit": "74793f06e0e64d2ab2f15c2da56d0d56ee795bb5"
+    "tag": "0.0.2",
+    "commit": "a20831d7d706ca4368478eee2d98cddded0f0f50"
   },
   "_source": "https://github.com/LRNWebComponents/grid-plate.git",
-  "_target": "^0.0.1",
+  "_target": "^0.0.2",
   "_originalSource": "LRNWebComponents/grid-plate",
   "_direct": true
 }

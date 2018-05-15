@@ -261,6 +261,12 @@ with the hax-body element which manages elements.
             'description': 'element ID, only set this if you know why',
             'inputMethod': 'textfield',
           });
+          props.settings.advanced.push({
+            'attribute': 'slot',
+            'title': 'slot',
+            'description': 'DOM slot area',
+            'inputMethod': 'textfield',
+          });
         }
         // support for advanced save options
         if (typeof props.saveOptions === typeof undefined) {

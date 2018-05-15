@@ -21,7 +21,7 @@ A LRN element
         display: block;
       }
     </style>
-    <responsive-grid-row>
+    <responsive-grid-row gutter="0">
       <responsive-grid-col xl$="[[size.area1]]" lg$="[[size.area1]]" md$="[[size.area1]]" sm$="[[size.area1]]" xs$="[[size.area1]]">
         <slot name="area1"></slot>
       </responsive-grid-col>
@@ -69,16 +69,16 @@ A LRN element
           break;
           case 2:
             return {
-              'area1': 6,
-              'area2': 6,
+              'area1': 5,
+              'area2': 5,
               'area3': 12,
             };
           break;
           case 3:
             return {
-              'area1': 4,
-              'area2': 4,
-              'area3': 4,
+              'area1': 3,
+              'area2': 3,
+              'area3': 3,
             };
           break;
         }
@@ -98,17 +98,11 @@ A LRN element
                 'property': 'areas',
                 'title': 'Grid setting',
                 'description': 'Number of grid areas',
-                'inputMethod': 'number',
+                'inputMethod': 'textfield',
                 'icon': 'image:grid-on',
               },
             ],
             'configure': [
-              {
-                'property': 'areas',
-                'title': 'Grid setting',
-                'description': 'Number of grid areas',
-                'inputMethod': 'number',
-              },
             ],
             'advanced': [
             ]

@@ -7,7 +7,7 @@
     "paper-item": "PolymerElements/paper-item#^2.0.0",
     "pdf-element": "LRNWebcomponents/pdf-element#^1.3.0",
     "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^2.0.0",
-    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.12.0",
+    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.12.4",
     "lrnsys-outline": "LRNWebComponents/lrnsys-outline#^0.2.0",
     "map-menu": "LRNWebComponents/map-menu#^1.0.3",
     "app-editor-hax": "LRNWebComponents/app-editor-hax",
@@ -20,7 +20,7 @@
     "paper-audio-player": "LRNWebComponents/paper-audio-player#1.1.1-lrn1",
     "lrndesign-blockquote": "LRNWebComponents/lrndesign-blockquote#^1.3.1",
     "magazine-cover": "LRNWebcomponents/magazine-cover#^1.1.4",
-    "hax-body": "LRNWebComponents/hax-body#^0.15.2",
+    "hax-body": "LRNWebComponents/hax-body#^0.16.0",
     "citation-element": "LRNWebComponents/citation-element#^1.0.3",
     "tab-list": "LRNWebComponents/tab-list#^0.1.0",
     "oer-schema": "LRNWebComponents/oer-schema#^1.0.5",
@@ -36,9 +36,10 @@
     "lrn-calendar": "LRNWebcomponents/lrn-calendar#^0.1.0",
     "person-testimonial": "LRNWebComponents/person-testimonial#^1.0.2",
     "hero-banner": "LRNWebComponents/hero-banner#^1.0.0",
-    "outline-player": "LRNWebComponents/outline-player#^1.0.1",
+    "outline-player": "LRNWebComponents/outline-player#^1.0.3",
     "license-element": "LRNWebComponents/license-element#^1.0.0",
-    "grid-plate": "LRNWebComponents/grid-plate#^0.0.1"
+    "grid-plate": "LRNWebComponents/grid-plate#^0.0.2",
+    "schema-behaviors": "LRNWebComponents/schema-behaviors#^1.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
