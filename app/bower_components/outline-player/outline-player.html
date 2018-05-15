@@ -11,7 +11,6 @@
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../paper-progress/paper-progress.html">
 <link rel="import" href="../paper-tooltip/paper-tooltip.html">
-<link rel="import" href="../marked-element/marked-element.html">
 <!--
 `outline-player`
 A LRN element
@@ -109,9 +108,6 @@ A LRN element
           background-color: var(--outline-player-light);
         }
       }
-      .markdown-wrapper {
-        padding: 32px;
-      }
     </style>
     <iron-ajax
       auto
@@ -151,9 +147,9 @@ A LRN element
           <paper-progress hidden$="[[!__loadingContent]]" value="10" indeterminate bottom-item></paper-progress>
         </app-toolbar>
       </app-header>
-      <marked-element markdown="[[markdown]]">
-        <div class="markdown-wrapper" slot="markdown-html"></div>
-      </marked-element>
+      <div>
+	      <slot></slot>
+	  </div>
       </app-header-layout>
     </app-drawer-layout>
   </template>
@@ -207,12 +203,6 @@ A LRN element
           type: Array,
           notify: true,
           observer: '_outlineChanged',
-        },
-        /**
-         * markdown
-         */
-        markdown: {
-          type: String,
         },
         /**
          * Active item which is in JSON Outline Schema
@@ -325,11 +315,10 @@ A LRN element
        * active item content changed.
        */
       _activeItemContentChanged: function(newValue, oldValue) {
-        if (typeof newValue !== typeof undefined && typeof oldValue !== typeof undefined) {
-          //this.wipeSlot(this);
-          this.markdown = newValue;
-          //let frag = document.createRange().createContextualFragment(newValue);
-          //Polymer.dom(this).appendChild(frag);
+        if (typeof newValue !== typeof undefined) {
+          this.wipeSlot(this);
+          let frag = document.createRange().createContextualFragment(newValue);
+          Polymer.dom(this).appendChild(frag);
         }
       },
       /**

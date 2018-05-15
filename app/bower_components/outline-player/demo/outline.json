@@ -1,0 +1,58 @@
+[
+  {
+    "id": "outline-item-0",
+    "indent": 0,
+    "order": 0,
+    "parent": null,
+    "title": "Welcome to the jungle",
+    "location": "content/Welcome to the jungle.html"
+  },
+  {
+    "id": "outline-item-2",
+    "indent": 0,
+    "order": 1,
+    "parent": null,
+    "title": "The team",
+    "location": "content/The team.html"
+  },
+  {
+    "id": "outline-item-3",
+    "indent": 1,
+    "order": 0,
+    "parent": "outline-item-2",
+    "title": "The purpose",
+    "location": "content/The purpose.html"
+  },
+  {
+    "id": "outline-item-7",
+    "indent": 1,
+    "order": 1,
+    "parent": "outline-item-2",
+    "title": "Documentation 1",
+    "location": "content/Documentation 1.html"
+  },
+  {
+    "id": "outline-item-6",
+    "indent": 1,
+    "order": 2,
+    "parent": "outline-item-2",
+    "title": "Article 2",
+    "location": "content/Article 2.html"
+  },
+  {
+    "id": "outline-item-5",
+    "indent": 1,
+    "order": 3,
+    "parent": "outline-item-2",
+    "title": "Really fun time 3",
+    "location": "content/Really fun time 3.html"
+  },
+  {
+    "id": "outline-item-4",
+    "indent": 2,
+    "order": 0,
+    "parent": "outline-item-3",
+    "title": "The mission",
+    "location": "content/The mission.html"
+  }
+]

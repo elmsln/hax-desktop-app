@@ -118,15 +118,15 @@
     "paper-radio-button": "^2.1.0"
   },
   "homepage": "https://github.com/LRNWebComponents/hax-body",
-  "version": "0.15.0",
-  "_release": "0.15.0",
+  "version": "0.15.1",
+  "_release": "0.15.1",
   "_resolution": {
     "type": "version",
-    "tag": "0.15.0",
-    "commit": "54ad35ae9c4f0bc787b3a367a565226d29c42af4"
+    "tag": "0.15.1",
+    "commit": "bbd96d73e20e5c9b95038b20aeeccc0dbfb42c79"
   },
   "_source": "https://github.com/LRNWebComponents/hax-body.git",
-  "_target": "^0.15.0",
+  "_target": "^0.15.1",
   "_originalSource": "LRNWebComponents/hax-body",
   "_direct": true
 }

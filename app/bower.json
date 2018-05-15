@@ -20,7 +20,7 @@
     "paper-audio-player": "LRNWebComponents/paper-audio-player#1.1.1-lrn1",
     "lrndesign-blockquote": "LRNWebComponents/lrndesign-blockquote#^1.3.1",
     "magazine-cover": "LRNWebcomponents/magazine-cover#^1.1.4",
-    "hax-body": "LRNWebComponents/hax-body#^0.15.0",
+    "hax-body": "LRNWebComponents/hax-body#^0.15.1",
     "citation-element": "LRNWebComponents/citation-element#^1.0.3",
     "tab-list": "LRNWebComponents/tab-list#^0.1.0",
     "oer-schema": "LRNWebComponents/oer-schema#^1.0.5",
@@ -36,7 +36,7 @@
     "lrn-calendar": "LRNWebcomponents/lrn-calendar#^0.1.0",
     "person-testimonial": "LRNWebComponents/person-testimonial#^1.0.2",
     "hero-banner": "LRNWebComponents/hero-banner#^1.0.0",
-    "outline-player": "LRNWebComponents/outline-player#^1.0.0",
+    "outline-player": "LRNWebComponents/outline-player#^1.0.1",
     "license-element": "LRNWebComponents/license-element#^1.0.0"
   },
   "devDependencies": {
