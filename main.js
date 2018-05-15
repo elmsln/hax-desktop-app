@@ -6,7 +6,7 @@ const electronify = require('electronify-server');
 const Store = require('electron-store');
 const store = new Store();
 const childProcess = require('child_process');
-const spawn = childProcess.spawn;
+const spawn = require('child-process-promise').spawn;
 const _id = require('lodash-id');
 const { app, BrowserWindow, ipcMain, Menu, shell, ipcRenderer, dialog } = electron;
 const { getPage, parseOutline, getOutlinePage, createPage } = require('./util/page');
@@ -24,30 +24,21 @@ const build = require('./util/build')
 
 let mainWindow;
 
-// Start GraphQL
-// const graphQLpipe = spawn('node', ['./graphql'])
-const restAPI = spawn('node', ['./restAPI'])
 
-// graphql server
-// electronify({
-  //   command: 'node',
-  //   args: ['./graphql'],
-  //   url: 'http://localhost:4000',
-  //   debug: true,
-  // // })
-  // electronify({
-  //     command: 'node',
-  //     args: ['./restAPI'],
-  //     url: 'http://localhost:3000',
-  //     debug: true,
-  //   })
-    
+
 app.on('ready', () => {
   mainWindow = mainWindowCreate();
   // Build main menu
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   // Insert the Menu into the app
   Menu.setApplicationMenu(mainMenu);
+  // start the restAPI
+  spawn('node', ['./restAPI'])
+    .then(function (result) {
+      // Send output
+      var stdout = result.stdout;
+      var stderr = result.stderr;
+    })
 })
 
 app.on("window-all-closed", function () {
@@ -727,7 +718,7 @@ ipcMain.on('active-page-selected', async (e, { outlineProjectLocation, activePag
  * @param {Event} e
  * @param {object} outlineProjectLocation, content 
  */
-ipcMain.on('save-content', async (e, { outlineProjectLocation, content}) => {
+ipcMain.on('save-content', async (e, { outlineProjectLocation, content }) => {
   const outline = await globals.getOutline(outlineProjectLocation);
   globals.updateActivePage(outline, content);
 })
