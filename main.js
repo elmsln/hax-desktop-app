@@ -23,7 +23,7 @@ const setOutline = require('./util/setOutline')
 const build = require('./util/build')
 
 let mainWindow;
-
+let restAPISpawn;
 
 
 app.on('ready', () => {
@@ -33,7 +33,7 @@ app.on('ready', () => {
   // Insert the Menu into the app
   Menu.setApplicationMenu(mainMenu);
   // start the restAPI
-  spawn('node', [path.join(process.cwd(), 'restAPI', 'index.js')])
+  restAPISpawn = spawn('node', [path.join(process.cwd(), 'restAPI', 'index.js')])
     .then(function (result) {
       // Send output
       var stdout = result.stdout;

@@ -150,7 +150,7 @@
        */
       attached: function () {
         Polymer.HaxStore.instance.haxManager.$.fileupload.addEventListener('upload-before', e => {
-          fetch('http://localhost:3000/fileupload', {
+          fetch('http://localhost:3001/fileupload', {
             body: e.detail.file.path,
             headers: {
               'hax-project-location': this.__projectId
@@ -175,7 +175,7 @@
 
       __appStoreConnectionCompute: function (projectId) {
         return {
-          url: `http://localhost:3000/appstore/${projectId}`
+          url: `http://localhost:3001/appstore/${projectId}`
         }
       },
 

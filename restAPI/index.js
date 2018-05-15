@@ -27,7 +27,7 @@ router.get('/appstore/:id', (ctx, next) => {
     const title = _.get(app, 'details.title', null)
     if (title === "Local files") {
       _.set(app, 'connection.protocol', 'http')
-      _.set(app, 'connection.url', 'localhost:3000')
+      _.set(app, 'connection.url', 'localhost:3001')
       _.set(app, 'connection.operations.add.endPoint', `fileupload`)
       _.set(app, 'connection.headers', {
         'hax-project-location': id
@@ -84,4 +84,4 @@ app
   .use(router.routes())
   .use(json({ pretty: false, param: 'pretty' }))
 
-app.listen(3000)
+app.listen(3001)
