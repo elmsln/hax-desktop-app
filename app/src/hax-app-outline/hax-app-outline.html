@@ -39,7 +39,7 @@
     </style>
     
     <hax-app-outline-ui id="ui" outline="[[__outline.tree]]" editing="[[__isEditing(__outline.editing)]]" editing-page="[[__activateHaxEditor]]" show-default-message="[[__showDefaultMessage]]">
-      <app-editor-hax id="editor" app-store-connection='[[__appStoreConnection]]' editing="[[__activateHaxEditor]]"></app-editor-hax>
+      <app-editor-hax id="editor" app-store-connection='{"url":"appstore.json"}' editing="[[__activateHaxEditor]]"></app-editor-hax>
     </hax-app-outline-ui>
 
     <paper-toast id="toast"></paper-toast>
