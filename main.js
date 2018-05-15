@@ -33,12 +33,20 @@ app.on('ready', () => {
   // Insert the Menu into the app
   Menu.setApplicationMenu(mainMenu);
   // start the restAPI
-  restAPISpawn = spawn('node', [path.join(process.cwd(), 'restAPI', 'index.js')])
-    .then(function (result) {
-      // Send output
-      var stdout = result.stdout;
-      var stderr = result.stderr;
-    })
+  restAPIWindow = new BrowserWindow({
+    autoHideMenuBar: true,
+    width: 640,
+    height: 480,
+    show: false
+  });
+  restAPIWindow.loadURL(`file://${__dirname}/restAPI/index.html`);
+  //restAPIWindow.webContents.openDevTools();
+  restAPIWindow.on('close', () => {
+    restAPIWindow.webContents.send('stop-server');
+  });
+  restAPIWindow.on("closed", () => {
+    restAPIWindow = null;
+  });
 })
 
 app.on("window-all-closed", function () {
