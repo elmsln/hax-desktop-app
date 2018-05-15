@@ -60,7 +60,22 @@
               "video",
               "audio",
               "pdf",
-              "svg"
+              "svg",
+              "doc",
+              "document",
+              "file",
+              "xml",
+              "csv",
+              "xls",
+              "xlsx",
+              "JPG",
+              "GIF",
+              "JPEG",
+              "doc",
+              "docx",
+              "htm",
+              "html",
+              "*"
             ],
             "resultMap": {
               "item": "data.file",
