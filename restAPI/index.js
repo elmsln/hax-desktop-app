@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 const _ = require('lodash')
 const Koa = require('koa');
@@ -32,7 +32,10 @@ router.get('/appstore/:id', (ctx, next) => {
     if (title === "Local files") {
       _.set(app, 'connection.protocol', 'http')
       _.set(app, 'connection.url', 'localhost:3000')
-      _.set(app, 'connection.operations.add.endPoint', `fileupload/${id}`)
+      _.set(app, 'connection.operations.add.endPoint', `fileupload`)
+      _.set(app, 'connection.headers', {
+        'hax-project-location': id
+      })
     }
     return app
   })
@@ -42,11 +45,22 @@ router.get('/appstore/:id', (ctx, next) => {
 
 router.post('/fileupload', (ctx, next) => {
   // access the files
-  const files = ctx.request.body.files;
-  // get the files
-  _.each(files, file => {
-    console.log(file.path)
-  })
+  console.log()
+  const projectLocation = _.get(ctx, 'headers.hax-project-location')
+  const uploadLocation = ctx.request.body;
+  if (typeof uploadLocation === 'string') {
+    const filename = path.basename(uploadLocation)
+    const dest = path.join(decodeURIComponent(projectLocation), 'assets', filename)
+    console.log(uploadLocation, projectLocation)
+    fs.copyFileSync(uploadLocation, dest)
+    ctx.body = { 
+      data: {
+        file: {
+          url: dest
+        }
+      }
+    }
+  }
 });
 
 app

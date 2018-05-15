@@ -114,8 +114,8 @@
 
       __projectChanged: function (project) {
         if (project) {
-          this.__projectId = project.id;
           if (project.outlineLocation) {
+            this.__projectId = encodeURIComponent(project.location);
             ipcRenderer.send('outline-init', this.project);
           }
         }
@@ -143,6 +143,19 @@
         ipcRenderer.on('active-page-saved-success', (e) => {
           this.$.toast.show('page saved');
         });
+      },
+      
+      attached: function () {
+        Polymer.HaxStore.instance.haxManager.$.fileupload.addEventListener('upload-before', e => {
+          console.log(e.detail.file.path)
+          fetch('http://localhost:3000/fileupload', {
+            body: e.detail.file.path,
+            headers: {
+              'hax-project-location': this.__projectId
+            },
+            method: 'POST'
+          })
+        })
       },
 
       /**
