@@ -34,7 +34,7 @@ is no edit state and that it is always editing effectively.
     </style>
     <hax-store skip-exit-trap hidden app-store="[[appStoreConnection]]"></hax-store>
     <hax-autoloader hidden></hax-autoloader>
-    <hax-panel id="panel" hide-panel-ops hide-export-button hide-preferences-button align="right"></hax-panel>
+    <hax-panel id="panel" hide-panel-ops hide-export-button hide-preferences-button$="[[hidePreferencesButton]]" align="right"></hax-panel>
     <hax-body id="body"></hax-body>
     <hax-manager></hax-manager>
     <hax-export-dialog></hax-export-dialog>
@@ -51,7 +51,14 @@ is no edit state and that it is always editing effectively.
          */
         appStoreConnection: {
           type: Object,
-        }
+        },
+        /**
+         * Ability to hide the preferences button
+         */
+        hidePreferencesButton: {
+          value: false,
+          type: Boolean,
+        },
       },
       /**
        * Basic save event to make targetting easier.
@@ -68,19 +75,8 @@ is no edit state and that it is always editing effectively.
       import: function(html) {
         // import the HTML blob to get going
         Polymer.HaxStore.instance.activeHaxBody.importContent(html);
-        // make sure we update the dom
-        Polymer.dom.flush();
         // fire event just letting things know this happened
         this.fire('app-editor-hax-import', true);
-      },
-      /**
-       * Attached to the DOM, now fire that we are editing this thing.
-       */
-      attached: function() {
-        // set state for edit mode
-        // setTimeout( () => {
-        //   Polymer.HaxStore.write('editMode', true, this);
-        // }, 250);
       },
     });
   </script>

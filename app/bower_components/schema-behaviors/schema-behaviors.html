@@ -55,7 +55,9 @@
     _schemaMapChanged: function(newValue, oldValue) {
       if (typeof newValue !== typeof undefined) {
         // use this to tie into schemaResourceID build
-        if (this.schemaResourceID == '') {
+        this.schemaResourceID = this.getAttribute('resource');
+        // if it still doesn't have one then we have to check
+        if (this.schemaResourceID == '' || this.schemaResourceID == null) {
           this.schemaResourceID = this.generateResourceID();
           this.setAttribute('resource', this.schemaResourceID);
         }
