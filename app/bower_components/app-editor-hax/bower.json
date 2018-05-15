@@ -4,7 +4,7 @@
   "main": "app-editor-hax.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.11.1",
-    "hax-body": "LRNWebComponents/hax-body#^0.12.4"
+    "hax-body": "LRNWebComponents/hax-body#^0.15.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

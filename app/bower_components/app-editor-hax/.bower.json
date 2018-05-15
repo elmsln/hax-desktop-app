@@ -4,7 +4,7 @@
   "main": "app-editor-hax.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.11.1",
-    "hax-body": "LRNWebComponents/hax-body#^0.12.4"
+    "hax-body": "LRNWebComponents/hax-body#^0.15.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -81,11 +81,11 @@
     "paper-drawer-panel": "^2.0.0"
   },
   "homepage": "https://github.com/LRNWebComponents/app-editor-hax",
-  "_release": "043b227fdc",
+  "_release": "1515cb2065",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "043b227fdce3c436b38548e462c2f988a36cb975"
+    "commit": "1515cb206513bc73cd072f3b5306c97013dbccbc"
   },
   "_source": "https://github.com/LRNWebComponents/app-editor-hax.git",
   "_target": "*",

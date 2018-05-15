@@ -27,7 +27,7 @@
     "juicy-html": "Juicy/juicy-html#^2.0.2",
     "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^2.1.1",
     "grafitto-filter": "grafitto/grafitto-filter#^0.0.3",
-    "schema-behaviors": "LRNWebcomponents/schema-behaviors#^0.2.0",
+    "schema-behaviors": "LRNWebComponents/schema-behaviors#^1.0.0",
     "iron-image": "PolymerElements/iron-image#^2.1.2",
     "dropdown-select": "LRNWebComponents/dropdown-select#^1.0.3",
     "materializecss-styles": "LRNWebcomponents/materializecss-styles#^1.2.1",
@@ -47,7 +47,8 @@
     "app-datepicker": "motss/app-datepicker#^2.12.0",
     "paper-collapse-item": "Collaborne/paper-collapse-item#^2.3.0",
     "paper-icon-picker": "LRNWebComponents/paper-icon-picker#^1.0.2",
-    "paper-input-flagged": "LRNWebComponents/paper-input-flagged#^1.0.1"
+    "paper-input-flagged": "LRNWebComponents/paper-input-flagged#^1.0.1",
+    "grid-plate": "LRNWebComponents/grid-plate#^0.0.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -118,15 +119,15 @@
     "paper-radio-button": "^2.1.0"
   },
   "homepage": "https://github.com/LRNWebComponents/hax-body",
-  "version": "0.15.1",
-  "_release": "0.15.1",
+  "version": "0.15.2",
+  "_release": "0.15.2",
   "_resolution": {
     "type": "version",
-    "tag": "0.15.1",
-    "commit": "bbd96d73e20e5c9b95038b20aeeccc0dbfb42c79"
+    "tag": "0.15.2",
+    "commit": "e9af2407115e51e86653af69f4d22779d6d00c47"
   },
   "_source": "https://github.com/LRNWebComponents/hax-body.git",
-  "_target": "^0.15.1",
+  "_target": "^0.15.2",
   "_originalSource": "LRNWebComponents/hax-body",
   "_direct": true
 }

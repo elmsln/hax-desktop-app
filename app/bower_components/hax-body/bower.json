@@ -27,7 +27,7 @@
     "juicy-html": "Juicy/juicy-html#^2.0.2",
     "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^2.1.1",
     "grafitto-filter": "grafitto/grafitto-filter#^0.0.3",
-    "schema-behaviors": "LRNWebcomponents/schema-behaviors#^0.2.0",
+    "schema-behaviors": "LRNWebComponents/schema-behaviors#^1.0.0",
     "iron-image": "PolymerElements/iron-image#^2.1.2",
     "dropdown-select": "LRNWebComponents/dropdown-select#^1.0.3",
     "materializecss-styles": "LRNWebcomponents/materializecss-styles#^1.2.1",
@@ -47,7 +47,8 @@
     "app-datepicker": "motss/app-datepicker#^2.12.0",
     "paper-collapse-item": "Collaborne/paper-collapse-item#^2.3.0",
     "paper-icon-picker": "LRNWebComponents/paper-icon-picker#^1.0.2",
-    "paper-input-flagged": "LRNWebComponents/paper-input-flagged#^1.0.1"
+    "paper-input-flagged": "LRNWebComponents/paper-input-flagged#^1.0.1",
+    "grid-plate": "LRNWebComponents/grid-plate#^0.0.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
