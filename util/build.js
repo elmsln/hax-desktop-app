@@ -1,6 +1,7 @@
 const fs = require('fs-extra')
 const path = require('path')
-const BUILD_DIR_NAME = '_site';
+const scrubPaths = require('./buildScrubPathAbsoluteLocations')
+const BUILD_DIR_NAME = 'docs';
 const BOWER_COMPONENTS_DIR = '../app/bower_components'
 
 /**
@@ -23,6 +24,8 @@ module.exports = (projectLocation) => {
     fs.copySync(path.join(projectLocation, 'outline.json'), path.join(buildDir, 'outline.json'))
     fs.copySync(path.join(projectLocation, 'content'), path.join(buildDir, 'content'))
     fs.copySync(path.join(projectLocation, 'assets'), path.join(buildDir, 'assets'))
+    // Scrub Absolute Paths
+    scrubPaths(projectLocation)
   } catch (error) {
     console.log(error)
     return

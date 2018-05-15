@@ -24,21 +24,24 @@ const build = require('./util/build')
 
 let mainWindow;
 
-// // GraphQL Server
-// electronify({
-//   command: 'node',
-//   args: ['./graphql'],
-//   url: 'http://localhost:4000',
-//   debug: true
-// })
+// Start GraphQL
+// const graphQLpipe = spawn('node', ['./graphql'])
+const restAPI = spawn('node', ['./restAPI'])
 
+// graphql server
 // electronify({
-//   command: 'node',
-//   args: ['./mongodb'],
-//   url: 'http://localhost:27017',
-//   debug: true
-// })
-
+  //   command: 'node',
+  //   args: ['./graphql'],
+  //   url: 'http://localhost:4000',
+  //   debug: true,
+  // // })
+  // electronify({
+  //     command: 'node',
+  //     args: ['./restAPI'],
+  //     url: 'http://localhost:3000',
+  //     debug: true,
+  //   })
+    
 app.on('ready', () => {
   mainWindow = mainWindowCreate();
   // Build main menu
@@ -643,7 +646,7 @@ ipcMain.on('project-open-in-finder', (e, project) => {
  */
 ipcMain.on('project-generate-build', (e, project) => {
   const projectBuilt = build(project.location)
-  shell.showItemInFolder(path.join(project.location, '_site'))
+  shell.showItemInFolder(path.join(project.location, 'docs'))
 })
 
 /**
@@ -744,3 +747,11 @@ ipcMain.on('markdown-to-html', (e, markdown) => {
 ipcMain.on('new-project', (e) => {
   globals.initProject();
 });
+
+
+/**
+ * Manage Files
+ */
+ipcMain.on('save-file', (e, { projectId, filepath }) => {
+  console.log(e)
+})
