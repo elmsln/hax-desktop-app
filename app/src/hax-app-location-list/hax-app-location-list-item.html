@@ -59,8 +59,12 @@
       #menu {
         position: absolute;
         top: 5px;
-        right: 10px;
+        right: 5px;
         color: #9DAAB6;
+      }
+
+      #menu ::shadow shibui-dropdown {
+        transform: translateX(-60%)
       }
 
       .menu-icon {
@@ -75,7 +79,7 @@
 
     <paper-card>
       <paper-avatar label="[[project.title]]"></paper-avatar>
-      <shibui-dropdown-menu id="menu">
+      <shibui-dropdown-menu id="menu" alignment="left">
         <paper-icon-button slot="trigger" icon="more-horiz"></paper-icon-button>
         <a id="openItemInFinder">open in finder <iron-icon icon="folder" class="menu-icon"></iron-icon> </a>
         <a id="generateBuild">generate build <iron-icon icon="tool" class="menu-icon"></iron-icon> </a>
