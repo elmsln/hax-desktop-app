@@ -44,19 +44,40 @@ router.get('/appstore/:id', (ctx, next) => {
 });
 
 router.post('/fileupload', (ctx, next) => {
-  // access the files
-  console.log()
+  /**
+   * @todo  Find out how the heck to save
+   * this write stream loca
+   */
+  // console.log(ctx.request.body.files)
+  // _.each(ctx.request.body.files, (file) => {
+  //   file._writeStream
+  // })
+
   const projectLocation = _.get(ctx, 'headers.hax-project-location')
   const uploadLocation = ctx.request.body;
+  console.log(uploadLocation)
   if (typeof uploadLocation === 'string') {
     const filename = path.basename(uploadLocation)
     const dest = path.join(decodeURIComponent(projectLocation), 'assets', filename)
-    console.log(uploadLocation, projectLocation)
     fs.copyFileSync(uploadLocation, dest)
     ctx.body = { 
       data: {
         file: {
           url: dest
+        }
+      }
+    }
+  }
+  else {
+    /**
+     * This is a totally cheating way of doing this
+     */
+    const hopefulFileName = _.get(ctx, 'request.body.files.file-upload.name')
+    const hopefulFilePath = path.join(projectLocation, 'assets', hopefulFileName)
+    ctx.body = { 
+      data: {
+        file: {
+          url: hopefulFilePath
         }
       }
     }

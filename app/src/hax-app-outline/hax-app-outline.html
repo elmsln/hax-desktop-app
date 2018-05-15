@@ -145,9 +145,11 @@
         });
       },
       
+      /**
+       * Hijack the vaadin upload
+       */
       attached: function () {
         Polymer.HaxStore.instance.haxManager.$.fileupload.addEventListener('upload-before', e => {
-          console.log(e.detail.file.path)
           fetch('http://localhost:3000/fileupload', {
             body: e.detail.file.path,
             headers: {
