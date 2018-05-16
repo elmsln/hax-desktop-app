@@ -1,5 +1,8 @@
 # hax-desktop-app
-HAX but running on your desktop. In the future this will be built to multiple platforms but for now it exists as source. Here are some goals of the HAX desktop app:
+
+Read directions on how to use HAX the deskop app and get the link to download packaged builds. [You can read about how to use this in this training](https://open-curriculum.gitbooks.io/oer-camp-2018/content/get-started-with-hax.html). If you are a developer or you want to help us take it further, keep reading
+
+HAX but running on your desktop. Here are some goals of the HAX desktop app:
 - Create the fastest, most accessible, highest quality way to write documentation for software projects
 - Load / Save directly to HTML files on the local file system w/ a lightweight outline structure (dictated by outline.json)
 - Simple workflow to publish directly to git / github pages
