@@ -526,7 +526,9 @@ el.error = {
         });
       },
       _removePropertyEl: function (el) {
-        this.unlisten(el, el.schemaProperty.component.valueProperty.replace(/([A-Z])/g, '-$1').toLowerCase() + '-changed', '_schemaPropertyChanged');
+        if (typeof el.schemaProperty !== typeof undefined) {
+          this.unlisten(el, el.schemaProperty.component.valueProperty.replace(/([A-Z])/g, '-$1').toLowerCase() + '-changed', '_schemaPropertyChanged');
+        }
         el.schemaProperty = null;
         Polymer.dom(this.$.form).removeChild(el);
       },

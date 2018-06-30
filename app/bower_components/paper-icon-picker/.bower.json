@@ -1,6 +1,6 @@
 {
   "name": "paper-icon-picker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A icon picker element using all the Material Design icons",
   "authors": [
     "Valentin Hristov <v.hristov@mail.ru>"
@@ -28,7 +28,10 @@
     "paper-menu-button": "PolymerElements/paper-menu-button#^2.1.1",
     "polymer": "Polymer/Polymer#^2.6.0",
     "paper-tooltip": "PolymerElements/paper-tooltip#^2.1.1",
-    "iron-icons": "PolymerElements/iron-icons#^2.1.1"
+    "iron-icons": "PolymerElements/iron-icons#^2.1.1",
+    "iron-list": "PolymerElements/iron-list#^2.0.16",
+    "neon-animation": "PolymerElements/neon-animation#^2.2.1",
+    "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^2.1.2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.1.0",
@@ -38,13 +41,13 @@
     "web-component-tester": "^4.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
-  "_release": "1.0.2",
+  "_release": "1.0.3",
   "_resolution": {
     "type": "version",
-    "tag": "v1.0.2",
-    "commit": "1710811add21892fa60ed1877725bad3a8493540"
+    "tag": "v1.0.3",
+    "commit": "dc56931548de1119bbfaf9f77e4d4c43513e4c8a"
   },
   "_source": "https://github.com/LRNWebComponents/paper-icon-picker.git",
-  "_target": "^1.0.2",
+  "_target": "^1.0.3",
   "_originalSource": "LRNWebComponents/paper-icon-picker"
 }

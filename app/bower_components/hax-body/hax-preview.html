@@ -9,6 +9,7 @@
 <link rel="import" href="../paper-icon-picker/paper-icon-picker.html">
 <link rel="import" href="../paper-input-flagged/paper-input-flagged.html">
 <link rel="import" href="../vaadin-split-layout/vaadin-split-layout.html">
+<link rel="import" href="../simple-colors/simple-colors.html">
 <!--
 `hax-preview`
 An element that can generate a form
@@ -26,12 +27,14 @@ An element that can generate a form
     <style>
       :host {
         display: block;
+        background-color: rgba(0, 0, 0, .6);
       }
       paper-card.form-wrapper {
         margin: 0;
         padding: 8px;
         width: 100%;
         min-height: 160px;
+        background-color: transparent;
       }
 
       vaadin-split-layout {
@@ -39,7 +42,7 @@ An element that can generate a form
         justify-content: space-around;
         height: 100%;
         --vaadin-split-layout-splitter: {
-          background-color: #f8f8f8;
+          background-color: #FFFFFF;
         };
       }
       eco-json-schema-object {
@@ -59,25 +62,34 @@ An element that can generate a form
         }
       }
       #preview {
-        padding:8px;
+        padding: 16px;
+        color: #000000;
+        background-color: #FFFFFF;
+      }
+      #preview ::slotted(*) {
+        float: unset !important;
+        float: unset !important;
+        margin: unset !important;
+        width: unset !important;
       }
       .preview-text {
-        font-size: 11px;
+        font-size: 14px;
         font-family: sans-serif;
-        color: #CCCCCC;
+        color: #FFFFFF;
         font-style: italic;
         width: 100%;
         height: 24px;
-        line-height: 16px;
-        border-bottom: 1px solid #CCCCCC;
+        border-bottom: 1px solid #FFFFFF;
         text-align: center;
+        padding: 8px 0;
+        box-sizing: content-box;
       }
       .preview-text iron-icon {
         margin: 0 8px;
       }
       .preview-text-bottom {
         border-bottom: unset;
-        border-top: 1px solid #CCCCCC;
+        border-top: 1px solid #FFFFFF;
       }
       @media screen and (max-width: 550px) {
         .hide-on-mobile {
@@ -91,14 +103,14 @@ An element that can generate a form
       #modetabs {
         height: 80px;
         border-bottom: 1px #e5e5e5 solid;
-        --paper-tabs-selection-bar-color: #34e79a;
+        --paper-tabs-selection-bar-color: var(--simple-colors-light-green-background1);
         --paper-tabs: {
-          background: #f8f8f8;
+          background: transparent;
         }
       }
 
       #modetabs paper-tab {
-        --paper-tab-ink: #34e79a;
+        --paper-tab-ink: var(--simple-colors-light-green-background1);
         --paper-tab: {
           font-size: 16px;
         }
@@ -107,25 +119,78 @@ An element that can generate a form
         min-width: unset;
         width: 100%;
       }
+      .human-name {
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+      }
+      .preview-buttons {
+        height: 64px;
+        padding: 0px;
+        color: #222222;
+        border-bottom: 1px var(--hax-manager-steps-color) solid;
+        background-color: transparent;
+        margin: 16px 0 0 0;
+        text-align: center;
+        box-sizing: content-box;
+      }
+      eco-json-schema-object {
+        color: white;
+        --eco-json-schema-object-form : {
+          -ms-flex: unset;
+          -webkit-flex: unset;
+          flex: unset;
+          -webkit-flex-basis: unset;
+          flex-basis: unset;
+        };
+        --paper-icon-button: {
+          background-color: rgba(0,0,0,.9) !important;
+          border-radius: 50%;
+        }
+        --code-pen-title-color: #FFFFFF;
+        --paper-checkbox-size: 22px;
+        --paper-checkbox-unchecked-color: var(--simple-colors-blue-grey-background1);
+        --paper-checkbox-checked-color: var(--simple-colors-light-green-foreground3);
+        --paper-checkbox-checked-ink-color: #FFFFFF;
+        --paper-checkbox-unchecked-ink-color: #FFFFFF;
+        --paper-checkbox-label-color: var(--simple-colors-blue-grey-background1);
+        --paper-checkbox-label-checked-color: var(--simple-colors-accent-background1);
+        --paper-checkbox-label: {
+          font-size: 22px;
+          line-height: 32px;
+        };
+        --paper-input-container-invalid-color: var(--simple-colors-red-foreground3);
+        --secondary-text-color: #FFFFFF;
+        --primary-text-color: #FFFFFF;
+        --primary-color: #FFFFFF;
+        --paper-input-container-input-color: #FFFFFF;
+        --paper-input-container-color: #FFFFFF !important;
+        --paper-input-container-focus-color: var(--simple-colors-light-green-background1) !important;
+        --paper-listbox-color: #000000;
+      }
+      .preview-buttons paper-button {
+        min-width: unset;
+        width: 40%;
+        color: #000000;
+        background-color: var(--simple-colors-light-green-background1);
+      }
     </style>
     <vaadin-split-layout class="panel-wrapper">
       <!-- critique panel -->
       <div class="vaadin-split-layout-panel">
-        <slot></slot>
-        <div class="preview-text"><iron-icon icon="icons:arrow-drop-down"></iron-icon><iron-icon icon="icons:arrow-drop-down"></iron-icon><iron-icon icon="icons:arrow-drop-down"></iron-icon>start preview<iron-icon icon="icons:arrow-drop-down"></iron-icon><iron-icon icon="icons:arrow-drop-down"></iron-icon><iron-icon icon="icons:arrow-drop-down"></iron-icon></div>
+        <div class="preview-buttons">
+          <paper-button id="insert" raised>[[editTitle]]</paper-button>
+          <paper-button id="cancel" raised>Cancel</paper-button>
+        </div>
+        <div class="preview-text"><iron-icon icon="icons:arrow-drop-down"></iron-icon><iron-icon icon="icons:arrow-drop-down"></iron-icon><iron-icon icon="icons:arrow-drop-down"></iron-icon>[[humanName]] preview<iron-icon icon="icons:arrow-drop-down"></iron-icon><iron-icon icon="icons:arrow-drop-down"></iron-icon><iron-icon icon="icons:arrow-drop-down"></iron-icon></div>
         <div id="preview"></div>
         <div class="preview-text preview-text-bottom"><iron-icon icon="icons:arrow-drop-up"></iron-icon><iron-icon icon="icons:arrow-drop-up"></iron-icon><iron-icon icon="icons:arrow-drop-up"></iron-icon>end preview<iron-icon icon="icons:arrow-drop-up"></iron-icon><iron-icon icon="icons:arrow-drop-up"></iron-icon><iron-icon icon="icons:arrow-drop-up"></iron-icon></div>
       </div>
-      <!-- critique panel -->
       <div class="vaadin-split-layout-panel">
-
-        <!-- editor mode -->
-        <template is="dom-if" if="[[haspreviewNode]]">
-          <paper-tabs id="modetabs" selected="{{modeTab}}" attr-for-selected="data-mode">
-            <paper-tab data-mode="configure"><paper-button raised noink>Configure</paper-button></paper-tab>
-            <paper-tab data-mode="advanced"><paper-button raised noink>Advanced</paper-button></paper-tab>
-          </paper-tabs>
-        </template>
+        <paper-tabs hidden$="[[!haspreviewNode]]" id="modetabs" selected="{{modeTab}}" attr-for-selected="data-mode">
+          <paper-tab id="configurebutton" data-mode="configure"><paper-button raised noink>Configure</paper-button></paper-tab>
+          <paper-tab id="advancedbutton" data-mode="advanced"><paper-button raised noink>Advanced</paper-button></paper-tab>
+        </paper-tabs>
         <paper-card class="form-wrapper">
           <eco-json-schema-object id="form" schema="[[schema]]" value="{{value}}"></eco-json-schema-object>
         </paper-card>
@@ -135,9 +200,14 @@ An element that can generate a form
   <script>
     Polymer({
       is: 'hax-preview',
+      behaviors: [window.simpleColorsBehaviors],
       observers: [
         '_valueChanged(value.*, formKey)'
       ],
+      listeners: {
+        'cancel.tap': 'cancel',
+        'insert.tap': 'insert',
+      },
       properties: {
         /**
          * A reference to the previewNode so we can do data binding correctly.
@@ -162,6 +232,13 @@ An element that can generate a form
           type: String,
           value: 'configure',
           observer: '_editorModeChanged',
+        },
+        /**
+         * Edit title since it can change based on the operation
+         */
+        editTitle: {
+          type: String,
+          value: 'Update',
         },
         /**
          * The element to work against expressing the structure of the DOM element
@@ -210,6 +287,24 @@ An element that can generate a form
           computed: '_computedFormKey(advancedForm)',
           observer: '_formKeyChanged',
         },
+        /**
+         * Active Name from the properties
+         */
+        humanName: {
+          type: String,
+        },
+      },
+      /**
+       * Trigger cancel on manager as it is the parent here.
+       */
+      cancel: function(e) {
+        Polymer.HaxStore.instance.haxManager.cancel(e);
+      },
+       /**
+       * Trigger insert on manager as it is the parent here.
+       */
+      insert: function(e) {
+        Polymer.HaxStore.instance.haxManager.insertHaxElement(e);
       },
       /**
        * Make a boolean to match the preview node's existance.
@@ -320,6 +415,13 @@ An element that can generate a form
             }
             else {
               schema = Polymer.HaxStore.instance.getHaxJSONSchema(this.formKey, props);
+            }
+            // generate a human name for this
+            if (typeof props.gizmo.title === typeof undefined) {
+              this.humanName = newValue.tagName.replace('-', ' ').toLowerCase();
+            }
+            else {
+              this.humanName = props.gizmo.title;
             }
             // first, allow element properties to dictate defaults
             for (var property in element.properties) {

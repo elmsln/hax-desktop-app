@@ -14,13 +14,14 @@
     "resize-observer-polyfill": "^1.5.0"
   },
   "homepage": "https://github.com/LRNWebComponents/responsive-utility",
-  "_release": "9802a416a3",
+  "version": "0.0.1",
+  "_release": "0.0.1",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "9802a416a3a853b8cbbc958b31de0a61b2bc69d6"
+    "type": "version",
+    "tag": "0.0.1",
+    "commit": "7ed61704815d63b0ac3d6dcf9f0267f99a112839"
   },
   "_source": "https://github.com/LRNWebComponents/responsive-utility.git",
-  "_target": "*",
+  "_target": "^0.0.1",
   "_originalSource": "LRNWebComponents/responsive-utility"
 }

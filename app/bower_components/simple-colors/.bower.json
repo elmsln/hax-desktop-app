@@ -1,0 +1,25 @@
+{
+  "name": "simple-colors",
+  "description": "A LRN element",
+  "main": "simple-colors.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.10.1"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  },
+  "homepage": "https://github.com/LRNWebComponents/simple-colors",
+  "version": "0.0.1",
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.1",
+    "commit": "2d0c6ba6ebc6eb3e991cddfdc7076ce24fa8d692"
+  },
+  "_source": "https://github.com/LRNWebComponents/simple-colors.git",
+  "_target": "^0.0.1",
+  "_originalSource": "LRNWebComponents/simple-colors"
+}

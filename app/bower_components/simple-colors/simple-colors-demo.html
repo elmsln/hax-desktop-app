@@ -1,0 +1,86 @@
+<link rel="import" href="simple-colors.html">
+<dom-module id="simple-colors-demo">
+  <template>
+    <style is="custom-style">
+      .theme-selector {
+        border: 1px solid #ddd;
+        padding: 15px;
+      }
+      .theme-selector,
+      .theme-selector > div {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 5px;
+      }
+      .theme-selector > div, 
+      .theme-selector > div > * {
+        align-self: middle;
+      }
+      .theme-selector select { 
+        margin-left: 1em;
+      }
+    </style>
+    <slot name="preselector"></slot>
+    <div class="theme-selector">
+      <div>Change the theme and/or accent color below. </div>
+      <div>
+        <label for="theme">Theme: </label>
+        <select id="theme">
+          <option>light (default)</option>
+          <option>dark</option>
+        </select>
+      </div>
+      <div>
+        <label for="accent">Accent Color: </label>
+        <select id="accent">
+          <option>none (default)</option>
+          <option>red</option>
+          <option>pink</option>
+          <option>purple</option>
+          <option>deep-purple</option>
+          <option>indigo</option>
+          <option>blue</option>
+          <option>light-blue</option>
+          <option>cyan</option>
+          <option>teal</option>
+          <option>green</option>
+          <option>light-green</option>
+          <option>lime</option>
+          <option>yellow</option>
+          <option>amber</option>
+          <option>orange</option>
+          <option>deep-orange</option>
+          <option>brown</option>
+          <option>blue</option>
+        </select>
+      </div>
+    </div>
+    <slot></slot>
+  </template>
+  <script>
+    Polymer({
+      is: 'simple-colors-demo',
+      behaviors: [ simpleColorsBehaviors ], 
+      ready: function(){
+        let root = this, accent = root.$.accent, theme = root.$.theme, span, updateSpan = function(content){
+          let ac = accent.selectedIndex > 0 ? ' accent-color="'+accent.options[accent.selectedIndex].innerText+'"' : '', dark = theme.options[theme.selectedIndex].innerText === 'dark' ? ' dark' : '';
+          if(span === undefined){
+            span = document.createElement('span');
+            span.style.fontWeight = "700";
+            document.getElementById('code').querySelector('code span span').appendChild(span);
+          }
+          span.innerHTML = dark+ac;
+        };
+
+        accent.onchange = function(){
+          updateSpan();
+          root.accentColor = accent.options[accent.selectedIndex].innerText;
+        }
+        theme.onchange = function(){
+          updateSpan();
+          root.dark = theme.options[theme.selectedIndex].innerText === 'dark';
+        }
+      }
+    });
+  </script>
+</dom-module>

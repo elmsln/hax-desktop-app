@@ -4,10 +4,11 @@
 <link rel="import" href="../schema-behaviors/schema-behaviors.html">
 <link rel="import" href="../a11y-behaviors/a11y-behaviors.html">
 <link rel="import" href="../media-behaviors/media-behaviors.html">
+<link rel="import" href="../a11y-media-player/a11y-media-group.html">
 
 <!--
 `video-player`
-A simple responsive video player
+A simple responsive video player with ridiculously powerful backing
 
 @demo demo/index.html
 
@@ -42,19 +43,19 @@ A simple responsive video player
         @apply --video-player-caption-theme;
       }
     </style>
-    <div class="responsive-video-container">
-      <template is="dom-if" if="[[sandboxed]]">
+    <template is="dom-if" if="[[sandboxed]]">
+      <div class="responsive-video-container">
         <webview resource$="[[schemaResourceID]]-video" src$="[[src]]" width$="[[width]]" height$="[[height]]" frameborder="0"></webview>
-      </template>
-      <template is="dom-if" if="[[!sandboxed]]">
-        <template is="dom-if" if="[[iframed]]">
+      </div>
+    </template>
+    <template is="dom-if" if="[[!sandboxed]]">
+      <template is="dom-if" if="[[iframed]]">
+        <div class="responsive-video-container">
           <iframe resource$="[[schemaResourceID]]-video" src$="[[src]]" width$="[[width]]" height$="[[height]]" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        </template>
-        <template is="dom-if" if="[[!iframed]]">
-          <video resource$="[[schemaResourceID]]-video" src$="[[src]]" width$="[[width]]" height$="[[height]]" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen controls></video>
-        </template>
+        </div>
       </template>
-    </div>
+    </template>
+    <div id="a11yplayer"></div>
     <div id="videocaption" class$="video-caption [[secondaryColorClass]] [[textColorClass]]">
       [[caption]]
       <slot name="caption"></slot>
@@ -122,10 +123,35 @@ A simple responsive video player
           value: true,
         },
         /**
+         * title for the video
+         */
+        title: {
+          type: String,
+        },
+        /**
+         * Thumbnail of a poster image
+         */
+        thumbnail: {
+          type: String,
+        },
+        /**
          * Simple caption for the video
          */
         caption: {
           type: String,
+        },
+        /**
+         * Closed caption tracks
+         */
+        tracks: {
+          type: Array,
+        },
+        /**
+         * List of source objects
+         */
+        sources: {
+          type: Array,
+          value: [],
         },
         /**
          * Primary Color.
@@ -240,6 +266,12 @@ A simple responsive video player
         return false;
       },
       /**
+       * Tracks and sources changed
+       */
+      _tracksChanged: function(newValue) {
+
+      },
+      /**
        * Compute sandboxed status
        */
       _computeSandboxed: function(source) {
@@ -265,6 +297,49 @@ A simple responsive video player
        * Attached.
        */
       attached: function() {
+        // ensure that source is set in sources too
+        if (typeof this.source !== typeof undefined && typeof this.sources.length === 0) {
+          this.sources = [{
+            'src': this.source
+          }];
+        }
+        // only do this when we have a media group
+        // @todo bring this back in in order to stage collapse our current setup
+        /*if (!this.iframed && !this.sandboxed && typeof this.sources !== typeof undefined) {
+          // set up the player
+          let player = document.createElement('a11y-media-group');
+          player.setAttribute('resource', this.schemaResourceID + '-video');
+          player.accentColor = 'red';
+          player.dark = true;
+          player.thumbnailSrc = this.thumbnail;
+          player.mediaTitle = this.title;
+          // work on the sources
+          for (var i in this.sources) {
+            let source = document.createElement('source');
+            source.setAttribute('src', this.sources[i].src);
+            if (typeof this.sources[i].type !== typeof undefined) {
+              source.setAttribute('type', this.sources[i].type);
+            }
+            player.appendChild(source);
+          }
+          // work on the tracks
+          for (var i in this.tracks) {
+            let track = document.createElement('track');
+            track.setAttribute('kind', this.tracks[i].kind);
+            track.setAttribute('label', this.tracks[i].label);
+            track.setAttribute('src', this.tracks[i].src);
+            track.setAttribute('srclang', this.tracks[i].srclang);
+            if (i === 0) {
+              track.setAttribute('default', 'default');
+            }
+            player.appendChild(track);
+          }
+          // duplicate it to help the player propagate correctly
+          let inject = player.cloneNode(true);
+          // inject this player into the a11y player area
+          Polymer.dom(this.$.a11yplayer).appendChild(inject);
+        }
+        */
         // Establish hax properties if they exist
         let props = {
           'canScale': true,
@@ -355,7 +430,65 @@ A simple responsive video player
                 'icon': 'editor:format-color-fill',
               }
             ],
-            'advanced': []
+            'advanced': [
+              {
+                'property': 'sources',
+                'title': 'Source list',
+                'description': 'List of sources',
+                'inputMethod': 'array',
+                'properties': [
+                  {
+                    'property': 'src',
+                    'title': 'Source',
+                    'description': 'The URL for this video.',
+                    'inputMethod': 'textfield',
+                  },
+                  {
+                    'property': 'type',
+                    'title': 'Type',
+                    'description': 'Video type data',
+                    'inputMethod': 'select',
+                    'options': {
+                      'video/mp4': 'mp4',
+                      'video/webm': 'webm',
+                      'video/ogg': 'ogg'
+                    },
+                  },
+                ],
+              },
+              {
+                'property': 'tracks',
+                'title': 'Track list',
+                'description': 'Tracks of different languages of closed captions',
+                'inputMethod': 'array',
+                'properties': [
+                  {
+                    'property': 'kind',
+                    'title': 'Kind',
+                    'description': 'Kind of track',
+                    'inputMethod': 'textfield',
+                  },
+                  {
+                    'property': 'label',
+                    'title': 'Label',
+                    'description': 'Label',
+                    'inputMethod': 'textfield',
+                  },
+                  {
+                    'property': 'src',
+                    'title': 'Source',
+                    'description': 'Source of the track',
+                    'inputMethod': 'textfield',
+                  },
+                  {
+                    'property': 'srclang',
+                    'title': 'Language code',
+                    'description': 'Label',
+                    'inputMethod': 'textfield',
+                  },
+                ],
+              },
+            ]
           }
         };
         this.setHaxProperties(props);

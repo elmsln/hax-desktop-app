@@ -1,0 +1,856 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-slider/paper-slider.html">
+<link rel="import" href="../web-animations-js/web-animations-next-lite.min.html">
+<link rel="import" href="screenfull-lib.html">
+<link rel="import" href="a11y-media-behaviors.html">
+<link rel="import" href="a11y-media-play-button.html">
+<link rel="import" href="a11y-media-controls.html">
+<link rel="import" href="a11y-media-transcript.html">
+<link rel="import" href="a11y-media-utility.html">
+
+
+<!--
+`a11y-media-player`
+A LRN element
+
+@demo demo/index.html
+
+@microcopy - the mental model for this element
+
+  <a11y-media-player 
+    accent-color$="[[accentColor]]"             // Optional accent color for controls, 
+                                                // using the following materialize colors: 
+                                                // red, pink, purple, deep-purple, indigo, blue, 
+                                                // light blue, cyan, teal, green, light green, lime, 
+                                                // yellow, amber, orange, deep-orange, and brown. 
+                                                // Default is null. 
+    allow-fullscreen$="[[allowFullscreen]]"         // Allow fullscreen mode?
+    audio-only$="[[audioOnly]]"                 // Is media audio only?
+    autoplay$="[[autoplay]]"                    // Is player set to autoplay (not recommended for a11y)?
+    cc$="[[cc]]"                                // Are closed captions toggled?
+    custom-microcopy$="[[customMicrocopy]]"     // Optional customization or text and icons
+    dark$="[[dark]]"                            // Is the color scheme dark? Default is light.    
+    disableFullscreen$="[[disableFullscreen]]"  // Is full screen mode disabled?
+    fullscreen$="[[fullscreen]]"                // Is full screen mode toggled on?
+    height$="[[height]]"                        // The height of player
+    hide-elapsed-time$="[[hideElapsedTime]]"    // Is elapsed time hidden?
+    lang$="[[lang]]"                            // The language of the media
+    loop$="[[loop]]"                            // Is video on a loop?
+    muted$="[[muted]]"                          // Is video muted?
+    volume$="[[volume]]"                        // The initial volume of the video
+    width$="[[width]]">                         // The width of player
+                                                // video source and tracks 
+    <source src="/path/to/video.mp4" type="video/mp4">
+    <source src="/path/to/video.webm" type="video/webm">
+    <track label="English" kind="subtitles" srclang="en" src="path/to/subtitles/en.vtt" default>
+    <track label="Deutsch" kind="subtitles" srclang="de" src="path/to/subtitles/de.vtt">
+    <track label="Español" kind="subtitles" srclang="es" src="path/to/subtitles/es.vtt">
+  </a11y-media-player>
+
+ Basic customization of player:
+--a11y-media-text-color: text color, default is #bbbbbb
+--a11y-media-bg-color: background color, default is #000000
+--a11y-media-faded-bg-color: a subtler version of background color, default is #444444
+--a11y-media-hover-color: text color on hover, default is #ffffff
+--a11y-media-accent-color: an accent color, default is #00b0ff
+--a11y-media-faded-accent-color: a subtler version of accent color, default is #4E7373
+ 
+ Custom styles for player buttons:
+--a11y-media-button-color: button text color, default is --a11y-media-text-color
+--a11y-media-button-bg-color: button background color, default is --a11y-media-bg-color
+--a11y-media-button-hover-color: button text color when focused/hovered, default is --a11y-media-hover-color
+--a11y-media-button-hover-bg-color: button background color when focused/hovered, default is --a11y-media-bg-color
+ 
+ Custom styles for player settings menu:
+--a11y-media-settings-menu-color: settings menu text color, default is --a11y-media-text-color
+--a11y-media-settings-menu-bg-color: settings menu background color, default is --a11y-media-bg-color
+ 
+ Custom styles for player toggle buttons:
+--a11y-toggle-off-color: color of toggle button when off, default is #f8f8f8
+--a11y-toggle-on-color: color of toggle button when on, default is --a11y-media-accent-color
+ 
+ Custom styles for player slider buttons:
+--a11y-media-slider-primary-color: primary slider color, default is --a11y-media-accent-color
+--a11y-media-slider-buffer-color: slider buffer color, default is --a11y-media-faded-accent-color
+--a11y-media-slider-pin-color: color of the pin that shows slider value, default is #444444
+--a11y-media-slider-knob-color: slider knob color, default is --a11y-media-accent-color
+
+ Custom styles for player volume slider:
+--a11y-media-volume-primary-color: volume slider color, default is #00b0ff
+--a11y-media-volume-pin-color: color of the pin that shows volume slider value, default is #444444
+--a11y-media-volume-knob-color: volume slider knob color, default is #00b0ff
+--a11y-media-volume-knob-start-color: knob color at the start of volume slider, default is --a11y-media-hover-color
+--a11y-media-volume-knob-end-color: knob color at the end of volume slider, default is --a11y-media-volume-knob-color
+
+ Custom styles for player speed slider:
+--a11y-media-speed-primary-color: speed slider color, default is #00b0ff
+--a11y-media-speed-pin-color: color of the pin that shows speed slider value, default is #444444
+--a11y-media-speed-knob-color: volume slider knob color, default is #00b0ff
+--a11y-media-speed-knob-start-color: knob color at the start of speed slider, default is --a11y-media-speed-knob-color
+--a11y-media-speed-knob-end-color: knob color at the end of speed slider, default is --a11y-media-speed-knob-color
+-->
+
+<dom-module id="a11y-media-player">
+  <template>
+    <style is="custom-style">
+      :host {
+        display: block;
+        max-width: 100%;
+        transition: position 0.5s ease, max-width 1s ease;
+      }
+      :host[sticky]:not([sticky-corner="none"]) {
+        position: fixed;
+        top: 5px;
+        right: 5px;
+        max-width: 200px;
+        z-index: 999999;
+        border: 1px solid;
+        box-shadow: 1px 1px 20px 1px rgba(125,125,125);
+        border-radius: 0.2em; 
+        border-color: var(--a11y-media-outline-color, var(--a11y-media-bg-color,#bbbbbb));
+      }
+      :host[dark][sticky]:not([sticky-corner="none"]) {
+        border-color: var(--a11y-media-outline-color, var(--a11y-media-bg-color,#000000));
+      }
+      :host[sticky][sticky-corner="top-left"] {
+        right: unset;
+        left: 5px;
+      }
+      :host[sticky][sticky-corner="bottom-left"] {
+        top: unset;
+        right: unset;
+        bottom: 5px;
+      }
+      :host[sticky][sticky-corner="bottom-right"] {
+        top: unset;
+        bottom: 5px;
+      }
+      :host, :host * {
+        /* settings */
+        --a11y-media-settings-menu-color: var(--a11y-media-color, #666666);
+        --a11y-media-settings-menu-bg-color: var(--a11y-media-bg-color, #eeeeee);
+        --a11y-media-settings-menu-hover-color: var(--a11y-media-hover-color, #000000);
+        --a11y-media-settings-menu-hover-bg-color: var(--a11y-media-hover-bg-color, #eeeeee);
+        
+        /* buttons */
+        --a11y-media-button-color: var(--a11y-media-color, #666666);
+        --a11y-media-button-bg-color: var(--a11y-media-bg-color, #eeeeee);
+        --a11y-media-button-hover-color: var(--a11y-media-hover-color, #000000);
+        --a11y-media-button-hover-bg-color: var(--a11y-media-hover-bg-color, #eeeeee);
+        
+        /* toggle button */
+        --paper-toggle-button-unchecked-bar-color: var(--a11y-media-toggle-off-color, var(--a11y-media-color, #666666));
+        --paper-toggle-button-unchecked-button-color: var(--a11y-media-toggle-off-color, var(--a11y-media-color, #666666));
+        --paper-toggle-button-checked-bar-color: var(--a11y-media-toggle-on-color, var(--a11y-media-accent-color,#444444));
+        --paper-toggle-button-checked-button-color: var(--a11y-media-toggle-on-color, var(--a11y-media-accent-color,#444444));
+        
+        /* slider */
+        --paper-slider-active-color: var(--a11y-media-slider-primary-color, var(--a11y-media-accent-color,#444444));
+        --paper-slider-secondary-color: var(--a11y-media-slider-buffer-color, var(--a11y-media-faded-accent-color, #888888));
+        --paper-slider-pin-color: var(--a11y-media-slider-pin-color, var(--a11y-media-faded-accent-color, #888888));
+        --paper-slider-pin-start-color: var(--a11y-media-slider-pin-color,var(--a11y-media-faded-accent-color, #888888));
+        --paper-slider-pin-end-color:  var(--a11y-media-slider-pin-color, var(--a11y-media-faded-accent-color, #888888));
+        --paper-slider-knob-color: var(--a11y-media-slider-knob-color, var(--a11y-media-accent-color,#444444));
+        --paper-slider-knob-start-border-color: var(--a11y-media-bg-color, #eeeeee);
+        --paper-slider-knob-end-border-color: var(--a11y-media-bg-color, #eeeeee);
+        --paper-slider-knob-start-color: var(--a11y-media-bg-color, #eeeeee);
+        --paper-slider-knob-end-color: var(--a11y-media-bg-color, #eeeeee);
+        
+        /* volume slider */
+        --a11y-media-volume-active-color: var(--a11y-media-accent-color, #444444);
+        --a11y-media-volume-knob-color: var(--a11y-media-slider-knob-color, var(--a11y-media-accent-color,#444444));
+        --a11y-media-volume-knob-start-color: var(--a11y-media-hover-color, #000000);
+        --a11y-media-volume-knob-end-color: var(--a11y-media-volume-knob-color, var(--a11y-media-slider-knob-color, --a11y-media-accent-color));
+        
+        /* speed slider */
+        --a11y-media-speed-active-color: var(--a11y-media-accent-color,#444444);
+        --a11y-media-speed-knob-color: var(--a11y-media-slider-knob-color, var(--a11y-media-accent-color,#444444));
+        --a11y-media-speed-knob-start-color: var(--a11y-media-speed-knob-color, var(--a11y-media-slider-knob-color, var(--a11y-media-accent-color,#444444)));
+        --a11y-media-speed-knob-end-color: var(--a11y-media-speed-knob-color, var(--a11y-media-slider-knob-color, var(--a11y-media-accent-color,#444444)));
+      }
+      :host[dark], :host[dark] * {
+        --a11y-media-color: #bbbbbb;
+        --a11y-media-bg-color: #000000;
+        --a11y-media-hover-color: #ffffff;
+        --a11y-media-hover-bg-color: #000000;
+        --a11y-media-faded-bg-color: #222222;
+        --a11y-media-accent-color: #ffffff;
+        --a11y-media-faded-accent-color: #dddddd;
+      }
+      :host[accent-color="red"], :host[accent-color="red"] * { 
+        --a11y-media-accent-color: #d50000;
+        --a11y-media-faded-accent-color: #e4a2a2;
+      }
+      :host[accent-color="red"][dark], :host[accent-color="red"][dark] * { 
+        --a11y-media-faded-accent-color: #7a0d0d;
+      }
+      :host[accent-color="pink"], :host[accent-color="pink"] * { 
+        --a11y-media-accent-color: #f50057;
+        --a11y-media-faded-accent-color: #e6a4bc;
+      }
+      :host[accent-color="pink"][dark], :host[accent-color="pink"][dark] * { 
+        --a11y-media-faded-accent-color: #9b1b4a;
+      }
+      :host[accent-color="purple"], :host[accent-color="purple"] * { 
+        --a11y-media-accent-color: #d500f9;
+        --a11y-media-faded-accent-color: #e2a1ee;
+      }
+      :host[accent-color="purple"][dark], :host[accent-color="purple"][dark] * { 
+        --a11y-media-faded-accent-color: #692075;
+      }
+      :host[accent-color="deep-purple"], :host[accent-color="deep-purple"] * { 
+        --a11y-media-accent-color: #651fff;
+        --a11y-media-faded-accent-color: #a194c0;
+      }
+      :host[accent-color="deep-purple"][dark], :host[accent-color="deep-purple"][dark] * { 
+        --a11y-media-faded-accent-color: #412582;
+      }
+      :host[accent-color="indigo"], :host[accent-color="indigo"] * { 
+        --a11y-media-accent-color: #304ffe;
+        --a11y-media-faded-accent-color: #919ddc;
+      }
+      :host[accent-color="indigo"][dark], :host[accent-color="indigo"][dark] * { 
+        --a11y-media-faded-accent-color: #2a3981;
+      }
+      :host[accent-color="blue"], :host[accent-color="blue"] * { 
+        --a11y-media-accent-color: #1565c0;
+        --a11y-media-faded-accent-color: #62a2e2;
+      }
+      :host[accent-color="blue"][dark], :host[accent-color="blue"][dark] * { 
+        --a11y-media-accent-color: #2196f3;
+        --a11y-media-faded-accent-color: #326b97;
+      }
+      :host[accent-color="light-blue"], :host[accent-color="light-blue"] * { 
+        --a11y-media-accent-color: #0091ea;
+        --a11y-media-faded-accent-color: #a0d3f0;
+      }
+      :host[accent-color="light-blue"][dark], :host[accent-color="light-blue"][dark] * {
+        --a11y-media-accent-color: #00b0ff;
+        --a11y-media-faded-accent-color: #2982a8;
+      }
+      :host[accent-color="cyan"], :host[accent-color="cyan"] * { 
+        --a11y-media-accent-color: #0097a7;
+        --a11y-media-faded-accent-color: #6fd4db;
+      }
+      :host[accent-color="cyan"][dark], :host[accent-color="cyan"][dark] * { 
+        --a11y-media-accent-color: #18ffff;
+        --a11y-media-faded-accent-color: #27a1a1;
+      }
+      :host[accent-color="teal"], :host[accent-color="teal"] * { 
+        --a11y-media-accent-color: #00897b;
+        --a11y-media-faded-accent-color: #76ccbf;
+      }
+      :host[accent-color="teal"][dark], :host[accent-color="teal"][dark] * { 
+        --a11y-media-accent-color: #64ffda;
+        --a11y-media-faded-accent-color: #4c9683;
+      }
+      :host[accent-color="green"], :host[accent-color="green"] * { 
+        --a11y-media-accent-color: #02993c;
+        --a11y-media-faded-accent-color: #5fd88e;
+      }
+      :host[accent-color="green"][dark], :host[accent-color="green"][dark] * { 
+        --a11y-media-accent-color: #00e676;
+        --a11y-media-faded-accent-color: #289960;
+      }
+      :host[accent-color="light-green"], :host[accent-color="light-green"] * { 
+        --a11y-media-accent-color: #448f02;
+        --a11y-media-faded-accent-color: #94d157;
+      }
+      :host[accent-color="light-green"][dark], :host[accent-color="light-green"][dark] * { 
+        --a11y-media-accent-color: #76ff03;
+        --a11y-media-faded-accent-color: #66ac29;
+      }
+      :host[accent-color="lime"], :host[accent-color="lime"] * { 
+        --a11y-media-accent-color: #6f8e00;
+        --a11y-media-faded-accent-color: #c1d86d;
+      }
+      :host[accent-color="lime"][dark], :host[accent-color="lime"][dark] * { 
+        --a11y-media-accent-color: #c6ff00;
+        --a11y-media-faded-accent-color: #8ca827;
+      }
+      :host[accent-color="yellow"], :host[accent-color="yellow"] * { 
+        --a11y-media-accent-color: #9a8000;
+        --a11y-media-faded-accent-color: #ceb545;
+      }
+      :host[accent-color="yellow"][dark], :host[accent-color="yellow"][dark] * { 
+        --a11y-media-accent-color: #ffff00;
+        --a11y-media-faded-accent-color: #b4b422;
+      }
+      :host[accent-color="amber"], :host[accent-color="amber"] * { 
+        --a11y-media-accent-color: #bf7f00;
+        --a11y-media-faded-accent-color: #e7b153;
+      }
+      :host[accent-color="amber"][dark], :host[accent-color="amber"][dark] * { 
+        --a11y-media-accent-color: #ffc400;
+        --a11y-media-faded-accent-color: #b89525;
+      }
+      :host[accent-color="orange"], :host[accent-color="orange"] * { 
+        --a11y-media-accent-color: #e65100;
+        --a11y-media-faded-accent-color: #f58851;
+      }
+      :host[accent-color="orange"][dark], :host[accent-color="orange"][dark] * { 
+        --a11y-media-accent-color: #ff9800;
+        --a11y-media-faded-accent-color: #b88038;
+      }
+      :host[accent-color="deep-orange"], :host[accent-color="deep-orange"] * { 
+        --a11y-media-accent-color: #ff3d00;
+        --a11y-media-faded-accent-color: #ff8661;
+      }
+      :host[accent-color="deep-orange"][dark], :host[accent-color="deep-orange"][dark] * { 
+        --a11y-media-faded-accent-color: #ac4729;
+      }
+      :host[accent-color="brown"], :host[accent-color="brown"] * { 
+        --a11y-media-accent-color: #5d4037;
+        --a11y-media-faded-accent-color: #77635d;
+      }
+      :host[accent-color="brown"][dark], :host[accent-color="brown"][dark] * { 
+        --a11y-media-accent-color: #8d6e63;
+        --a11y-media-faded-accent-color: #8d6e63;
+      }
+      :host, :host #controls {
+        /* defaults */
+        color: var(--a11y-media-color, #666666);
+        background-color: var(--a11y-media-bg-color, #eeeeee);
+      }
+      :host #print-only {
+        display: none;
+      }
+      :host #player-inner {
+        z-index: 1;
+      }
+      :host #slider,
+      :host #controls {
+        z-index: 2 !important;
+      }
+      :host #media {
+        display: flex;
+        align-items: stretch;
+        position: relative;
+      }
+      :host[no-height] #media {
+        display: none;
+      }
+      :host #media,
+      :host #media > *, 
+      :host #slider,
+      :host #controls {
+        width: 100%;
+      }
+      :host #video {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      :host #player-inner, 
+      :host #media > * {
+        max-height: 80vh;
+      }
+
+      @media print {
+        :host {
+          color: #000000;
+          background-color: #f8f8f8;
+          padding: 15px;
+          width: auto;
+        }
+        :host:not([thumbnail-src]) #media, 
+        :host #slider, 
+        :host #video, 
+        :host #audio, 
+        :host #controls {
+          display: none;
+        }
+        :host #print-only {
+          display: inline;
+        }
+        :host #print-only .media-type {
+          font-style: italic;
+        }
+      }
+    </style>
+    <div lang$="[[uiLanguage]]">
+      <span id="print-only">
+        [[mediaTitle]] (<span class="media-type" hidden$="[[audioOnly]]">[[videoLabel]]</span><span class="media-type" hidden$="[[!audioOnly]]">[[audioLabel]]</span>)
+      </span>
+      <div id="player">
+        <div id="player-inner">
+          <div id="media" hidden$="[[noHeight]]">
+            <video 
+              autoplay$="[[autoplay]]" 
+              hidden$="[[audioOnly]]"
+              id="video" 
+              lang$="[[lang]]"
+              loop$="[[loop]]" 
+              muted$="[[muted]]" 
+              preload="metadata">
+              <slot></slot>
+              HTML5 video not supported 
+            </video>
+            <audio 
+              autoplay$="[[autoplay]]" 
+              hidden$="[[!audioOnly]]"
+              id="audio" 
+              lang$="[[lang]]"
+              loop$="[[loop]]" 
+              muted$="[[muted]]" 
+              preload="metadata">
+              <slot></slot>
+              HTML5 audio not supported 
+            </audio>
+            <a11y-media-play-button 
+              audio-only$="[[audioOnly]]" 
+              hidden$="[[noHeight]]"
+              id="playbutton" 
+              pause-label$="[[pauseLabel]]" 
+              playing$="[[__playing]]"
+              play-label$="[[playLabel]]" 
+              thumbnail-src$="[[thumbnailSrc]]">
+            </a11y-media-play-button>
+          </div>
+        </div>
+        <paper-slider 
+          id="slider" 
+          max$="[[__duration]]" 
+          pin 
+          secondary-progress$="[[__buffered]]" 
+          value$="[[__elapsed]]">
+        </paper-slider>
+      </div>
+      <a11y-media-controls 
+        audio-label$="[[audioLabel]]" 
+        captions-label$="[[captionsLabel]]" 
+        captions-icon$="[[captionsIcon]]" 
+        captions-menu-label$="[[captionsMenuLabel]]" 
+        captions-menu-off$="[[captionsMenuOff]]" 
+        cc$="[[cc]]"
+        forward-label$="[[forwardLabel]]" 
+        forward-icon$="[[forwardIcon]]" 
+        fullscreen-label$="[[fullscreenLabel]]" 
+        fullscreen-icon$="[[fullscreenIcon]]" 
+        has-captions$="[[hasCaptions]]"
+        has-transcript$="[[hasTranscript]]"
+        id="controls"
+        lang$="[[uiLanguage]]"
+        length="[[__length]]"
+        loop-label$="[[loopLabel]]" 
+        mute-label$="[[muteLabel]]" 
+        mute-icon$="[[muteIcon]]" 
+        muted$="[[muted]]"
+        pause-label$="[[pauseLabel]]" 
+        pause-icon$="[[pauseIcon]]" 
+        play-label$="[[playLabel]]" 
+        play-icon$="[[playIcon]]" 
+        playing$="[[__playing]]"
+        print-label$="[[printLabel]]" 
+        print-icon$="[[printIcon]]" 
+        restart-label$="[[restartLabel]]" 
+        restart-icon$="[[restartIcon]]" 
+        search-transcript$="[[searchTranscript]]" 
+        settings-label$="[[settingsLabel]]" 
+        settings-icon$="[[settingsIcon]]" 
+        rewind-label$="[[rewindLabel]]" 
+        rewind-icon$="[[rewindIcon]]" 
+        speed-label$="[[speedLabel]]"  
+        transcript-label$="[[transcriptLabel]]" 
+        transcript-icon$="[[transcriptIcon]]"
+        transcript-menu-label$="[[transcriptMenuLabel]]"
+        unmute-label$="[[unmuteLabel]]" 
+        unmute-icon$="[[unmuteIcon]]" 
+        volume="[[__volume]]"
+        volume-label$="[[volumeLabel]]" 
+        video-label$="[[videoLabel]]">
+      </a11y-media-controls>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'a11y-media-player',
+
+      listeners: {
+        'controls-change': '_onControlsChanged',
+        'play-button-tapped': 'play'
+      },
+      
+      behaviors: [
+        a11yMediaBehaviors.GeneralFunctions,
+        a11yMediaBehaviors.PlayerBehaviors
+      ],
+      
+      properties: {
+        /**
+          * Language
+          */
+        lang: {
+          type: String,
+          value: 'en',
+          reflectToAttribute: true,
+        },
+      },
+
+      /**
+        * initializes slider metadata
+        */
+      created: function(){
+      },
+
+      /**
+        * calls responsive-utility to get parent's responsive size
+        */ 
+      attached: function(){
+        Polymer.A11yMediaUtility.requestAvailability();
+        this._addResponsiveUtility();
+        this.fire('a11y-player',this);
+      },
+      ready: function(){
+        let root = this, tracks = new Array();
+        root.__src = root.$.video !== undefined ? root.$.video : root.$.audio
+        root.__status = 'Loading...';
+        root.__slider = root.$.slider;
+        root.__volume = root.muted ? 0 : Math.max(this.volume,10);
+        root.__resumePlaying = false;
+        root.__showFullscreen = this.allowFullscreen && screenfull.enabled;
+        root.$.controls.setStatus(root.__status);
+
+        // handles fullscreen
+        if(root.__showFullscreen) {
+          screenfull.on('change', () => { this.fullscreen = screenfull.isFullscreen });
+        }
+        // handles dragging with a mouse
+        root.$.slider.addEventListener('dragging-changed', (e) => {
+          // when dragging stops, seeks to that value and 
+          // if the video was playing before the dragging, resumes it
+          if (!root.$.slider.dragging) { 
+            root.seek(root.$.slider.immediateValue);
+            root.__resumePlaying = false;
+          }
+        });
+        // handles slider focus
+        root.$.slider.addEventListener('focused-changed', (e) => {
+          // temporarily pauses playback so that a value can be selected, 
+          // but notes if playing should be resumed
+          if(root.$.slider.focused){
+            if (root.__playing) root.__resumePlaying = true;
+            root.pause();
+          } else {
+            root.seek(root.$.slider.value);
+            root.__resumePlaying = false;
+          }
+        });
+        //adjusts video width and height based on attributes
+        if (root.width === 'unset' && root.height === 'unset'){
+          root.style.width = '100%';  
+        } else if (root.width === 'unset' && root.height !== 'unset') {
+          root.style.height = root.height;
+        } else {
+          root.style.width = root.width;  
+        }
+        // handles loaded metadata
+        root.__src.addEventListener('loadedmetadata',function(){
+          // adjusts aspect ratio
+          if (root.width !== 'unset') root.setAttribute('width',root.width);
+          if (root.height !== 'unset') root.setAttribute('height',root.height);
+          let aspect = root.__src.videoHeight/root.__src.videoWidth * 100;
+          root.$.media.style.paddingTop = aspect+'%';
+          // gets and converts video duration
+          root.__duration = root.__src.duration > 0 ? root.__src.duration: 0; 
+          root.__status = root._convertTime(0,root.__src.duration)+'/'+root._convertTime(root.__src.duration);
+          root.$.controls.setStatus(root.__status);
+
+          // hides the video subtitles and captions and adds them to the tracks dropdown-select
+          if (root.__src.textTracks.length > 0) {
+            root.hasCaptions = true;
+            root.selectTrack(0);
+          }
+          
+          // gets cues from tracks
+          for(i in root.__src.textTracks) {
+            let cues = {};
+            if (root.__src.textTracks[i] !== null) {
+              let text = root.__src.textTracks[i].label !== undefined ? root.__src.textTracks[i].label : root.__src.textTracks[i].language;
+              if(text !== undefined){
+                let track = root.__src.textTracks[i];
+                root.setAttribute('has-captions',true);
+                tracks.push({
+                  'text': text, 
+                  'language': track.language, 
+                  'value': i
+                });
+                track.oncuechange = function(e){
+                  if (root.__transcript !== undefined && root.__transcript !== null) {
+                    root.__transcript.setActiveCues(Object.keys(e.currentTarget.activeCues).map(function(key) { 
+                      return e.currentTarget.activeCues[key].id;
+                    }));
+                  }
+                };
+              }
+            }
+          }
+          root.set('__tracks', tracks);
+          root.$.controls.setTracks(tracks);
+
+          if (root.__transcript !== undefined && root.__transcript !== null) {
+            let complete = 0;
+            for (var i=0 ; i < tracks.length; i++) {
+              let itrack = tracks[i], track = root.__src.textTracks[i], loaded = itrack.cues !== undefined;
+              if(!loaded){
+                track.mode = 'showing';
+                let temp = setInterval(() => {
+                  if (track.cues.length > 0) {
+                    track.mode = 'hidden';
+                    itrack.cues = Object.keys(track.cues).map(function(key) { 
+                      return {
+                        "order": track.cues[key].id,
+                        "seek": track.cues[key].startTime,
+                        "start": root._convertTime(track.cues[key].startTime,root.__src.duration),
+                        "end": root._convertTime(track.cues[key].endTime,root.__src.duration), 
+                        "text": track.cues[key].text
+                      };
+                    });
+                    complete++;
+                    if (complete === tracks.length && root.__transcript !== null) {
+                      root.__transcript.setTracks(tracks);
+                      root.__transcript.setAttribute('selected-transcript',root.__selectedTrackId);
+                    }
+                    clearInterval(temp);
+                  }
+                },1);
+              }
+            }
+          }
+        });
+        // when transcript is ready associate it with the player
+        document.body.addEventListener('transcript-ready',function(e){
+          if((root.getAttribute('id') !== null && root.getAttribute('id') === e.detail.mediaId) || root === e.detail.media) {
+            root.__transcript = e.detail;
+            root.hasTranscript = true;
+            if (root.__tracks !== undefined) {
+              root.__transcript.setTracks(tracks);
+              root.$.controls.setTracks(tracks);
+            }
+            root.__transcript.addEventListener('cue-seek',function(e){
+              root.seek(e.detail.cue.seek);
+            });
+          }
+        });
+      },
+      /** 
+       * plays the media 
+       */
+      play: function(e){
+        let root = this;
+        root.__playing = true;
+        if (e === undefined || e.detail === root.$.playbutton) {
+          // while playing, update the slider and length
+          root.__playProgress = setInterval(() => {
+            root.__elapsed = root.__src.currentTime > 0 ? root.__src.currentTime : 0;
+            root.__status = root._convertTime(root.__src.currentTime,root.__src.duration) +'/'+ root._convertTime(root.__src.duration);
+            root.$.controls.setStatus(root.__status);
+            // if the video reaches the end and is not set to loop, stop
+            if(root.__elapsed === root.__duration && !root.loop){
+              root.__playing = false;
+              clearInterval(root.__playProgress);
+            }
+            
+            //updated buffered section of the slider
+            root.__buffered = root.__src.buffered.length > 0 ? root.__src.buffered.end(0) : root.__elapsed;
+          }, 1);
+          root.fire('a11y-player-playing',root);
+          root.__src.play();
+        }
+      },
+      /** 
+       * pauses the media 
+       */
+      pause: function(){
+        let root = this;
+        root.__playing = false;
+        root.__src.pause();
+
+        //stop updating the slider and length
+        clearInterval(root.__playProgress); 
+      },
+      /** 
+       * stops the media 
+       */
+      stop: function(){
+        this.pause();
+        this.seek(0);
+      },
+      /** 
+       * restarts the media 
+       */
+      restart: function(){
+        this.seek(0);
+        this.play();
+      },
+      /** 
+       * seeks media backward at a set increment
+       */
+      rewind: function(amt){
+        amt = amt !== undefined ? amt : 1;
+        this.seek(Math.max(this.__src.currentTime - amt,0));
+      },
+      /** 
+       * seeks media forward at a set increment
+       */
+      forward: function(amt){
+        amt = amt !== undefined ? amt : 1;
+        this.seek(Math.min(this.__src.currentTime + amt,this.__src.duration));
+      },
+      /** 
+       * seeks to a specific time 
+       */
+      seek: function(time){
+        let seekable = this.__src.seekable;
+        if (seekable.length > 0 && time >= seekable.start(0) && time <= seekable.end(0)) {
+          this.__src.currentTime = time;
+          this.__elapsed = time;
+          this.__length = this._convertTime(this.__src.currentTime,this.__src.duration) +'/'+ this._convertTime(this.__src.duration);
+          if (this.__resumePlaying) this.play();
+        }
+      },
+      /** 
+       * selects a specific track by index
+       */
+      selectTrack: function(index){
+        for(i in this.__src.textTracks) {
+          if (index == i) {
+            this.__src.textTracks[i].mode = 'showing';
+            this.__selectedTrack = this.__src.textTracks[i];
+            this.__selectedTrackId = i;
+          } else if (this.__src.textTracks[i] !== null) {
+            this.__src.textTracks[i].mode = 'hidden';
+          }
+        }
+        if (this.__transcript !== undefined && this.__transcript !== null && this.__transcript.tracks !== null) {
+          this.__transcript.setAttribute('selected-transcript',this.__selectedTrackId);
+        }
+      },
+      /** 
+       * toggles captions:
+       * toggleCC(true) to check the toggle, toggleCC(false) for unchecking, and toggleCC to toggle  
+       */
+      toggleCC: function(mode){
+        mode = mode === undefined ? !this.cc : mode;
+        this.cc = mode;
+        if (this.__selectedTrack !== undefined && mode == true) {
+          this.__selectedTrack.mode = 'showing';
+          this.$.video.textTracks.value = this.__selectedTrackId;
+        } else if (this.__selectedTrack !== undefined) {
+          this.__selectedTrack.mode = 'hidden';
+          this.$.video.textTracks.value = '';
+        }
+      },
+      /** 
+       * set volume of media
+       */
+      setVolume: function(value){
+        this.volume = value !== null ? value : 70;
+        this.__src.volume = this.volume !== null ? value/100 : 0.7;
+        this.muted = value === null || value === 0;
+      },
+      /** 
+       * set speed/playback rate of media
+       */
+      setPlaybackRate: function(value){
+        this.__src.playbackRate = value !== null ? value : 1;
+      },
+      /** 
+       * toggles autoplay:
+       * toggleAutoplay(true) to check the toggle, 
+       * toggleAutoplay(false) for unchecking, and 
+       * toggleAutoplay to toggle  
+       */
+      toggleAutoplay: function(mode){
+        mode = mode === undefined ? !this.muted : mode;
+        this.autoplay = mode;
+      },
+      /** 
+       * toggles looping:
+       * toggleLoop(true) to check the toggle, toggleLoop(false) for unchecking, and toggleLoop to toggle  
+       */
+      toggleLoop: function(mode){
+        mode = mode === undefined ? !this.loop : mode;
+        this.loop = mode;
+      },
+      /** 
+       * toggles mute:
+       * toggleMute(true) to check the toggle, 
+       * toggleMute(false) for unchecking, and 
+       * toggleMute to toggle  
+       */
+      toggleMute: function(mode){
+        mode = mode === undefined ? !this.muted : mode;
+        this.muted = mode;
+        this.__volume = this.muted ? 0 : Math.max(this.volume,10);
+        this.__src.volume = this.muted ? 0 : Math.max(this.volume/100,0.1);
+        this.__src.muted = this.muted;
+      },
+      /** 
+       * toggles sticky attribute:
+       * toggleSticky(true) to stick, toggleSticky(false) for unstick, and toggleSticky to toggle sticky 
+       */
+      toggleSticky: function(mode){
+        mode = mode === undefined ? !this.sticky : mode;
+        this.sticky = mode;
+        this.fire('player-sticky', this);
+      },
+      /** 
+       * toggles transcript:
+       * toggleTranscript(true) to check the toggle, toggleTranscript(false) for unchecking, and toggleTranscript to toggle  
+       */
+       toggleTranscript: function(mode){
+        mode = mode === undefined ? this.hideTranscript : mode;
+        this.hideTranscript = !mode;
+        if (this.__transcript !== undefined && this.__transcript !== null) {
+          this.fire('transcript-toggle',this);
+          this.__transcript.toggleHidden(this.hideTranscript);
+        }
+      },
+      /**
+       * determine which button was clicked and act accordingly 
+       */
+       _onControlsChanged: function(e){
+        let root = this, action = e.detail.label !== undefined ? e.detail.label : e.detail.id;
+        if (action === 'backward' || action === root.rewindLabel) {
+          root.rewind(root.__src.duration/20);
+        } else if (action === 'closed captions' || action === 'captions' || action === root.captionsLabel  || action === root.captionsMenuLabel) {
+          root.toggleCC();
+        } else if (action === 'transcript' || action === 'transcript-toggle' || action === root.transcriptLabel  || action === root.transcriptMenuLabel) {
+          root.toggleTranscript();
+        } else if (action === 'forward' || action === root.forwardLabel) {
+          root.forward(root.__src.duration/20);
+        } else if (action === 'full screen' || action === root.fullscreenLabel) {
+          screenfull.toggle(root);
+        } else if (action === 'loop' || action === root.loopLabel) {
+          root.toggleLoop();
+        } else if (action === 'mute' || action === 'unmute' || action === root.muteLabel || action === root.unmuteLabel ) {
+          root.toggleMute();
+        } else if (action === 'pause' || action === root.pauseLabel) {
+          root.pause();
+        } else if (action === 'play' || action === root.playLabel) {
+          root.play();
+        } else if (action === 'restart' || action === root.restartLabel) {
+          root.seek(0);
+          root.play();
+        } else if (action === 'speed' || action === root.speedLabel) {
+          root.setPlaybackRate(e.detail.value);
+        } else if (action === 'volume' || action === root.volumeLabel) {
+          root.setVolume(e.detail.value);
+        }
+      },
+      /**
+        * set play/pause button 
+        */
+      _convertTime: function(val,max){
+        max = max === undefined ? val : max;
+        let a = (val) => { return val < 10 ? '0' + val : val; }, 
+        b = (val,i,none) => { return max >= i ? a(Math.floor(val/i))+':' : none },
+        c = (val) => { return val < 100 ? val+'0' : val };
+        return b(val,3600,'')+b(val%3600,60,'00:')+a(Math.round(val%60));
+      }
+    });
+  </script>
+</dom-module>

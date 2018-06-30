@@ -41,7 +41,7 @@
       <h3>video-player for any address</h3>
       <demo-snippet>
         <template>
-          <video-player source="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm"></video-player>
+          <video-player sources='[{"src": "http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm"}]'></video-player>
         </template>
       </demo-snippet>
     </div>
@@ -61,9 +61,9 @@
         <template>
           <video-player source="https://vimeo.com/144218562" not-responsive width="400" height="200"></video-player>
           <video-player source="https://www.youtube.com/watch?v=o9RypkhGqrg" not-responsive></video-player>
-          <video-player source="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" not-responsive width="300" height="300"></video-player>
         </template>
       </demo-snippet>
     </div>
+    <video-player thumbnail="https://www.elmsln.org/sites/redesign/files/styles/square-profile-portrait/public/headshot.jpg?itok=_1HEhahr" tracks='[{"label":"English","kind":"subtitles","srclang":"en","src":"samples/stclair.vtt"}]' sources='[{"src":"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4","type":"video/mp4"}]'></video-player>
   </body>
 </html>

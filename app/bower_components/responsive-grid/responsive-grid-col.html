@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 
-<!--
+<!--    
 `responsive-grid-col`
 A column for the responsive grid
 
@@ -29,9 +29,10 @@ A column for the responsive grid
       :host:after {
         clear: both;
       }
-      :host #col-inner {
+      #col-inner {
         padding-left: 15px;
         padding-right: 15px;
+        @apply --responsive-grid-col-inner;
       }
       /* Hide Print-Only on Screen */
       @media screen {

@@ -19,13 +19,12 @@ A LRN element
         position: relative;
       }
     </style>
-      <a-scene embedded arjs="[[ar]]" style$="height:[[height]];width:[[width]];">
-        <a-entity id="entity" gltf-model$="[[source]]" position="0 0 0"></a-entity>
-        <a-sky color$="[[skyColor]]"></a-sky>
-        <a-marker-camera preset='hiro'></a-marker-camera>
-      </a-scene>
+    <a-scene id="scene" class="embedded" embedded arjs$="[[ar]]" style$="height:[[height]];width:[[width]];">
+      <a-sky color$="[[skyColor]]"></a-sky>
+      <a-marker-camera preset="hiro"></a-marker-camera>
+      <a-entity id="entity" gltf-model$="[[source]]" position="0 0 0"></a-entity>
+    </a-scene>
   </template>
-
   <script>
     Polymer({
 
@@ -72,35 +71,37 @@ A LRN element
          */
         x: {
           type: String,
-          value: '0'
+          value: '0',
         },
         /**
          * y position for the AR element.
          */
         y: {
           type: String,
-          value: '0'
+          value: '0',
         },
         /**
          * z position for the AR element.
          */
         z: {
           type: String,
-          value: '0'
+          value: '0',
         },
         /**
          * Generate a position object when coordinates change.
          */
         position: {
           type: Object,
-          computed: '_computePosition(x, y, z,width,height)',
-          observer: '_positionChanged'
+          computed: '_computePosition(x, y, z, width, height)',
+          observer: '_positionChanged',
         }
       },
       /**
-       * Ready.
+       * Attached.
        */
-      ready: function() {
+      attached: function () {
+        // ensure that this doesn't put full screen styles on the page!
+        this.$.scene.removeFullScreenStyles();
         let props = {
           'canScale': false,
           'canPosition': false,
@@ -111,19 +112,16 @@ A LRN element
             'icon': 'av:play-circle-filled',
             'color': 'amber',
             'groups': ['3D', 'Augmented reality'],
-            'handles': [
-              {
-                'type': '3d',
-                'source': 'source'
-              }
-            ],
+            'handles': [{
+              'type': '3d',
+              'source': 'source'
+            }],
             'meta': {
               'author': 'LRNWebComponents'
             }
           },
           'settings': {
-            'quick': [
-              {
+            'quick': [{
                 'property': 'height',
                 'title': 'height',
                 'description': 'height of the object',
@@ -142,8 +140,7 @@ A LRN element
                 'required': true,
               },
             ],
-            'configure': [
-              {
+            'configure': [{
                 'property': 'source',
                 'title': 'Source',
                 'description': 'The URL for this AR file.',
@@ -207,7 +204,7 @@ A LRN element
        * When position is updated, inject this into a-frame tag.
        */
       _positionChanged: function (position) {
-        this.$$('#entity').setAttribute('position', position);
+        this.$.entity.setAttribute('position', position);
       },
     });
   </script>

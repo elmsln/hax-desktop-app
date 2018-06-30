@@ -111,6 +111,32 @@ with the hax-body element which manages elements.
    * like a block-quote tag which uses slot to allow users to write whatever
    * they want inside the tag would NOT want to use this, otherwise the contents
    * would be lost.
+   * Another used saveOption is `unsetAttributes`. `unsetAttributes` is an Array
+   * which can be used to tell a hax-body save operation to NOT save certain
+   * attributes. The form of these is in the html style, NOT the javascript
+   * style of attribute definition. In this way, you can define non property
+   * based values that you require not saving. For example, the following
+   * would be a valid use of `unsetAttributes`:
+   * 'saveOptions': {
+   *   'unsetAttributes': [
+   *     'displayed-answers',
+   *     'data-some-value',
+   *     'id',
+   *     'colors'
+   *   ]
+   * },
+   *
+   * Specialized functions
+   * `preProcessHaxNodeToContent` - If you define this function on your element
+   * then it will run BEFORE the conversion to text. This can be used to do
+   * specialized processing that may not be standard prior to conversion to content.
+   *
+   * `postProcesshaxNodeToContent` - If you define this function on your element
+   * then it will run AFTER the node has been converted to Content and allows you
+   * to act upon the content even further. This could be to clean up / regex against
+   * the text certain patterns or to look for certain elements at the end of
+   * the conversion routine.
+   *
    */
   // ensure HAXPropertiesBehaviors exists
   window.HAXBehaviors = window.HAXBehaviors || {};
@@ -277,10 +303,10 @@ with the hax-body element which manages elements.
         // fire event so we know they have been set for the store to collect
         // only fire if we haven't already so multiple elements don't keep bubbling
         if (tag !== '' && typeof Polymer.HaxStore !== typeof undefined && typeof Polymer.HaxStore.instance !== typeof undefined && Polymer.HaxStore.instance != null && typeof Polymer.HaxStore.instance.elementList !== typeof undefined && typeof Polymer.HaxStore.instance.elementList[tag.toLowerCase()] === typeof undefined) {
-          this.fire('hax-register-properties', {'tag': tag.toLowerCase(), 'properties': props});
+          this.fire('hax-register-properties', { 'tag': tag.toLowerCase(), 'properties': props });
         }
-        else if (typeof Polymer.HaxStore !== typeof undefined && typeof Polymer.HaxStore.instance !== typeof undefined && Polymer.HaxStore.instance != null && typeof Polymer.HaxStore.instance.elementList !== typeof undefined  && typeof Polymer.HaxStore.instance.elementList[this.tagName.toLowerCase()] === typeof undefined) {
-          this.fire('hax-register-properties', {'tag': this.tagName.toLowerCase(), 'properties': props});
+        else if (typeof Polymer.HaxStore !== typeof undefined && typeof Polymer.HaxStore.instance !== typeof undefined && Polymer.HaxStore.instance != null && typeof Polymer.HaxStore.instance.elementList !== typeof undefined && typeof Polymer.HaxStore.instance.elementList[this.tagName.toLowerCase()] === typeof undefined) {
+          this.fire('hax-register-properties', { 'tag': this.tagName.toLowerCase(), 'properties': props });
         }
         // only set these when tag hasn't been force fed
         if (tag === '') {
@@ -298,7 +324,7 @@ with the hax-body element which manages elements.
     /**
      * Validate settings object.
      */
-    validateSetting: function(setting) {
+    validateSetting: function (setting) {
       // we don't have a property or slot so it's not valid.
       if (typeof setting.property === typeof undefined && typeof setting.slot === typeof undefined && typeof setting.attribute === typeof undefined) {
         return false;
@@ -349,7 +375,7 @@ with the hax-body element which manages elements.
     /**
      * Match convention for set.
      */
-    getHaxProperties: function() {
+    getHaxProperties: function () {
       return this.haxProperties;
     },
     /**
@@ -357,7 +383,7 @@ with the hax-body element which manages elements.
      * This allows for complex form building systems based on this data.
      * type is configure or advanced
      */
-    getHaxJSONSchema: function(type, haxProperties, target = this) {
+    getHaxJSONSchema: function (type, haxProperties, target = this) {
       if (typeof type === typeof undefined) {
         type = 'configure';
       }
@@ -372,14 +398,23 @@ with the hax-body element which manages elements.
         'type': 'object',
         'properties': {}
       };
-      schema.properties = this._getHaxJSONSchemaProperty(settings, target);
+      schema.properties = target._getHaxJSONSchemaProperty(settings, target);
+      // support post processing of schema in order to allow for really
+      // custom implementations that are highly dynamic in nature
+      schema = target.postProcessgetHaxJSONSchema(schema);
+      return schema;
+    },
+    /**
+     * Default postProcessgetHaxJSONSchema to be overridden.
+     */
+    postProcessgetHaxJSONSchema: function (schema) {
       return schema;
     },
     /**
      * Internal helper for getHaxJSONSchema to buiild the properties object
      * correctly with support for recursive nesting thx to objects / arrays.
      */
-    _getHaxJSONSchemaProperty: function(settings, target) {
+    _getHaxJSONSchemaProperty: function (settings, target) {
       var props = {};
       for (var value in settings) {
         if (settings.hasOwnProperty(value)) {
@@ -412,7 +447,7 @@ with the hax-body element which manages elements.
                     'type': 'number'
                   }
                 };
-              break;
+                break;
               case 'select':
                 slot = '';
                 if (typeof settings[value].options !== typeof undefined) {
@@ -428,7 +463,7 @@ with the hax-body element which manages elements.
                     'required': settings[value].required
                   }
                 };
-              break;
+                break;
               case 'textarea':
                 props[settings[value].property].component = {
                   'name': 'paper-textarea',
@@ -441,7 +476,7 @@ with the hax-body element which manages elements.
                     'char-counter': 'char-counter'
                   }
                 };
-              break;
+                break;
               case 'code-editor':
                 props[settings[value].property].component = {
                   'name': 'code-editor',
@@ -458,13 +493,13 @@ with the hax-body element which manages elements.
                     'className': 'hax-code-editor'
                   }
                 };
-              break;
+                break;
               case 'array':
                 props[settings[value].property].items = {
                   "type": "object",
-                  "properties": this._getHaxJSONSchemaProperty(settings[value].properties, target)
+                  "properties": target._getHaxJSONSchemaProperty(settings[value].properties, target)
                 }
-              break;
+                break;
               case 'textfield':
                 props[settings[value].property].component = {
                   'name': 'paper-input',
@@ -476,7 +511,7 @@ with the hax-body element which manages elements.
                     'auto-validate': 'auto-validate'
                   }
                 };
-              break;
+                break;
               case 'alt':
                 props[settings[value].property].component = {
                   'name': 'paper-input-flagged',
@@ -488,7 +523,7 @@ with the hax-body element which manages elements.
                     'auto-validate': 'auto-validate'
                   }
                 };
-              break;
+                break;
               case 'colorpicker':
                 props[settings[value].property].component = {
                   'name': 'paper-swatch-picker',
@@ -497,7 +532,7 @@ with the hax-body element which manages elements.
                     'required': settings[value].required
                   }
                 };
-              break;
+                break;
               case 'iconpicker':
                 props[settings[value].property].component = {
                   'name': 'paper-icon-picker',
@@ -510,7 +545,7 @@ with the hax-body element which manages elements.
                 if (settings[value].options.constructor === Array) {
                   props[settings[value].property].component.properties.iconList = settings[value].options;
                 }
-              break;
+                break;
               case 'datepicker':
                 props[settings[value].property].component = {
                   'name': 'app-datepicker',
@@ -520,7 +555,7 @@ with the hax-body element which manages elements.
                     'autoUpdateDate': true,
                   }
                 };
-              break;
+                break;
             }
           }
           else if (typeof settings[value].attribute !== typeof undefined) {
@@ -563,7 +598,7 @@ with the hax-body element which manages elements.
                     'type': 'number'
                   }
                 };
-              break;
+                break;
               case 'select':
                 slot = '';
                 if (typeof settings[value].options !== typeof undefined) {
@@ -579,7 +614,7 @@ with the hax-body element which manages elements.
                     'required': settings[value].required
                   }
                 };
-              break;
+                break;
               case 'textarea':
                 props[settings[value].attribute].component = {
                   'name': 'paper-textarea',
@@ -592,7 +627,7 @@ with the hax-body element which manages elements.
                     'char-counter': 'char-counter'
                   }
                 };
-              break;
+                break;
               case 'code-editor':
                 props[settings[value].attribute].component = {
                   'name': 'code-editor',
@@ -609,7 +644,7 @@ with the hax-body element which manages elements.
                     'className': 'hax-code-editor'
                   }
                 };
-              break;
+                break;
               case 'textfield':
                 props[settings[value].attribute].component = {
                   'name': 'paper-input',
@@ -621,7 +656,7 @@ with the hax-body element which manages elements.
                     'auto-validate': 'auto-validate'
                   }
                 };
-              break;
+                break;
               case 'alt':
                 props[settings[value].attribute].component = {
                   'name': 'paper-input-flagged',
@@ -633,7 +668,7 @@ with the hax-body element which manages elements.
                     'auto-validate': 'auto-validate'
                   }
                 };
-              break;
+                break;
               case 'colorpicker':
                 props[settings[value].attribute].component = {
                   'name': 'paper-swatch-picker',
@@ -642,7 +677,7 @@ with the hax-body element which manages elements.
                     'required': settings[value].required
                   }
                 };
-              break;
+                break;
             }
           }
           else {
@@ -689,17 +724,17 @@ with the hax-body element which manages elements.
     /**
      * Convert input method to schedma type
      */
-    getHaxJSONSchemaType: function(inputMethod) {
+    getHaxJSONSchemaType: function (inputMethod) {
       var methods = this.validHAXPropertyInputMethod();
       if (methods.includes(inputMethod)) {
         switch (inputMethod) {
           case 'flipboolean':
           case 'boolean':
             return 'boolean';
-          break;
+            break;
           case 'number':
             return 'number';
-          break;
+            break;
           case 'select':
           case 'textarea':
           case 'colorpicker':
@@ -708,27 +743,27 @@ with the hax-body element which manages elements.
           case 'textfield':
           case 'alt':
             return 'string';
-          break;
+            break;
           case 'array':
             return 'array';
-          break;
+            break;
           default:
             return 'string';
-          break;
+            break;
         }
       }
     },
     /**
      * List valid input methods.
      */
-    validHAXPropertyInputMethod: function() {
+    validHAXPropertyInputMethod: function () {
       var methods = ['flipboolean', 'boolean', 'select', 'textfield', 'textarea', 'datepicker', 'colorpicker', 'iconpicker', 'alt', 'number', 'code-editor', 'array'];
       return methods;
     },
     /**
      * Return a haxProperties prototype / example structure
      */
-    prototypeHaxProperties: function() {
+    prototypeHaxProperties: function () {
       // example properties valid for HAX context menu.
       let props = {
         'api': '1',
@@ -826,6 +861,10 @@ with the hax-body element which manages elements.
         },
         'saveOptions': {
           'wipeSlot': false,
+          'unsetAttributes': [
+            'end-point',
+            'secondary-color'
+          ]
         },
       };
       return props;

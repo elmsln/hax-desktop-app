@@ -30,14 +30,32 @@ required for populating input.
         margin: 0;
         height: 40px;
       }
+      .human-name {
+        font-size: 16px;
+        margin: -36px 0px 0 38px;
+        line-height: 16px;
+        background-color: black;
+        color: white;
+        padding: 10px;
+        font-family: serif;
+        width: -webkit-fit-content;
+        width:  -moz-max-content;
+        width: fit-content;
+      }
     </style>
+    <div class="human-name">[[humanName]]</div>
     <hax-toolbar hax-properties="[[haxProperties]]" size="{{ceSize}}">
       <slot></slot>
       <hax-context-item
         slot="primary"
-        icon="settings"
+        icon="icons:settings"
         label="Settings"
         event-name="hax-manager-configure" hidden$="[[!__hasSettingsForm]]"></hax-context-item>
+      <hax-context-item
+        slot="primary"
+        icon="icons:view-quilt"
+        label="[[__parentName]]"
+        event-name="hax-manager-configure-container" hidden$="[[!__hasParentSettingsForm]]"></hax-context-item>
     </hax-toolbar>
   </template>
 
@@ -61,6 +79,12 @@ required for populating input.
           type: Object,
           value: {},
           observer: '_haxPropertiesChanged',
+        },
+        /**
+         * Active Name from the properties
+         */
+        humanName: {
+          type: String,
         },
       },
       /**
@@ -101,6 +125,32 @@ required for populating input.
           else {
             this.__hasSettingsForm = false;
           }
+          this.__hasParentSettingsForm = false;
+          // test for parent being different from child
+          if (Polymer.HaxStore.instance.activeContainerNode !== Polymer.HaxStore.instance.activeNode){
+            this.__hasParentSettingsForm = true;
+            switch (Polymer.HaxStore.instance.activeContainerNode.tagName) {
+              case 'P':
+              case 'UL':
+              case 'OL':
+              case 'DIV':
+                this.__parentName = 'Text block settings';
+              break;
+              case 'GRID-PLATE':
+                this.__parentName = 'Layout settings';
+              break;
+              default:
+                this.__parentName = Polymer.HaxStore.instance.activeContainerNode.tagName.replace('-', ' ').toLowerCase(); + ' settings';
+              break;
+            }
+          }
+          // generate a human name for this
+          if (typeof newValue.gizmo.title === typeof undefined) {
+            this.humanName = Polymer.HaxStore.instance.activeNode.tagName.replace('-', ' ').toLowerCase();
+          }
+          else {
+            this.humanName = newValue.gizmo.title;
+          }
           var item;
           // @todo kick stuff into the local dom as options
           for (i = 0; i < settings.length; i++) {
@@ -109,7 +159,7 @@ required for populating input.
             item = document.createElement('hax-context-item');
             item.eventName = 'hax-edit-property';
             item.label = setting.title;
-            item.slot = 'primary';
+            item.setAttribute('slot', 'primary');
             item.options = setting.options;
             item.icon = setting.icon;
             item.inputMethod = setting.inputMethod;

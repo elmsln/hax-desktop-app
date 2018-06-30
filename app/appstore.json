@@ -3,101 +3,16 @@
   "apps": [
     {
       "details": {
-        "title": "Local files",
-        "icon": "perm-media",
-        "color": "green",
-        "author": "LRNWebComponents",
-        "description": "Local file system",
-        "status": "alpha",
-        "tags": ["media", "local"]
-      },
-      "connection": {
-        "protocol": "file",
-        "url": "/Users/bto108/Documents/git/elmsln/LRNWebComponents/hax-desktop-app/app",
-        "operations": {
-          "browse": {
-            "method": "GET",
-            "endPoint": "hax-backend.js",
-            "pagination": {
-              "style": "link",
-              "props": {
-                "first": "page.first",
-                "next": "page.next",
-                "previous": "page.previous",
-                "last": "page.last"
-              }
-            },
-            "search": {
-              "title": {
-                "title": "Search",
-                "type": "string"
-              }
-            },
-            "resultMap": {
-              "defaultGizmoType": "image",
-              "items": "list",
-              "preview": {
-                "title": "title",
-                "details": "body",
-                "image": "field_image.url",
-                "id": "uuid"
-              },
-              "gizmo": {
-                "source": "field_image.url",
-                "id": "uuid",
-                "title": "title",
-                "caption": "body.value",
-                "description": "body.value",
-                "citation": "field_citation.value"
-              }
-            }
-          },
-          "add": {
-            "method": "POST",
-            "endPoint": "hax-backend.json",
-            "acceptsGizmoTypes": [
-              "image",
-              "video",
-              "audio",
-              "pdf",
-              "svg",
-              "doc",
-              "document",
-              "file",
-              "xml",
-              "csv",
-              "xls",
-              "xlsx",
-              "JPG",
-              "GIF",
-              "JPEG",
-              "doc",
-              "docx",
-              "htm",
-              "html",
-              "*"
-            ],
-            "resultMap": {
-              "item": "data.file",
-              "defaultGizmoType": "image",
-              "gizmo": {
-                "source": "url",
-                "id": "uuid"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "details": {
         "title": "Youtube",
         "icon": "av:play-arrow",
         "color": "red",
         "author": "Google, Youtube LLC",
         "description": "The most popular online video sharing and remix site.",
         "status": "available",
-        "tags": ["video", "crowdsourced"]
+        "tags": [
+          "video",
+          "crowdsourced"
+        ]
       },
       "connection": {
         "protocol": "https",
@@ -128,9 +43,6 @@
               "type": "video",
               "maxResults": "20"
             },
-
-              "url": "https://www.youtube.com/watch?v=",
-
             "resultMap": {
               "defaultGizmoType": "video",
               "items": "items",
@@ -161,7 +73,10 @@
         "author": "Vimeo Inc.",
         "description": "A high quality video sharing community.",
         "status": "available",
-        "tags": ["video", "crowdsourced"]
+        "tags": [
+          "video",
+          "crowdsourced"
+        ]
       },
       "connection": {
         "protocol": "https",
@@ -218,260 +133,6 @@
     },
     {
       "details": {
-        "title": "NASA",
-        "icon": "places:all-inclusive",
-        "color": "blue",
-        "author": "US Government",
-        "description": "The cozmos through one simple API.",
-        "status": "available",
-        "tags": ["images", "government", "space"]
-      },
-      "connection": {
-        "protocol": "https",
-        "url": "images-api.nasa.gov",
-        "operations": {
-          "browse": {
-            "method": "GET",
-            "endPoint": "search",
-            "pagination": {
-              "style": "page",
-              "props": {
-                "page": "page"
-              }
-            },
-            "search": {
-              "q": {
-                "title": "Search",
-                "type": "string"
-              }
-            },
-            "data": {
-              "media_type": "image"
-            },
-            "resultMap": {
-              "defaultGizmoType": "image",
-              "items": "collection.items",
-              "preview": {
-                "title": "data.0.title",
-                "details": "data.0.description",
-                "image": "links.0.href",
-                "id": "links.0.href"
-              },
-              "gizmo": {
-                "id": "links.0.href",
-                "source": "links.0.href",
-                "title": "data.0.title",
-                "caption": "data.0.description",
-                "description": "data.0.description",
-                "citation": "data.0.photographer",
-                "type": "data.0.media_type"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "details": {
-        "title": "Giphy",
-        "icon": "gif",
-        "color": "green",
-        "author": "Giphy",
-        "description": "Crowd sourced memes via animated gifs.",
-        "status": "available",
-        "tags": ["gif", "crowdsourced", "meme"]
-      },
-      "connection": {
-        "protocol": "https",
-        "url": "api.giphy.com",
-        "data": {
-          "api_key": "mr3blNkTT0HeTvtyPPT4TIftqUSgyHoO"
-        },
-        "operations": {
-          "browse": {
-            "method": "GET",
-            "endPoint": "v1/gifs/search",
-            "pagination": {
-              "style": "offset",
-              "props": {
-                "offset": "pagination.offset",
-                "total": "pagination.total_count",
-                "count": "pagination.count"
-              }
-            },
-            "search": {
-              "q": {
-                "title": "Search",
-                "type": "string"
-              },
-              "rating": {
-                "title": "Rating",
-                "type": "string",
-                "component": {
-                  "name": "dropdown-select",
-                  "slot": "<paper-item value='Y'>Y</paper-item><paper-item value='G'>G</paper-item><paper-item value='PG'>PG</paper-item><paper-item value='PG-13'>PG-13</paper-item><paper-item value='R'>R</paper-item>"
-                }
-              },
-              "lang": {
-                "title": "Language",
-                "type": "string",
-                "component": {
-                  "name": "dropdown-select",
-                  "slot": "<paper-item value='en'>en</paper-item><paper-item value='es'>es</paper-item><paper-item value='pt'>pt</paper-item><paper-item value='id'>id</paper-item><paper-item value='fr'>fr</paper-item><paper-item value='ar'>ar</paper-item><paper-item value='tr'>tr</paper-item><paper-item value='th'>th</paper-item><paper-item value='vi'>vi</paper-item><paper-item value='de'>de</paper-item><paper-item value='it'>it</paper-item><paper-item value='ja'>ja</paper-item><paper-item value='zh-CN'>zh-CN</paper-item><paper-item value='zh-TW'>zh-TW</paper-item><paper-item value='ru'>ru</paper-item><paper-item value='ko'>ko</paper-item><paper-item value='pl'>pl</paper-item><paper-item value='nl'>nl</paper-item><paper-item value='ro'>ro</paper-item><paper-item value='hu'>hu</paper-item><paper-item value='sv'>sv</paper-item><paper-item value='cs'>cs</paper-item><paper-item value='hi'>hi</paper-item><paper-item value='bn'>bn</paper-item><paper-item value='da'>da</paper-item><paper-item value='fa'>fa</paper-item><paper-item value='tl'>tl</paper-item><paper-item value='fi'>fi</paper-item><paper-item value='iw'>iw</paper-item><paper-item value='ms'>ms</paper-item><paper-item value='no'>no</paper-item><paper-item value='uk'>uk</paper-item>"
-                }
-              }
-            },
-            "data": {
-              "limit": "20",
-              "lang": "en"
-            },
-            "resultMap": {
-              "defaultGizmoType": "image",
-              "items": "data",
-              "preview": {
-                "title": "title",
-                "details": "description",
-                "image": "images.preview_gif.url",
-                "id": "id"
-              },
-              "gizmo": {
-                "source": "images.original.url",
-                "source2": "images.480w_still.url",
-                "id": "id",
-                "title": "title",
-                "alt": "title",
-                "caption": "user.display_name",
-                "citation": "user.display_name"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "details": {
-        "title": "Unsplash",
-        "icon": "image:collections",
-        "color": "grey",
-        "author": "Unsplash",
-        "description": "Crowd sourced, open photos",
-        "status": "available",
-        "tags": ["images", "crowdsourced", "cc"]
-      },
-      "connection": {
-        "protocol": "https",
-        "url": "api.unsplash.com",
-        "data": {
-          "client_id": "0e1fa3a203724415c10c03581e8db8a43e8bc8906ad934e0f321d28be16281ff"
-        },
-        "operations": {
-          "browse": {
-            "method": "GET",
-            "endPoint": "search/photos",
-            "pagination": {
-              "style": "link",
-              "props": {
-                "first": "paging.first",
-                "next": "paging.next",
-                "previous": "paging.previous",
-                "last": "paging.last"
-              }
-            },
-            "search": {
-              "query": {
-                "title": "Search",
-                "type": "string"
-              }
-            },
-            "data": {
-            },
-            "resultMap": {
-              "defaultGizmoType": "image",
-              "items": "results",
-              "preview": {
-                "title": "",
-                "details": "description",
-                "image": "urls.thumb",
-                "id": "id"
-              },
-              "gizmo": {
-                "id": "id",
-                "source": "urls.regular",
-                "alt": "description",
-                "caption": "description",
-                "citation": "user.name"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "details": {
-        "title": "Sketchfab",
-        "icon": "icons:3d-rotation",
-        "color": "purple",
-        "author": "Sketchfab",
-        "description": "3D sharing community.",
-        "status": "available",
-        "rating": "0",
-        "tags": ["3D", "creative commons", "crowdsourced"]
-      },
-      "connection": {
-        "protocol": "https",
-        "url": "api.sketchfab.com",
-        "data": {
-          "type": "models"
-        },
-        "operations": {
-          "browse": {
-            "method": "GET",
-            "endPoint": "v3/search",
-            "pagination": {
-              "style": "page",
-              "props": {
-                "per_page": "photos.perpage",
-                "total_pages": "photos.pages",
-                "page": "photos.page"
-              }
-            },
-            "search": {
-              "q": {
-                "title": "Search",
-                "type": "string"
-              },
-              "license": {
-                "title": "License type",
-                "type": "string",
-                "value": "",
-                "component": {
-                  "name": "dropdown-select",
-                  "valueProperty": "value",
-                  "slot": "<paper-item value=''>Any</paper-item><paper-item value='by'>Attribution</paper-item><paper-item value='by-sa'>Attribution ShareAlike</paper-item><paper-item value='by-nd'>Attribution NoDerivatives</paper-item><paper-item value='by-nc'>Attribution-NonCommercial</paper-item><paper-item value='by-nc-sa'>Attribution NonCommercial ShareAlike</paper-item><paper-item value='by-nc-nd'>Attribution NonCommercial NoDerivatives</paper-item><paper-item value='cc0'>Public Domain Dedication (CC0)</paper-item>"
-                }
-              }
-            },
-            "resultMap": {
-              "defaultGizmoType": "video",
-              "items": "results",
-              "preview": {
-                "title": "name",
-                "details": "description._content",
-                "image": "thumbnails.images.2.url",
-                "id": "uid"
-              },
-              "gizmo": {
-                "title": "name",
-                "source": "embedUrl",
-                "alt": "description"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      "details": {
         "title": "Flickr",
         "icon": "image:collections",
         "color": "pink",
@@ -479,7 +140,11 @@
         "description": "The original photo sharing platform on the web.",
         "status": "available",
         "rating": "0",
-        "tags": ["images", "creative commons", "crowdsourced"]
+        "tags": [
+          "images",
+          "creative commons",
+          "crowdsourced"
+        ]
       },
       "connection": {
         "protocol": "https",
@@ -554,13 +219,427 @@
     },
     {
       "details": {
+        "title": "NASA",
+        "icon": "places:all-inclusive",
+        "color": "blue",
+        "author": "US Government",
+        "description": "The cozmos through one simple API.",
+        "status": "available",
+        "tags": [
+          "images",
+          "government",
+          "space"
+        ]
+      },
+      "connection": {
+        "protocol": "https",
+        "url": "images-api.nasa.gov",
+        "operations": {
+          "browse": {
+            "method": "GET",
+            "endPoint": "search",
+            "pagination": {
+              "style": "page",
+              "props": {
+                "page": "page"
+              }
+            },
+            "search": {
+              "q": {
+                "title": "Search",
+                "type": "string"
+              }
+            },
+            "data": {
+              "media_type": "image"
+            },
+            "resultMap": {
+              "defaultGizmoType": "image",
+              "items": "collection.items",
+              "preview": {
+                "title": "data.0.title",
+                "details": "data.0.description",
+                "image": "links.0.href",
+                "id": "links.0.href"
+              },
+              "gizmo": {
+                "id": "links.0.href",
+                "source": "links.0.href",
+                "title": "data.0.title",
+                "caption": "data.0.description",
+                "description": "data.0.description",
+                "citation": "data.0.photographer",
+                "type": "data.0.media_type"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "details": {
+        "title": "Giphy",
+        "icon": "gif",
+        "color": "green",
+        "author": "Giphy",
+        "description": "Crowd sourced memes via animated gifs.",
+        "status": "available",
+        "tags": [
+          "gif",
+          "crowdsourced",
+          "meme"
+        ]
+      },
+      "connection": {
+        "protocol": "https",
+        "url": "api.giphy.com",
+        "data": {
+          "api_key": "mr3blNkTT0HeTvtyPPT4TIftqUSgyHoO"
+        },
+        "operations": {
+          "browse": {
+            "method": "GET",
+            "endPoint": "v1/gifs/search",
+            "pagination": {
+              "style": "offset",
+              "props": {
+                "offset": "pagination.offset",
+                "total": "pagination.total_count",
+                "count": "pagination.count"
+              }
+            },
+            "search": {
+              "q": {
+                "title": "Search",
+                "type": "string"
+              },
+              "rating": {
+                "title": "Rating",
+                "type": "string",
+                "component": {
+                  "name": "dropdown-select",
+                  "slot": "<paper-item value='Y'>Y</paper-item><paper-item value='G'>G</paper-item><paper-item value='PG'>PG</paper-item><paper-item value='PG-13'>PG-13</paper-item><paper-item value='R'>R</paper-item>"
+                }
+              },
+              "lang": {
+                "title": "Language",
+                "type": "string",
+                "component": {
+                  "name": "dropdown-select",
+                  "slot": "<paper-item value='en'>en</paper-item><paper-item value='es'>es</paper-item><paper-item value='pt'>pt</paper-item><paper-item value='id'>id</paper-item><paper-item value='fr'>fr</paper-item><paper-item value='ar'>ar</paper-item><paper-item value='tr'>tr</paper-item><paper-item value='th'>th</paper-item><paper-item value='vi'>vi</paper-item><paper-item value='de'>de</paper-item><paper-item value='it'>it</paper-item><paper-item value='ja'>ja</paper-item><paper-item value='zh-CN'>zh-CN</paper-item><paper-item value='zh-TW'>zh-TW</paper-item><paper-item value='ru'>ru</paper-item><paper-item value='ko'>ko</paper-item><paper-item value='pl'>pl</paper-item><paper-item value='nl'>nl</paper-item><paper-item value='ro'>ro</paper-item><paper-item value='hu'>hu</paper-item><paper-item value='sv'>sv</paper-item><paper-item value='cs'>cs</paper-item><paper-item value='hi'>hi</paper-item><paper-item value='bn'>bn</paper-item><paper-item value='da'>da</paper-item><paper-item value='fa'>fa</paper-item><paper-item value='tl'>tl</paper-item><paper-item value='fi'>fi</paper-item><paper-item value='iw'>iw</paper-item><paper-item value='ms'>ms</paper-item><paper-item value='no'>no</paper-item><paper-item value='uk'>uk</paper-item>"
+                }
+              }
+            },
+            "data": {
+              "limit": "20",
+              "lang": "en"
+            },
+            "resultMap": {
+              "defaultGizmoType": "image",
+              "items": "data",
+              "preview": {
+                "title": "title",
+                "details": "description",
+                "image": "images.preview_gif.url",
+                "id": "id"
+              },
+              "gizmo": {
+                "source": "images.original.url",
+                "source2": "images.480w_still.url",
+                "id": "id",
+                "title": "title",
+                "alt": "title",
+                "caption": "user.display_name",
+                "citation": "user.display_name"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "details": {
+        "title": "Google Poly",
+        "icon": "icons:3d-rotation",
+        "color": "red",
+        "author": "Google",
+        "description": "Google 3D object sharing service",
+        "status": "available",
+        "tags": [
+          "3D",
+          "creative commons",
+          "crowdsourced"
+        ]
+      },
+      "connection": {
+        "protocol": "https",
+        "url": "poly.googleapis.com/v1",
+        "data": {
+          "key": "AIzaSyDiSvloa49gHUJG0YAt3Ys_I6IEoiscPUM"
+        },
+        "operations": {
+          "browse": {
+            "method": "GET",
+            "endPoint": "assets",
+            "pagination": {
+              "style": "page",
+              "props": {
+                "previous": "prevPageToken",
+                "next": "nextPageToken",
+                "total_items": "pageInfo.totalResults"
+              }
+            },
+            "search": {
+              "keywords": {
+                "title": "Search",
+                "type": "string"
+              },
+              "category": {
+                "title": "Category",
+                "type": "string",
+                "value": "",
+                "component": {
+                  "name": "dropdown-select",
+                  "valueProperty": "value",
+                  "slot": "<paper-item value=''>Any</paper-item><paper-item value='animals'>Animals</paper-item><paper-item value='architecture'>Architecture</paper-item><paper-item value='art'>Art</paper-item><paper-item value='food'>Food</paper-item><paper-item value='nature'>Nature</paper-item><paper-item value='objects'>Objects</paper-item><paper-item value='people'>People</paper-item><paper-item value='scenes'>Scenes</paper-item><paper-item value='technology'>Technology</paper-item><paper-item value='transport'>Transport</paper-item>"
+                }
+              }
+            },
+            "data": {
+              "pageSize": "20"
+            },
+            "resultMap": {
+              "defaultGizmoType": "video",
+              "items": "assets",
+              "preview": {
+                "title": "displayName",
+                "details": "description",
+                "image": "thumbnail.url",
+                "id": "name"
+              },
+              "gizmo": {
+                "title": "displayName",
+                "description": "description",
+                "id": {
+                  "property": "name",
+                  "op": "split",
+                  "delimiter": "/",
+                  "position": "1"
+                },
+                "image": "thumbnail.url",
+                "_url_source": "https://poly.google.com/view/<%= id %>/embed",
+                "caption": "description",
+                "citation": "authorName",
+                "license": "license"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "details": {
+        "title": "Sketchfab",
+        "icon": "icons:3d-rotation",
+        "color": "purple",
+        "author": "Sketchfab",
+        "description": "3D sharing community.",
+        "status": "available",
+        "rating": "0",
+        "tags": [
+          "3D",
+          "creative commons",
+          "crowdsourced"
+        ]
+      },
+      "connection": {
+        "protocol": "https",
+        "url": "api.sketchfab.com",
+        "data": {
+          "type": "models"
+        },
+        "operations": {
+          "browse": {
+            "method": "GET",
+            "endPoint": "v3/search",
+            "pagination": {
+              "style": "page",
+              "props": {
+                "per_page": "photos.perpage",
+                "total_pages": "photos.pages",
+                "page": "photos.page"
+              }
+            },
+            "search": {
+              "q": {
+                "title": "Search",
+                "type": "string"
+              },
+              "license": {
+                "title": "License type",
+                "type": "string",
+                "value": "",
+                "component": {
+                  "name": "dropdown-select",
+                  "valueProperty": "value",
+                  "slot": "<paper-item value=''>Any</paper-item><paper-item value='by'>Attribution</paper-item><paper-item value='by-sa'>Attribution ShareAlike</paper-item><paper-item value='by-nd'>Attribution NoDerivatives</paper-item><paper-item value='by-nc'>Attribution-NonCommercial</paper-item><paper-item value='by-nc-sa'>Attribution NonCommercial ShareAlike</paper-item><paper-item value='by-nc-nd'>Attribution NonCommercial NoDerivatives</paper-item><paper-item value='cc0'>Public Domain Dedication (CC0)</paper-item>"
+                }
+              }
+            },
+            "resultMap": {
+              "defaultGizmoType": "video",
+              "items": "results",
+              "preview": {
+                "title": "name",
+                "details": "description._content",
+                "image": "thumbnails.images.2.url",
+                "id": "uid"
+              },
+              "gizmo": {
+                "title": "name",
+                "source": "embedUrl",
+                "alt": "description"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "details": {
+        "title": "Meme generator",
+        "icon": "android",
+        "color": "blue",
+        "author": "Meme generator",
+        "description": "A search engine of popular memes.",
+        "status": "available",
+        "tags": [
+          "picture",
+          "crowdsourced",
+          "image",
+          "meme"
+        ]
+      },
+      "connection": {
+        "protocol": "http",
+        "url": "version1.api.memegenerator.net",
+        "data": {
+          "apiKey": "e7fbcd7f-8d76-4513-9698-e20de4362d99"
+        },
+        "operations": {
+          "browse": {
+            "method": "GET",
+            "endPoint": "Generators_Search",
+            "pagination": {
+              "style": "page",
+              "props": {
+                "previous": "prevPageToken",
+                "next": "nextPageToken",
+                "total_items": "pageInfo.totalResults"
+              }
+            },
+            "search": {
+              "q": {
+                "title": "Search",
+                "type": "string"
+              }
+            },
+            "data": {
+              "pageIndex": "0",
+              "pageSize": "20"
+            },
+            "resultMap": {
+              "defaultGizmoType": "image",
+              "items": "result",
+              "preview": {
+                "title": "displayName",
+                "details": "",
+                "image": "imageUrl",
+                "id": "imageID"
+              },
+              "gizmo": {
+                "title": "displayName",
+                "id": "imageID",
+                "source": "imageUrl"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "details": {
+        "title": "Unsplash",
+        "icon": "image:collections",
+        "color": "grey",
+        "author": "Unsplash",
+        "description": "Crowd sourced, open photos",
+        "status": "available",
+        "tags": [
+          "images",
+          "crowdsourced",
+          "cc"
+        ]
+      },
+      "connection": {
+        "protocol": "https",
+        "url": "api.unsplash.com",
+        "data": {
+          "client_id": "0e1fa3a203724415c10c03581e8db8a43e8bc8906ad934e0f321d28be16281ff"
+        },
+        "operations": {
+          "browse": {
+            "method": "GET",
+            "endPoint": "search/photos",
+            "pagination": {
+              "style": "link",
+              "props": {
+                "first": "paging.first",
+                "next": "paging.next",
+                "previous": "paging.previous",
+                "last": "paging.last"
+              }
+            },
+            "search": {
+              "query": {
+                "title": "Search",
+                "type": "string"
+              }
+            },
+            "data": {},
+            "resultMap": {
+              "defaultGizmoType": "image",
+              "items": "results",
+              "preview": {
+                "title": "tags.0.title",
+                "details": "description",
+                "image": "urls.thumb",
+                "id": "id"
+              },
+              "gizmo": {
+                "id": "id",
+                "source": "urls.regular",
+                "alt": "description",
+                "caption": "description",
+                "citation": "user.name"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "details": {
         "title": "Dailymotion",
         "icon": "av:play-circle-filled",
         "color": "blue",
         "author": "Dailymotion",
         "description": "A crowdsourced video platform that is ad supported.",
         "status": "available",
-        "tags": ["video", "crowdsourced"]
+        "tags": [
+          "video",
+          "crowdsourced"
+        ]
       },
       "connection": {
         "protocol": "https",
@@ -584,11 +663,11 @@
               }
             },
             "data": {
-              "fields":"description,embed_url,thumbnail_240_url,title,id",
-              "no_live":"1",
-              "ssl_assets":"true",
-              "sort":"relevance",
-              "limit":"20"
+              "fields": "description,embed_url,thumbnail_240_url,title,id",
+              "no_live": "1",
+              "ssl_assets": "true",
+              "sort": "relevance",
+              "limit": "20"
             },
             "resultMap": {
               "defaultGizmoType": "video",
@@ -619,7 +698,10 @@
         "author": "Pixabay",
         "description": "Pixabay open image community",
         "status": "available",
-        "tags": ["images", "crowdsourced"]
+        "tags": [
+          "images",
+          "crowdsourced"
+        ]
       },
       "connection": {
         "protocol": "https",
@@ -670,6 +752,74 @@
     },
     {
       "details": {
+        "title": "CC Mixter",
+        "icon": "av:library-music",
+        "color": "purple",
+        "author": "CC Mixter",
+        "description": "User submitted audio files and music.",
+        "status": "available",
+        "tags": [
+          "audio",
+          "crowdsourced"
+        ]
+      },
+      "connection": {
+        "protocol": "http",
+        "url": "ccmixter.org",
+        "data": {
+          "format": "json",
+          "sort": "name",
+          "limit": "20"
+        },
+        "operations": {
+          "browse": {
+            "method": "GET",
+            "endPoint": "api/query",
+            "pagination": {
+              "style": "link",
+              "props": {
+                "first": "paging.first",
+                "next": "paging.next",
+                "previous": "paging.previous",
+                "last": "paging.last"
+              }
+            },
+            "search": {
+              "tags": {
+                "title": "Search",
+                "type": "string"
+              }
+            },
+            "data": {
+              "direction": "asc",
+              "sort": "alphabetical",
+              "filter": "CC",
+              "per_page": "20"
+            },
+            "resultMap": {
+              "defaultGizmoType": "audio",
+              "items": "",
+              "preview": {
+                "title": "upload_name",
+                "details": "upload_description_plain",
+                "image": "license_logo_url",
+                "id": "upload_id"
+              },
+              "gizmo": {
+                "source": "files.0.download_url",
+                "id": "upload_id",
+                "title": "upload_name",
+                "caption": "upload_description_plain",
+                "description": "upload_description_plain",
+                "citation": "license_name"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "details": {
         "title": "Codepen.io",
         "icon": "code",
         "color": "green",
@@ -677,7 +827,13 @@
         "description": "HTML / CSS / JS sharing community",
         "status": "available",
         "rating": "0",
-        "tags": ["code", "development", "html", "js", "crowdsourced"]
+        "tags": [
+          "code",
+          "development",
+          "html",
+          "js",
+          "crowdsourced"
+        ]
       },
       "connection": {
         "protocol": "https",
@@ -721,6 +877,67 @@
           }
         }
       }
+    },
+    {
+      "details": {
+        "title": "Wikipedia",
+        "icon": "account-balance",
+        "color": "grey",
+        "author": "Wikimedia",
+        "description": "Encyclopedia of the world.",
+        "status": "available",
+        "tags": [
+          "content",
+          "encyclopedia",
+          "wiki"
+        ]
+      },
+      "connection": {
+        "protocol": "https",
+        "url": "en.wikipedia.org",
+        "data": {
+          "action": "query",
+          "list": "search",
+          "format": "json",
+          "origin": "*"
+        },
+        "operations": {
+          "browse": {
+            "method": "GET",
+            "endPoint": "w\/api.php",
+            "pagination": {
+              "style": "offset",
+              "props": {
+                "offset": "sroffset"
+              }
+            },
+            "search": {
+              "srsearch": {
+                "title": "Search",
+                "type": "string"
+              }
+            },
+            "data": {},
+            "resultMap": {
+              "image": "https://en.wikipedia.org/static/images/project-logos/enwiki.png",
+              "defaultGizmoType": "content",
+              "items": "query.search",
+              "preview": {
+                "title": "title",
+                "details": "snippet",
+                "id": "title"
+              },
+              "gizmo": {
+                "_url_source": "https://en.wikipedia.org/wiki/<%= id %>",
+                "id": "title",
+                "title": "title",
+                "caption": "snippet",
+                "description": "snippet"
+              }
+            }
+          }
+        }
+      }
     }
   ],
   "stax": [
@@ -731,7 +948,9 @@
         "description": "An example of what HAX can do",
         "status": "available",
         "rating": "0",
-        "tags": ["example"]
+        "tags": [
+          "example"
+        ]
       },
       "stax": [
         {
@@ -928,7 +1147,9 @@
         "description": "An example about the course page.",
         "status": "available",
         "rating": "0",
-        "tags": ["example"]
+        "tags": [
+          "example"
+        ]
       },
       "stax": [
         {
@@ -1049,7 +1270,9 @@
         "description": "An example assignment with OER Schema.",
         "status": "available",
         "rating": "0",
-        "tags": ["example"]
+        "tags": [
+          "example"
+        ]
       },
       "stax": [
         {
@@ -1107,27 +1330,32 @@
   "blox": [
     {
       "details": {
-        "title": "Two column",
-        "image": "",
+        "title": "50% columns",
         "author": "ELMS:LN",
-        "description": "",
+        "icon": "hax:6/6",
         "status": "available",
-        "areas": 2
+        "layout": "6/6"
       },
       "blox": [
         {
-          "tag": "place-holder",
+          "tag": "h2",
           "properties": {
-            "slot": "area1",
-            "type": "text"
+            "slot": "col-1"
           },
-          "content": ""
+          "content": "Heading"
+        },
+        {
+          "tag": "p",
+          "properties": {
+            "slot": "col-1"
+          },
+          "content": "A paragraph of text would go here to describe the work."
         },
         {
           "tag": "place-holder",
           "properties": {
-            "slot": "area2",
-            "type": "video"
+            "slot": "col-2",
+            "type": "image"
           },
           "content": ""
         }
@@ -1135,18 +1363,44 @@
     },
     {
       "details": {
-        "title": "Three column",
-        "image": "",
+        "title": "66 / 33 columns",
         "author": "ELMS:LN",
-        "description": "",
+        "icon": "hax:8/4",
         "status": "available",
-        "areas": 3
+        "layout": "8/4"
       },
       "blox": [
         {
           "tag": "place-holder",
           "properties": {
-            "slot": "area1",
+            "slot": "col-1",
+            "type": "text"
+          },
+          "content": ""
+        },
+        {
+          "tag": "place-holder",
+          "properties": {
+            "slot": "col-2",
+            "type": "image"
+          },
+          "content": ""
+        }
+      ]
+    },
+    {
+      "details": {
+        "title": "33% columns",
+        "author": "ELMS:LN",
+        "icon": "hax:4/4/4",
+        "status": "available",
+        "layout": "4/4/4"
+      },
+      "blox": [
+        {
+          "tag": "place-holder",
+          "properties": {
+            "slot": "col-1",
             "type": "image"
           },
           "content": ""
@@ -1154,7 +1408,7 @@
         {
           "tag": "place-holder",
           "properties": {
-            "slot": "area2",
+            "slot": "col-2",
             "type": "image"
           },
           "content": ""
@@ -1162,7 +1416,93 @@
         {
           "tag": "place-holder",
           "properties": {
-            "slot": "area3",
+            "slot": "col-3",
+            "type": "image"
+          },
+          "content": ""
+        }
+      ]
+    },
+    {
+      "details": {
+        "title": "33 / 66 columns",
+        "author": "ELMS:LN",
+        "icon": "hax:4/8",
+        "status": "available",
+        "layout": "4/8"
+      },
+      "blox": [
+        {
+          "tag": "place-holder",
+          "properties": {
+            "slot": "col-2",
+            "type": "text"
+          },
+          "content": ""
+        },
+        {
+          "tag": "place-holder",
+          "properties": {
+            "slot": "col-1",
+            "type": "image"
+          },
+          "content": ""
+        },
+        {
+          "tag": "place-holder",
+          "properties": {
+            "slot": "col-1",
+            "type": "image"
+          },
+          "content": ""
+        },
+        {
+          "tag": "place-holder",
+          "properties": {
+            "slot": "col-1",
+            "type": "image"
+          },
+          "content": ""
+        }
+      ]
+    },
+    {
+      "details": {
+        "title": "25% columns",
+        "author": "ELMS:LN",
+        "icon": "hax:3/3/3/3",
+        "status": "available",
+        "layout": "3/3/3/3"
+      },
+      "blox": [
+        {
+          "tag": "place-holder",
+          "properties": {
+            "slot": "col-1",
+            "type": "image"
+          },
+          "content": ""
+        },
+        {
+          "tag": "place-holder",
+          "properties": {
+            "slot": "col-2",
+            "type": "image"
+          },
+          "content": ""
+        },
+        {
+          "tag": "place-holder",
+          "properties": {
+            "slot": "col-3",
+            "type": "image"
+          },
+          "content": ""
+        },
+        {
+          "tag": "place-holder",
+          "properties": {
+            "slot": "col-4",
             "type": "image"
           },
           "content": ""
@@ -1171,17 +1511,17 @@
     }
   ],
   "autoloader": [
-    "license-element",
     "grid-plate",
-    "q-r",
-    "self-check",
     "tab-list",
+    "magazine-cover",
+    "video-player",
+    "image-compare-slider",
+    "license-element",
+    "self-check",
     "multiple-choice",
     "oer-schema",
     "hero-banner",
-    "magazine-cover",
     "task-list",
-    "video-player",
     "lrn-table",
     "media-image",
     "lrndesign-blockquote",
@@ -1189,8 +1529,6 @@
     "a11y-gif-player",
     "paper-audio-player",
     "wikipedia-query",
-    "wave-player",
-    "pdf-element",
     "lrn-vocab",
     "lrn-math",
     "person-testimonial",
@@ -1198,6 +1536,10 @@
     "lrn-calendar",
     "code-editor",
     "place-holder",
-    "aframe-player"
+    "q-r",
+    "wave-player",
+    "pdf-element",
+    "aframe-player",
+    "stop-note"
   ]
 }

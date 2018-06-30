@@ -5,7 +5,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.10.1",
     "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#^2.0.1",
-    "responsive-utility": "LRNWebComponents/responsive-utility"
+    "responsive-utility": "LRNWebComponents/responsive-utility#^0.0.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

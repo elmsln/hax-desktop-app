@@ -5,6 +5,7 @@
 <link rel="import" href="../iron-list/iron-list.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../elmsln-loading/elmsln-loading.html">
+<link rel="import" href="../simple-colors/simple-colors.html">
 <!--<link rel="import" href="hax-app-pagination.html">-->
 <link rel="import" href="hax-app-search-inputs.html">
 <link rel="import" href="hax-app-search-result.html">
@@ -57,7 +58,6 @@
         align-content: space-around;
         justify-content: center;
         position: absolute;
-        background-color: white;
         padding: 0;
         margin: 0;
         display: flex;
@@ -103,6 +103,11 @@
         justify-content: center;
         color: #222222;
       }
+      .loading-text {
+        font-size: 32px;
+        padding: 16px 0;
+        color: var(--simple-colors-light-green-background3);
+      }
     </style>
 
     <iron-ajax
@@ -115,12 +120,13 @@
       params='[[requestParams]]'
       last-response="{{requestData}}"
       hidden
-      loading="{{loading}}"></iron-ajax>
+      loading="{{loading}}"
+      debounce-duration="250"></iron-ajax>
     <hax-app-search-inputs label="[[label]]" schema="{{searchSchema}}" values="{{searchValues}}"></hax-app-search-inputs>
     <hax-app-pagination id="pagerbottom" request-data="[[requestData]]" pagination="[[pagination]]"></hax-app-pagination>
     <div id="loading" class="loading" hidden$="[[!loading]]">
-      <elmsln-loading color="blue-text text-darken-4" size="large"></elmsln-loading>
-      <h3 class="loading-text">Loading content..</h3>
+      <elmsln-loading color="light-green-text text-accent-3" size="large"></elmsln-loading>
+      <div class="loading-text">Loading content..</div>
     </div>
     <iron-list grid id="itemlist" items="[[media]]" as="resultData">
       <template>
@@ -314,21 +320,62 @@
             // understand when stamping out our cards above.
             for (i = 0; i < data.length; i++) {
               media[i] = {
-                'id' : this._resolveObjectPath(map.preview.id, data[i]),
                 'title': this._resolveObjectPath(map.preview.title, data[i]),
                 'details': this._resolveObjectPath(map.preview.details, data[i]),
-                'image': this._resolveObjectPath(map.preview.image, data[i]),
                 'type': map.defaultGizmoType,
                 'map': {},
               };
+              // strip HTML from details since it might contain complex content
+              if (typeof media[i].details !== typeof undefined && media[i].details != null) {
+                media[i].details = media[i].details.replace(/(<([^>]+)>)/ig, "");
+              }
+              // allow id to use deeper logic to split it back out
+              if (map.preview.id.constructor === Object) {
+                let tmp = this._resolveObjectPath(map.preview.id.property, data[i]);
+                if (map.preview.id.op === 'split') {
+                  tmp = tmp.split(map.preview.id.delimiter);
+                  media[i].id = tmp[map.preview.id.position];
+                }
+              }
+              else {
+                media[i].id = this._resolveObjectPath(map.preview.id, data[i]);
+              }
+              // image, while really useful is not required
+              if (typeof map.preview.image !== typeof undefined) {
+                media[i].image = this._resolveObjectPath(map.preview.image, data[i]);
+              }
+              else if (typeof map.image !== typeof undefined) {
+                media[i].image = map.image;
+              }
+              else {
+                media[i].image = '';
+              }
               for(var prop in map.gizmo){
                 // check for a _url_source modifier... stupid youtube and others.
                 if (prop === '_url_source') {
-                  let _id = this._resolveObjectPath(map.gizmo.id, data[i]);
+                  let _id = '';
+                  if (typeof media[i].map.__id !== typeof undefined) {
+                    _id = media[i].map.__id;
+                  }
+                  else {
+                    _id = this._resolveObjectPath(map.gizmo.id, data[i]);
+                  }
                   media[i].map.source = map.gizmo._url_source.replace('<%= id %>', _id);
                 }
                 else {
-                  media[i].map[prop] = this._resolveObjectPath(map.gizmo[prop], data[i]);
+                  if (map.gizmo[prop].constructor === Object) {
+                    let tmp = this._resolveObjectPath(map.gizmo[prop].property, data[i]);
+                    if (map.gizmo[prop].op === 'split') {
+                      tmp = tmp.split(map.gizmo[prop].delimiter);
+                      media[i].map[prop] = tmp[map.gizmo[prop].position];
+                      if (prop === 'id') {
+                        media[i].map.__id = media[i].map[prop];
+                      }
+                    }
+                  }
+                  else {
+                    media[i].map[prop] = this._resolveObjectPath(map.gizmo[prop], data[i]);
+                  }
                 }
               }
               // another sanity check, if we don't have a url but have a source bind that too

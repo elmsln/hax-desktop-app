@@ -1,0 +1,224 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../simple-search/simple-search.html">
+<link rel="import" href="a11y-media-behaviors.html">
+<link rel="import" href="a11y-media-button.html">
+
+<!--
+`a11y-media-transcript-controls`
+A controls for the transcript element
+
+@demo demo/index.html
+
+@microcopy - the mental model for this element
+  <a11y-media-transcript-controls 
+    accent-color$="[[accentColor]]"                 // Optional accent color highlighted cues, 
+                                                    // using the following materialize colors: 
+                                                    // red, pink, purple, deep-purple, indigo, blue, 
+                                                    // light blue, cyan, teal, green, light green, lime, 
+                                                    // yellow, amber, orange, deep-orange, and brown. 
+                                                    // Default is null. 
+    custom-microcopy$="[[customMicrocopy]]"         // Optional customization or text and icons
+    disable-print-button$="[[disablePrintButton]]"  // Disable the print button?
+    disable-scroll$="[[disableScroll]]"             // Disable autoscrolling transcript as video plays? 
+    disable-search$="[[disableSearch]]"             // Disable transcript search? 
+  </a11y-media-transcript-controls>
+
+-->
+
+<dom-module id="a11y-media-transcript-controls">
+  <template>
+    <style is="custom-style">
+        :host {
+          background-color: var(--a11y-media-transcript-bg-color, #ffffff);
+          color: var(--a11y-media-transcript-text-color, #666666);
+        }
+        :host simple-search {
+          --paper-input-container-input-color: var(--a11y-media-transcript-text-color, #666666);
+          --paper-input-container-focus-color: var(--a11y-media-transcript-focus-color, #000000);
+          --paper-input-container-color: var(--a11y-media-transcript-text-color, #666666);
+          --paper-input-container: {
+            padding: 0 15px;
+          };
+        }
+        :host simple-search, 
+        :host a11y-media-button {
+          --a11y-media-button-toggle-color: var(--a11y-media-transcript-focus-color, #000000);
+          --a11y-media-button-color: var(--a11y-media-transcript-text-color, #666666);
+          --a11y-media-button-bg-color:  var(--a11y-media-transcript-bg-color, #ffffff);
+          --a11y-media-button-hover-color: var(--a11y-media-transcript-focus-color, #000000);
+          --a11y-media-button-hover-bg-color:  var(--a11y-media-transcript-bg-color, #ffffff);
+        }
+        :host[accent-color="red"] simple-search,
+        :host[accent-color="red"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #d50000;
+        }
+        :host[accent-color="pink"] simple-search,
+        :host[accent-color="pink"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #f50057;
+        }
+        :host[accent-color="purple"] simple-search,
+        :host[accent-color="purple"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #d500f9;
+        }
+        :host[accent-color="deep-purple"] simple-search,
+        :host[accent-color="deep-purple"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #651fff;
+        }
+        :host[accent-color="indigo"] simple-search,
+        :host[accent-color="indigo"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #304ffe;
+        }
+        :host[accent-color="blue"] simple-search,
+        :host[accent-color="blue"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #1565c0;
+        }
+        :host[accent-color="light-blue"] simple-search,
+        :host[accent-color="light-blue"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #0091ea;
+        }
+        :host[accent-color="cyan"] simple-search,
+        :host[accent-color="cyan"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #0097a7;
+        }
+        :host[accent-color="teal"] simple-search,
+        :host[accent-color="teal"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #00897b;
+        }
+        :host[accent-color="green"] simple-search,
+        :host[accent-color="green"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #02993c;
+        }
+        :host[accent-color="light-green"] simple-search,
+        :host[accent-color="light-green"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #448f02;
+        }
+        :host[accent-color="lime"] simple-search,
+        :host[accent-color="lime"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #6f8e00;
+        }
+        :host[accent-color="yellow"] simple-search,
+        :host[accent-color="yellow"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #9a8000;
+        }
+        :host[accent-color="amber"] simple-search,
+        :host[accent-color="amber"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #bf7f00;
+        }
+        :host[accent-color="orange"] simple-search,
+        :host[accent-color="orange"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #e65100;
+        }
+        :host[accent-color="deep-orange"] simple-search,
+        :host[accent-color="deep-orange"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #ff3d00;
+        }
+        :host[accent-color="brown"] simple-search,
+        :host[accent-color="brown"] a11y-media-button { 
+          --a11y-media-transcript-focus-color: #5d4037;
+        }
+        :host #searchbar {
+          display: flex;
+          align-items: stretch;
+          justify-content: space-between;
+          width: 100%;
+        }
+        :host #searching {
+          flex-grow: 2;
+        }
+        :host #autoscroll {
+          padding-right: 0.5em;
+        }
+        :host #scrolling,
+        :host #printing {
+          display: flex;
+          align-items: center;
+        }
+        @media print {
+          :host {
+            display: none;
+          }
+        }
+    </style>
+    <div id="searchbar">
+      <div id="searching">
+        <simple-search 
+          disabled$="[[disableSearch]]" 
+          controls="transcript" 
+          hidden$="[[disableSearch]]"
+          id="search" 
+          next-button-icon$="[[searchNextButtonIcon]]"
+          next-button-label$="[[searchNextButtonLabel]]"
+          prev-button-icon$="[[searchPrevButtonIcon]]"
+          prev-button-label$="[[searchPrevButtonLabel]]"
+          search-input-icon$="[[searchIcon]]" 
+          search-input-label$="[[searchLabel]]"
+          target="[[target]]">
+        </simple-search>
+      </div>
+      <div id="scrolling">
+        <a11y-media-button 
+          controls="transcript" 
+          id="scroll" 
+          icon="[[autoScrollIcon]]" 
+          label="[[autoScrollLabel]]" 
+          toggle$="[[!disableScroll]]">
+        </a11y-media-button>
+      </div>
+      <div id="printing" 
+        hidden$="[[disablePrintButton]]" 
+        disabled$="[[disablePrintButton]]">
+        <a11y-media-button 
+          controls="transcript" 
+          id="print" 
+          icon="[[printIcon]]" 
+          label="[[printLabel]]">
+        </a11y-media-button>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'a11y-media-transcript-controls',
+      
+      behaviors: [
+        a11yMediaBehaviors.GeneralFunctions,
+        a11yMediaBehaviors.TranscriptBehaviors 
+      ],
+
+      properties: {
+        /**
+          * Language
+          */
+        lang: {
+          type: String,
+          value: 'en',
+          reflectToAttribute: true,
+        },
+        /**
+          * target of the controls
+          */
+        target: {
+          type: Object,
+          value: null
+        },
+      },
+
+      /**
+        * calls responsive-utility to get parent's responsive size
+        */ 
+      attached: function(){
+        let root = this;
+        root.search = root.$.search;
+        root.fire('searchbar-added',root.$.search);
+        root.$.scroll.addEventListener('button-clicked',function(e){
+          this.fire('toggle-scroll',this);
+        });
+        root.$.print.addEventListener('button-clicked',function(e){
+          this.fire('print-transcript',this);
+        });
+      },
+    });
+  </script>
+</dom-module>

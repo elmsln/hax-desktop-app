@@ -59,6 +59,9 @@ A LRN element
       behaviors: [
         HAXBehaviors.PropertiesBehaviors
       ],
+      listeners: {
+        'dblclick': 'fireReplaceEvent',
+      },
       properties: {
         /**
          * calculate an icon based on the type that was used
@@ -98,6 +101,12 @@ A LRN element
         },
       },
       /**
+       * Fire an event for things to react to above us
+       */
+      fireReplaceEvent: function(e) {
+        this.fire('place-holder-replace', this.type);
+      },
+      /**
        * Get the calculated text based on text being empty and type being set.
        */
       _getCalcText: function(text, type, dragOver) {
@@ -129,9 +138,6 @@ A LRN element
             break
             case 'image':
               return 'image:crop-original';
-            break
-            case 'media':
-              return 'device:graphic-eq';
             break
             case 'math':
               return 'editor:functions';
@@ -174,9 +180,18 @@ A LRN element
             e.preventDefault();
             e.stopPropagation();
             this.classList.remove('dragover');
-            e.placeHolderElement = this;
-            // fire this specialized event up so things like HAX can intercept
-            this.fire('place-holder-file-drop', e);
+            // this helps ensure that what gets drag and dropped is a file
+            // this prevents issues with selecting and dragging text (which triggers drag/drop)
+            // as well as compatibility with things that are legit in a draggable state
+            try {
+              if (e.dataTransfer.items[0].kind === 'file') {
+                e.placeHolderElement = this;
+                // fire this specialized event up so things like HAX can intercept
+                this.fire('place-holder-file-drop', e);
+              }
+            }
+            catch (e) {
+            }
           });
         }
       },
@@ -216,14 +231,16 @@ A LRN element
                   'audio': 'Audio',
                   'video': 'Video',
                   'image': 'Image',
-                  'media': 'Media',
                   'math': 'Math',
                 },
               },
             ],
             'advanced': [
             ]
-          }
+          },
+          'saveOptions': {
+            'wipeSlot': true,
+          },
         };
         this.setHaxProperties(props);
       },

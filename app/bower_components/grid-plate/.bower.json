@@ -7,7 +7,9 @@
     "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.2.0",
     "materializecss-styles": "LRNWebComponents/materializecss-styles#^1.0.0",
     "schema-behaviors": "LRNWebComponents/schema-behaviors",
-    "responsive-grid": "LRNWebComponents/responsive-grid#^0.2.0"
+    "responsive-grid": "LRNWebcomponents/responsive-grid#^1.0.0",
+    "simple-colors": "LRNWebComponents/simple-colors",
+    "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^2.1.2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -22,15 +24,14 @@
     "webcomponentsjs": "^0.7.24"
   },
   "homepage": "https://github.com/LRNWebComponents/grid-plate",
-  "version": "0.0.2",
-  "_release": "0.0.2",
+  "version": "1.0.5",
+  "_release": "1.0.5",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.2",
-    "commit": "a20831d7d706ca4368478eee2d98cddded0f0f50"
+    "tag": "1.0.5",
+    "commit": "857dc56491a2819b192fa3337f481c50ea312044"
   },
   "_source": "https://github.com/LRNWebComponents/grid-plate.git",
-  "_target": "^0.0.2",
-  "_originalSource": "LRNWebComponents/grid-plate",
-  "_direct": true
+  "_target": "^1.0.5",
+  "_originalSource": "LRNWebComponents/grid-plate"
 }

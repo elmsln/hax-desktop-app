@@ -3,7 +3,7 @@
 <link rel="import" href="responsive-grid-col.html">
 <link rel="import" href="responsive-grid-clear.html">
 
-<!--
+<!--   
 `responsive-grid-row`
 A LRN element
 
@@ -46,9 +46,10 @@ A LRN element
         -moz-box-sizing: border-box;
         box-sizing: border-box;
       }
-      :host #row-inner {
+      #row-inner {
         margin-left: -15px;
         margin-right: -15px;
+        @apply --responsive-grid-row-inner;
       }
       :host #row-inner:before,
       :host #row-inner:after {
@@ -168,6 +169,21 @@ A LRN element
       #row-inner[screen="xl"] ::slotted(responsive-grid-col[xl="0"]) {
         display: none;
       }
+      :host #row-inner ::slotted(* > #col-inner) {
+        padding: 0px;
+      }
+      :host #row-inner[gutter="1"] ::slotted(* > #col-inner) {
+        padding: 5px;
+      }
+      :host #row-inner[gutter="2"] ::slotted(* > #col-inner) {
+        padding: 10px;
+      }
+      :host #row-inner[gutter="3"] ::slotted(* > #col-inner) {
+        padding: 15px;
+      }
+      :host #row-inner[gutter="4"] ::slotted(* > #col-inner) {
+        padding: 20px;
+      }
     </style>
     <responsive-utility 
       sm$=[[sm]] 
@@ -176,17 +192,13 @@ A LRN element
       xl$=[[xl]] 
       responsive-to-parent$=[[responsiveToParent]]>
     </responsive-utility>
-    <div id="row-inner" screen$="[[screen]]"><slot></slot></div>
+    <div id="row-inner" screen$="[[screen]]" gutter$="[[gutter]]"><slot></slot></div>
   </template>
 
   <script>
     Polymer({
 
       is: 'responsive-grid-row',
-      
-      listeners: {
-        'screen-resize': '_onScreenResize'
-      },
 
       properties: {
         /**
@@ -213,9 +225,16 @@ A LRN element
         /**
          * Custom extra-large breakpoint
          */
-        lg: {
+        xl: {
           type: Number,
           value: null,
+        },
+        /** 
+         * the gutter-level for the columns from 0-4
+         */
+         gutter: {
+          type: Number,
+          value: 0,
         },
         /**
          * make responsive based on a container instead of the window
@@ -223,6 +242,7 @@ A LRN element
         responsiveToParent: {
           type: Boolean,
           value: false,
+          reflectToAttribute: true,
         },
         /*
          * screen size: xs, sm, md, lg, or xl
@@ -234,8 +254,14 @@ A LRN element
           reflectToAttribute: true,
         },
       },
-      _onScreenResize: function(e){
-        this.screen = e.detail.screen;
+      attached: function(){
+        let root = this;
+        Polymer.ResponsiveUtility.requestAvailability();
+        root.fire('responsive-element', {
+          "element": root,
+          "attribute": "screen",
+          "relativeToParent": root.responsiveToParent,
+        });
       }
     });
   </script>

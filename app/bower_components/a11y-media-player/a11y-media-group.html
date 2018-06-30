@@ -1,0 +1,314 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../responsive-utility/responsive-utility.html">
+<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="a11y-media-behaviors.html">
+<link rel="import" href="a11y-media-player.html">
+<link rel="import" href="a11y-media-transcript-controls.html">
+
+<!--
+`a11y-media-group`
+A responsive group of player and transcript.
+
+@demo demo/index.html
+
+@microcopy - the mental model for this element
+ 
+  <a11y-media-group
+                                                    // For player & controls:
+    accent-color$="[[accentColor]]"                 // Optional accent color for controls, inlcuding cues, 
+                                                    // using the following materialize colors: 
+                                                    // red, pink, purple, deep-purple, indigo, blue, 
+                                                    // light blue, cyan, teal, green, light green, lime, 
+                                                    // yellow, amber, orange, deep-orange, and brown. 
+                                                    // Default is null. 
+    audio-only$="[[audioOnly]]"                     // Is media audio only?
+    autoplay$="[[autoplay]]"                        // Is player set to autoplay (not recommended for a11y)?
+    allow-fullscreen$="[[allowFullscreen]]"         // Allow fullscreen mode?
+    cc$="[[cc]]"                                    // Are closed captions toggled?
+    dark$="[[dark]]"                                // Is the color scheme dark? Default is light.  
+    disableFullscreen$="[[disableFullscreen]]"      // Is full screen mode disabled?  
+    disable-interactive$="[[disableInteractive]]"   // Disable interactive transcript cues?
+    disable-scroll$="[[disableScroll]]"             // Disable autoscrolling transcript as video plays? 
+    disable-search$="[[disableSearch]]"             // Disable transcript search? 
+    fullscreen$="[[fullscreen]]"                    // Is full screen mode toggled on?
+    height$="[[height]]"                            // The height of player
+    hide-elapsed-time$="[[hideElapsedTime]]"        // Is elapsed time hidden?
+    lang$="[[lang]]"                                // The language of the media
+    loop$="[[loop]]"                                // Is video on a loop?
+    muted$="[[muted]]"                              // Is video muted?
+    volume$="[[volume]]"                            // The initial volume of the video
+    width$="[[width]]"                              // The width of player
+
+                                                    // For transcript & cues: 
+    disable-interactive$="[[disableInteractive]]"   // Disable interactive cues?
+    hide-timestamps$="[[hideTimestamps]]"           // Hide cue timestamps?
+    media-id=""                                     // The id of the player
+    selected-transcript$="[[selectedTranscript]]">  // The index of the current track
+                                                    // video source and tracks
+    <source src="/path/to/video.mp4" type="video/mp4">
+    <source src="/path/to/video.webm" type="video/webm">
+    <track label="English" kind="subtitles" srclang="en" src="path/to/subtitles/en.vtt" default>
+    <track label="Deutsch" kind="subtitles" srclang="de" src="path/to/subtitles/de.vtt">
+    <track label="Español" kind="subtitles" srclang="es" src="path/to/subtitles/es.vtt">
+  </a11y-media-group>
+
+Basic customization:
+--a11y-media-outline-color: border-color of group, default is --a11y-media-bg-color (black)
+--a11y-media-transcript-bg-color: background color, default is #ffffff
+
+-->
+
+<dom-module id="a11y-media-group">
+  <template>
+    <style is="custom-style">
+      :host {  
+        width: 100%;
+        display: block;
+        outline: 1px solid #bbbbbb;
+      }
+      :host[dark] {  
+        outline: 1px solid black;
+      }
+      @media screen {
+        :host:not([hide-transcript]):not([no-height]):not([stacked-layout]):not([responsive-size*="s"]) {
+          display: inline-flex;
+          align-items: stretch;
+          outline: 1px solid;
+          outline-color: var(--a11y-media-outline-color, var(--a11y-media-bg-color,#bbbbbb));
+          background-color: var(--a11y-media-transcript-bg-color, #ffffff);
+        }
+        :host[dark]:not([hide-transcript]):not([no-height]):not([stacked-layout]):not([responsive-size*="s"]) {
+          outline-color: var(--a11y-media-outline-color, var(--a11y-media-bg-color,#000000));
+        }
+        :host > div {
+          transition: width 0.5s, height .5s;
+        }
+        :host:not([hide-transcript]):not([no-height]):not([stacked-layout]):not([responsive-size*="s"]) > div {
+          width: 50%;
+          flex-grow: 1;
+          flex-shrink: 1;
+        }
+        :host[sticky]:not([no-height]):not([stacked-layout]):not([responsive-size*="s"]) > #player-outer {
+          width: 0%;
+        }
+        :host[sticky]:not([no-height]):not([stacked-layout]):not([responsive-size*="s"]) > #transcript-outer {
+          width: 100%;
+        }
+        :host[hide-transcript] #player-outer {
+          min-width: 50%;
+          max-width: 100%;
+        }
+        :host[hide-transcript] #transcript-outer {
+          display: none;
+        }
+        :host #transcript-outer {
+          position: relative;
+        }
+        :host #transcript {
+          padding-top: 48px;
+        }
+        :host:not([no-height]):not([stacked-layout]):not([responsive-size*="s"]) #transcript {
+          position: absolute;
+          top: 0; 
+          left: 0;
+          right: 0; 
+          bottom: 0;
+          overflow-y: scroll;
+        }
+        :host:not([no-height]):not([stacked-layout]):not([responsive-size*="s"]) #player.totop {
+          position: absolute;
+          top:0;
+          left: 0;
+          width: 200px !important;
+          z-index: 9999;
+        }
+        :host #controls {
+          z-index: 1000;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          display: flex;
+        }
+      }
+      @media print {
+        :host {
+          border: 1px solid #000000; 
+          background-color: #ffffff;
+        }
+        :host[sticky] #player-outer {
+          height: unset !important;
+        }
+        :host #searchbar {
+          display: none;
+        }
+      }
+    </style>
+    <div id="player-outer" lang$="[[uiLanguage]]">
+      <a11y-media-player 
+        accent-color$="[[accentColor]]" 
+        audio-label$="[[audioLabel]]" 
+        audio-only$="[[audioOnly]]"
+        autoplay$="[[autoplay]]"
+        captions-label$="[[captionsLabel]]" 
+        captions-icon$="[[captionsIcon]]" 
+        captions-menu-label$="[[captionsMenuLabel]]" 
+        captions-menu-off$="[[captionsMenuOff]]" 
+        cc$="[[cc]]" 
+        dark$="[[dark]]"
+        disableFullscreen$="[[disableFullscreen]]"
+        forward-label$="[[forwardLabel]]" 
+        forward-icon$="[[forwardIcon]]" 
+        fullscreen$="[[fullscreen]]"
+        fullscreen-label$="[[fullscreenLabel]]" 
+        fullscreen-icon$="[[fullscreenIcon]]" 
+        height$="[[height]]"
+        hide-elapsed-time$="[[hideElapsedTime]]"
+        id="player"  
+        lang$="[[lang]]"
+        ui-language$="[[uiLanguage]]"
+        loop$="[[loop]]" 
+        loop-label$="[[loopLabel]]" 
+        media-title$="[[mediaTitle]]"
+        mute-label$="[[muteLabel]]" 
+        mute-icon$="[[muteIcon]]" 
+        muted$="[[muted]]" 
+        no-height$="[[noHeight]]"
+        pause-label$="[[pauseLabel]]" 
+        pause-icon$="[[pauseIcon]]" 
+        play-label$="[[playLabel]]" 
+        play-icon$="[[playIcon]]" 
+        print-label$="[[printLabel]]" 
+        print-icon$="[[printIcon]]" 
+        restart-label$="[[restartLabel]]" 
+        restart-icon$="[[restartIcon]]" 
+        search$="[[search]]"
+        search-transcript$="[[searchTranscript]]" 
+        settings-label$="[[settingsLabel]]" 
+        settings-icon$="[[settingsIcon]]"
+        sticky$="[[sticky]]"
+        sticky-corner$="[[stickyCorner]]" 
+        rewind-label$="[[rewindLabel]]" 
+        rewind-icon$="[[rewindIcon]]" 
+        speed-label$="[[speedLabel]]"  
+        thumbnail-src$="[[thumbnailSrc]]"
+        transcript-label$="[[transcriptLabel]]" 
+        transcript-icon$="[[transcriptIcon]]"
+        transcript-menu-label$="[[transcriptMenuLabel]]"
+        unmute-label$="[[unmuteLabel]]" 
+        unmute-icon$="[[unmuteIcon]]" 
+        volume$="[[volume]]"
+        volume-label$="[[volumeLabel]]" 
+        video-label$="[[videoLabel]]"
+        width$="[[width]]">
+        <slot></slot>
+      </a11y-media-player>
+    </div>
+    <div id="transcript-outer">
+      <a11y-media-transcript-controls
+        accent-color$="[[accentColor]]" 
+        auto-scroll-label$="[[autoScrollLabel]]" 
+        auto-scroll-icon$="[[autoScrollIcon]]" 
+        disable-print-button$="[[disablePrintButton]]"
+        disable-scroll$="[[disableScroll]]"
+        disable-search$="[[disableSearch]]" 
+        id="controls"
+        lang$="[[uiLanguage]]" 
+        print-label$="[[printLabel]]" 
+        print-icon$="[[printIcon]]" 
+        search-label$="[[searchLabel]]" 
+        search-icon$="[[searchIcon]]" 
+        search-prev-button-label$="[[searchPrevButtonLabel]]" 
+        search-prev-button-icon$="[[searchPrevButtonIcon]]" 
+        search-next-button-label$="[[searchNextButtonLabel]]" 
+        search-next-button-icon$="[[searchNextButtonIcon]]" 
+        skip-transcript-link$="[[skipTranscriptLink]]"
+        target="[[target]]">
+      </a11y-media-transcript-controls>
+      <a11y-media-transcript 
+        accent-color$="[[accentColor]]"
+        disable-scroll$="[[disableScroll]]"
+        disable-search$="[[disableSearch]]"
+        disable-interactive$="[[disableInteractive]]"
+        hide-timestamps$="[[hideTimestamps]]"
+        id="transcript" 
+        search="[[search]]"
+        selected-transcript$="[[selectedTranscript]]">
+      </a11y-media-transcript>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'a11y-media-group',
+
+      listeners: {
+        'transcript-toggle': 'toggleTranscript',
+        'player-sticky': 'toggleSticky'
+      },
+      
+      behaviors: [
+        a11yMediaBehaviors.GeneralFunctions, 
+        a11yMediaBehaviors.PlayerBehaviors, 
+        a11yMediaBehaviors.TranscriptBehaviors
+      ],
+
+      properties: {
+        /**
+          * Language
+          */
+        lang: {
+          type: String,
+          value: 'en',
+          reflectToAttribute: true,
+        },
+        /** 
+          * stacked layout instead of side-by-side?
+          */
+        stackedLayout: {
+          type: Boolean,
+          value: false,
+        },
+        /**
+          * target of the controls
+          */
+        target: {
+          type: Object,
+          value: null
+        },
+      },
+      /**
+        * calls responsive-utility to get parent's responsive size
+        */ 
+      attached: function(){
+        let root = this;
+        root.target = root.$$('#transcript');
+        root.$.controls.addEventListener('searchbar-added',function(e){
+          root.search = e.detail;
+        });
+        root.$.controls.addEventListener('toggle-scroll',function(e){
+          root.disableScroll = !root.disableScroll;
+        });
+        root.$.controls.addEventListener('print-transcript',function(e){
+          this.fire('print-transcript',this);
+          root.$.transcript.print(root.mediaTitle);
+        });
+        root.$.transcript.setMedia(root.$.player);
+        root._addResponsiveUtility();
+      },
+      /**
+        * toggles (shows or hides) the transcript
+        */ 
+      toggleTranscript: function(e){
+        this.hideTranscript = e.detail.hideTranscript;
+      },
+      /** 
+       * toggles sticky attribute
+       */
+      toggleSticky: function(e){
+        this.sticky = e.detail.sticky;
+      },
+    });
+  </script>
+</dom-module>

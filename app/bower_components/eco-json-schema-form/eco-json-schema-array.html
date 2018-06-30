@@ -261,8 +261,12 @@ Please see the `eco-json-schema-object` documentation for further information.
       },
       _removeArrayEl: function(el) {
         var polyEl = Polymer.dom(el);
+        if (typeof polyEl.childNodes[0] !== typeof undefined) {
         this.unlisten(polyEl.childNodes[0], polyEl.firstChild.schemaArrayItem.component.valueProperty.replace(/([A-Z])/g, '-$1').toLowerCase() + '-changed', '_schemaArrayItemChanged');
-        this.unlisten(polyEl.childNodes[1], 'tap', '_onRemoveItem');
+          if (typeof polyEl.childNodes[1] !== typeof undefined) {
+            this.unlisten(polyEl.childNodes[1], 'tap', '_onRemoveItem');
+          }
+        }
         el.schemaArrayItem = null;
         Polymer.dom(this.$.form).removeChild(el);
       },
