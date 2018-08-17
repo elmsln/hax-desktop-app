@@ -3,6 +3,97 @@
   "apps": [
     {
       "details": {
+        "title": "Local files",
+        "icon": "perm-media",
+        "color": "green",
+        "author": "LRNWebComponents",
+        "description": "Local file system",
+        "status": "alpha",
+        "tags": [
+          "media",
+          "local"
+        ]
+      },
+      "connection": {
+        "protocol": "file",
+        "url": "/Users/bto108/Documents/git/elmsln/LRNWebComponents/hax-desktop-app/app",
+        "operations": {
+          "browse": {
+            "method": "GET",
+            "endPoint": "hax-backend.js",
+            "pagination": {
+              "style": "link",
+              "props": {
+                "first": "page.first",
+                "next": "page.next",
+                "previous": "page.previous",
+                "last": "page.last"
+              }
+            },
+            "search": {
+              "title": {
+                "title": "Search",
+                "type": "string"
+              }
+            },
+            "resultMap": {
+              "defaultGizmoType": "image",
+              "items": "list",
+              "preview": {
+                "title": "title",
+                "details": "body",
+                "image": "field_image.url",
+                "id": "uuid"
+              },
+              "gizmo": {
+                "source": "field_image.url",
+                "id": "uuid",
+                "title": "title",
+                "caption": "body.value",
+                "description": "body.value",
+                "citation": "field_citation.value"
+              }
+            }
+          },
+          "add": {
+            "method": "POST",
+            "endPoint": "hax-backend.json",
+            "acceptsGizmoTypes": [
+              "image",
+              "video",
+              "audio",
+              "pdf",
+              "svg",
+              "doc",
+              "document",
+              "file",
+              "xml",
+              "csv",
+              "xls",
+              "xlsx",
+              "JPG",
+              "GIF",
+              "JPEG",
+              "doc",
+              "docx",
+              "htm",
+              "html",
+              "*"
+            ],
+            "resultMap": {
+              "item": "data.file",
+              "defaultGizmoType": "image",
+              "gizmo": {
+                "source": "url",
+                "id": "uuid"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "details": {
         "title": "Youtube",
         "icon": "av:play-arrow",
         "color": "red",
