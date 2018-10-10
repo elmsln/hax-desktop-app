@@ -3,7 +3,8 @@
   "description": "A LRN element",
   "main": "simple-colors.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.10.1"
+    "polymer": "Polymer/polymer#^1.10.1",
+    "iron-icons": "PolymerElements/iron-icons#^2.1.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

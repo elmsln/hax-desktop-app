@@ -203,6 +203,9 @@ as the events being bubbled up include HTML nodes to inject into something
       observers: [
         '_globalPreferencesChanged(globalPreferences.*)',
       ],
+      behaviors: [
+        simpleColorsBehaviors,
+      ],
       properties: {
         /**
          * Display to the right corner instead of the left (default)
@@ -270,6 +273,13 @@ as the events being bubbled up include HTML nodes to inject into something
         this.fire('hax-register-panel', this);
         document.body.addEventListener('hax-store-property-updated', this._haxStorePropertyUpdated.bind(this));
         document.body.addEventListener('hax-panel-operation', this._processItemEvent.bind(this));
+      },
+      /**
+       * Detached life cycle
+       */
+      detached: function () {
+        document.body.removeEventListener('hax-store-property-updated', this._haxStorePropertyUpdated.bind(this));
+        document.body.removeEventListener('hax-panel-operation', this._processItemEvent.bind(this));
       },
       /**
        * Global preference changed.

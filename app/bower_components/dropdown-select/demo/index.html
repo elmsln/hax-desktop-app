@@ -14,41 +14,35 @@
 
     <style is="custom-style" include="demo-pages-shared-styles">
     </style>
-    <script>
-      window.onload = function(){
-        if(document.getElementById('example') !== null) {
-          document.getElementById('example').addEventListener('change', function (e) {
-            if(e.detail !== null){
-              alert('You picked '+e.detail.value+'.');
-            }
-          });
-        }
-      }
-    </script>
   </head>
   <body>
     <div class="vertical-section-container centered">
       <h3>Basic dropdown-select demo</h3>
       <demo-snippet>
         <template>
-          <dropdown-select id="example" value="bird" label="Select an animal.">
+          <dropdown-select id="example" value="" label="Select an animal." placeholder="none">
             <paper-item value="bird">Bird</paper-item>
             <paper-item value="cat">Cat</paper-item>
             <paper-item value="dog">Dog</paper-item>
             <paper-item value="fish">Fish</paper-item>
           </dropdown-select>
-          <!-- Example script for getting the value. --
           <script>
-            window.onload = function(){
-              if(document.getElementById('example') !== null) {
-                document.getElementById('example').addEventListener('change', function (e) {
-                  if(e.detail !== null){
-                    alert('You picked '+e.detail.value+'.');
-                  }
-                });
-              }
-            }
-          </script> -->
+            document.getElementById('example').addEventListener('dropdown-select-changed', function (e) {
+              alert('You picked '+e.detail.value+'.');
+            });
+          </script>
+        </template>
+      </demo-snippet>
+
+      <h3>dropdown-select demo with initial value set</h3>
+      <demo-snippet>
+        <template>
+          <dropdown-select id="example" value="fish" label="Select an animal." placeholder="none">
+            <paper-item value="bird">Bird</paper-item>
+            <paper-item value="cat">Cat</paper-item>
+            <paper-item value="dog">Dog</paper-item>
+            <paper-item value="fish">Fish</paper-item>
+          </dropdown-select>
         </template>
       </demo-snippet>
     </div>

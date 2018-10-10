@@ -57,6 +57,10 @@
         else if (input.indexOf('youtube.com/watch') != -1) {
           return input.replace('youtube.com/watch', 'youtube.com/embed/') + v;
         }
+        // copy and paste from the URL
+        else if (input.indexOf('youtube-no-cookie.com/embed') != -1) {
+          return input.replace('youtube-no-cookie.com/embed', 'youtube.com/embed/') + v;
+        }
         // weird share-ly style version
         else if (input.indexOf('youtu.be') != -1) {
           return input.replace('youtu.be/', 'www.youtube.com/embed/') + v;
@@ -76,6 +80,7 @@
      * Figure out the type of video based on source.
      */
     getVideoType: function(source) {
+      let localFormats = ['aac','flac','mov','mp3','mp4','oga','ogg','ogv','wav','webm'], isLocal = false;
       // some common ones
       if (source.indexOf('vimeo') != -1) {
         return 'vimeo';
@@ -89,8 +94,11 @@
       else if (source.indexOf('dailymotion.com') != -1) {
         return 'dailymotion';
       }
+      for(let i=0; i<localFormats.length;i++){
+        if(!isLocal && source.toLowerCase().indexOf('.'+localFormats[i]) > -1) isLocal = true;
+      }
       // see if it's a direct file reference, otherwise we'll assume it's external
-      if (source.indexOf('.mp4') != -1 || source.indexOf('.mov') != -1 || source.indexOf('.ogg') != -1 || source.indexOf('.webm') != -1) {
+      if (isLocal) {
         return 'local';
       }
       else {

@@ -11,6 +11,11 @@ An inline element that can be searched with the seimple-search element
     content="[[content]]"                // inline content to be searched
   </simple-search-content>
 
+  CSS Variables for matched content:
+  color: var(--simple-search-match-text-color, #000);
+  background-color: var(--simple-search-match-background-color, #f0f0f0);
+  border-color: var(--simple-search-match-border-color, #ddd);
+  @apply --simple-search-match;
 -->
 
 <dom-module id="simple-search-content">
@@ -19,11 +24,12 @@ An inline element that can be searched with the seimple-search element
       @apply --simple-search-content;
     }
     :host #content [match-number]{
-      background-color: #f0f0f0;
-      border: 1px solid #dddddd;
+      color: var(--simple-search-match-text-color, #000);
+      background-color: var(--simple-search-match-bg-color, #f0f0f0);
+      border: 1px solid; 
+      border-color: var(--simple-search-match-border-color, #ddd);
       padding: 0.1em 0.25em;
       border-radius: 0.1em;
-      color: #000;
       font-weight: bold;
       @apply --simple-search-match;
     }

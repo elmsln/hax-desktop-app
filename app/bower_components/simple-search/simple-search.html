@@ -55,12 +55,35 @@ A button used in simple-search
     }
   ]
 
+  CSS Variables:
+  For the input field...
+  --paper-input-container-input-color: var(--simple-search-input-color, #111);
+  --paper-input-container-focus-color: var(--simple-search-input-placeholder-color, #000);
+  --paper-input-container-color: var(--simple-search-input-line-color, #fff);
+  @apply --simple-search-container;
 
+  For buttons:
+  color: var(--simple-search-button-color, #111);
+  background-color: var(--simple-search-button-bg-color, #eee);
+  border-color: var(--simple-search-button-border-color, #ccc);
+  @apply --simple-search-button;
+
+  For buttons on hover:
+  color: var(--simple-search-button-hover-color, #000);
+  background-color: var(--simple-search-button-hover-bg-color, #fff);
+  border-color: var(--simple-search-button-hover-border-color, #ddd);
+  @apply --simple-search-button-hover;
+
+  For disabled buttons:
+  color: var(--simple-search-button-disabled-color, #666);
+  background-color: var(--simple-search-button-disabled-bg-color, #ccc);
+  border-color: var(--simple-search-button-disabled-border-color, #aaa);
+  @apply --simple-search-button-disabled;
 -->
 
 <dom-module id="simple-search">
   <template>
-    <style>
+    <style is="custom-style">
       :host {
         display: flex;
         align-items: flex-end;
@@ -70,12 +93,36 @@ A button used in simple-search
       :host #input {
         flex-grow: 2;
         margin-right: 0.25em;
+        --paper-input-container-input-color: var(--simple-search-input-text-color, #000);
+        --paper-input-container-focus-color: var(--simple-search-input-line-color, #000);
+        --paper-input-container-color: var(--simple-search-input-placeholder-color, #222);
+        color: var(--simple-search-input-placeholder-color, #222);
+        @apply --simple-search-container;
       }
       :host #xofy {
         margin: 8px;
       }
       :host button {
         margin: 8px 0 8px;
+        color: var(--simple-search-button-color, #111);
+        background-color: var(--simple-search-button-bg-color, #eee);
+        border-color: var(--simple-search-button-border-color, #ccc);
+        @apply --simple-search-button;
+      }
+      :host button:not([disabled]):focus,
+      :host button:not([disabled]):hover {
+        cursor: pointer;
+        color: var(--simple-search-button-hover-color, #000);
+        background-color: var(--simple-search-button-hover-bg-color, #fff);
+        border-color: var(--simple-search-button-hover-border-color, #ddd);
+        @apply --simple-search-button-hover;
+      }
+      :host button[disabled] {
+        cursor: not-allowed;
+        color: var(--simple-search-button-disabled-color, #999);
+        background-color: var(--simple-search-button-disabled-bg-color, #eee);
+        border-color: var(--simple-search-button-disabled-border-color, #ccc);
+        @apply --simple-search-button-disabled;
       }
       :host button:not([controls]) {
         display: none;
@@ -84,7 +131,10 @@ A button used in simple-search
         display: none;
       }
     </style>
-    <paper-input id="input" label="[[searchInputLabel]]">
+    <paper-input id="input" 
+      always-float-label$="[[alwaysFloatLabel]]"
+      label="[[searchInputLabel]]" 
+      no-label-float$="[[noLabelFloat]]">
       <iron-icon icon="[[searchInputIcon]]" slot="prefix"></iron-icon>
     </paper-input>
     <div id="xofy" shrink-hide$="[[noSearch]]"></div>
@@ -100,12 +150,12 @@ A button used in simple-search
       </button>
       <paper-tooltip for="prev">[[prevButtonLabel]]</paper-tooltip>
       <button
-      id="next" 
-      aria-label="[[nextButtonLabel]]" 
-      aria-role="button" 
-      controls$="[[controls]]" 
-      disabled$="[[nextButtonDisabled]]" 
-      tabindex="0">
+        id="next" 
+        aria-label="[[nextButtonLabel]]" 
+        aria-role="button" 
+        controls$="[[controls]]" 
+        disabled$="[[nextButtonDisabled]]" 
+        tabindex="0">
         <iron-icon icon$="[[nextButtonIcon]]"></iron-icon>
       </button>
       <paper-tooltip for="next">[[nextButtonLabel]]</paper-tooltip>
@@ -119,6 +169,13 @@ A button used in simple-search
 
       properties: {
         /**
+          * always float the label
+          */
+        alwaysFloatLabel: {
+          type: Boolean,
+          value: false
+        },
+        /**
           * Is the search case-sensitive
           */
         caseSensitive: {
@@ -130,7 +187,7 @@ A button used in simple-search
           */
         controls: {
           type: String,
-          value: null,
+          value: null
         },
         /**
           * is the previous next button disabled
@@ -152,6 +209,13 @@ A button used in simple-search
         nextButtonLabel: {
           type: String,
           value: 'next result',
+        },
+        /**
+          * never float the label
+          */
+        noLabelFloat: {
+          type: Boolean,
+          value: false
         },
         /**
           * are there any results to navigate?
@@ -284,7 +348,7 @@ A button used in simple-search
         * navigate results
         */
       _navigateResults: function(increment){
-        if (!this._isNavButtonDisabled(this.resultPointer,this.resultCount,this.resultsSpan,increment)) {
+        if (this.resultPointer+increment > 0 && this.resultPointer+increment <= this.resultCount) {
           this.resultPointer += increment;
           this.fire('goto-result',this.resultPointer);
         }
@@ -293,8 +357,7 @@ A button used in simple-search
         * navigate results
         */
       _isNavButtonDisabled: function(resultPointer,resultCount,resultsSpan,increment){  
-        let newPointer =  resultPointer+increment;
-        return !(resultsSpan !== '' && resultPointer+increment > 0 && resultPointer+increment <= resultCount);
+        return resultsSpan == '' || resultPointer+increment <= 0 || resultPointer+increment > resultCount;
       },
       /** 
         * gets the tab-index of cues based on whether or not interactive cues are disabled
@@ -384,6 +447,7 @@ A button used in simple-search
         for (let i=0; i<terms.length;i++){
           updateResults(terms[i]);
         }
+        root.resultPointer = 0;
         return results;
       }
     });

@@ -2,7 +2,7 @@
 <link rel="import" href="../iron-image/iron-image.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-styles/paper-styles.html">
-
+<link rel="import" href="../simple-colors/simple-colors.html">
 <!--
 `hax-source`
  An element that brokers the visual display of a listing of material from an end point. The goal is to normalize data from some location which is media centric. This expects to get at least enough data in order to form a grid of items which are selectable. It's also generically implemented so that anything can be hooked up as a potential source for input (example: youtube API or custom in-house solution). The goal is to return enough info via fired event so that hax-manager can tell hax-body that the user selected a tag, properties, slot combination so that hax-body can turn the selection into a custom element / element injected into the hax-body slot.
@@ -20,6 +20,8 @@
       :host {
         display: inline-flex;
         width: 50%;
+        background-color: transparent;
+        color: #ffffff;
       }
       paper-button.button {
         margin: 0;
@@ -29,17 +31,22 @@
         width: 100%;
         border: 2px solid #CCCCCC;
         justify-content: flex-start;
+        background-color: transparent;
+        background-image: none;
+        color: #ffffff;
+        text-align: unset;
       }
       paper-button:hover,
       paper-button:focus,
       paper-button:active {
-        border: 2px solid #a0ff52;
+        border: 2px solid var(--simple-colors-light-green-background1);
         background-color:rgba(0, 0, 0, .7);
       }
       .detail-wrapper {
         padding: 0 8px;
         display: inline-block;
         height: 100%;
+        width: calc(80% - 16px);
         overflow: hidden;
       }
       .title {
@@ -52,6 +59,7 @@
         height: 100px;
         overflow: hidden;
         font-size: 12px;
+        line-height: 16px;
         padding: 0;
         margin: 0;
         text-transform: none;
@@ -59,8 +67,7 @@
       .image {
         display: inline-block;
         height: 152px;
-        min-width: 220px;
-        width: 220px;
+        width: 20%;
         background-color: lightgray;
       }
       @media screen and (max-width: 1000px) {
@@ -98,6 +105,9 @@
     Polymer({
 
       is: 'hax-app-search-result',
+      behaviors: [
+        simpleColorsBehaviors,
+      ],
       properties: {
         /**
          * Preview object from hax-app originally.

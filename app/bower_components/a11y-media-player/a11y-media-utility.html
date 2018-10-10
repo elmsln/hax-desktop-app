@@ -42,28 +42,54 @@ Utily to control
          */
         created: function() {
           let root = this;
+          this.__playerLoader = function(e){ root.players.push(e.detail) };
 
-          // like the Highlander, there can be only one
+          // sets the instance to the current instance
           if (!Polymer.A11yMediaUtility.instance) {
-            Polymer.A11yMediaUtility.instance = root;
-          }
+            Polymer.A11yMediaUtility.instance = this;
 
-          // listen for a players added to the page
-          document.body.addEventListener('a11y-player', function(e){
-            root.players.push(e.detail);
-          });
+            // listen for a players added to the page
+            document.body.addEventListener('a11y-player', root.__playerLoader);
+          }
+        },
+        
+        /**
+         * Makes sure there is a utility ready and listening for elements.
+         */
+        attached: function() {
+          let root = this;
+          this.__stickyManager = function(e){ root.setStickyPlayer(e.detail) };
+          this.__scrollChecker = function(e) { root._checkScroll() };
 
           // listen for a player that starts playing, 
           // make it the player that can be sticky, 
           // and check for concurrent players
-          document.body.addEventListener('a11y-player-playing', function(e){
-            root.setStickyPlayer(e.detail);
-          });
+          document.body.addEventListener('a11y-player-playing', root.__stickyManager);
 
           // listen for scrolling and find out if a player is off-screen
-          window.onscroll = function(e) {
-            root._checkScroll();
-          };
+          window.addEventListener('scroll', root.__scrollChecker);
+        },
+        
+        /**
+         * Clean up.
+         */
+        detached: function() {
+          let root = this;
+            document.body.removeEventListener('a11y-player', root.__playerLoader);
+            document.body.removeEventListener('a11y-player-playing', root.__stickyManager);
+            window.removeEventListener('scroll', root.__scrollChecker);
+        },
+        /**
+          * if a player disallows concurrent players, pauses other players
+          */ 
+        checkConcurrentPlayers: function(){
+          let root = this, player = root.stickyPlayer;
+          for(let i=0; i<root.players.length; i++){
+            let playeri = root.players[i];
+            if(playeri !== player && (!player.allowConcurrent || !playeri.allowConcurrent)){
+              playeri.pause();
+            }
+          }
         },
         /**
           * if a player disallows concurrent players, pauses other players
@@ -101,7 +127,6 @@ Utily to control
         _checkScroll: function(){
           let root = this, wintop = window.pageYOffset, winbottom = wintop + window.innerHeight;
           if(root.stickyPlayer !== undefined && root.stickyPlayer !== null){
-            console.log(wintop,root.__playerTop,root.__playerMiddle,root.__playerBottom,winbottom);
             if (root.stickyPlayer.__playing && (root.__playerLowerMiddle > winbottom || root.__playerUpperMiddle < wintop)) {
               root.stickyPlayer.toggleSticky(true);
             } else {
@@ -127,6 +152,7 @@ Utily to control
        * Checks to see if there is an instance available, and if not appends one
        */
       Polymer.A11yMediaUtility.requestAvailability = function() {
+        //only create an instance if there isn't one
         if (!Polymer.A11yMediaUtility.instance) {
           Polymer.A11yMediaUtility.instance = document.createElement('a11y-media-utility');
         }

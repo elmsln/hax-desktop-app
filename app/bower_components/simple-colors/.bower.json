@@ -3,7 +3,8 @@
   "description": "A LRN element",
   "main": "simple-colors.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.10.1"
+    "polymer": "Polymer/polymer#^1.10.1",
+    "iron-icons": "PolymerElements/iron-icons#^2.1.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -12,14 +13,14 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebComponents/simple-colors",
-  "version": "0.0.1",
-  "_release": "0.0.1",
+  "version": "1.0.5",
+  "_release": "1.0.5",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.1",
-    "commit": "2d0c6ba6ebc6eb3e991cddfdc7076ce24fa8d692"
+    "tag": "1.0.5",
+    "commit": "2281a4f5aeb5ba7109c60c5463213cd824fc4989"
   },
   "_source": "https://github.com/LRNWebComponents/simple-colors.git",
-  "_target": "^0.0.1",
+  "_target": "*",
   "_originalSource": "LRNWebComponents/simple-colors"
 }

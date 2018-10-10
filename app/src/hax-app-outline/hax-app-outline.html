@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/map-menu/map-menu.html">
 <link rel="import" href="../../bower_components/app-editor-hax/app-editor-hax.html">
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/hax-body/hax-store.html">
 <link rel="import" href="../components/hax-app-outline-ui.html">
 
 
@@ -149,6 +150,7 @@
        * Hijack the vaadin upload
        */
       attached: function () {
+        setTimeout(() => {
         Polymer.HaxStore.instance.haxManager.$.fileupload.addEventListener('upload-before', e => {
           fetch('http://localhost:3001/fileupload', {
             body: e.detail.file.path,
@@ -158,6 +160,7 @@
             method: 'POST'
           })
         })
+        }, 1000);
       },
 
       /**

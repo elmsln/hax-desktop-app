@@ -21,7 +21,7 @@ Browse a list of apps. This provides a listing of our gizmos that we've integrat
 
 <dom-module id="hax-app-browser">
   <template>
-    <style>
+    <style is="custom-style">
       :host {
         display: block;
         --hax-accent: #34e79a;
@@ -113,7 +113,9 @@ Browse a list of apps. This provides a listing of our gizmos that we've integrat
     Polymer({
 
       is: 'hax-app-browser',
-      behaviors: [window.simpleColorsBehaviors],
+      behaviors: [
+        simpleColorsBehaviors,
+      ],
       properties: {
         /**
          * Search term
@@ -149,7 +151,6 @@ Browse a list of apps. This provides a listing of our gizmos that we've integrat
        * Attached
        */
       attached: function() {
-        this.reset();
         this.resetBrowser();
         this.$.inputfilter.addEventListener('value-changed', (e) => {
           this.$.filter.like = e.target.value;
@@ -161,6 +162,13 @@ Browse a list of apps. This provides a listing of our gizmos that we've integrat
         });
         document.body.addEventListener('hax-app-selected', this._appSelected.bind(this));
         document.body.addEventListener('hax-store-property-updated', this._haxStorePropertyUpdated.bind(this));
+      },
+      /**
+       * Detached life cycle
+       */
+      detached: function () {
+        document.body.removeEventListener('hax-app-selected', this._appSelected.bind(this));
+        document.body.removeEventListener('hax-store-property-updated', this._haxStorePropertyUpdated.bind(this));
       },
       /**
        * App has been selected.

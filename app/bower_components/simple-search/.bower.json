@@ -18,13 +18,14 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
   "homepage": "https://github.com/LRNWebComponents/simple-search",
-  "_release": "a93977e9f0",
+  "version": "1.0.4",
+  "_release": "1.0.4",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "a93977e9f06f4d5bff9f87072848a3c9b22ae8b8"
+    "type": "version",
+    "tag": "1.0.4",
+    "commit": "10cdae2f810284749c3cb265e626e18ba26909ec"
   },
   "_source": "https://github.com/LRNWebComponents/simple-search.git",
-  "_target": "*",
+  "_target": "^1.0.4",
   "_originalSource": "LRNWebComponents/simple-search"
 }

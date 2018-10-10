@@ -2,19 +2,19 @@
 ```
 <custom-element-demo>
   <template>
-    <link rel="import" href="a11y-media-player.html">
+    <link rel="import" href="a11y-media-standalone-player.html">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
 ```
 -->
 ```html
-<a11y-media-player></a11y-media-player>
+<a11y-media-standalone-player></a11y-media-standalone-player>
 ```
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/LRNWebComponents/a11y-media-player)
 
-# \<a11y-media-player\>
+# \<a11y-media-standalone-player\>
 
 A LRN element
 

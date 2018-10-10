@@ -11,7 +11,6 @@
 <link rel="import" href="../iron-icons/places-icons.html">
 <link rel="import" href="../iron-icons/maps-icons.html">
 <link rel="import" href="../iron-image/iron-image.html">
-<link rel="import" href="../paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../materializecss-styles/colors.html">
 
 <!--
@@ -64,6 +63,7 @@ A button on the hax-app-browser display
       paper-button iron-icon {
         height: 32px;
         width: 32px;
+        display: inline-block;
       }
       .flip-icon {
         transform: rotateY(180deg);
@@ -78,12 +78,6 @@ A button on the hax-app-browser display
         </div>
       </paper-button>
     </paper-card>
-    <paper-tooltip
-      for="button"
-      position="bottom"
-      offset="14">
-      [[teaser]]
-    </paper-tooltip>
   </template>
 
   <script>
@@ -115,30 +109,25 @@ A button on the hax-app-browser display
          * Icon for the button, optional.
          */
         icon: {
-          type: String
+          type: String,
         },
         /**
          * Image for the button, optional.
          */
         image: {
-          type: String
+          type: String,
+          value: false,
         },
         /**
          * MaterializeCSS color name of the item
          */
         color: {
-          type: String
+          type: String,
         },
         /**
          * Author related to this app
          */
         author: {
-          type: String
-        },
-        /**
-         * Teaser / headline.
-         */
-        teaser: {
           type: String
         },
         /**

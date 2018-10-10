@@ -9,9 +9,143 @@ A set of behaviors for a11y-media components.
 
 <script>
   window.a11yMediaBehaviors = window.a11yMediaBehaviors || {};
-  window.a11yMediaBehaviors.GeneralFunctions = {
+  window.a11yMediaBehaviors.MediaProps = {
     properties: {
+      /** 
+        * autoplay is an option, 
+        * but generally not recommended for a11y
+        */ 
+      autoplay: {
+        type: Boolean,
+        value: false,
+      },
+      /**
+        * show closed captions
+        */
+      cc: {
+        type: Boolean,
+        value: false,
+      },
+      /** 
+        * The height of the media player. 
+        */
+      height: {
+        type: Number,
+        value: null
+      },
+      /**
+        * is YouTube?
+        */
+      isYoutube: {
+        type: Boolean,
+        computed: '_hasAttribute(youtubeId)'
+      },
+      /**
+        * Language
+        */
+      lang: {
+        type: String,
+        value: 'en',
+      },
+      /** 
+        * Loop the video?
+        */
+      loop: {
+        type: Boolean,
+        value: false,
+      },
+      /** 
+        * Dash.js manifest source?
+        */
+      manifest: {
+        type: String,
+        value: null
+      },
+      /** 
+        * Is audio muted?
+        */
+      muted: {
+        type: Boolean,
+        value: false,
+      },
+      /** 
+        * Preload the sources: auto, metadata (default), or none.
+        */
+      preload: {
+        type: String,
+        value: "metadata",
+      },
+      /**
+        * Playback rate where 1 is normal speed, 0.5 is half-speed, and 2 is double speed
+        */
+      playbackRate: {
+        type: Number,
+        value: 1
+      },
+      /**
+        * status
+        */
+      status: {
+        type: String,
+        value: 'loading...',
+      },
+      /**
+        * the selected track
+        */
+      selectedTrack: {
+        type: Object,
+        value: null,
+      },
+      /**
+        * id of the selected track
+        */
+      selectedTrackID: {
+        type: Number,
+        value: null,
+      },
+      /** 
+        * array of tracks and cues
+        */
+      tracks: {
+        type: Array,
+        value: null
+      },
+      /** 
+        * Range is 0 to 100. Default should not be loud enough to overpower screen readers. 
+        */
+      volume: {
+        type: Number,
+        value: 70
+      },
+      /** 
+        * the id for the video 
+        */
+      youtubeId: {
+        type: String,
+        value: null
+      },
+      /** 
+        * the YouTube player object
+        */
+      youTube: {
+        type: Object,
+        value: {}
+      }
     },
+    /**
+      * returns true if an attribute is not null
+      */ 
+    _hasAttribute: function(attr){
+      return attr !== undefined && attr !== null;
+    },
+    /**
+      * returns true if an attribute is set to a value
+      */ 
+    _testAttribute: function(attr,val){
+      return attr === val;
+    },
+  };
+  window.a11yMediaBehaviors.GeneralFunctions = {
     /**
       * calls responsive-utility to get parent's responsive size
       */ 
@@ -24,12 +158,39 @@ A set of behaviors for a11y-media components.
       Polymer.ResponsiveUtility.requestAvailability();
       root.fire('responsive-element',data2);
     },
+    /**
+      * converts time in millesconds to HH:MM:SS
+      */
+    _getHHMMSS: function(val,max){
+      max = max === undefined ? val : max;
+      let a = (val) => { return val < 10 ? '0' + val : val; }, 
+      b = (val,i,none) => { return max >= i ? a(Math.floor(val/i))+':' : none },
+      c = (val) => { return val < 100 ? val+'0' : val };
+      return b(val,3600,'')+b(val%3600,60,'00:')+a(Math.round(val%60));
+    },
+    /** TODO - I may not need this
+      * converts time in millesconds to HH:MM:SS
+    _getSeconds: function(val){
+      let total = 0, units = val.split(':').reverse();
+      total = units[0] !== undefined && units[0] !== null ? units[0]/1000 : 0; //ms
+      total += units[1] !== undefined && units[1] !== null ? units[1] : 0; //ss
+      total += units[2] !== undefined && units[2] !== null ? units[2]*60 : 0; //mm
+      total += units[3] !== undefined && units[3] !== null ? units[3]*3600 : 0; //hh
+      console.log(units,total);
+      return total;
+    }
+      */
   };
   window.a11yMediaBehaviors.PlayerBehaviors = {
     properties: {
-      /** 
-        * Accent color on controls. Default is blue.
-        */ 
+      /**
+       * Optional accent color for controls, 
+       * using the following materialize colors:  
+       * red, pink, purple, deep-purple, indigo, blue,  
+       * light blue, cyan, teal, green, light green, lime,  
+       * yellow, amber, orange, deep-orange, and brown. 
+       * Default is null. 
+       */
       accentColor: {
         type: String,
         value: null,
@@ -52,21 +213,6 @@ A set of behaviors for a11y-media components.
         value: false,
         reflectToAttribute: true,
       },
-      /** 
-        * autoplay is an option, 
-        * but generally not recommended for a11y
-        */ 
-      autoplay: {
-        type: Boolean,
-        value: false,
-      },
-      /**
-        * show closed captions
-        */
-      cc: {
-        type: Boolean,
-        value: false,
-      },
       /**
         * Use compact controls?
         */
@@ -75,8 +221,16 @@ A set of behaviors for a11y-media components.
         computed: '_getCompactControls(responsiveSize)',
         reflectToAttribute: true
       },
+      /**
+        * crossorigin attribute for <video> and <audio> tags
+        */
+      crossorigin: {
+        type: String,
+        value: null,
+        reflectToAttribute: true
+      },
       /** 
-        * disable fullscreen option 
+        * Enables darker player.
         */
       dark: {
         type: Boolean,
@@ -89,6 +243,14 @@ A set of behaviors for a11y-media components.
       disableFullscreen: {
         type: Boolean,
         value: false,
+      },
+      /**
+        * Determines if video and transcript are in a flex layout
+        */
+      flexLayout: {
+        type: Boolean,
+        computed: '_isFlexLayout(standAlone,hideTranscript,noHeight,stackedLayout)',
+        reflectToAttribute: true
       },
       /** 
         * Is fullscreen mode?
@@ -120,13 +282,6 @@ A set of behaviors for a11y-media components.
         value: false,
       },
       /** 
-        * The width of the media player. 
-        */
-      height: {
-        type: String,
-        value: 'unset'
-      },
-      /** 
         * Hide elapsed time?
         */
       hideElapsedTime: {
@@ -141,13 +296,6 @@ A set of behaviors for a11y-media components.
         value: false,
         reflectToAttribute: true,
       },
-      /** 
-        * Loop the video?
-        */
-      loop: {
-        type: Boolean,
-        value: false,
-      },
       /**
         * optional title of media (shows when printed)
         */
@@ -155,13 +303,6 @@ A set of behaviors for a11y-media components.
         type: String,
         value: '',
         reflectToAttribute: true,
-      },
-      /** 
-        * Is audio muted?
-        */
-      muted: {
-        type: Boolean,
-        value: false,
       },
       /**
         * Is it an audio player with no thumbnail?
@@ -172,11 +313,11 @@ A set of behaviors for a11y-media components.
         reflectToAttribute: true
       },
       /**
-        * Playback rate where 1 is normal speed, 0.5 is half-speed, and 2 is double speed
+        * Hide the giant play button?
         */
-      playbackRate: {
-        type: Number,
-        value: 1
+      noPlayButton: {
+        type: Boolean,
+        computed: '_noPlayButton(noHeight,isYoutube)'
       },
       /**
         * Is media playing?
@@ -191,6 +332,21 @@ A set of behaviors for a11y-media components.
       responsiveSize: {
         type: String,
         notify: true,
+        reflectToAttribute: true
+      },
+      /**
+        * is YouTube?
+        */
+      showYoutubeCaptions: {
+        type: Boolean,
+        computed: '_showYoutubeCaptions(isYoutube,cc)'
+      },
+      /** 
+        * Is stand-alone player (without transcript)?
+        */
+      standAlone: {
+        type: Boolean,
+        value: false,
         reflectToAttribute: true
       },
       /** 
@@ -220,25 +376,11 @@ A set of behaviors for a11y-media components.
         reflectToAttribute: true
       },
       /** 
-        * array of tracks and cues
-        */
-      tracks: {
-        type: Array,
-        value: null
-      },
-      /** 
-        * Range is 0 to 100. Default should not be loud enough to overpower screen readers. 
-        */
-      volume: {
-        type: Number,
-        value: 70
-      },
-      /** 
         * The width of the media player. 
         */
       width: {
         type: String,
-        value: 'unset'
+        value: null
       },
       /**
         * label/microcopy for audio
@@ -309,6 +451,13 @@ A set of behaviors for a11y-media components.
       fullscreenLabel: {
         type: String,
         value: "fullscreen"
+      },
+      /**
+        * label for loading status
+        */
+      loadingLabel: {
+        type: String,
+        value: "Loading..."
       },
       /**
         * label for loop menu item on settings menu of player controls
@@ -465,6 +614,12 @@ A set of behaviors for a11y-media components.
       return audioOnly && (thumbnailSrc === null || thumbnailSrc === undefined);
     },
     /**
+      * returns true if the player has no giant play button
+      */ 
+    _noPlayButton: function(noHeight,isYoutube){
+      return noHeight || isYoutube;
+    },
+    /**
       * returns true if an attribute is set to a value
       */ 
     _getFullscreenButton: function(disableFullscreen){
@@ -485,6 +640,18 @@ A set of behaviors for a11y-media components.
       */ 
     _testAttribute: function(attr,val){
       return attr === val;
+    },
+    /**
+      * show youtube closed captions layer?
+      */ 
+    _showYoutubeCaptions: function(isYoutube,cc){
+      return isYoutube && cc;
+    },
+    /**
+      * Determines if video and transcript are in a flex layout
+      */
+    _isFlexLayout: function(standAlone,hideTranscript,noHeight,stackedLayout){
+      return !standAlone && !hideTranscript && !noHeight && !stackedLayout;
     }
   };
   window.a11yMediaBehaviors.TranscriptBehaviors = {
@@ -496,6 +663,13 @@ A set of behaviors for a11y-media components.
         type: String,
         value: null,
         reflectToAttribute: true,
+      },
+      /** 
+        * Use dark theme on transcript? Default is false, even when player is dark.
+        */
+      darkTranscript: {
+        type: Boolean,
+        value: false,
       },
       /** 
         * disable interactive mode that makes the transcript clickable 
@@ -547,13 +721,6 @@ A set of behaviors for a11y-media components.
         value: null,
       },
       /**
-        * selected transcript track id
-        */
-      selectedTranscript: {
-        type: String,
-        value: '0',
-      },
-      /**
         * label for search input  on transcript
         */
       searchLabel: {
@@ -595,6 +762,20 @@ A set of behaviors for a11y-media components.
           type: String,
           value: "arrow-back"
         },
+      /** 
+        * stacked layout instead of side-by-side?
+        */
+      stackedLayout: {
+        type: Boolean,
+        value: false,
+      },
+      /**
+        * target of the controls
+        */
+      target: {
+        type: Object,
+        value: null
+      },
       /**
         * label for autoscroll button on transcript controls
         */
@@ -622,6 +803,48 @@ A set of behaviors for a11y-media components.
       printIcon: {
         type: String,
         value: "print"
+      },
+      /**
+        * label for print button on player controls
+        */
+      searchLabel: {
+        type: String,
+        value: "search transcript"
+      },
+      /**
+        * label for print button on player controls
+        */
+      searchIcon: {
+        type: String,
+        value: "search"
+      },
+      /**
+        * label for print button on player controls
+        */
+      searchNextLabel: {
+        type: String,
+        value: "next result"
+      },
+      /**
+        * label for print button on player controls
+        */
+      searchNextIcon: {
+        type: String,
+        value: "arrow-forward"
+      },
+      /**
+        * label for print button on player controls
+        */
+      searchPrevLabel: {
+        type: String,
+        value: "previous result"
+      },
+      /**
+        * label for print button on player controls
+        */
+      searchPrevIcon: {
+        type: String,
+        value: "arrow-back"
       },
       /**
         * label for skip the transcript link before the transcript
