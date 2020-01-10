@@ -12,15 +12,7 @@ HAX but running on your desktop. Here are some goals of the HAX desktop app:
 To build HAX desktop from source, run the following
 
 ```
-git clone https://github.com/LRNWebComponents/hax-desktop-app.git
+git clone https://github.com/elmsln/hax-desktop-app.git
 cd hax-desktop-app
 sh build.sh
-```
-
-
-If you don't have a development environment, here's what you have to do to set it up ahead of time.
-- download and install https://nodejs.org/en/
-```
-npm install -g bower
-npm install -g git
 ```
